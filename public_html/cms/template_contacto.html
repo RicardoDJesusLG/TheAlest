@@ -1,0 +1,261 @@
+{% extends "template_container.html" %}
+
+{% block content %}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <ol class="breadcrumb">
+          <li><i class="fa fa-edit"></i> {{sectionTitle}}</li>
+          <li class="active">Items</li>
+        </ol>
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+
+            {% if mode == 'list' %}
+
+                {% if msgUpdated %}
+                    <br />
+                    <div class="callout callout-success">
+                        <p><i class="fa fa-check-circle"></i> {{ msgUpdated }}</p>
+                    </div>
+                {% endif %}
+
+                {% if items|length > 0 %}
+                    <div class="box box-info">
+                        <div class="box-body">
+
+                            <table id="mainTable" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-2">Date</th>
+                                        <th class="col-md-6">From</th>
+                                        <th class="col-md-1"><span class="visible-xs-inline"><i class="fa fa-check-circle"></i></span><span class="hidden-xs">{{translationStatus}}</span></th>
+                                        <th class="col-md-3">{{translationEdit}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {% for item in items %}
+                                        <tr>
+                                            <td><span style="display: none">{{ item['position'] }}</span>{{ item['date'] }}</td>
+                                            <td>{{ item['fromName'] }} </td>
+                                            <td>
+                                                {% if item['status'] %}
+                                                    <small class="label bg-green"><span class="visible-xs-inline"><i class="fa fa-check-circle"></i></span> <span class="hidden-xs">{{translationSetAsRead}}</span></small>
+                                                {% else %}
+                                                    <small class="label bg-red"><span class="visible-xs-inline"><i class="fa fa-check-circle"></i></span> <span class="hidden-xs">{{translationSetAsNotRead}}</span></small>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <a href="mailto:{{ item['fromEmail'] }}"><button type="button" class="btn btn-warning btn-xs"><i class="fa fa-envelope"></i> Reply</button></a>
+
+                                                <a href="{{currentPage}}?mode=edit&id={{ item['id'] }}">
+                                                    <button type="button" class="btn btn-info btn-xs"><span class="visible-xs-inline"><i class="fa fa-pencil"></i></span> <span class="hidden-xs">{{translationDetail}}</span></button>
+                                                </a>
+
+                                                <a data-toggle="modal" data-id="{{ item['id'] }}" data-toggle="modal" title="{{translationDelete}}" class="open-puDelete btn bg-navy btn-xs" href="#puDelete"><span class="visible-xs-inline"><i class="fa fa-remove"></i></span> <span class="hidden-xs">{{translationDelete}}</span></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+
+                    <br />
+
+                    <!--
+                    <a href="{{currentPage}}?export=1">
+                        <button type="button" class="btn btn-warning"><i class="fa fa-plus-circle"></i> Exportar</button>
+                    </a>
+                -->
+                    
+                {% else %}
+
+                    <br />
+                    <div class="callout callout-danger">
+                        <p><i class="fa fa-warning"></i> {{ translationNoItemsAvailable }}</p>
+                    </div>
+
+                {% endif %}
+
+                <a href="{{currentPage}}?export=1">
+                    <button type="button" class="btn btn-warning"><i class="fa fa-list"></i> Export</button>
+                </a>
+                <!--
+                <form method="GET" action="{{currentPage}}" class="form-horizontal" autocomplete="off">
+                    <input type="hidden" id="submitExportRange" name="submitExportRange" value="1">
+
+                    <div class="input-daterange input-group">
+                        <input type="text" class="input-sm form-control" name="start" value="{{start}}" />
+                        <span class="input-group-addon">hasta</span>
+                        <input type="text" class="input-sm form-control" name="end" value="{{end}}" />
+                        <span class="input-group-addon"><button type="submit" class="btn btn-info btn-xs">Exportar rango</button><a href="{{currentPage}}?export=1"><button type="button" class="btn btn-info btn-xs">Exportar todos</button></a></span>
+                    </div>
+                </form>
+            -->
+
+                <!-- <br />
+                <a href="{{ linkAdd }}">
+                    <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i> {{ translationAddItem }}</button>
+                </a> -->
+
+            {% elseif mode == 'edit' %}
+
+                <!-- Horizontal Form -->
+                <form method="POST" action="{{currentPage}}?{{qs}}" id="form" name="form" class="form-horizontal" enctype="multipart/form-data">
+                    <input type="hidden" id="submitUpdate" name="submitUpdate" value="1" />
+
+                    <div class="box box-primary">
+
+                        <!-- /.box-header -->
+                        <div class="box-body no-padding">
+                          <div class="mailbox-read-message">
+                            <p>{{html|raw}}</p>
+                          </div>
+                          <!-- /.mailbox-read-message -->
+                        </div>
+                        <!-- /.box-body -->
+
+                    </div>
+                    <!-- /. box -->
+
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"> {{ translationStatus }}</h3>
+                        </div>
+                        <!-- /.box-header -->
+
+                        <div class="box-body">
+
+                            <div class="form-group">
+                                <!-- <label for="status" class="col-sm-2 control-label">{{ translationStatus }}</label> -->
+
+                                <div class="col-sm-12">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="status" name="status" value="1" {% if status %}checked{% endif %} /> {{ translationMarkAsRead }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+
+                    <div class="box">
+                        <div class="box-footer">
+                            <a href="{{linkCancel}}">
+                                <button type="button" class="btn btn-default"><i class="fa fa-undo"></i> {{ translationBack }}</button>
+                            </a>
+
+                            <button type="submit" class="btn btn-info pull-right"><i class="fa fa-save"></i> {{ translationSave }}</button>
+                        </div>
+                        <!-- /.box-footer -->
+                    </div>
+                    <!-- /.box -->
+
+                </form>
+
+            {% endif %}
+
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+
+<!-- delete -->
+<div id="puDelete" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">{{ translationConfirm }}</h4>
+            </div>
+
+            <form id="frmDelete" name="frmDelete" method="POST" action="{{currentPage}}?">
+                <input type="hidden" id="submitDelete" name="submitDelete" value="1" />
+                <input type="hidden" id="idDelete" name="idDelete" />
+
+                <div class="modal-body">
+                    <p>{{ translationConfirmDeleteLabel }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ translationStrNo }}</button>
+                    <button type="submit" class="btn btn-primary">{{ translationStrYes }}</button>
+                </div>
+
+            </form>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+{% endblock %}
+
+{% block js %}
+
+    {% if mode == 'list' %}
+
+        <!-- DataTables -->
+        <script src="./resources/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="./resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <script>
+            $(function() {
+                $('#mainTable').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true
+
+                    {% if siteLang == 'es' %}
+                    , "language": {
+                        "url": "./resources/plugins/datatables/Spanish.json"
+                    }
+                    {% endif %}
+
+                });
+            });
+        </script>
+
+        <!-- datepicker -->
+        <script src="./resources/plugins/datepicker/bootstrap-datepicker.js"></script>
+        {% if siteLang == 'es' %}
+            <script src="./resources/plugins/datepicker/locales/bootstrap-datepicker.es.js"></script>
+        {% endif %}
+        <script type="text/javascript">
+        $('.input-daterange').datepicker({
+        autoclose: true,
+            {% if siteLang == 'es' %}
+                language: 'es',
+                format: 'dd/mm/yyyy'
+            {% else %}
+                format: 'mm/dd/yyyy'
+            {% endif %}
+        });
+        </script>
+
+    {% elseif mode == 'edit' %}
+
+    {% endif %}
+
+{% endblock %}

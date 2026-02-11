@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="{{ base_href }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest - Spa </title>
+    <meta name="description" content=" ">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <link rel="stylesheet" href="resources/css/book-widget.css">
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% include 'inc_analytics.html' %}
+    <style>
+        .aabb {
+            margin-bottom: 70px;
+        }
+
+
+        .hero-home .slide img {
+            opacity: 0.4;
+        }
+
+        /* --- Estilo general --- */
+
+        .spa-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .spa-title {
+            color: #c7a86f;
+            margin-bottom: 30px;
+        }
+
+        /* --- Galería de servicios --- */
+        .spa-gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .spa-item {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 250px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .spa-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .spa-item img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+        }
+
+        .spa-item p {
+            background-color: #FFF6F1;
+            margin: 0;
+            padding: 10px;
+            font-weight: 500;
+            color: #c7a86f;
+        }
+
+        /* --- Modal --- */
+        .spa-modal {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        .spa-modal-content {
+            background-color: #fff;
+            margin: 20px;
+            padding: 25px 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh; /* 👈 limita el alto al 80% de la pantalla */
+            overflow-y: auto; /* 👈 scroll vertical si el contenido se pasa */
+            overflow-x: hidden; /* 👈 evita scroll lateral */
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.3s ease forwards;
+        }
+
+
+        .spa-modal-content h3 {
+            margin-bottom: 10px;
+            color: #c7a86f;
+        }
+
+        .spa-modal-content p {
+            color: #6b564c;
+            line-height: 1.5;
+        }
+
+        .spa-close {
+            color: #c2a79a;
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .spa-close:hover {
+            color: #a67c68;
+        }
+
+        /* --- Animaciones suaves --- */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* --- Tabla lujosa --- */
+        .luxury-table {
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fafafa;
+            font-family: 'Nunito Sans';
+            font-size: 17px;
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: auto;
+        }
+
+        .luxury-table thead {
+            background-color: #FAF6ED !important;
+        }
+
+        .luxury-table th {
+            color: #c7a86f;
+            word-wrap: break-word;
+            text-align: left;
+            padding: 10px;
+        }
+
+        .luxury-table td {
+            color: #333;
+            word-wrap: break-word;
+            text-align: left;
+            padding: 10px;
+        }
+
+        .luxury-table tbody tr:hover {
+            background-color: #f2f2f2;
+            transition: 0.3s ease;
+        }
+
+        caption {
+            caption-side: bottom;
+            font-size: 1.25rem;
+            color: #7a6c63;
+            margin-top: 10px;
+            font-style: italic;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .spa-gallery {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .spa-item {
+                width: 90%;
+            }
+
+            .spa-modal-content {
+                width: 95%;
+                padding: 15px;
+                max-width: none;
+                max-height: 85vh; /* Un poquito más alto en móviles */
+            }
+
+            .luxury-table {
+                font-size: 14px;
+                display: block;
+            }
+
+            .luxury-table th, .luxury-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+{% include 'inc_header.html' %}
+<div class="hero-home">
+    <div class="txt">
+        <div class="title">
+            Spa THE ALEST
+        </div>
+        <div class="sub">The Alest Wellness Sanctuary</div>
+    </div>
+
+    <div class="slide">
+        <img src="resources/img/hero-spa.jpg" alt="">
+    </div>
+</div>
+<!-- MAIN MENU mainmenu.html -->
+<div id='mainmenu'>
+</div>
+<!-- / MAIN MENU mainmenu.html -->
+<!-- cal -->
+<div class='calendarBox'>
+    <div class='form-hit'></div>
+    <div id='calendar' class='dnaCalendar'></div>
+    <form id='calendarForm' method='POST' action="book.php" style='display:none;'>
+        <input type="hidden" name='datein' value=''/>
+        <input type="hidden" name='dateout' value=''/>
+        <input type="hidden" name='adults' value=''/>
+        <input type="hidden" name='children' value=''/>
+    </form>
+</div>
+<!-- /calendar
+-->
+<div class="aabb" style='width: 100%;overflow: hidden;'>
+    <div class="container">
+        <div class="introaabb">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="left">
+                        <h6 data-aos="fade-left" data-aos-duration="1000">Spa the alest</h6>
+                        <h1 data-aos="fade-left" data-aos-duration="1500">Your rest, our top <span>priority</span></h1>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="right" data-aos="fade-right" data-aos-duration="1000">
+                        <p>Immerse yourself in an experience of luxury and renewal.
+                            Our exclusive treatments are designed to balance body and soul, using techniques and
+                            products of the highest quality. </p>
+                        <p>Enjoy this oasis of well-being right in the comfort of your room,
+                            with no need to step outside — we bring the spa experience directly
+                            to you.</p>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <section class="spa-section">
+        <h2 data-aos="fade-left" data-aos-duration="1000" class="spa-title">Our Services</h2>
+        <div data-aos="fade-right" data-aos-duration="2000" class="spa-gallery">
+            <div class="spa-item" data-title="Massage Therapies"
+                 data-info=
+                         "<p>Release stress and muscle tension by choosing your perfect therapy.</p>
+                         <div class='py-4'>
+                            <div class='third'>
+                                <table class='table table-hover align-middle luxury-table'>
+                                    <thead class='table-dark'>
+                                        <tr>
+                                            <th>Massage</th>
+                                            <th>Duration</th>
+                                            <th>Focus and Benefit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><b>RELAXING</b></td>
+                                            <td>60 / 90 / 120 min</td>
+                                            <td><b>Supreme Relaxation: </b>The most popular technique to dissolve tension and promote mental peace.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>DEEP TISSUE</b></td>
+                                            <td>60 / 90 / 120 min</td>
+                                            <td><b>Goodbye Knots: </b>Intense pressure to relieve chronic pain and eliminate the deepest muscle knots.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>SPORTS</b></td>
+                                            <td>60 / 90 / 120 min</td>
+                                            <td><b>Total Recovery: </b>Combines deep tissue work and assisted stretches to improve flexibility and speed up muscle recovery.</td>
+                                        </tr>
+                                    </tbody>
+                                    <caption>All treatments are provided directly in the guest’s room.</caption>
+                                </table>
+                            </div>
+                        </div>"
+            >
+                <img src="resources/img/massage.png" alt="Masaje relajante">
+                <p>Massage Therapies</p>
+            </div>
+            <div class="spa-item" data-title="High-End Facials"
+                 data-info=
+                         "<p>Revitalize your skin with the power of technology and the most exclusive beauty brands.</p>
+                         <div class='py-4'>
+                            <div class='third'>
+                                <table class='table table-hover align-middle luxury-table'>
+                                    <thead>
+                                        <tr>
+                                            <th>Facial</th>
+                                            <th>Focus and Purpose</th>
+                                            <th>Luxury Results</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><b>LOTUS EXPERIENCE</b> (Foreo & Natura Bissé)</td>
+                                            <td>Cleanses · Oxygenates · Firms</td>
+                                            <td>
+                                                An experience that harnesses the power of Natura Bissé and Foreo's top facial technology.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>ENERGIZING C+C</b> (Natura Bissé)</td>
+                                            <td>Revitalizes · Brightens · Antioxidant</td>
+                                            <td>
+                                                A dose of Vitamin C that brightens, revitalizes, and fights cellular oxidative stress.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>DEEP CLEANSING</b></td>
+                                            <td>Purifies · Cleanses · Renews</td>
+                                            <td>
+                                                Double exfoliation that removes impurities and gives your face an immediate glow.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>THE ULTIMATE GROOMING</b> (For Him)</td>
+                                            <td>Exfoliates · Brightens · Revitalizes</td>
+                                            <td>
+                                                Created for men: deeply hydrates and softens hair for a perfect shave.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>TEENS</b></td>
+                                            <td>Cleanses · Detoxifies · Purifies</td>
+                                            <td>
+                                                The ideal treatment for younger skin, designed to cleanse and purify.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <caption>All treatments are provided directly in the guest’s room.</caption>
+                                </table>
+                            </div>
+                        </div>"
+            >
+                <img src="resources/img/facial.png" alt="Tratamiento facial">
+                <p>High-End Facials</p>
+            </div>
+            <div class="spa-item" data-title="Body Exfoliation"
+                 data-info=
+                         "<p></p>
+                         <div class='py-4'>
+                            <div class='third'>
+                                <table class='table table-hover align-middle luxury-table'>
+                                    <thead class='table-dark'>
+                                        <tr>
+                                            <th>Treatment</th>
+                                            <th>Exclusive Benefit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><b>DOUBLE PEEL</b> by Comfort Zone</td>
+                                            <td>
+                                                <b>Perfectly compact, firm, smooth, and soft skin.</b>
+                                                Provides complete and immediate skin regeneration thanks to its mechanical and chemical peeling.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <caption>All treatments are provided directly in the guest’s room.</caption>
+                                </table>
+                            </div>
+                        </div>"
+            >
+                <img src="resources/img/exfoliation.jpg" alt="Aromaterapia">
+                <p>Body Exfoliation</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="spa-modal" class="spa-modal">
+        <div class="spa-modal-content">
+            <span class="spa-close">&times;</span>
+            <h3 id="modal-title"></h3>
+            <div id="modal-info"></div>
+        </div>
+    </div>
+
+</div>
+
+{% include 'inc_footer.html' %}
+<!-- JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+<script src="resources/js/main.js?a=10"></script>
+<script src="resources/js/newsletter.js"></script>
+<script src="resources/js/book-widget.js?ap=tst2"></script>
+<script>
+    $(function () {
+        $(".check-av").click(function (e) {
+            if (e) e.preventDefault();
+            $("#calendarForm").submit();
+        });
+    });
+</script>
+
+<script>
+    const items = document.querySelectorAll('.spa-item');
+    const modal = document.getElementById('spa-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalInfo = document.getElementById('modal-info');
+    const closeBtn = document.querySelector('.spa-close');
+
+    // Cuando se hace clic en un servicio
+    items.forEach(item => {
+        item.addEventListener('click', () => {
+            const title = item.getAttribute('data-title');
+            const info = item.getAttribute('data-info');
+            modalTitle.textContent = title;
+            modalInfo.innerHTML = info;
+            modal.style.display = 'flex';
+        });
+    });
+
+    // Cerrar modal al presionar la X
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    // Cerrar modal si se hace clic fuera del contenido
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+</script>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+    AOS.init();
+
+    window.addEventListener('load', function () {
+        AOS.refresh();
+    });
+
+
+</script>
+</body>
+</html>

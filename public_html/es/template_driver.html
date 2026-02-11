@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="{{ base_href }}">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest - The House Car</title>
+    <meta name="description" content=" ">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <link rel='stylesheet' href="resources/css/fullGallery.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% include 'inc_analytics.html' %}
+
+    <style>
+        .hero-home .slide img{ opacity:0.4; }
+
+        /* Intro y componentes elegantes */
+        .intro-wrap{
+            max-width: 900px;
+            margin: 20px auto 0;
+            color:#555;
+            font-size:16px;
+            line-height:1.7;
+            text-align:center;
+        }
+        .highlight-bar{
+            border:1px solid #d8c38a; /* dorado suave */
+            background: #fffdf6;
+            border-radius:6px;
+            padding:14px 18px;
+            margin:22px auto 0;
+            max-width: 900px;
+        }
+        .highlight-bar i{ margin-right:8px; }
+        .highlight-item{
+            display:inline-block;
+            margin:6px 14px;
+            color:#444;
+        }
+
+        /* Cards de los 3 servicios */
+        #services .service-card h3{
+            font-weight:600;
+            margin-top:0;
+        }
+        #services .divider{
+            width:120px; height:2px; background:#eee; margin:10px auto 14px;
+        }
+        #services p{
+            max-width:360px; margin:0 auto; color:#777;
+        }
+
+        /* Tarjeta de tarifas y reservas */
+        .rates-card{
+            border:1px solid #eee;
+            border-radius:8px;
+            background:#fff;
+            padding:22px;
+            max-width:880px;
+            margin:30px auto 0;
+            text-align:left;
+            box-shadow:0 1px 12px rgba(0,0,0,0.04);
+        }
+        .rates-card h4{
+            margin-top:0;
+            font-weight:600;
+        }
+        .rates-card .list-unstyled li{
+            margin:8px 0;
+            color:#555;
+        }
+        .email-cta{
+            display:inline-block;
+            padding:10px 16px;
+            border:1px solid #d8c38a;
+            border-radius:4px;
+            text-decoration:none;
+            color:#8c6f2b;
+            transition:all .2s ease;
+        }
+        .email-cta:hover{
+            background:#fff8e1;
+            text-decoration:none;
+            color:#6d561f;
+        }
+        .note{
+            font-size:13px; color:#777; margin-top:10px;
+        }
+
+        /* Imágenes redondas responsivas (mantengo tu estilo base) */
+        .img-circle{
+            object-fit:cover;
+        }
+
+        @media (max-width: 767px){
+            .highlight-item{ display:block; margin:8px 0; }
+        }
+    </style>
+</head>
+<body>
+
+{% include 'inc_header.html' %}
+
+<div class="hero-home" >
+    <div class="txt">
+        <div class="title">
+            The House Car
+        </div>
+        <div class="sub">Servicio de Transporte Exclusivo</div>
+    </div>
+    <div class="pager-slider">
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#" class="active"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+    </div>
+    <div class="slide">
+        <img src="resources/img/the-car-house.jpg" alt="">
+    </div>
+</div>
+
+<div class="intro" style='width: 100%;overflow: hidden;'>
+    <div class="container">
+        <div class="cont">
+            <figure>
+                <img src="resources/img/the-car-house-2.jpg" alt="" data-aos="fade-up" data-aos-duration="900">
+            </figure>
+            <div class="txt">
+                <h6 data-aos="fade-up" data-aos-duration="900">Confort y Distinción</h6>
+                <h1 data-aos="fade-up" data-aos-duration="900" data-aos-offset="200">Servicio<br><span>Privado del Hotel</span></h1>
+
+                <!-- TEXTO EXTRA (movido aquí, junto a la imagen) -->
+                <p data-aos="fade-up" data-aos-duration="900" data-aos-offset="120">
+                    The Alest Hotel extiende su alto nivel de servicio con su exclusivo
+                    <em>“The House Car Service”</em>: el auto privado del hotel para traslados
+                    cómodos, puntuales y con la discreción que nos caracteriza.
+                </p>
+                <!-- Banda destacada (llamativa pero sobria) -->
+                <div class="highlight-bar text-center" data-aos="fade-up" data-aos-duration="900" data-aos-delay="150">
+                    <span class="highlight-item"><i class="fa fa-car"></i> Lincoln Navigator Reserve 2022</span>
+                    <span class="highlight-item"><i class="fa fa-user"></i> Hasta 5 pasajeros</span>
+                    <span class="highlight-item"><i class="fa fa-shield"></i> Confort y sofisticación</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- ===== Servicios (3 columnas) ===== -->
+<section id="services" class="container" style="margin:0px auto;">
+    <div class="row">
+
+        <!-- 1. Traslados al Aeropuerto -->
+        <div class="col-sm-4 text-center service-card" data-aos="fade-up" data-aos-duration="1000">
+            <figure style="margin:0 0 22px;">
+                <img
+                        src="resources/img/the-car-house-4.png"
+                        onerror="this.src='resources/img/daniela.jpg'"
+                        class="img-circle img-responsive center-block"
+                        alt="Traslados al Aeropuerto"
+                        style="width:280px; height:280px; object-fit:cover;">
+            </figure>
+
+            <h3>Traslados al Aeropuerto</h3>
+            <div class="divider"></div>
+            <p>
+                Pick Up / Drop Off al AICM (CDMX) y Aeropuerto de Toluca. Puntualidad, asistencia con equipaje y un trayecto sin contratiempos.
+            </p>
+            <br>
+        </div>
+
+        <!-- 2. Helipuertos en Polanco -->
+        <div class="col-sm-4 text-center service-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+            <figure style="margin:0 0 22px;">
+                <img
+                        src="resources/img/the-car-house-3.png"
+                        onerror="this.src='resources/img/daniela.jpg'"
+                        class="img-circle img-responsive center-block"
+                        alt="Traslados a Helipuertos"
+                        style="width:280px; height:280px; object-fit:cover;">
+            </figure>
+
+            <h3>Helipuertos en Polanco</h3>
+            <div class="divider"></div>
+            <p>
+                Servicio de conexión terrestre a helipuertos de la zona. Coordinación precisa para embarques y desembarques sin espera.
+            </p>
+            <br>
+        </div>
+
+        <!-- 3. Renta por Tiempo -->
+        <div class="col-sm-4 text-center service-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+            <figure style="margin:0 0 22px;">
+                <img
+                        src="resources/img/alest-car.jpg"
+                        onerror="this.src='resources/img/daniela.jpg'"
+                        class="img-circle img-responsive center-block"
+                        alt="Renta por Tiempo"
+                        style="width:280px; height:280px; object-fit:cover;">
+            </figure>
+
+            <h3>Renta de servicios por Tiempo</h3>
+            <div class="divider"></div>
+            <p>
+                Contratación por hora o por día dentro de la Ciudad de México. Ideal para agendas flexibles, citas y traslados múltiples.
+            </p>
+            <br>
+        </div>
+    </div>
+
+    <!-- Tarjeta de Tarifas & Reservaciones -->
+    <div class="rates-card" data-aos="fade-up" data-aos-duration="900" data-aos-delay="150" style="margin-top:60px; margin-bottom: 60px">
+        <h4><i class="fa fa-credit-card"></i> Tarifas & Reservaciones</h4>
+
+        <b>Las tarifas varían según el servicio solicitado (traslados fijos o renta por tiempo).</b>
+
+        <ul class="list-unstyled">
+            <li><i class="fa fa-check"></i> Traslados al Aeropuerto (AICM / Toluca)</li>
+            <li><i class="fa fa-check"></i> Pick Up / Drop Off a helipuertos en Polanco</li>
+            <li><i class="fa fa-check"></i> Renta por hora o por día dentro de la CDMX</li>
+        </ul>
+        <p style="margin:14px 0;">
+            Para cotizaciones y disponibilidad, contáctanos:
+            <a class="email-cta" href="mailto:hello@thealest.com?subject=The%20House%20Car%20Service%20-%20Cotizaci%C3%B3n">
+                <i class="fa fa-envelope-o"></i> hello@thealest.com
+            </a>
+        </p>
+        <div class="note">
+            *Se recomienda reservar con anticipación para garantizar disponibilidad.
+        </div>
+    </div>
+</section>
+<!-- ===== /Servicios ===== -->
+
+<!-- MAIN MENU mainmenu.html -->
+<div id='mainmenu'></div>
+<!-- / MAIN MENU mainmenu.html -->
+
+<!-- imágenes de las galerías -->
+<script></script>
+
+{% include 'inc_footer.html' %}
+
+<!-- JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+<script>
+    window.MAINMENU_URL='/es/mainmenu.html';
+</script>
+<script src="resources/js/main.js?a=0"></script>
+<script src="resources/js/newsletter.js"></script>
+<script src='resources/js/fullGallery.js'></script>
+<script>
+    $(function(){
+        document.getElementsByTagName("footer")[0].removeAttribute('data-aos');
+        document.getElementsByTagName("footer")[0].removeAttribute('data-aos-duration');
+    })
+</script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+    window.addEventListener('load', function() {
+        AOS.refresh();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+.book-widget {
+  -webkit-user-select: none;
+  /* Chrome all / Safari all */
+  -moz-user-select: none;
+  /* Firefox all */
+  -ms-user-select: none;
+  /* IE 10+ */
+  user-select: none;
+}
+.book-widget .col {
+  opacity: 0;
+  transition: opacity 1s;
+}
+@media (max-width: 768px) {
+  .book-widget .col > span {
+    font-size: 10px;
+  }
+}
+.book-widget .col .date .mes {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+@media (max-width: 768px) {
+  .book-widget .col .date .mes {
+    margin: 0;
+    text-align: center;
+    font-size: 12px;
+    display: block;
+  }
+}
+.book-widget .col .date:hover .mes {
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+.book-widget .col .date .numero,
+.book-widget .col .pax .numero {
+  width: 28px;
+}
+@media (max-width: 768px) {
+  .book-widget .col .date .numero,
+  .book-widget .col .pax .numero {
+    width: auto;
+    font-size: 24px;
+    text-align: center;
+  }
+}
+.check-av {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.hero-home .slide img {
+  opacity: 0;
+  position: absolute;
+}
+.tapa {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #111820;
+  transform: scale(1, 1);
+  transition: all 1s ease-in-out;
+}

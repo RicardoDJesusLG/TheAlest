@@ -1,0 +1,215 @@
+.hero-home {
+  background-color: #111820;
+}
+#mainmenu {
+  width: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 855px;
+  background-color: #00071099;
+  transition: width 0.8s ease-in-out;
+  z-index: 200;
+  overflow: hidden;
+}
+@media (max-width: 768px) {
+  #mainmenu {
+    height: 100vh;
+  }
+}
+#mainmenu .blackBase {
+  width: 0%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: black;
+  height: 100%;
+  transition: width 0.8s ease-in-out;
+}
+#mainmenu.opened {
+  width: 100%;
+  transition: width 0.7s ease-in-out;
+}
+#mainmenu.opened .blackBase {
+  width: 480px;
+  transition: width 0.5s ease-in-out;
+}
+@media (max-width: 768px) {
+  #mainmenu.opened .blackBase {
+    width: 0%;
+  }
+}
+#mainmenu .mainmenu-bg {
+  width: 0%;
+  right: 0%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  background-color: #111820;
+  transition: all 0.8s ease-in-out;
+  opacity: 0;
+}
+#mainmenu .mainmenu-bg.opened {
+  width: 80%;
+  right: 480px;
+  opacity: 1;
+  transition: all 1.2s ease-in-out;
+}
+@media (max-width: 768px) {
+  #mainmenu .mainmenu-bg.opened {
+    width: 100%;
+    right: 0px;
+  }
+}
+#mainmenu .mainmenu-bg img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+}
+#mainmenu .mainmenu-leftList,
+#mainmenu .mainmenu-rightList {
+  position: absolute;
+  width: 380px;
+  right: 480px;
+  padding: 180px 32px 16px 16px;
+  text-align: left;
+}
+@media (max-width: 768px) {
+  #mainmenu .mainmenu-leftList,
+  #mainmenu .mainmenu-rightList {
+    padding: 100px 0px 8px 0px;
+    position: relative;
+    right: 0;
+    left: 0;
+    width: 320px;
+  }
+}
+#mainmenu .mainmenu-leftList ul,
+#mainmenu .mainmenu-rightList ul {
+  list-style: none;
+}
+#mainmenu .mainmenu-leftList ul li,
+#mainmenu .mainmenu-rightList ul li {
+  list-style: none;
+  opacity: 0;
+  transform: translatex(60px);
+  transition: all 0.5s ease-in-out;
+}
+#mainmenu .mainmenu-leftList ul li a,
+#mainmenu .mainmenu-rightList ul li a {
+  display: inline-block;
+  padding: 8px 8px 8px 12px;
+  font-family: 'Baskervville', serif;
+  font-size: 22px;
+  color: white;
+  transition: color 0.5s;
+  text-decoration: none;
+  font-weight: 400;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  #mainmenu .mainmenu-leftList ul li a,
+  #mainmenu .mainmenu-rightList ul li a {
+    font-size: 20px;
+    padding: 4px 8px 4px 10px;
+  }
+}
+#mainmenu .mainmenu-leftList ul li a:hover,
+#mainmenu .mainmenu-rightList ul li a:hover {
+  color: #cccccc;
+  transition: color 0.5s;
+}
+#mainmenu .mainmenu-leftList ul li sup,
+#mainmenu .mainmenu-rightList ul li sup {
+  font-size: 14px;
+  color: #c7a86f;
+}
+@media (max-width: 768px) {
+  #mainmenu .mainmenu-leftList ul li sup,
+  #mainmenu .mainmenu-rightList ul li sup {
+    font-size: 10px;
+  }
+}
+#mainmenu .mainmenu-leftList ul li.opened,
+#mainmenu .mainmenu-rightList ul li.opened {
+  opacity: 1;
+  transform: translatex(0px);
+  transition: all 0.5s ease-in-out;
+}
+#mainmenu .mainmenu-leftList ul li .topmenu a,
+#mainmenu .mainmenu-rightList ul li .topmenu a {
+  font-size: 14px;
+  color: #c7a86f;
+}
+#mainmenu .mainmenu-rightList {
+  position: absolute;
+  width: 320px;
+  right: 100px;
+  padding: 180px 32px 16px 16px;
+  text-align: left;
+}
+@media (max-width: 768px) {
+  #mainmenu .mainmenu-rightList {
+    padding: 0px 0px 8px 0px;
+    position: relative;
+    right: 0;
+    left: 0;
+    width: 320px;
+  }
+}
+#mainmenu .lang-selector,
+#mainmenu .social-selector {
+  display: block;
+  text-align: left;
+  margin: 32px 0px 4px;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+  color: white;
+  line-height: 24px;
+}
+#mainmenu .lang-selector.active,
+#mainmenu .social-selector.active {
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out;
+}
+@media (max-width: 768px) {
+  #mainmenu .lang-selector,
+  #mainmenu .social-selector {
+    margin-left: 22px;
+    margin-top: 6px;
+  }
+}
+#mainmenu .lang-selector b,
+#mainmenu .social-selector b {
+  text-transform: uppercase;
+  color: #c7a86f;
+  display: block;
+}
+#mainmenu .lang-selector a,
+#mainmenu .social-selector a {
+  display: inline-block;
+  padding: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #bbbbbb;
+}
+#mainmenu .lang-selector a img,
+#mainmenu .social-selector a img {
+  margin: 8px 16px 8px 0;
+  transform: scale(0.7, 0.7);
+  opacity: 0.8;
+}
+#mainmenu .lang-selector a.active,
+#mainmenu .social-selector a.active {
+  color: white;
+}
+#mainmenu .social-selector b {
+  text-transform: uppercase;
+  color: #c7a86f;
+  display: block;
+}
+header {
+  z-index: 201;
+}

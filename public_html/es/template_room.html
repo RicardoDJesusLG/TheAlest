@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <base href="{{ base_href }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest, {{title}}</title>
+    <meta name="description" content=" ">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <link rel="stylesheet" href="resources/css/swiper-bundle.min.css">
+    <style>
+        /* ESTILOS ORIGINALES (Escritorio) */
+        a:focus { outline:none !important; outline-offset: 0px; }
+        .hero-home .slide img { opacity:0.4; }
+        .specials { overflow:hidden; }
+
+        .contenedor-suite-premium {
+            background-color: #f8f5f0;
+            margin-top: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .suite-info-col { padding: 80px 10%; color: #4a3728; width: 50%; }
+        .suite-info-col h6 { text-transform: uppercase; letter-spacing: 2px; font-size: 12px; margin-bottom: 10px; color: #8e7d6f; }
+        .suite-info-col h2 { font-family: serif; font-size: 32px; margin-bottom: 30px; line-height: 1.2; color: #4a3728; }
+        .suite-info-col p { font-size: 16px; line-height: 1.8; color: #635144; margin-bottom: 20px; }
+
+        .suite-image-col {
+            min-height: 750px;
+            background-size: cover;
+            background-position: center;
+            padding: 40px;
+            background-repeat: no-repeat;
+            width: 50%;
+        }
+
+        .swiper-container-unificado {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .swiper-container-unificado .swiper-slide img {
+            width: 100%;
+            aspect-ratio: 1 / 1 !important;
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border-radius: 20px !important;
+        }
+
+        /* Clase base para la imagen de la suite */
+        .suite-premium-img-ajuste {
+            min-height: 550px !important;
+            background-size: contain !important;
+            background-color: #f8f5f0;
+        }
+
+        .specs-label { display: block; margin-top: 30px; font-size: 13px; color: #8e7d6f; border-top: 1px solid #e3ddd5; padding-top: 20px; }
+
+        .grid-servicios { display: flex; flex-wrap: wrap; list-style: none; padding: 0; margin: 0; }
+        .item-servicio { width: 33.33% !important; margin-bottom: 15px; display: flex; align-items: center; font-size: 14px; color: #635144; }
+        .item-servicio i { color: #8e7d6f; margin-right: 12px; width: 20px; text-align: center; }
+
+        .seccion-combinacion-full {
+            width: 100%;
+            background-color: #fdfcf9;
+            border-top: 1px solid #e3ddd5;
+            border-bottom: 1px solid #e3ddd5;
+            padding: 80px 0;
+            margin-top: 50px;
+            color: #4a3728;
+        }
+
+        .box-contenido { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        .box-contenido h3 { font-family: serif; font-size: 32px; margin-bottom: 30px; text-align: center; }
+        .box-contenido p { font-size: 16px; line-height: 1.8; margin-bottom: 25px; text-align: center; }
+
+        .contenedor-dimensiones { display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 20px; margin-top: 40px; width: 100%; }
+        .btn-dimension { background: #ffffff; border: 1px solid #e3ddd5; padding: 15px 30px; border-radius: 50px; font-size: 14px; color: #8e7d6f; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.3s ease; text-align: center; flex: 1; max-width: 450px; }
+        .btn-dimension strong { color: #4a3728; display: block; text-transform: uppercase; letter-spacing: 1px; font-size: 11px; margin-bottom: 5px; }
+
+
+        /* --- AJUSTES PARA TABLET --- */
+        @media (max-width: 991px) {
+            .suite-info-col { padding: 60px 5%; width: 100%; text-align: center; }
+            .suite-image-col { min-height: 450px !important; padding: 20px; background-size: cover !important; width: 100%; }
+            .item-servicio { width: 50% !important; }
+        }
+
+
+        /* --- AJUSTES PARA MÓVIL (MÁXIMA MEJORA VISUAL) --- */
+        @media (max-width: 767px) {
+            .item-servicio { width: 100% !important; }
+
+            /* Cambiamos el orden para que la imagen no colapse y se vea arriba */
+            .contenedor-suite-premium {
+                display: flex;
+                flex-direction: column; /* Cambiado de column-reverse a column para priorizar la foto */
+            }
+
+            /* --- AJUSTES PARA MÓVIL (DENTRO DEL MEDIA QUERY 767px) --- */
+            @media (max-width: 767px) {
+
+                /* ... otros estilos ... */
+
+                .suite-image-col.suite-premium-img-ajuste {
+                    display: block !important;
+                    width: 100% !important;
+                    min-height: 400px !important;
+                    background-size: cover !important;
+                    background-position: center !important;
+                    padding: 0;
+                    order: 1;
+
+                    /* SEPARACIÓN EN LA PARTE DE ARRIBA */
+                    margin-top: 20px !important;    /* Espacio entre el menú y la foto */
+                    margin-bottom: 30px !important; /* Espacio entre la foto y el texto */
+                }
+
+                /* ... resto de estilos ... */
+            }
+
+
+            .suite-info-col {
+                width: 100% !important;
+                padding: 40px 20px !important;
+                order: 2; /* Texto abajo */
+                text-align: center;
+            }
+
+            .seccion-combinacion-full { padding: 60px 0; }
+            .contenedor-dimensiones { flex-direction: column; }
+            .btn-dimension { width: 100%; max-width: 100%; }
+
+            /* Mejora del Hero inicial */
+            .hero-home .slide img {
+                height: 100% !important;
+                object-fit: cover !important;
+            }
+
+            .intro-room .room-book { width:100%; }
+        }
+    </style>
+
+
+    {% include 'inc_analytics.html' %}
+</head>
+<body>
+
+{% include 'inc_header.html' %}
+
+<div class="hero-home">
+    <script>
+        const heroImages=[
+            {% for item in slider %}
+        "{{ item['image'] }}" {% if not loop.last %},{% endif %}
+        {% endfor %}
+        ]
+    </script>
+    <div class="txt">
+        <div class="title">{{title}}</div>
+        <div class="sub">{{intro}}</div>
+        <div class="visible-xs">
+            <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F" target="_blank" class="btn-line-big">Check Availability</a>
+        </div>
+    </div>
+    <div class="slide">
+        {% for item in slider %}
+        {% if loop.first %}<img src="{{ item['image'] }}" alt="">{% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<div id="mainmenu"></div>
+
+<section class="contenedor-suite-premium">
+    <div class="col-md-6 suite-info-col" data-aos="fade-right" data-aos-duration="1000">
+        <h6>{{ pretitle|default('falta definir') }}</h6>
+        <h2>{{ title|default('falta definir') }}</h2>
+
+        {% if intro2 is defined and intro2 %}
+        <p>{{ intro2|nl2br }}</p>
+        {% else %}
+        <p>falta definir</p>
+        {% endif %}
+
+        {% if text is defined and text %}
+        <p>{{ text|nl2br }}</p>
+        {% else %}
+        <p>falta definir</p>
+        {% endif %}
+
+        <span class="specs-label">
+            <strong>DIMENSIONES:</strong><br>
+            {{ dimensions|default('falta definir')|nl2br }}
+        </span>
+
+        <br><br>
+        <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F" target="_blank" class="btn-line-big">Check Availability</a>
+    </div>
+
+    <div class="col-md-6 suite-image-col suite-premium-img-ajuste"
+         data-aos="fade-left" data-aos-duration="1000"
+         style="background-image: url('{{ image|default('falta definir') }}');">
+    </div>
+</section>
+
+<div class="servicios-mejora" style="padding: 100px 0; background: #fff; overflow: hidden;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 txt" data-aos="fade-up" data-aos-duration="1000">
+                <h2 style="font-family: serif; font-size: 36px; color: #4a3728; margin-bottom: 50px; text-align: center; margin-top: 60px;">
+                    Services & Amenities
+                </h2>
+
+                <ul class="grid-servicios">
+                    {% if services is defined and services|length > 0 %}
+                    {% for s in services %}
+                    <li class="item-servicio">
+                        <i class="{{ s.icon|default('fa fa-check') }}"></i> {{ s.text }}
+                    </li>
+                    {% endfor %}
+                    {% else %}
+                    <li class="item-servicio"><i class="fa fa-info-circle"></i> falta definir</li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="col-md-12" data-aos="fade-right" data-aos-duration="1000">
+                <div class="swiper-container swiper-container-unificado">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="resources/img/amenidad7.png" alt="Img 1"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidad8.png" alt="Img 2"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidad11.png" alt="Img 3"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidaddes11.png" alt="Img 4"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades1.png" alt="Img 5"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades4.png" alt="Img 6"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades5.png" alt="Img 7"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades6.png" alt="Img 8"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades9.png" alt="Img 9"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades10.png" alt="Img 10"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades13.png" alt="Img 11"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades14.png" alt="Img 12"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades16.png" alt="Img 13"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades17.png" alt="Img 14"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades19.jpeg" alt="Img 15"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades20.jpeg" alt="Img 16"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades21.png" alt="Img 17"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades22.png" alt="Img 19"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades23.png" alt="Img 20"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades25.png" alt="Img 21"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades26.png" alt="Img 22"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades27.png" alt="Img 23"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades28.png" alt="Img 25"></div>
+                        <div class="swiper-slide"><img src="resources/img/amenidades29.png" alt="Img 26"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if idType is defined and idType == 1 %}
+<section class="seccion-combinacion-full">
+    <div class="box-contenido" data-aos="fade-up">
+        <h3>{{ specialInfoTitle|default('falta definir') }}</h3>
+        <p>{{ specialInfoText|default('falta definir')|nl2br }}</p>
+
+        <div class="contenedor-dimensiones">
+            <div class="btn-dimension">
+                <strong>{{ specialDimensionTitle|default('falta definir') }}</strong>
+                {{ specialDimensionValue|default('falta definir') }}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<br><br>
+
+<div class="specials" data-aos="fade-up" data-aos-duration="3000">
+    <div class="header">
+        <div class="row">
+            <div class="col-sm-6"><h2>Other categories</h2></div>
+            <div class="col-sm-6">
+                <nav>
+                    <a href="#" class="inactive"><img src="resources/img/prev.png" alt="previous"></a>
+                    <a href="#"><img src="resources/img/next.png" alt="next"></a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid lessmar">
+        {% if rooms is defined and rooms|length > 0 %}
+        {% for item in rooms %}
+        <figure>
+            <a href="{{ item['link'] }}">
+                <figcaption>
+                    <h4>{{ item['title'] }}</h4>
+                    <p>{{ item['intro'] }}</p>
+                </figcaption>
+                <div class="shad"></div>
+                <img src="{{ item['image'] }}" alt="">
+                <div class="bg"></div>
+            </a>
+        </figure>
+        {% endfor %}
+        {% else %}
+        falta definir
+        {% endif %}
+    </div>
+</div>
+
+{% include 'inc_footer.html' %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+<script src="resources/js/main.js?a=0"></script>
+<script src="resources/js/book-widget.js?ap=tst2"></script>
+<script src="resources/js/swiper-bundle.min.js"></script>
+<script src='resources/js/lineSlider.js'></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+    // Inicialización de Animaciones
+    AOS.init();
+    window.addEventListener('load', function() {
+        AOS.refresh();
+    });
+
+    // Configuración Única del Swiper
+    $(document).ready(function() {
+        var swiperUnificado = new Swiper('.swiper-container-unificado', {
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            spaceBetween: 20,
+            breakpoints: {
+                // Móvil
+                320: {
+                    slidesPerView: 1,
+                },
+                // Tablets
+                768: {
+                    slidesPerView: 2,
+                },
+                // Escritorio: Muestra 4 imágenes
+                1024: {
+                    slidesPerView: 4,
+                }
+            }
+        });
+
+        // Evento Check Availability
+        $(".check-av").click(function(e){
+            if(e)e.preventDefault();
+            $("#calendarForm").submit();
+        });
+    });
+</script>
+
+</body>
+</html>

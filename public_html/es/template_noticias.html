@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <base href="{{ base_href }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest, Novedades</title>
+    <meta name="description" content=" ">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% include 'inc_analytics.html' %}
+    
+    <style>
+
+      .hero-home .slide img{
+              opacity:0.4;
+            }
+          </style>
+  </head>
+  <body>
+    {% include 'inc_header.html' %}
+    <div class="hero-noimage">
+      <h1 class="title">Lo que sucede</h1>
+      <div class="sub">en the alest</div>
+    </div>
+    
+    <!-- MAIN MENU mainmenu.html -->
+    <div id='mainmenu'>
+    </div>
+    <!-- / MAIN MENU mainmenu.html -->
+    <div class="news">
+      <div class="container">
+        <div class="grilla">
+
+            
+          <div class="row">
+            {% for item in articles %}
+
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="500">
+                  <a href="{{ item['link'] }}">
+                    <article class="nota">
+                      <figure>
+                        <img src="{{ item['image'] }}" alt="">
+                      </figure>
+                      <div class="txt">
+                        <div class="date" style="display: none">{{ item['date'] }}</div>
+                        <div class="title">{{ item['title'] }}</div>
+                        <p class="art1">{{ item['intro']|nl2br }}</p>
+                        <div class="more">Mas</div>
+                      </div>
+                    </article>
+                  </a>
+                </div>
+                 {% endfor %}
+
+            </div>
+
+           
+
+
+
+
+
+
+
+
+
+
+
+
+          <!-- set 2 -->
+          <!-- set 3 -->
+        </div>
+      </div>
+    </div>
+
+    {% include 'inc_footer.html' %}
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="resources/js/jQuery.succinct.min.js"></script>
+    <script src="resources/js/scrollreveal.min.js"></script>
+<script>
+window.MAINMENU_URL='/es/mainmenu.html';
+</script>
+    <script src="resources/js/main.js"></script>
+    <script src="resources/js/newsletter.js"></script>
+    <script> 
+    </script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  
+    <script>
+    AOS.init();
+    
+    window.addEventListener('load', function() {
+        AOS.refresh();
+    });
+    
+    
+        </script>
+  </body>
+</html>

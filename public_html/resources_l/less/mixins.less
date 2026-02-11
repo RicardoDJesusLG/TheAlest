@@ -1,0 +1,73 @@
+// alest
+//
+// Mixins
+// --------------------------------------------------
+//.border-radius(5px);
+.border-radius(@r) {
+  -webkit-border-radius: @r;
+  -moz-border-radius: @r;
+  border-radius: @r;
+}
+
+// Responsive meadia queries (mobile first)
+// @media @s-view { }
+// @media @m-view { }
+// @media @l-view { }
+// @media @xs-view { }
+
+@s: ~"(min-width: 768px)";
+@m: ~"(min-width: 992px)";
+@l: ~"(min-width: 1200px)";
+@xs: ~"(max-width: 767px)";
+
+//.transition(all 0.4s ease);
+.transition(@transition) {
+	-webkit-transition: @transition;
+	-moz-transition: @transition;
+	-o-transition: @transition;
+	transition: @transition;
+}
+
+.fill {
+  object-fit: cover;
+  object-position: middle center;
+}
+
+//bg cover
+.cover {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.shad {
+  text-shadow: 0 -1px 0 rgba(128,128,128,.5);
+}
+
+.sans {
+  font-family: 'Nunito Sans', sans-serif;
+}
+.serif {
+  font-family: 'Baskervville', serif;
+}
+.serif-number {
+  font-family: 'Libre Baskerville', serif;
+}
+
+.light {
+  font-weight: 300;
+}
+.regular {
+  font-weight: 400;
+}
+.semi {
+  font-weight: 600;
+}
+.bold {
+  font-weight: 700;
+}
+
+.upper {
+  text-transform: uppercase;
+}

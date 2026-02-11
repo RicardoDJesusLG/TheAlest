@@ -1,0 +1,403 @@
+{% extends "template_container.html" %}
+
+{% block content %}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <ol class="breadcrumb">
+          <li><i class="fa fa-edit"></i> {{sectionTitle}}</li>
+          <li class="active">Items</li>
+        </ol>
+    </h1>
+</section>
+ 
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+
+            {% if mode == 'order' %}
+
+                {% if items|length > 0 %}
+
+                    <form method="POST" action="{{currentPage}}?{{qs}}" id="form" name="form" class="form-horizontal">
+                        <input type="hidden" id="submitUpdateOrder" name="submitUpdateOrder" value="{{mode}}" />
+
+                        <input type="hidden" id="orderHidden" name="orderHidden">
+
+                        <div class="box box-info">
+                            <div class="box-body">
+                                <p>{{ translationDragAndDrop }}</p>
+
+                                <ul class='containerOrder list-group'>
+
+                                {% for item in items %}
+                                    <li data-id="{{ item['id'] }}" class="list-group-item pointer">{{ item['title'] }}</li>
+                                {% endfor %}
+
+                                </ul>
+
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+
+                        <div class="box">
+                            <div class="box-footer">
+                                <a href="{{currentPage}}?">
+                                    <button type="button" class="btn btn-default"><i class="fa fa-undo"></i> {{ translationCancel }}</button>
+                                </a>
+
+                                <button type="submit" class="btn btn-info pull-right"><i class="fa fa-save"></i> {{ translationSave }}</button>
+                            </div>
+                            <!-- /.box-footer -->
+                        </div>
+                        <!-- /.box -->
+
+                    </form>
+
+                {% else %}
+
+                    <br />
+                    <div class="callout callout-danger">
+                        <p><i class="fa fa-warning"></i> {{ translationNoItemsAvailable }}</p>
+                    </div>
+
+                {% endif %}
+
+            {% elseif mode == 'list' %}
+
+                {% if msgUpdated %}
+                    <br />
+                    <div class="callout callout-success">
+                        <p><i class="fa fa-check-circle"></i> {{ msgUpdated }}</p>
+                    </div>
+                {% endif %}
+
+                {% if items|length > 0 %}
+                    <div class="box box-info">
+                        <div class="box-body">
+
+                            <table id="mainTable" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-10">Title</th>
+                                        <th class="col-md-2">{{translationEdit}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {% for item in items %}
+                                        <tr>
+                                            <td><span style="display: none">{{ item['position'] }}</span> {{ item['title'] }}</td>
+                                            <td>
+                                                <a href="{{currentPage}}?mode=edit&id={{ item['id'] }}">
+                                                    <button type="button" class="btn btn-info btn-xs"><span class="visible-xs-inline"><i class="fa fa-pencil"></i></span> <span class="hidden-xs">{{translationEdit}}</span></button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+
+                {% else %}
+
+                    <br />
+                    <div class="callout callout-danger">
+                        <p><i class="fa fa-warning"></i> {{ translationNoItemsAvailable }}</p>
+                    </div>
+
+                {% endif %}
+
+            {% elseif mode == 'edit' %}
+
+                {% if errorMsg %}
+                    <br />
+                    <div class="callout callout-danger">
+                        <p><i class="fa fa-warning"></i> {{ errorMsg }}</p>
+                    </div>
+                {% endif %}
+
+                    <!-- Horizontal Form -->
+                    <form method="POST" action="{{currentPage}}?{{qs}}" id="form" name="form" class="form-horizontal" enctype="multipart/form-data">
+                        <input type="hidden" id="submitUpdate" name="submitUpdate" value="1" />
+                        <!-- Custom Tabs -->
+                        <div class="nav-tabs-custom">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#tab_es" data-toggle="tab"><i class="famfamfam-flag-es"></i></a></li>
+                                <li><a href="#tab_en" data-toggle="tab"><i class="famfamfam-flag-gb"></i></a></li>
+                                <li><a href="#tab_general" data-toggle="tab">General</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab_es">
+                                    <div class="form-group">
+                                        <label for="pretitleEs" class="col-sm-2 control-label">Intro  </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="pretitleEs" name="pretitleEs" value="{{pretitleEs}}">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p class="text-red">{{ translationRequired }}</p>
+                                        </div>
+                                    </div>                                     
+                                    <div class="form-group">
+                                        <label for="introEs" class="col-sm-2 control-label">Title  </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="introEs" name="introEs" value="{{introEs}}">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p class="text-red">{{ translationRequired }}</p>
+                                        </div>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label for="textEs" class="col-sm-2 control-label">Text </label>
+                                        <div class="col-sm-8">
+                                        <textarea id="textEs" name="textEs" class="form-control summernote" rows="4">{{textEs}}</textarea>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p class="text-red">{{ translationRequired }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="captionEs" class="col-sm-2 control-label">Caption </label>
+                                        <div class="col-sm-8">
+                                            <textarea id="captionEs" name="captionEs" class="form-control" rows="4">{{captionEs}}</textarea>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p class="text-red">{{ translationRequired }}</p>
+                                        </div>
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <label for="reservationsEs" class="col-sm-2 control-label">Reservations link </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="reservationsEs" name="reservationsEs" value="{{reservationsEs}}">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <!--<p class="text-red">{{ translationRequired }}</p>-->
+                                        </div>
+                                    </div>   
+
+                                </div>
+                                <!-- /.tab-pane -->
+                                <div class="tab-pane" id="tab_en">
+                                    <div class="form-group">
+                                        <label for="pretitleEn" class="col-sm-2 control-label">Intro  </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="pretitleEn" name="pretitleEn" value="{{pretitleEn}}">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p class="text-red">{{ translationRequired }}</p>
+                                        </div>
+                                    </div>                                     
+                                    <div class="form-group">
+                                        <label for="introEn" class="col-sm-2 control-label">Title  </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="introEn" name="introEn" value="{{introEn}}">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p class="text-red">{{ translationRequired }}</p>
+                                        </div>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label for="textEn" class="col-sm-2 control-label">Text </label>
+                                        <div class="col-sm-8">
+                                        <textarea id="textEn" name="textEn" class="form-control summernote" rows="4">{{textEn}}</textarea>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p class="text-red">{{ translationRequired }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="captionEn" class="col-sm-2 control-label">Caption </label>
+                                        <div class="col-sm-8">
+                                            <textarea id="captionEn" name="captionEn" class="form-control" rows="4">{{captionEn}}</textarea>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p class="text-red">{{ translationRequired }}</p>
+                                        </div>
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <label for="reservationsEn" class="col-sm-2 control-label">Reservations link </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="reservationsEn" name="reservationsEn" value="{{reservationsEn}}">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <!--<p class="text-red">{{ translationRequired }}</p>-->
+                                        </div>
+                                    </div>  
+
+                                </div>
+                                <!-- /.tab-pane -->
+                                <div class="tab-pane" id="tab_general">
+                                    <input type='hidden' name='imageHero' value='{{imageHero}}' />
+                                    <div class="form-group">
+                                        <label for="imageHero" class="col-sm-2 control-label">Image Hero </label>
+                                        <div class="col-sm-8">
+                                            <input type="file" id="imageHero" name="imageHero">
+                                            <p class="help-block">{{translationSize}} 1450 x 856px</p>
+                                        {% autoescape false %}{{ imageHeroPreview }}{% endautoescape %}
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p class="text-red">{{ translationRequired }}</p>
+                                        </div>
+                                    </div>
+
+                                    <input type='hidden' name='image' value='{{image}}' />
+                                    <div class="form-group">
+                                        <label for="image" class="col-sm-2 control-label">Image </label>
+                                        <div class="col-sm-8">
+                                            <input type="file" id="image" name="image">
+                                            <p class="help-block">{{translationSize}} 401 x 544px</p>
+                                        {% autoescape false %}{{ imagePreview }}{% endautoescape %}
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p class="text-red">{{ translationRequired }}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- /.tab-pane -->
+                            </div>
+                            <!-- /.tab-content -->
+                        </div>
+                        <!-- nav-tabs-custom -->
+                        <div class="box">
+                            <div class="box-footer">
+                                <a href="{{linkCancel}}">
+                                    <button type="button" class="btn btn-default"><i class="fa fa-undo"></i> {{ translationCancel }}</button>
+                                </a>
+                                <button type="submit" class="btn btn-info pull-right"><i class="fa fa-save"></i> {{ translationSave }}</button>
+                            </div>
+                            <!-- /.box-footer -->
+                        </div>
+                        <!-- /.box -->
+                    </form>
+
+            {% endif %}
+
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+
+<!-- delete -->
+<div id="puDelete" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">{{ translationConfirm }}</h4>
+            </div>
+
+            <form id="frmDelete" name="frmDelete" method="POST" action="{{currentPage}}?">
+                <input type="hidden" id="submitDelete" name="submitDelete" value="1" />
+                <input type="hidden" id="idDelete" name="idDelete" />
+
+                <div class="modal-body">
+                    <p>{{ translationConfirmDeleteLabel }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ translationStrNo }}</button>
+                    <button type="submit" class="btn btn-primary">{{ translationStrYes }}</button>
+                </div>
+
+            </form>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+{% endblock %}
+
+{% block js %}
+
+    {% if mode == 'order' %}
+
+        <script src="./resources/plugins/jquery-sortable.js"></script>
+        <script>
+        $(function  () {
+          $("ul.containerOrder").sortable({
+              onDrop: function ($item, container, _super) {
+                var data = $("ul.containerOrder").sortable("serialize").get();
+
+                var jsonString = JSON.stringify(data, null, ' ');
+
+                $('#orderHidden').val(jsonString);
+                _super($item, container);
+              }
+            });
+        });
+        </script>
+
+    {% elseif mode == 'list' %}
+
+        <!-- DataTables -->
+        <script src="./resources/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="./resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <script>
+            $(function() {
+                $('#mainTable').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true
+
+                    {% if siteLang == 'es' %}
+                    , "language": {
+                        "url": "./resources/plugins/datatables/Spanish.json"
+                    }
+                    {% endif %}
+
+                });
+            });
+        </script>
+
+    {% elseif mode == 'edit' %}
+
+        <!-- datepicker -->
+        <script src="./resources/plugins/datepicker/bootstrap-datepicker.js"></script>
+
+        {% if siteLang == 'es' %}
+        <script src="./resources/plugins/datepicker/locales/bootstrap-datepicker.es.js"></script>
+        {% endif %}
+
+        <script>
+            $(function() {
+                $('.datepicker').datepicker({
+                    autoclose: true,
+
+                    {% if siteLang == 'es' %}
+                        language: 'es',
+                        format: 'dd/mm/yyyy'
+                    {% else %}
+                        format: 'mm/dd/yyyy'
+                    {% endif %}
+                });
+            });
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+          $('.summernote').summernote();
+        });            
+        </script>
+
+    {% endif %}
+
+{% endblock %}

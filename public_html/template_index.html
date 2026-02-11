@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="{{ base_href }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest Hotel in Polanco, Mexico</title>
+    <meta name="description" content="Located in the refined and cosmopolitan neighborhood of Polanco. A property that, under the boutique hospitality concept, opens its doors to a world of dreams and unparalleled hedonism.">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/book-widget.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <link rel="stylesheet" href="resources/css/swiper-bundle.min.css">
+
+    <style>
+        a:focus{ outline:none !important; outline-offset: 0px; }
+        .hero-home .slide img{ opacity:0.4; }
+        .specials{ overflow:hidden; }
+
+        /* --- NEWS SECTION --- */
+        .news { padding: 60px 0; background-color: #fcfcfc; }
+        .news .grilla article {
+            background: #fff; margin-bottom: 30px; border: 1px solid #eaeaea;
+            transition: all 0.3s ease; overflow: hidden; height: 100%;
+        }
+        .news .grilla a { text-decoration: none !important; color: inherit; }
+        .news .grilla a:hover article { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
+        .news .grilla .nota figure img { width: 100%; height: 250px; object-fit: cover; }
+        .news .grilla .txt { padding: 25px; }
+        .news .grilla .title {
+            font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600;
+            line-height: 1.4; margin-bottom: 15px; color: #1a1a1a;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .news .grilla p.art1 { font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 20px; }
+        .news .grilla .more {
+            font-size: 12px; text-transform: uppercase; font-weight: bold;
+            letter-spacing: 2px; color: #bfa17d; border-bottom: 1px solid #bfa17d;
+            display: inline-block; padding-bottom: 2px;
+        }
+
+        /* MODAL & GALLERY */
+        .modal-backdrop { background-color: #000; }
+        .modal-backdrop.in { opacity: 0.8; }
+        .modal-content { border-radius: 0; border: none; box-shadow: 0 15px 50px rgba(0,0,0,0.5); }
+        .modal-gallery-img {
+            width: 100%; height: 250px; object-fit: cover;
+            border: 1px solid #eee; transition: opacity 0.3s;
+        }
+        .modal-gallery-img:hover { opacity: 0.9; }
+
+        /* FIX PARA EL DIV DE ERROR 404 SI EL SCRIPT FALLA */
+        #mainmenu:empty { display: none; }
+    </style>
+    {% include 'inc_analytics.html' %}
+</head>
+<body>
+{% include 'inc_header.html' %}
+
+<div class="hero-home">
+    <script>
+        const heroImages=[
+            {% for item in slider %}
+        "{{ item['image'] }}" {% if not loop.last %},{% endif %}
+        {% endfor %}
+        ]
+    </script>
+    <div class="txt">
+        <div class="title">The Alest Hotel</div>
+        <div class="sub">Hosting the world <br><br><strong>Welcome</strong></div>
+        <div class="hidden-xs">
+            <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F" target="_blank" class="btn-line-big">Check Availability</a>
+        </div>
+        <div class="visible-xs">
+            <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F" target="_blank" class="btn-line-big">Check Availability</a>
+        </div>
+    </div>
+    <div class="pager-slider">
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+    </div>
+    <div class="slide">
+        <img src="files/slider/slide1a.jpg" alt="">
+    </div>
+</div>
+
+<div id='mainmenu'></div>
+
+<div class='calendarBox'>
+    <div class='form-hit'></div>
+    <div id='calendar' class='dnaCalendar'></div>
+    <form id='calendarForm' method='POST' action="book.php" style='display:none;'>
+        <input type="hidden" name='datein' value=''/>
+        <input type="hidden" name='dateout' value=''/>
+        <input type="hidden" name='adults' value=''/>
+        <input type="hidden" name='children' value=''/>
+    </form>
+</div>
+
+<div class="intro" style="padding: 80px 0; background-color: #f4f4f4;">
+    <div class="container">
+        <div style="background: #ffffff; border: 1px solid #d1d1d1; padding: 60px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+            <div class="row" style="display: flex; align-items: center; flex-wrap: wrap;">
+                <div class="col-md-7">
+                    <div class="txt" style="text-align: left; padding-right: 30px;">
+                        <h6 data-aos="fade-up" data-aos-duration="900">Experience</h6>
+                        <h1 data-aos="fade-up" data-aos-duration="900" data-aos-offset="200" style="margin-top: 20px; margin-bottom: 30px;">
+                            The Alest, a sophisticated hotel in a vibrant city
+                        </h1>
+                        <p data-aos="fade-up" data-aos-duration="900" data-aos-offset="100" style="margin-bottom: 30px;">
+                            The Alest is characterized by the classic elegance that shines through all its spaces, from its 19 beautifully decorated rooms to the elegant public areas that stand out for their unique beauty both inside and out.
+                            <br><br>
+                            Allow yourself to be captivated by personalized and anticipatory service that meets the most demanding needs, welcoming you to new, unique, and unrepeatable experiences.
+                        </p>
+                        <a href="javascript:void(0)" class="btn-line" data-toggle="modal" data-target="#modalExperiencia" data-aos="fade-up" data-aos-duration="900" data-aos-offset="100">Discover more</a>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <figure style="background: #fff; padding: 15px; border: 1px solid #eaeaea; margin: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                        <img src="resources/img/thealest0.png" alt="" data-aos="fade-up" data-aos-duration="900" style="width: 100%; height: auto; display: block;">
+                        <figcaption data-aos="fade-right" data-aos-duration="900" style="text-align: left; padding: 15px; border-left: 4px solid #c5a059; margin-top: 15px; background: #fff;">
+                            <strong>Extraordinary location</strong>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="twospots">
+    <div class="spots">
+        <figure>
+            <a href="{{link_rooms}}">
+                <figcaption>
+                    <h3>Rooms and Deluxe Junior Suites</h3>
+                    <p>Enter a universe of disconnection and eclectic style through a curated selection of interior design</p>
+                </figcaption>
+                <img src="resources/img/spot-rooms.jpg" data-aos="zoom-out" data-aos-duration="1000" alt="">
+                <div class="bg" data-aos="fade-right" data-aos-duration="500"></div>
+            </a>
+        </figure>
+        <figure>
+            <a href="{{link_gallery}}">
+                <figcaption>
+                    <h3>Gallery</h3>
+                    <p>Enchant your senses at The Alest Hotel</p>
+                </figcaption>
+                <img src="resources/img/spot-galler.jpg" data-aos="zoom-out" data-aos-duration="1000" alt="">
+                <div class="bg" data-aos="fade-left" data-aos-duration="900"></div>
+            </a>
+        </figure>
+    </div>
+</div>
+
+<div class="testimonials">
+    {% for item in testimonials %}
+    <div class="txt">
+        <div class="llave" data-aos="fade-down" data-aos-duration="2000">
+            <img src="resources/img/llave.png" alt="">
+        </div>
+        <h4>“{{ item['text'] }}”</h4>
+        <div class="author"><strong>{{ item['author'] }}</strong> / {{ item['location'] }}</div>
+    </div>
+    {% endfor %}
+    <div class="bg" data-aos="zoom-in" data-aos-duration="2000">
+        <img src="resources/img/alest-bg.jpg" alt="">
+    </div>
+</div>
+
+<div class="specials" data-aos="fade-up" data-aos-duration="3000">
+    <div class="header">
+        <div class="row">
+            <div class="col-sm-8">
+                <h6>Promotions</h6>
+                <h2>Seasonal rates and exclusive packages</h2>
+            </div>
+            <div class="col-sm-4">
+                <nav>
+                    <a href="#" class="inactive"><img src="resources/img/prev.png" alt="prev"></a>
+                    <a href="#"><img src="resources/img/next.png" alt="next"></a>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="grid">
+        {% for item in specials %}
+        <figure>
+            <a href="{{ item['link'] }}">
+                <figcaption>
+                    <h4>{{ item['title'] }}</h4>
+                    <p>{{ item['intro'] }}</p>
+                </figcaption>
+                <div class="shad"></div>
+                <img src="{{ item['image'] }}" alt="">
+                <div class="bg"></div>
+            </a>
+        </figure>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="news">
+    <div class="container">
+        <div class="head" data-aos="fade-up" data-aos-duration="1000">
+            <h6>What's happening at</h6>
+            <h2>The Alest</h2>
+        </div>
+        <div class="grilla">
+            <div class="row">
+                {% for item in articles %}
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="500">
+                    <a href="{{ item['link_1'] }}">
+                        <article class="nota">
+                            <figure><img src="{{ item['image_1'] }}" alt=""></figure>
+                            <div class="txt">
+                                <div class="title">{{ item['title_1'] }}</div>
+                                <p class="art1">{{ item['intro_1']|nl2br }}</p>
+                                <div class="more">See More</div>
+                            </div>
+                        </article>
+                    </a>
+                    {% if item['id_2'] %}
+                    <a href="{{ item['link_2'] }}">
+                        <article class="nota">
+                            <figure><img src="{{ item['image_2'] }}" alt=""></figure>
+                            <div class="txt">
+                                <div class="title">{{ item['title_2'] }}</div>
+                                <p class="art1">{{ item['intro_2']|nl2br }}</p>
+                                <div class="more">See More</div>
+                            </div>
+                        </article>
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="1000">
+                    {% if item['id_3'] %}
+                    <a href="{{ item['link_3'] }}">
+                        <article class="nota">
+                            <figure><img src="{{ item['image_3'] }}" alt=""></figure>
+                            <div class="txt">
+                                <div class="title">{{ item['title_3'] }}</div>
+                                <p class="art1">{{ item['intro_3']|nl2br }}</p>
+                                <div class="more">See More</div>
+                            </div>
+                        </article>
+                    </a>
+                    {% endif %}
+                    {% if item['id_4'] %}
+                    <a href="{{ item['link_4'] }}">
+                        <article class="nota">
+                            <figure><img src="{{ item['image_4'] }}" alt=""></figure>
+                            <div class="txt">
+                                <div class="title">{{ item['title_4'] }}</div>
+                                <p class="art1">{{ item['intro_4']|nl2br }}</p>
+                                <div class="more">See More</div>
+                            </div>
+                        </article>
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="1500">
+                    {% if item['id_5'] %}
+                    <a href="{{ item['link_5'] }}">
+                        <article class="nota">
+                            <figure><img src="{{ item['image_5'] }}" alt=""></figure>
+                            <div class="txt">
+                                <div class="title">{{ item['title_5'] }}</div>
+                                <p class="art1">{{ item['intro_5']|nl2br }}</p>
+                                <div class="more">See More</div>
+                            </div>
+                        </article>
+                    </a>
+                    {% endif %}
+                    {% if item['id_6'] %}
+                    <a href="{{ item['link_6'] }}">
+                        <article class="nota">
+                            <figure><img src="{{ item['image_6'] }}" alt=""></figure>
+                            <div class="txt">
+                                <div class="title">{{ item['title_6'] }}</div>
+                                <p class="art1">{{ item['intro_6']|nl2br }}</p>
+                                <div class="more">See More</div>
+                            </div>
+                        </article>
+                    </a>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="viewmore" data-aos="fade-down" data-aos-duration="3000">
+                <div class="linea"></div>
+                <a href="{{link_news}}"><div class="btn-line">See more</div></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalExperiencia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="border: none; padding: 20px 20px 0 20px;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 30px;"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" style="text-transform: uppercase; letter-spacing: 2px;">The Alest Gallery</h4>
+            </div>
+            <div class="modal-body" style="padding: 20px;">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal1.png" class="modal-gallery-img" alt="1"></div>
+                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal9.png" class="modal-gallery-img" alt="2"></div>
+                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal2.png" class="modal-gallery-img" alt="3"></div>
+                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal3.png" class="modal-gallery-img" alt="4"></div>
+                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal8.png" class="modal-gallery-img" alt="5"></div>
+                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal10.png" class="modal-gallery-img" alt="6"></div>
+                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal4.png" class="modal-gallery-img" alt="7"></div>
+                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal6.jpeg" class="modal-gallery-img" alt="8"></div>
+                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal11.jpeg" class="modal-gallery-img" alt="9"></div>
+                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal5.png" class="modal-gallery-img" alt="10"></div>
+                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal7.jpeg" class="modal-gallery-img" alt="11"></div>
+                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal13.jpeg" class="modal-gallery-img" alt="12"></div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border: none;">
+                <button type="button" class="btn-line" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'inc_footer.html' %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+
+<script>
+    window.MAINMENU_URL='mainmenu.html';
+</script>
+
+<script src="resources/js/main.js?v=30"></script>
+<script src="resources/js/newsletter.js"></script>
+<script src="resources/js/book-widget.js?ap=tst2"></script>
+<script src="resources/js/swiper-bundle.min.js"></script>
+<script src='resources/js/lineSlider.js'></script>
+
+<script>
+    $(function(){
+        $(".check-av").click(function(e){
+            if(e)e.preventDefault();
+            $("#calendarForm").submit();
+        });
+    });
+</script>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+    window.addEventListener('load', function() {
+        AOS.refresh();
+    });
+</script>
+
+</body>
+</html>

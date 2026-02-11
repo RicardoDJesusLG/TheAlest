@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <base href="{{ base_href }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest, El Hotel | Contacto</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <style>
+        /* TIPOGRAFÍA E INTEGRACIÓN DE ESTILO LUXURY */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital@0;1&display=swap');
+
+        body { font-family: 'Montserrat', sans-serif; background-color: #fff; }
+
+        .hero-home .slide img {
+            opacity: 0.4;
+            position: absolute;
+        }
+
+        /* SECCIÓN CONTACTO GENERAL */
+        .contact { padding: 90px 0; background-color: #ffffff; }
+
+        .form-container-luxury {
+            background: #ffffff;
+            padding: 50px;
+            border: 1px solid #f2f2f2;
+            border-top: 3px solid #c5a059;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+        }
+
+        .contact h6 {
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #c5a059;
+            font-weight: 600;
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+
+        .contact h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            font-style: italic;
+            margin-top: 0;
+            margin-bottom: 40px;
+            color: #1a1a1a;
+        }
+
+        /* INPUTS ESTILO LÍNEA MINIMALISTA */
+        .form input[type="text"],
+        .form input[type="email"],
+        .form textarea,
+        .form select {
+            width: 100%;
+            border: none !important;
+            border-bottom: 1px solid #e0e0e0 !important;
+            padding: 12px 0 !important;
+            margin-bottom: 25px !important;
+            background: transparent !important;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+
+        .form input:focus, .form textarea:focus, .form select:focus {
+            border-bottom: 1px solid #c5a059 !important;
+            outline: none;
+        }
+
+        /* BOTÓN DE ENVÍO */
+        .btn-line-luxury {
+            background: #1a1a1a;
+            color: #fff;
+            border: 1px solid #1a1a1a;
+            padding: 18px 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            width: 100%;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        .btn-line-luxury:hover {
+            background: #c5a059;
+            border-color: #c5a059;
+            color: #fff;
+        }
+
+        /* BARRA LATERAL DE INFORMACIÓN */
+        .contact-sidebar { padding-left: 20px; }
+        .info-block { margin-bottom: 35px; }
+        .info-block label {
+            display: block;
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: #c5a059;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .info-block p, .info-block a {
+            font-size: 15px;
+            color: #444;
+            line-height: 1.6;
+            text-decoration: none;
+            display: block;
+        }
+
+        .social-luxury a {
+            font-size: 18px;
+            margin-right: 20px;
+            color: #1a1a1a;
+            transition: 0.3s;
+        }
+
+        .social-luxury a:hover { color: #c5a059; }
+
+        /* Eliminamos cualquier cambio al pasar el mouse */
+        .map-section iframe {
+            filter: grayscale(100%);
+            display: block;
+        }
+        @media (max-width: 767px) {
+            .contact-sidebar { padding-left: 0; margin-top: 40px; }
+            .form-container-luxury { padding: 30px 20px; }
+            .map-section { height: 350px; }
+        }
+    </style>
+
+    {% include 'inc_analytics.html' %}
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+<body>
+
+{% include 'inc_header.html' %}
+
+<div class="hero-home">
+    <div class="txt">
+        <div class="title">Contacto</div>
+        <div class="sub">The Alest</div>
+    </div>
+    <div class="slide">
+        <img src="resources/img/contactoimg.png" alt="Contacto The Alest">
+    </div>
+</div>
+
+<div id='mainmenu'></div>
+
+<div class="contact">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-7" data-aos="fade-up">
+                <div class="form-container-luxury">
+                    <h6>The Alest</h6>
+                    <h1>Formulario de contacto</h1>
+
+                    {% if frmMessageThanks %}
+                    <div style="border: 1px solid #c5a059; padding: 40px; text-align: center;">
+                        <h3 style="font-family: 'Playfair Display'; color: #1a1a1a;">¡Gracias!</h3>
+                        <p>Su mensaje ha sido enviado con éxito. Nos pondremos en contacto con usted a la brevedad.</p>
+                    </div>
+                    {% else %}
+
+                    {% if frmMessage %}
+                    <span class="frmFormsMessages">{{ frmMessage }}</span>
+                    {% endif %}
+
+                    <form method="POST" action="{{link_contact}}">
+                        <input type="hidden" id="frmSubmitContact" name="frmSubmitContact" value="1">
+
+                        <div class="form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" placeholder="Nombre*" id="frmNombre" name="frmNombre" value="{{frmNombre}}" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" placeholder="Apellido*" id="frmApellido" name="frmApellido" value="{{frmApellido}}" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" placeholder="Teléfono*" id="frmTelefono" name="frmTelefono" value="{{frmTelefono}}" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" placeholder="Email*" id="frmEmail" name="frmEmail" value="{{frmEmail}}" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" placeholder="País*" id="frmPais" name="frmPais" value="{{frmPais}}">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" placeholder="Ciudad*" id="frmCiudad" name="frmCiudad" value="{{frmCiudad}}">
+                                </div>
+                            </div>
+
+                            <select id="frmAsunto" name="frmAsunto" required>
+                                <option value="">Asunto*</option>
+                                <option value="General Inqueries" {% if frmAsunto == 'General Inqueries' %}selected{% endif %}>Consultas Generales</option>
+                                <option value="Reservations" {% if frmAsunto == 'Reservations' %}selected{% endif %}>Reservaciones</option>
+                                <option value="Events" {% if frmAsunto == 'Events' %}selected{% endif %}>Eventos</option>
+                                <option value="Restaurants" {% if frmAsunto == 'Restaurants' %}selected{% endif %}>Restaurantes</option>
+                            </select>
+
+                            <textarea rows="3" placeholder="Mensaje" id="frmComentarios" name="frmComentarios" style="resize: none;">{{frmComentarios}}</textarea>
+
+                            <div class="captcha" style="margin-bottom: 20px;">
+                                <div class="g-recaptcha" data-sitekey="{{recaptchaPublic}}"></div>
+                            </div>
+
+                            <button type="submit" class="btn-line-luxury">Enviar Mensaje</button>
+                        </div>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-sm-4 col-sm-offset-1" data-aos="fade-up" data-aos-delay="200">
+                <div class="contact-sidebar">
+                    <div class="info-block">
+                        <label>Dirección</label>
+                        <p>Eugenio Sue 45, Polanco<br>11540, Ciudad de México</p>
+                    </div>
+
+                    <div class="info-block">
+                        <label>Teléfonos</label>
+                        <a href="tel:00525590277343">+52 55 90277 343</a>
+                        <a href="tel:00525590277344">+52 55 90277 344</a>
+                    </div>
+
+                    <div class="info-block">
+                        <label>Email</label>
+                        <a href="mailto:reservations@thealest.com">reservations@thealest.com</a>
+                        <a href="mailto:hello@thealest.com">hello@thealest.com</a>
+                    </div>
+
+                    <div class="info-block">
+                        <label>Síguenos</label>
+                        <div class="social-luxury">
+                            <a href="https://www.instagram.com/thealestmexico/" target="_blank"><i class="fa fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/The-Alest-109499224797664" target="_blank"><i class="fa fa-facebook"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+{% include 'inc_footer.html' %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+    window.MAINMENU_URL='/es/mainmenu.html';
+</script>
+<script src="resources/js/main.js"></script>
+<script src="resources/js/newsletter.js"></script>
+
+</body>
+</html>

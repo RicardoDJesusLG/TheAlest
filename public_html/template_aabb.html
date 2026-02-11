@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="{{ base_href }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest, 45 Bar & Restaurant </title>
+    <meta name="description" content=" ">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <link rel="stylesheet" href="resources/css/book-widget.css">
+    
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% include 'inc_analytics.html' %}
+    <style>
+      .aabb .gridaabb {
+    margin-bottom: 70px;
+}
+ 
+
+.hero-home .slide img{
+        opacity:0.4;
+      } 
+
+    </style>
+  </head>
+  <body>
+    {% include 'inc_header.html' %}
+    <div class="hero-home" >
+      <div class="txt">
+        <div class="title">
+          45 Bar & Restaurant 
+        </div>
+        <div class="sub">Contemporary Mexican Haute Cuisine</div>
+      </div>
+      
+      <div class="slide">
+        <img src="resources/img/hero-aabb.jpg" alt="">
+      </div>
+    </div>
+    <!-- MAIN MENU mainmenu.html -->
+    <div id='mainmenu'>
+    </div>
+    <!-- / MAIN MENU mainmenu.html -->
+    <!-- cal -->
+    <div class='calendarBox'>
+      <div class='form-hit'></div>
+      <div id='calendar' class='dnaCalendar'></div>
+      <form id='calendarForm' method='POST' action="book.php" style='display:none;'>
+        <input type="hidden" name='datein' value=''/>
+        <input type="hidden" name='dateout' value=''/>
+        <input type="hidden"  name='adults' value=''/>
+        <input type="hidden"  name='children' value=''/>
+      </form>
+    </div>
+    <!-- /calendar
+    -->
+    <div class="aabb"  style='width: 100%;overflow: hidden;'>
+      <div class="container">
+        <div class="introaabb">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="left">
+                <h6 data-aos="fade-left" data-aos-duration="1000">45 Bar & Restaurant</h6>
+                <h1 data-aos="fade-left" data-aos-duration="1500">A fusion of tradition and modernity <span>for connoisseurs</span></h1>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="right" data-aos="fade-right" data-aos-duration="1000">
+
+                <p>Local gourmet experiences and exclusive mixology.</p>
+                <p>We take our cuisine seriously at The Alest Hotel. We bring together culinary elements from every corner of the country several times a day and night, to the delight of our guests. Enjoy traditional Mexican breakfasts, freshly baked bread, fresh juices made with seasonal local fruits, scrumptious menus with top-quality ingredients, and immersive experiences featuring national spirits.</p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="gridaabb">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6">
+              <a href="{{link_aabb_the_restaurant}}">
+                <figure class="tall">
+                  <figcaption  data-aos="fade-up" data-aos-duration="1200">
+                  <div class="tit">45 Restaurant</div>
+                  <div class="des">View more</div>
+                  </figcaption>
+                  
+                  <img src="resources/img/aabb1.jpg" alt="" data-aos="fade-right" data-aos-duration="1000">
+                  
+                </figure>
+              </a>
+            </div>
+            <div class="col-sm-6">
+              <a href="{{link_aabb_the_bar}}">
+                <figure class="fat">
+                  
+                  <figcaption  data-aos-duration="1700" data-aos="fade-up">
+                  <div class="tit">The Alest Bar, 45</div>
+                  <div class="des">View more</div>
+                  </figcaption>
+                  <img src="resources/img/aabb2.jpg" alt="" data-aos="fade-right" data-aos-duration="1500">
+                </figure>
+              </a>
+              <a href="{{link_aabb_the_terrace}}">
+                <figure class="fat">
+                  <figcaption  data-aos="fade-up" data-aos-duration="2200">
+                  <div class="tit">The Terrace</div>
+                  <div class="des">View more</div>
+                  </figcaption>
+                  <img src="resources/img/aabb3.jpg" alt="" data-aos="fade-right" data-aos-duration="2000">
+                </figure>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    {% include 'inc_footer.html' %}
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="resources/js/jQuery.succinct.min.js"></script>
+    <script src="resources/js/scrollreveal.min.js"></script>
+    <script src="resources/js/main.js?a=10"></script>
+    <script src="resources/js/newsletter.js"></script>
+    <script src="resources/js/book-widget.js?ap=tst2"></script>
+    <script>
+    $(function(){
+    $(".check-av").click(function(e){
+    if(e)e.preventDefault();
+    $("#calendarForm").submit();
+    });
+    });
+ 
+
+    </script>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  
+<script>
+AOS.init();
+
+window.addEventListener('load', function() {
+    AOS.refresh();
+});
+
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+body.dragging, body.dragging *, .pointer {
+  cursor: pointer !important;
+}
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+ul.containerOrder li.placeholder {
+  position: relative;
+  /** More li styles **/
+  height: 40px;
+  	list-style: none;
+}
+ul.containerOrder li.placeholder:before {
+  position: absolute;
+  /** Define arrowhead **/
+}

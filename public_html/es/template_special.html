@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="{{ base_href }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest, {{title}}</title>
+    <meta name="description" content="{{intro}}">
+    <meta property="fb:app_id" content="902044634000102" />
+    <meta property="og:url" content="{{link}}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{title}}" />
+    <meta property="og:description" content="{{intro}}" />
+    <meta property="og:image" content="{{image}}" />
+    <meta property="og:image:width" content="{{image_w}}" />
+    <meta property="og:image:height" content="{{image_h}}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% include 'inc_analytics.html' %}
+    
+    <style>
+
+      .hero-home .slide img{
+              opacity:0.4;
+            }
+          </style>
+  </head>
+  <body>
+    
+    {% include 'inc_header.html' %}
+    <div class="hero-noimage">
+      <div class="title">Nuestros especiales</div>
+      <div class="sub">Disfrute de exclusivos  beneficios</div>
+    </div>
+    
+    <!-- MAIN MENU mainmenu.html -->
+    <div id='mainmenu'>
+    </div>
+    <!-- / MAIN MENU mainmenu.html -->
+    <div class="special-detalle"  style='width: 100%;overflow: hidden;'>
+      <div class="container">
+        
+        <div class="row">
+          <div class="col-sm-4 col-sm-push-8">
+            <figure>
+              <img src="{{image}}" alt="">
+            </figure>
+          </div>
+          <div class="col-sm-8 col-sm-pull-4">
+            <div class="txt">
+            <!-- <h6>Our Specials</h6> -->
+            <h1>{{title}}</h1>
+            <h4>{{intro}}</h4>
+            <article>
+              <p>{{text|raw}}</p>
+            </article>
+
+          <div class="cta">
+            <a href="{{link_contact}}" class="btn-line">Contact Us</a>
+          </div>
+          <div class="share">
+              <a onclick="PopupCenter('{{ fb_share_url }}', 'puFb', 670, 400);" href="javascript:void(0);"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a onclick="PopupCenter('{{ tw_share_url }}', 'puTw', 690, 460);" href="javascript:void(0);"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a href="{{wa_share_url}}"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+          </div>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+  {% include 'inc_footer.html' %}
+  <!-- JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="resources/js/jQuery.succinct.min.js"></script>
+  <script src="resources/js/scrollreveal.min.js"></script>
+<script>
+window.MAINMENU_URL='/es/mainmenu.html';
+</script>
+  <script src="resources/js/main.js"></script>
+  <script src="resources/js/newsletter.js"></script>
+    <script type="text/javascript">
+    function PopupCenter(pageURL, title, w, h) {
+    var left = (screen.width/2)-(w/2);
+    var top = (screen.height/2)-(h/2);
+    var targetWin = window.open(pageURL, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+    }
+    </script>
+  <script> 
+  </script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  
+  <script>
+  AOS.init();
+  
+  window.addEventListener('load', function() {
+      AOS.refresh();
+  });
+  
+  
+      </script>
+</body>
+</html>

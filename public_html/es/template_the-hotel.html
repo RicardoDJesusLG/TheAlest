@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <base href="{{ base_href }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest, El Hotel</title>
+    <meta name="description" content=" ">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <link rel="stylesheet" href="resources/css/book-widget.css">
+
+    {% include 'inc_analytics.html' %}
+
+    <style>
+        .hero-home .slide img { opacity:0.4; }
+
+        /* Estilos para uniformidad de imágenes */
+        .the-hotel figure img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        /* ESTILO DE RECUADROS SOLICITADOS */
+        .txt-box {
+            background: #ffffff;
+            padding: 30px;
+            border: 1px solid #ececec;
+            border-left: 5px solid #c5a059;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        .txt-box h3, .txt-box h2, .txt-box h6 {
+            text-align: left;
+            margin-top: 0;
+        }
+
+        .the-hotel .first, .the-hotel .second, .the-hotel .third {
+            margin-bottom: 80px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .the-hotel .row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        @media (max-width: 767px) {
+            .the-hotel .row, .the-hotel .first, .the-hotel .second, .the-hotel .third { display: block; }
+            .the-hotel figure img { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+{% include 'inc_header.html' %}
+
+<div class="hero-home">
+    <div class="txt">
+        <div class="title">The Alest Hotel</div>
+        <div class="sub">Detalles Refinados y Experiencias Exclusivas</div>
+        <div class="hidden-xs">
+            <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F" target="_blank" class="btn-line-big">Consultar Disponibilidad</a>
+        </div>
+        <div class="visible-xs">
+            <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F" target="_blank" class="btn-line-big">Consultar Disponibilidad</a>
+        </div>
+    </div>
+    <div class="pager-slider">
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#" class="active"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+    </div>
+    <div class="slide">
+        <img src="resources/img/hero-thehotel.jpg" alt="">
+    </div>
+</div>
+
+<div id='mainmenu'></div>
+
+<div class='calendarBox'>
+    <div class='form-hit'></div>
+    <div id='calendar' class='dnaCalendar'></div>
+    <form id='calendarForm' method='POST' action="book.php" style='display:none;'>
+        <input type="hidden" name='datein' value=''/>
+        <input type="hidden" name='dateout' value=''/>
+        <input type="hidden"  name='adults' value=''/>
+        <input type="hidden"  name='children' value=''/>
+    </form>
+</div>
+
+<div class="the-hotel" style='width: 100%; overflow: hidden;'>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs-12 text-center" style="margin-bottom: 50px;">
+                <h6 data-aos="fade-up" data-aos-duration="1000">The Alest</h6>
+                <h1 data-aos="fade-up" data-aos-duration="1500" style="text-align: center;">
+                    Donde el lujo se manifiesta en los detalles,
+                    <span style="display: block;">la calidez del servicio y la intimidad de cada experiencia.</span>
+                </h1>
+            </div>
+        </div>
+
+        <div class="first">
+            <div class="row">
+                <div class="col-sm-6">
+                    <figure data-aos="fade-up" data-aos-duration="1000">
+                        <img src="resources/img/Recpcion.png" alt="Recepción">
+                    </figure>
+                </div>
+                <div class="col-sm-6">
+                    <div class="txt-box" data-aos="fade-left" data-aos-duration="1000">
+                        <p>Hospitalidad de clase mundial en un entorno refinado y hedónico.</p>
+                        <p>Detalles exquisitos y experiencias exclusivas son nuestro sello distintivo.<br>
+                            The Alest Hotel posee una identidad única. Diseñado con elementos eclécticos y sofisticados, su fachada de inspiración británica combina maravillosamente con los variados estilos clásicos europeos que redefinen la arquitectura del barrio de Polanco, marcado por construcciones modernas que conviven con casas de estilo neocolonial y californiano.</p>
+                        <p>Con sus materiales suntuosos y una personalidad inigualable, nuestra propiedad le da la bienvenida a descubrir la Ciudad de México con una nueva forma de mirar.</p>
+                        <div class="epigrafe" data-aos="fade-left" data-aos-duration="1000" style="font-style: italic; border-top: 1px solid #eee; padding-top: 10px; margin-top: 10px;">
+                            Cada detalle y experiencia en The Alest Hotel ha sido meticulosamente creado para brindar una buena vida y hacer que nuestros huéspedes se sientan como en casa.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="second">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="txt-box" data-aos="fade-right" data-aos-duration="1000">
+                        <h6>Un Barrio Rico en Historia</h6>
+                        <h3>Polanco, Ciudad de México</h3>
+                        <p>En la época colonial, en el siglo XVI, la Hacienda de San Juan de los Morales fue la primera edificación de la zona que el Rey de España donó a Hernán Cortés, y recibió su nombre por los morales que allí se plantaron.</p>
+                        <p>Alrededor de 1930, las tierras se dividieron en respuesta a la demanda de zonas urbanas en la ciudad, que aumentó tras la Revolución Mexicana, ya que las familias deseaban alejarse de la zona central. Las calles del barrio recibieron entonces nombres de diferentes humanistas, filósofos y escritores, entre ellos el autor francés Eugenio Sue.</p>
+
+                        <div class="epigrafe" data-aos="fade-right" data-aos-duration="1500" style="padding: 10px;">
+                            La diversidad cultural ha sido un sello distintivo del barrio de Polanco. Al día de hoy, sigue siendo la zona preferida por los nuevos residentes internacionales, encantados por el ambiente cosmopolita y sus calles llenas de vida.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <figure data-aos="fade-left" data-aos-duration="1000">
+                        <img src="resources/img/Fachada.png" alt="fachada polanco">
+                    </figure>
+                </div>
+            </div>
+        </div>
+
+        <div class="third">
+            <div class="row">
+                <div class="col-sm-6">
+                    <figure data-aos="fade-right" data-aos-duration="1000">
+                        <img src="resources/img/thehotel3.jpg" alt="Servicio">
+                    </figure>
+                </div>
+                <div class="col-sm-6">
+                    <div class="txt-box" data-aos="fade-left" data-aos-duration="1000">
+                        <h3>Servicio Inigualable</h3>
+                        <p>The Alest Hotel brinda un nivel superior de servicio con el equilibrio justo entre profesionalismo, privacidad y calidez, en alianza con la firma Hospitality & Butler. Aquí, las necesidades y gustos de cada visitante siempre serán anticipados, y serán tratados como huéspedes especiales para que se sientan en casa, consentidos con amenidades de alta gama dentro de la propiedad, y con las experiencias más exclusivas que la Ciudad de México tiene para ofrecer a su disposición.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="third">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="txt-box" data-aos="fade-right" data-aos-duration="1000">
+                        <h3>Bienestar</h3>
+                        <p>Gracias a nuestras alianzas exclusivas, los huéspedes de The Alest podrán disfrutar de masajes y tratamientos estéticos en la comodidad de su propia habitación, de la mano de proveedores externos de los mejores spas de la zona. Además, podrán mantenerse en forma practicando yoga, fitness o su disciplina favorita en los estudios y gimnasios cercanos recomendados por nuestro concierge.</p>
+                        <p>Dentro de las habitaciones, los huéspedes pueden disfrutar de diferentes sesiones de spa y terapias con un menú especial para consentirse, con opciones para relajar o aliviar la tensión, así como masajes especializados, ya sean prenatales, reductores o de drenaje linfático.</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <figure data-aos="fade-left" data-aos-duration="1000">
+                        <img src="resources/img/thehotel4.jpg" alt="Bienestar">
+                    </figure>
+                </div>
+            </div>
+        </div>
+
+        <div class="third">
+            <div class="row">
+                <div class="col-sm-6">
+                    <figure data-aos="fade-right" data-aos-duration="1000" style="display: flex; justify-content: center;">
+                        <img src="resources/img/lobby2.png" alt="Lobby" style="width: 100%; max-width: 550px; height: 450px; object-fit: cover; border-radius: 0;">
+                    </figure>
+                </div>
+                <div class="col-sm-6">
+                    <div class="txt-box" data-aos="fade-left" data-aos-duration="1000">
+                        <h3>El Lobby</h3>
+                        <p>El corazón de The Alest Hotel es un espacio elegante que mezcla lo mejor de diversos estilos de diseño de interiores. El estilo clásico de la recepción le da la bienvenida a un ambiente sofisticado, salpicado de áreas agradables que invitan al descanso.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="third">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="txt-box" data-aos="fade-right" data-aos-duration="1000">
+                        <h3>The Alest Bar - 45</h3>
+                        <p>45 es un punto de encuentro agradable y exclusivo, cuya mixología destaca por sus bebidas altamente originales.</p>
+                        <p>Los cócteles, diseñados por expertos exclusivamente para 45, el bar de The Alest Hotel, se inspiran en las figuras notables que dan nombre a las calles de Polanco, creados para despertar la mente, el corazón y el alma de quienes los prueban, tal como lo hicieron estos pensadores, autores y científicos a través de sus obras.</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <figure data-aos="fade-left" data-aos-duration="1000">
+                        <img src="resources/img/thehotel6.jpg" alt="Bar">
+                    </figure>
+                </div>
+            </div>
+        </div>
+
+        <div id="housecar"></div>
+        <div class="third">
+            <div class="row">
+                <div class="col-sm-6">
+                    <figure data-aos="fade-left" data-aos-duration="1000">
+                        <img src="resources/img/alest-car.jpg" alt="Auto de la casa">
+                    </figure>
+                </div>
+                <div class="col-sm-6">
+                    <div class="txt-box" data-aos="fade-right" data-aos-duration="1000">
+                        <h3>El Auto de la Casa</h3>
+                        <p>The Alest Hotel brinda un servicio superior a sus huéspedes en lo que a transporte se refiere.<br>
+                            El "House Car" es el vehículo privado de The Alest Hotel. Una lujosa camioneta Lincoln Navigator Reserve 2022 de color negro, con un diseño imponente y tecnología intuitiva que ofrece el máximo confort. Capacidad máxima para 5 personas.<br>
+                            El vehículo cuenta con portaequipajes de techo así como un amplio maletero.</p>
+                        <a href="mailto:hello@thealest.com?subject=Reserva%20de%20Servicio%20de%20Auto" class="btn-line-big" style="display: inline-block; margin-top: 15px; color: #222; border: 1px solid #c5a059; padding: 10px 25px; text-decoration: none;">
+                            Reservar servicio de transporte
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% include 'inc_footer.html' %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+<script src="resources/js/main.js?a=0"></script>
+<script src="resources/js/newsletter.js"></script>
+<script src="resources/js/book-widget.js?ap=tst2"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+    window.addEventListener('load', function() {
+        AOS.refresh();
+    });
+    $(function(){
+        $(".check-av").click(function(e){
+            if(e)e.preventDefault();
+            $("#calendarForm").submit();
+        });
+    });
+</script>
+</body>
+</html>

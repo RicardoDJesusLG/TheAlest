@@ -1,0 +1,314 @@
+.hero-home {
+  background-color: #111820;
+}
+#mainmenu {
+  vertical-align: top;
+  width: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  /*height: 855px;*/
+  height: 100vh;
+  background-color: #00071099;
+  transition: width 0.8s ease-in-out;
+  z-index: 9998;
+  overflow: hidden;
+}
+@media (max-width: 850px) {
+  #mainmenu {
+    height: 100vh;
+  }
+}
+#mainmenu .blackBase {
+  width: 0%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #111820;
+  height: 100%;
+  transition: width 0.8s ease-in-out;
+}
+#mainmenu.opened {
+  width: 100%;
+  transition: width 0.7s ease-in-out;
+}
+#mainmenu.opened .blackBase {
+  width: 480px;
+  transition: width 0.5s ease-in-out;
+}
+@media (max-width: 850px) {
+  #mainmenu.opened .blackBase {
+    width: 0%;
+  }
+}
+#mainmenu .mainmenu-bg {
+  width: 0%;
+  right: 0%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  background-color: #111820;
+  transition: all 0.8s ease-in-out;
+  opacity: 0;
+}
+#mainmenu .mainmenu-bg.opened {
+  width: 80%;
+  right: 480px;
+  opacity: 1;
+  transition: all 1.2s ease-in-out;
+}
+@media (max-width: 850px) {
+  #mainmenu .mainmenu-bg.opened {
+    width: 100%;
+    right: 0px;
+  }
+}
+#mainmenu .mainmenu-bg img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+}
+#mainmenu .mainmenu-leftList,
+#mainmenu .mainmenu-rightList {
+  vertical-align: top;
+  position: absolute;
+  width: 450px;
+  right: 480px;
+  padding: 180px 10px 16px 16px;
+  text-align: left;
+}
+@media (max-width: 850px) {
+  #mainmenu .mainmenu-leftList,
+  #mainmenu .mainmenu-rightList {
+    padding: 140px 0px 8px 0px;
+    position: absolute;
+    right: 48vw;
+    top: 0;
+    left: 0vw;
+    width: 48vw;
+  }
+}
+@media (max-width: 680px) {
+  #mainmenu .mainmenu-leftList,
+  #mainmenu .mainmenu-rightList {
+    padding-top: 100px;
+    padding-bottom: 0px;
+    position: relative;
+    display: inline-block;
+    width: 100vw;
+    top: 0;
+    left: 0;
+  }
+}
+#mainmenu .mainmenu-leftList ul,
+#mainmenu .mainmenu-rightList ul {
+  list-style: none;
+}
+@media (max-width: 680px) {
+  #mainmenu .mainmenu-leftList ul,
+  #mainmenu .mainmenu-rightList ul {
+    margin-bottom: 0;
+  }
+}
+#mainmenu .mainmenu-leftList ul li,
+#mainmenu .mainmenu-rightList ul li {
+  list-style: none;
+  opacity: 0;
+  transform: translatex(60px);
+  transition: all 0.5s ease-in-out;
+}
+#mainmenu .mainmenu-leftList ul li a,
+#mainmenu .mainmenu-rightList ul li a {
+  display: inline-block;
+  padding: 8px 8px 10px 12px;
+  font-family: 'Baskervville', serif;
+  font-size: 24px;
+  color: white;
+  transition: color 0.5s;
+  text-decoration: none;
+  font-weight: 400;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+@media (max-width: 850px) {
+  #mainmenu .mainmenu-leftList ul li a,
+  #mainmenu .mainmenu-rightList ul li a {
+    font-size: 24px;
+    padding: 8px 8px 4px 10px;
+  }
+}
+@media (max-width: 680px) {
+  #mainmenu .mainmenu-leftList ul li a,
+  #mainmenu .mainmenu-rightList ul li a {
+    font-size: 22px;
+    padding: 8px 8px 0px 10px;
+  }
+}
+@media (max-width: 360px) {
+  #mainmenu .mainmenu-leftList ul li a,
+  #mainmenu .mainmenu-rightList ul li a {
+    font-size: 20px;
+    padding: 4px 8px 0px 10px;
+  }
+}
+#mainmenu .mainmenu-leftList ul li a:hover,
+#mainmenu .mainmenu-rightList ul li a:hover {
+  color: #cccccc;
+  transition: color 0.5s;
+}
+#mainmenu .mainmenu-leftList ul li sup,
+#mainmenu .mainmenu-rightList ul li sup {
+  font-size: 14px;
+  color: #c7a86f;
+}
+@media (max-width: 850px) {
+  #mainmenu .mainmenu-leftList ul li sup,
+  #mainmenu .mainmenu-rightList ul li sup {
+    font-size: 10px;
+  }
+}
+@media (max-width: 680px) {
+  #mainmenu .mainmenu-leftList ul li sup,
+  #mainmenu .mainmenu-rightList ul li sup {
+    font-size: 8px;
+  }
+}
+#mainmenu .mainmenu-leftList ul li.opened,
+#mainmenu .mainmenu-rightList ul li.opened {
+  opacity: 1;
+  transform: translatex(0px);
+  transition: all 0.4s ease-in-out;
+}
+#mainmenu .mainmenu-leftList ul li .topmenu a,
+#mainmenu .mainmenu-rightList ul li .topmenu a {
+  font-size: 14px;
+  color: #c7a86f;
+}
+#mainmenu .mainmenu-rightList {
+  position: absolute;
+  width: 420px;
+  right: 100px;
+  padding: 180px 10px 16px 16px;
+  text-align: left;
+}
+@media (max-width: 850px) {
+  #mainmenu .mainmenu-rightList {
+    padding: 140px 0px 8px 0px;
+    position: absolute;
+    right: 0vw;
+    top: 0;
+    left: 52vw;
+    width: 48vw;
+  }
+}
+@media (max-width: 680px) {
+  #mainmenu .mainmenu-rightList {
+    padding: 0px 0px 8px 0px;
+    position: relative;
+    display: inline-block;
+    width: 100vw;
+    top: 0;
+    left: 0;
+  }
+}
+#mainmenu .lang-selector,
+#mainmenu .social-selector {
+  display: block;
+  text-align: left;
+  margin: 32px 0px 4px;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+  color: white;
+  line-height: 24px;
+}
+#mainmenu .lang-selector.active,
+#mainmenu .social-selector.active {
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out;
+}
+@media (max-width: 850px) {
+  #mainmenu .lang-selector,
+  #mainmenu .social-selector {
+    margin-left: 22px;
+    margin-top: 16px;
+  }
+}
+@media (max-width: 680px) {
+  #mainmenu .lang-selector,
+  #mainmenu .social-selector {
+    display: none;
+  }
+}
+#mainmenu .lang-selector b,
+#mainmenu .social-selector b {
+  text-transform: uppercase;
+  color: #c7a86f;
+  display: block;
+  letter-spacing: 1px;
+}
+#mainmenu .lang-selector a,
+#mainmenu .social-selector a {
+  display: inline-block;
+  padding: 4px 12px 4px 0;
+  cursor: pointer;
+  text-decoration: none;
+  color: #bbbbbb;
+}
+#mainmenu .lang-selector a.active,
+#mainmenu .social-selector a.active {
+  color: white;
+}
+#mainmenu .lang-selector .sociales,
+#mainmenu .social-selector .sociales {
+  margin-top: 8px;
+}
+#mainmenu .lang-selector .sociales a,
+#mainmenu .social-selector .sociales a {
+  font-size: 24px;
+  margin: 0 8px 0 0;
+}
+#mainmenu .lang-selector .sociales a:hover,
+#mainmenu .social-selector .sociales a:hover {
+  color: #c7a86f;
+}
+@media (max-width: 850px) {
+  #mainmenu .lang-selector {
+    display: block;
+  }
+}
+@media (max-width: 680px) {
+  #mainmenu .lang-selector {
+    display: block;
+  }
+}
+#mainmenu .social-selector b {
+  text-transform: uppercase;
+  color: #c7a86f;
+  display: block;
+}
+header {
+  z-index: 9999;
+}
+.hero-home .slide img {
+  opacity: 0;
+  position: absolute;
+}
+.hero-home .txt .title,
+.hero-noimage .title {
+  animation-name: fade_in;
+  animation-duration: 2s;
+}
+.hero-home .txt .sub,
+.hero-noimage .sub {
+  animation-name: fade_in;
+  animation-duration: 4s;
+}
+@keyframes fade_in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <base href="{{ base_href }}">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest, Ubicación</title>
+    <meta name="description" content="The Alest Hotel se encuentra en una de las colonias más exclusivas de la Ciudad de México, Polanco.">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+
+    <style>
+        .hero-home .slide img {
+            opacity: 0.4;
+            position: absolute;
+        }
+
+        /* Estilos del Mapa de la versión Inglés */
+        #mapid {
+            min-height: 600px;
+            height: 600px;
+            width: 100%;
+            background-color: #f8f9fa;
+            border-top: 1px solid #eee;
+            display: block;
+        }
+
+        .custom-div-icon { background: none; border: none; }
+
+        .marker-pin {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: #ffffff; border: 2px solid #000000;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-family: 'Times New Roman', serif; font-size: 24px;
+            font-weight: bold; color: #000000;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer; position: relative;
+        }
+
+        .marker-pin:hover { transform: scale(1.15); background-color: #fcfcfc; }
+
+        .nav-links { display: flex; gap: 8px; margin-top: 12px; }
+        .nav-btn {
+            flex: 1; display: flex; align-items: center; justify-content: center;
+            gap: 5px; padding: 7px 2px; border-radius: 4px;
+            color: #fff !important; font-size: 11px; font-weight: bold;
+            text-decoration: none !important;
+        }
+        .btn-gmaps { background-color: #4285F4; }
+        .btn-waze { background-color: #33CCFF; }
+
+        .marker-pin::after {
+            content: ''; position: absolute; width: 100%; height: 100%;
+            border-radius: 50%; animation: pulse-marker 2.5s infinite;
+        }
+
+        @keyframes pulse-marker {
+            0% { box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 0, 0, 0); }
+            100% { box-shadow: 0 0 0 0px rgba(0, 0, 0, 0); }
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+
+    {% include 'inc_analytics.html' %}
+</head>
+<body>
+
+{% include 'inc_header.html' %}
+
+<div class="hero-home">
+    <div class="txt">
+        <div class="title">Ubicación</div>
+        <div class="sub">Todo sucede en Polanco</div>
+    </div>
+    <div class="slide">
+        <img src="resources/img/hero1-location.jpg" alt="">
+    </div>
+</div>
+
+<div id='mainmenu'></div>
+
+<div class="the-hotel" style='width: 100%;overflow: hidden;'>
+    <div class="container">
+
+        <div class="first less-margin">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="left">
+                        <h6 data-aos="fade-right" data-aos-duration="1000">Polanco</h6>
+                        <h1 data-aos="fade-right" data-aos-duration="1500"><span>The Alest Hotel</span> se encuentra en una de las colonias más exclusivas de la Ciudad de México, </h1>
+                        <figure data-aos="fade-up" data-aos-duration="1000" style="margin-top: 50px;">
+                            <img src="resources/img/location1.jpg" alt="">
+                            <figcaption class="epigrafe" style="margin-top: 30px;">
+                                A pocos metros de The Alest Hotel está el Parque Lincoln, donde suceden las principales actividades de pasatiempo de los habitantes de Polanco, desde modelismo acuático en sus espejos de agua y el mercado semanal hasta eventos culturales en el teatro al aire libre Ángela Peralta.
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="right">
+                        <div data-aos="fade-left" data-aos-duration="1000">
+                            <p>Polanco alberga una multitud de boutiques de alta gama, las residencias urbanas más cotizadas, los museos más importantes de la capital y una vibrante y cosmopolita atmósfera.</p>
+                            <p>Para quienes buscan una experiencia de shopping personalizada, el Concierge Service del hotel puede coordinar citas en una de las tiendas departamentales de mayor prestigio con cita o a puerta cerrada o incluso en las boutiques de alta gama de su preferencia e incluso compra de accesorios o artículos que podrían ser enviados al hotel.</p>
+                            <p>Su céntrica ubicación es ideal para planear visitas a todos los puntos de interés que ofrece la ciudad.</p>
+                            <p>Ante la vasta oferta de actividades, atracciones y puntos obligados que convergen en la ciudad, diseñar el itinerario idóneo se convierte en algo sencillo con el acompañamiento del experimentado Concierge Service de The Alest.</p>
+                            <p>Bajo el concepto The Alest Signature Esperiences, los huéspedes tienen a su disposición tours exclusivos con guía bilingüe y transportación privada, a elegir entre paseos y recorridos dentro de la Ciudad de México o visitas a otras ciudades y zonas arqueológicas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="second less-margin">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="left">
+                        <h6 data-aos="fade-left" data-aos-duration="1000">Restaurantes</h6>
+                        <h2 data-aos="fade-left" data-aos-duration="1500">Una amplia gama de <span>opciones sibaritas</span></h2>
+                        <div data-aos="fade-up" data-aos-duration="1000">
+                            <p>La oferta gastronómica es una característica distintiva en los alrededores de The Alest Hotel. Disfrute de nuestras recomendaciones de restaurantes seleccionados por expertos además de otras opciones culinarias de reconocidos chefs en otras zonas de la Ciudad de México.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="right">
+                        <figure data-aos="fade-right" data-aos-duration="1000">
+                            <img src="resources/img/location2.jpg" alt="polanco">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="third less-margin">
+            <figure data-aos="fade-right" data-aos-duration="1000" class="hidden-xs">
+                <img src="resources/img/location3.jpg" alt="">
+                <figcaption>El arte en todas sus formas y la historia pueden apreciarse en las exclusivas galerías de arte de Polanco, o bien en los museos más importantes que alberga la zona, a los que se puede llegar a pie.</figcaption>
+            </figure>
+            <div class="txt" data-aos="fade-left" data-aos-duration="1000">
+                <h3>Vivir Polanco</h3>
+                <p>Polanco es el punto central para complacerse con distintos tipos de experiencias y satisfacer a todo tipo de viajeros. Dentro o muy cerca de sus calles, las mejores cosas suceden. Los eventos más renombrados, como el Salón de la Alta Relojería (SIAR), Zona MACO, Mercedes-Benz Fashion Week, el encuentro ecuestre Longines Global Champions Tour, Design Week FYJA Polanco en flores, Desfile de alebrijes, desfile día de muertos, Gay Parade entre otros suceden a metros o a corta distancia del hotel.</p>
+            </div>
+        </div>
+
+        <div class="mapa" style="position: relative; width: 100%;">
+            <div id="mapid" style="z-index: 1;"></div>
+            <div class="info" data-aos="fade-up" data-aos-duration="1000" style="position: absolute; z-index: 2; pointer-events: none;">
+                <h3>The Alest</h3>
+                <p>Eugenio Sue #45, Polanco, 11540 Ciudad de México</p>
+            </div>
+        </div>
+
+        <div class="acceso">
+            <div class="titul">
+                <h2 data-aos="fade-left" data-aos-duration="1500">Accesibilidad</h2>
+            </div>
+            <div class="txt">
+                <p>
+                    <strong>Distancias desde The Alest:</strong><br>
+                    Aeropuerto Internacional de la Ciudad de México – 16 Km. / 20 minutos.<br>
+                    Aeropuerto Internacional Felipe Ángeles - 57.8 Km. / 60 minutos.<br>
+                    Aeropuerto Privado de Toluca – 53 Km. / 45 minutos.<br>
+                    Helipuerto Campos Elíseos 204 – 1 Km. / 10 minutos a pie.<br>
+                    Helipuerto Torre Omega – 0.6 Km. / 6 minutos a pie.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'inc_footer.html' %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+<script>window.MAINMENU_URL='/es/mainmenu.html';</script>
+<script src="resources/js/main.js"></script>
+<script src="resources/js/newsletter.js"></script>
+
+<script>
+    var lat = 19.43029798401748;
+    var lng = -99.194232087246;
+
+    var mymap = L.map('mapid', {
+        center: [lat, lng],
+        zoom: 16,
+        minZoom: 14,
+        maxZoom: 18,
+        scrollWheelZoom: false,
+        zoomControl: true,
+        trackResize: true,
+        zoomAnimation: true,
+        zoomSnap: 0.2,
+        zoomDelta: 0.2
+    });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        attribution: '© OpenStreetMap © CARTO',
+        subdomains: 'abcd',
+        maxZoom: 19,
+        updateWhenIdle: false,
+        keepBuffer: 4
+    }).addTo(mymap);
+
+    var iconA = L.divIcon({
+        className: 'custom-div-icon',
+        html: "<div class='marker-pin'>A</div>",
+        iconSize: [44, 44],
+        iconAnchor: [22, 22],
+        popupAnchor: [0, -20]
+    });
+
+    var marker = L.marker([lat, lng], {icon: iconA}).addTo(mymap);
+
+    var iconGmaps = '<img src="resources/img/mapsSVG.svg" alt="Maps" style="width:30px;height:30px;">';
+    var iconWaze = '<img src="resources/img/wazeSVG.svg" alt="Waze" style="width:30px;height:30px;">';
+
+    var popupContent = '<b>The Alest Hotel</b><br>Eugenio Sue #45, Polanco.' +
+        '<div class="nav-links">' +
+        '<a href="https://www.google.com/maps?q=' + lat + ',' + lng + '" target="_blank" class="nav-btn btn-gmaps">' + iconGmaps + ' Maps</a>' +
+        '<a href="https://waze.com/ul?ll=' + lat + ',' + lng + '&navigate=yes" target="_blank" class="nav-btn btn-waze">' + iconWaze + ' Waze</a>' +
+        '</div>';
+
+    marker.bindPopup(popupContent);
+
+    function fixMap() { setTimeout(function(){ mymap.invalidateSize(); }, 1200); }
+    window.addEventListener('load', fixMap);
+    window.addEventListener('resize', fixMap);
+</script>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+    window.addEventListener('load', function() { AOS.refresh(); });
+</script>
+</body>
+</html>

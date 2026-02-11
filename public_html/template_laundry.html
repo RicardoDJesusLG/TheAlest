@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="{{ base_href }}">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest - Dry clean</title>
+    <meta name="description" content=" ">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <link rel='stylesheet' href="resources/css/fullGallery.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% include 'inc_analytics.html' %}
+
+    <style>
+        .hero-home .slide img{ opacity:0.4; }
+
+        /* Prevent horizontal overflow on mobile */
+        html, body { overflow-x: hidden; }
+
+        /* Center image: fluid and safe for small viewports */
+        .feature-circle {
+            width: min(80vw, 420px);
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 20px;
+        }
+
+        /* Extra safety for shadowed cards */
+        .panel { overflow: hidden; }
+
+        /* AOS sometimes causes off-viewport transforms */
+        [data-aos] { backface-visibility: hidden; transform: translateZ(0); }
+    </style>
+</head>
+<body>
+
+{% include 'inc_header.html' %}
+<div class="hero-noimage">
+    <h1 class="title">Laundry & Care</h1>
+    <div class="sub">Premium in-house laundry for our guests</div>
+</div>
+
+<section id="why-choose-us" class="container" style="margin:0px auto;">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="media" data-aos="fade-right">
+                <div class="media-body text-right">
+                    <h3 style="font-weight:700; margin-top:0;">Professional Care</h3>
+                    <div style="width:180px; height:2px; background:#eee; margin:12px 0 14px  auto;"></div>
+                    <p style="color:#777; max-width:360px; margin-left:auto;">
+                        A discreet, premium laundry and dry-cleaning service available exclusively for registered guests. Handled by our team with hotel-grade standards.
+                    </p>
+                </div>
+            </div>
+
+            <div style="height:40px;"></div>
+
+            <div class="media" data-aos="fade-right" data-aos-delay="100">
+                <div class="media-body text-right">
+                    <h3 style="font-weight:700; margin-top:0;">Impeccable Finish</h3>
+                    <div style="width:180px; height:2px; background:#eee; margin:12px 0 14px  auto;"></div>
+                    <p style="color:#777; max-width:360px; margin-left:auto;">
+                        Delicate fabrics and special items receive tailored treatment. Pressed to perfection and returned ready to wear.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 text-center" data-aos="zoom-in">
+            <img
+                    src="resources/img/laundry.jpg"
+                    class="feature-circle img-responsive center-block"
+                    alt="In-house laundry service">
+        </div>
+
+        <div class="col-sm-4">
+            <div class="media" data-aos="fade-left">
+                <div class="media-body">
+                    <h3 style="font-weight:700; margin-top:0;">Fast Turnaround</h3>
+                    <div style="width:180px; height:2px; background:#eee; margin:12px auto 14px 0;"></div>
+                    <p style="color:#777; max-width:360px;">
+                        Same-day and next-day options for your convenience. Simply request the service through our team.
+                    </p>
+                </div>
+            </div>
+
+            <div style="height:40px;"></div>
+
+            <div class="media" data-aos="fade-left" data-aos-delay="100">
+                <div class="media-body">
+                    <h3 style="font-weight:700; margin-top:0;">Guest-First Service</h3>
+                    <div style="width:180px; height:2px; background:#eee; margin:12px auto 14px 0;"></div>
+                    <p style="color:#777; max-width:360px;">
+                        Managed by The Alest staff from start to finish. Clear communication, careful handling, and punctual returns.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container" style="margin:60px auto;">
+    <div class="row">
+
+        <div class="col-sm-6" data-aos="fade-right">
+            <div class="panel" style="border:none; box-shadow:0 4px 20px rgba(0,0,0,0.05); border-radius:10px; padding:30px; background:#fff;min-height: 420px">
+                <h3 class="text-center" style="font-weight:700; margin-top:0; margin-bottom:25px;">Turnaround Times</h3>
+
+                <p class="text-center" style="color:#666; max-width:420px; margin:0 auto 20px;">
+                    Our in-house service is designed for efficiency and discretion, keeping your garments pristine throughout your stay.
+                </p>
+
+                <div class="table-responsive">
+                    <table class="table" style="margin-top:10px;">
+                        <thead>
+                        <tr style="border-bottom:2px solid #000;">
+                            <th>Service Type</th>
+                            <th>Submission Time</th>
+                            <th>Return</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Same-Day Service</td>
+                            <td>Before 10:00</td>
+                            <td>Same day, 19:00</td>
+                        </tr>
+                        <tr>
+                            <td>Next-Day Service</td>
+                            <td>After 10:00</td>
+                            <td>Following day, 09:00</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="text-muted text-center" style="font-size:12px; margin-top:10px;">
+                    * Service is unavailable on Sundays and national holidays.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-sm-6" data-aos="fade-left">
+            <div class="panel" style="border:none; box-shadow:0 4px 20px rgba(0,0,0,0.05); border-radius:10px; padding:30px; background:#fff; min-height: 420px">
+                <h3 class="text-center" style="font-weight:700; margin-top:0; margin-bottom:25px;">Rates & Assurances</h3>
+
+                <ul class="list-unstyled text-center" style="color:#555; margin-bottom:25px;">
+                    <li>Rates are subject to <strong>16% VAT</strong> and a <strong>10% service charge</strong>.</li>
+                    <li>Express option: <strong>+15%</strong> surcharge for priority turnaround.</li>
+                    <li>Coverage up to <strong>10×</strong> the service value in case of any incident.</li>
+                    <li>Returned <em>folded</em> or <em>on hanger</em>, ready to wear.</li>
+                </ul>
+
+                <div class="table-responsive">
+                    <table class="table" style="margin-top:10px;">
+                        <thead>
+                        <tr style="border-bottom:2px solid #000;">
+                            <th>Category</th>
+                            <th>Details</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Standard Service</td>
+                            <td>Wash, press, and standard return.</td>
+                        </tr>
+                        <tr>
+                            <td>Express Service</td>
+                            <td>+15% surcharge for same-day return.</td>
+                        </tr>
+                        <tr>
+                            <td>Premium Care</td>
+                            <td>Special treatment for delicate garments.</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="reasons" class="container" style="margin:60px auto;">
+    <div class="row">
+
+        <div class="col-sm-4 text-center" data-aos="fade-up" data-aos-delay="100">
+            <figure style="margin:0 0 22px;">
+                <img
+                        src="resources/img/Dry-clean2.jpg"
+                        class="img-circle img-responsive center-block"
+                        alt="Professional care"
+                        style="width:280px; height:280px; object-fit:cover;">
+            </figure>
+
+            <h3 style="font-weight:600; margin-top:0;">Professional Care</h3>
+            <div style="width:120px; height:2px; background:#eee; margin:10px auto 14px;"></div>
+            <p style="max-width:360px; margin:0 auto; color:#777;">
+                Exclusive to The Alest guests—discreet handling with meticulous standards from start to finish.
+            </p>
+            <br>
+        </div>
+
+        <div class="col-sm-4 text-center" data-aos="fade-up" data-aos-delay="200">
+            <figure style="margin:0 0 22px;">
+                <img
+                        src="resources/img/Dry-clean3.png"
+                        class="img-circle img-responsive center-block"
+                        alt="Fast turnaround"
+                        style="width:280px; height:280px; object-fit:cover;">
+            </figure>
+
+            <h3 style="font-weight:600; margin-top:0;">Fast Turnaround</h3>
+            <div style="width:120px; height:2px; background:#eee; margin:10px auto 14px;"></div>
+            <p style="max-width:360px; margin:0 auto; color:#777;">
+                Same-day and next-day options to suit your itinerary during your stay.
+            </p>
+            <br>
+        </div>
+
+        <div class="col-sm-4 text-center" data-aos="fade-up" data-aos-delay="300">
+            <figure style="margin:0 0 22px;">
+                <img
+                        src="resources/img/Dry-clean.jpg"
+                        class="img-circle img-responsive center-block"
+                        alt="Impeccable finish"
+                        style="width:280px; height:280px; object-fit:cover;">
+            </figure>
+
+            <h3 style="font-weight:600; margin-top:0;">Impeccable Finish</h3>
+            <div style="width:120px; height:2px; background:#eee; margin:10px auto 14px;"></div>
+            <p style="max-width:360px; margin:0 auto; color:#777;">
+                Premium cleaning and pressing with special attention to delicate pieces and guest preferences.
+            </p>
+            <br>
+        </div>
+    </div>
+</section>
+<!-- /Reasons -->
+
+<!-- MAIN MENU mainmenu.html -->
+<div id='mainmenu'></div>
+<!-- / MAIN MENU mainmenu.html -->
+
+{% include 'inc_footer.html' %}
+
+<!-- JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+<script src="resources/js/main.js?a=0"></script>
+<script src="resources/js/newsletter.js"></script>
+<script src='resources/js/fullGallery.js'></script>
+<script>
+    $(function(){
+        document.getElementsByTagName("footer")[0].removeAttribute('data-aos');
+        document.getElementsByTagName("footer")[0].removeAttribute('data-aos-duration');
+    })
+</script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+    window.addEventListener('load', function() {
+        AOS.refresh();
+    });
+</script>
+</body>
+</html>

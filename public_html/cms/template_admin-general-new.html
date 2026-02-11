@@ -1,0 +1,108 @@
+{% extends "template_container.html" %}
+{% set urlCancel = 'admin.php' %}
+
+{% block content %}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+        <ol class="breadcrumb">
+          <li><i class="fa fa-edit"></i> {{ translationAdminSection }}</li>
+        </ol>
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<div class="row">
+
+		<div class="col-md-12">
+
+			{% if msgUpdated %}
+				<br />
+				<div class="callout callout-success">
+					<p><i class="fa fa-check-circle"></i> {{ msgUpdated }}</p>
+				</div>
+			{% endif %}
+
+			{% if errorMsg %}
+				<br />
+				<div class="callout callout-danger">
+					<p><i class="fa fa-warning"></i> {{ errorMsg }}</p>
+				</div>
+			{% endif %}
+
+			<!-- Horizontal Form -->
+			<div class="box box-info">
+				<div class="box-header with-border">
+					<h3 class="box-title">{{ translationEditLabel }}</h3>
+				</div>
+				<!-- /.box-header -->
+
+				<!-- form start -->
+				<form class="form-horizontal" method="POST" action="admin-general-new.php?{{qs}}">
+					<input type="hidden" id="submitUpdate" name="submitUpdate" value="1" />
+
+					<div class="box-body">
+
+						<div class="form-group">
+							<label for="nameAdmin" class="col-sm-2 control-label">{{ translationAdminProfileFieldsName }}</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="nameAdmin" name="nameAdmin" value="{{nameAdmin}}">
+							</div>
+							<div class="col-sm-2">
+								<p class="text-red">{{ translationRequired }}</p>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="emailAdmin" class="col-sm-2 control-label">{{ translationAdminProfileFieldsEmail }}</label>
+							<div class="col-sm-8">
+								<input type="email" class="form-control" id="emailAdmin" name="emailAdmin" value="{{emailAdmin}}">
+							</div>
+							<div class="col-sm-2">
+								<p class="text-red">{{ translationRequired }}</p>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="passwordAdmin" class="col-sm-2 control-label">{{ translationAdminProfileFieldsPassword }}</label>
+							<div class="col-sm-8">
+								<input type="password" class="form-control" id="passwordAdmin" name="passwordAdmin" value="{{passwordAdmin}}">
+							</div>
+							<div class="col-sm-2">
+								{% if completePasswords %}<p class="text-red">{{ translationRequired }}</p>{% endif %}
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="passwordAdmin2" class="col-sm-2 control-label">{{ translationAdminProfileFieldsRepeatPassword }}</label>
+							<div class="col-sm-8">
+								<input type="password" class="form-control" id="passwordAdmin2" name="passwordAdmin2" value="{{passwordAdmin2}}">
+							</div>
+							<div class="col-sm-2">
+								{% if completePasswords %}<p class="text-red">{{ translationRequired }}</p>{% endif %}
+							</div>
+						</div>
+
+					</div>
+					<!-- /.box-body -->
+					<div class="box-footer">
+						<a href="{{urlCancel}}">
+							<button type="button" class="btn btn-default"><i class="fa fa-undo"></i> {{ translationCancel }}</button>
+						</a>
+
+						<button type="submit" class="btn btn-info pull-right"><i class="fa fa-save"></i> {{ translationSave }}</button>
+					</div>
+					<!-- /.box-footer -->
+				</form>
+			</div>
+			<!-- /.box -->
+
+		</div>
+		<!-- /.row -->
+</section>
+<!-- /.content -->
+{% endblock %}
+
+{% block js %} {% endblock %}

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <base href="{{ base_href }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest - Gym</title>
+    <meta name="description" content=" ">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <link rel="stylesheet" href="resources/css/fullGallery.css">
+    {% include 'inc_analytics.html' %}
+
+    <style>
+        body{ background:#fff; color:#000; }
+
+        .hero-noimage{
+            background:#fff; padding:40px 0 20px; text-align:center;
+        }
+        .hero-noimage .title{
+            color:#c6a06d;
+            font-size:42px;
+            font-weight:700;
+            margin-bottom:10px;
+        }
+        .hero-noimage .sub{
+            color:#555;
+            font-size:20px;
+            font-weight:400;
+            line-height:1.5;
+        }
+
+        /* ===== Tarjetas de servicios ===== */
+        #services{ margin:20px auto 10px; }
+        #services .service-card{ text-align:center; margin-bottom:40px; }
+        #services .service-card h3{
+            font-weight:700; margin:14px 0 8px; color:#333; font-size:24px;
+        }
+        #services .divider{
+            width:80px; height:2px; background:#c6a06d; margin:10px auto 14px;
+        }
+        #services p{
+            max-width:320px; margin:0 auto; color:#555; line-height:1.7;
+            font-size:15px; font-family:'Lato','Helvetica Neue',Helvetica,Arial,sans-serif;
+            font-weight:300; letter-spacing:0.3px; text-align:center;
+        }
+
+        /* Imágenes cuadradas */
+        .circle-wrap{
+            width:260px; height:260px; margin:0 auto 10px;
+        }
+        .img-circle{
+            width:260px; height:260px;
+            border-radius:10px;
+            object-fit:cover; display:block; margin:0 auto;
+            box-shadow:0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        /* ===== Nueva sección de tecnología ===== */
+        #tech-section {
+            text-align: center;
+            padding: 40px 0 20px;
+        }
+
+        #tech-section h2 {
+            color: #c6a06d;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            font-family: "Playfair Display", serif;
+        }
+
+        #tech-section p {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.7;
+            font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 10px;
+        }
+
+        /* BOTONES DE DESCARGA */
+        .download-buttons-container{
+            display:flex; justify-content:center; align-items:center; gap:20px;
+            margin:20px 0 60px; flex-wrap:wrap;
+        }
+        .download-button-compact{
+            display:inline-flex; align-items:center; justify-content:center; gap:12px;
+            width:220px; padding:14px 18px; text-decoration:none; font-weight:normal;
+            font-size:16px; border-radius:10px; transition:transform .2s, box-shadow .2s; line-height:1;
+        }
+        .download-button-compact img{
+            height:34px; width:auto; display:inline-block; vertical-align:middle; margin:0;
+            background:transparent !important; border:none !important; box-shadow:none !important;
+            filter:drop-shadow(0 0 0 transparent) !important;
+        }
+        .download-android{ background:#3DDC84; color:#fff; }
+        .download-ios{ background:#000; color:#fff; }
+        .download-button-compact:hover{ transform:translateY(-2px); box-shadow:0 4px 8px rgba(0,0,0,0.2); }
+
+        /* GALERÍA */
+        .fullGallery{ background:#fff; }
+
+        /* Responsive */
+        @media(max-width:767px){
+            .circle-wrap,.img-circle{ width:220px; height:220px; }
+            #services p{ padding:0 10px; font-size:15px; }
+            .download-buttons-container{ flex-direction:column; gap:16px; }
+            .download-button-compact{ width:90%; font-size:15px; padding:14px; gap:10px; }
+            .download-button-compact img{ height:36px; }
+            #tech-section h2{ font-size:26px; }
+            #tech-section p{ padding:0 12px; }
+        }
+
+        /* Fuente elegante */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Lato:wght@300;400&display=swap');
+    </style>
+</head>
+<body>
+{% include 'inc_header.html' %}
+
+<div class="hero-noimage">
+    <h1 class="title">Conexión, Energía y Evolución</h1>
+    <div class="sub">Dinamo Fit promueve una experiencia conectada y dinámica.</div>
+</div>
+
+<!-- MENÚ PRINCIPAL -->
+<div id="mainmenu"></div>
+
+<!-- ===== SECCIÓN: TARJETAS DE SERVICIOS ===== -->
+<section id="services" class="container" data-aos="fade-up" data-aos-duration="1000">
+    <div class="row">
+
+        <!-- 1. Dinamo App -->
+        <div class="col-sm-4 service-card" data-aos="fade-up" data-aos-duration="900">
+            <figure class="circle-wrap">
+                <img
+                        src="resources/img/gimnasioapp1.jpeg"
+                        alt="Aplicación Dinamo"
+                        class="img-circle"
+                        onerror="this.src='resources/img/daniela.jpg'">
+            </figure>
+            <h3>Aplicación Dinamo</h3>
+            <div class="divider"></div>
+            <p>Una aplicación móvil sofisticada, disponible para iOS y Android, que te permite acceder a tus entrenamientos, reservar clases y seguir tu progreso fácilmente.</p>
+        </div>
+
+        <!-- 2. Clases on-demand -->
+        <div class="col-sm-4 service-card" data-aos="fade-up" data-aos-duration="900" data-aos-delay="100">
+            <figure class="circle-wrap">
+                <img
+                        src="resources/img/gimnasioapp2.webp"
+                        alt="Clases on-demand"
+                        class="img-circle"
+                        onerror="this.src='resources/img/daniela.jpg'">
+            </figure>
+            <h3>Clases bajo demanda</h3>
+            <div class="divider"></div>
+            <p>Accede a miles de clases y rutinas exclusivas a través de la plataforma Technogym VISIO y la App Dinamo, en cualquier momento y lugar.</p>
+        </div>
+
+        <!-- 3. Comunidad activa -->
+        <div class="col-sm-4 service-card" data-aos="fade-up" data-aos-duration="900" data-aos-delay="200">
+            <figure class="circle-wrap">
+                <img
+                        src="resources/img/gimnasioapp3.webp"
+                        alt="Comunidad activa"
+                        class="img-circle"
+                        onerror="this.src='resources/img/daniela.jpg'">
+            </figure>
+            <h3>Comunidad activa</h3>
+            <div class="divider"></div>
+            <p>Forma parte de una comunidad inspiradora e inclusiva que va más allá del fitness, fomentando la conexión, la motivación y el crecimiento personal.</p>
+        </div>
+
+    </div>
+</section>
+<!-- /SECCIÓN TARJETAS -->
+
+<!-- BOTONES DE DESCARGA -->
+<div class="download-buttons-container">
+    <a href="https://play.google.com/store/apps/details?id=com.technogym.tgapp&hl=es"
+       target="_blank"
+       class="download-button-compact download-android">
+        <img src="resources/img/gimnasioandroid.svg" alt="Google Play">
+        <span>Descargar para Android</span>
+    </a>
+
+    <a href="https://apps.apple.com/mx/app/technogym-app-gym-y-casa/id976506047"
+       target="_blank"
+       class="download-button-compact download-ios">
+        <img src="resources/img/gimnasioappstore.svg" alt="App Store">
+        <span>Descargar para iOS</span>
+    </a>
+</div>
+
+<!-- GALERÍA OPCIONAL -->
+<div class='fullGallery'>
+    <nav>
+        <div class='galleryTitles'>
+            <span></span><span class='tit'></span>
+        </div>
+        <div class='dots'></div>
+        <div class='galleryClose'>&times;</div>
+    </nav>
+    <div class='img'></div>
+</div>
+
+{% include 'inc_footer.html' %}
+
+<!-- JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+<script src="resources/js/main.js?a=0"></script>
+<script src="resources/js/newsletter.js"></script>
+<script src="resources/js/fullGallery.js"></script>
+
+<script>
+    window.MAINMENU_URL='/es/mainmenu.html';
+</script>
+
+<script>
+    // Limpia AOS del footer
+    $(function(){
+        if (document.getElementsByTagName("footer")[0]) {
+            document.getElementsByTagName("footer")[0].removeAttribute('data-aos');
+            document.getElementsByTagName("footer")[0].removeAttribute('data-aos-duration');
+        }
+    });
+</script>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+    window.addEventListener('load', function(){ AOS.refresh(); });
+</script>
+
+</body>
+</html>

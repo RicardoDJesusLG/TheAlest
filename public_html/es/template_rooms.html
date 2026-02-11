@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <base href="{{ base_href }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest</title>
+    <meta name="description" content=" ">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <link rel="stylesheet" href="resources/css/book-widget.css">
+    <link rel="stylesheet" href="resources/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    {% include 'inc_analytics.html' %}
+
+
+    <style>
+
+
+
+        /* FONDO GENERAL Y TIPOGRAFÍA */
+        body {
+            background-color: #f9f7f2;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        a:focus { outline: none !important; outline-offset: 0px; }
+        a:hover { text-decoration: none; }
+        .hero-home .slide img { opacity: 0.4; }
+        .specials { overflow: hidden; }
+
+        /* --- DISEÑO DE TARJETA PREMIUM CON TIMES NEW ROMAN --- */
+        .row-flex {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .full-room-container {
+            margin-bottom: 50px;
+        }
+
+        .room-frame {
+            background: #ffffff;
+            padding: 0;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            /* Aplicamos la tipografía base a la tarjeta */
+            font-family: 'Times New Roman', Times, serif !important;
+        }
+
+        .room-frame:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(179, 147, 89, 0.15);
+        }
+
+
+        .room-frame:hover .tall-frame img {
+            transform: scale(1.08);
+        }
+
+        .room-info-new {
+            padding: 35px 30px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .row-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* ESTO CENTRARÁ LAS TARJETAS DE LA ÚLTIMA FILA */
+        }
+
+
+        .room-frame .tall-frame img {
+            width: 100%;
+            height: 100%;
+            max-width: none; /* Quitamos restricciones previas */
+            max-height: none;
+            object-fit: cover; /* Esto hace que la imagen llene todo el espacio sin deformarse */
+            transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+
+        /* --- TARJETA MÁS PEQUEÑA Y ESTILIZADA --- */
+        .room-frame .tall-frame {
+            width: 100%;
+            height: 350px; /* Reducido de 550px a 350px */
+            overflow: hidden;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .room-info-new {
+            padding: 25px 20px; /* Reducido el padding interno */
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        /* Ajuste de margen para que no se vean gigantes en desktop */
+        .full-room-container {
+            margin-bottom: 30px;
+            padding: 0 10px; /* Añade espacio entre tarjetas */
+        }
+
+        /* Ajuste para móviles: que no se vea excesivamente larga en pantallas pequeñas */
+        @media (max-width: 768px) {
+            .room-frame .tall-frame {
+                height: 400px;
+            }
+        }
+
+
+
+
+
+
+        /* --- AJUSTE PARA 3 TARJETAS POR FILA --- */
+        .room-frame .tall-frame {
+            height: 280px; /* Reducido de 350px para mantener la proporción con el ancho menor */
+        }
+
+        .room-info-new .tit {
+            font-size: 16px; /* Un punto menos para que quepan títulos largos en una sola línea */
+            letter-spacing: 2px;
+        }
+
+        .room-info-new .des {
+            font-size: 13px; /* Más compacto para las nuevas dimensiones */
+            max-width: 100%; /* Permite que use todo el ancho de la tarjeta pequeña */
+        }
+
+        .btn-detail {
+            padding: 10px 20px; /* Botón ligeramente más pequeño */
+            font-size: 11px;
+        }
+
+
+
+
+        .room-info-new::after {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: #b39359;
+            margin: 15px 0 20px 0;
+            transition: width 0.4s ease;
+        }
+
+        .room-frame:hover .room-info-new::after {
+            width: 80px;
+        }
+
+
+
+        .btn-detail {
+            /* Tipografía específica para el botón */
+            font-family: 'Times New Roman', Times, serif !important;
+            display: inline-block;
+            padding: 12px 30px;
+            border: 1px solid #b39359;
+            color: #b39359;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+        .room-frame {
+            background: #ffffff;
+            padding: 0;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            /* --- CAMBIOS AQUÍ --- */
+            overflow: hidden; /* Esto corta la imagen para que respete la curva */
+            border-radius: 20px; /* Ajusta este valor si quieres más o menos redondeo */
+            /* -------------------- */
+            font-family: 'Times New Roman', Times, serif !important;
+        }
+
+        .btn-detail:hover {
+            color: #fff;
+            background: #b39359;
+            text-decoration: none;
+        }
+        /* AJUSTE IMAGEN LLAVE */
+        .llave {
+            margin-top: -60px; /* Aquí ajustas qué tan arriba sale */
+            position: relative;
+            z-index: 10;
+        }
+        .llave img {
+            max-width: 60px; /* Tamaño controlado de la llave */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+{% include 'inc_header.html' %}
+
+<div class="hero-home">
+    <div class="txt">
+        <div class="title">Descanso entre mármol y oro</div>
+        <div class="sub">Intimidad, diseño y bienestar</div>
+        <div class="hidden-xs">
+            <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F" target="_blank" class="btn-line-big">Ver Disponibilidad</a>
+        </div>
+        <div class="visible-xs">
+            <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F" target="_blank" class="btn-line-big">Ver Disponibilidad</a>
+        </div>
+    </div>
+    <div class="pager-slider">
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#" class="active"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+    </div>
+    <div class="slide">
+        <img src="resources/img/hero1.jpg" alt="">
+    </div>
+</div>
+
+<div id='mainmenu'></div>
+
+<div class='calendarBox'>
+    <div class='form-hit'></div>
+    <div id='calendar' class='dnaCalendar'></div>
+    <form id='calendarForm' method='POST' action="book.php" style='display:none;'>
+        <input type="hidden" name='datein' value=''/>
+        <input type="hidden" name='dateout' value=''/>
+        <input type="hidden"  name='adults' value=''/>
+        <input type="hidden"  name='children' value=''/>
+    </form>
+</div>
+
+
+<div class="galeria pararoom" style="width: 100%; overflow: hidden; padding-top: 100px; padding-bottom: 80px;">
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 80px;">
+            <h2 style="margin-bottom: 10px; text-transform: uppercase; letter-spacing: 3px; font-weight: 700; color: #1a1a1a;" data-aos="fade-up">
+                Nuestras Habitaciones & Suites
+            </h2>
+            <h3 style="font-size: 26px; font-style: italic; color: #777; font-family: 'Times New Roman', serif;" data-aos="fade-up" data-aos-delay="200">
+                La expresión más refinada del confort
+            </h3>
+        </div>
+
+
+        <div class="row row-flex">
+            {% for item in suites %}
+            {% for i in ['1', '2', '3'] %}
+            {% if item['title_' ~ i] %}
+            <div class="col-sm-4 full-room-container" data-aos="fade-up">
+                <div class="room-frame">
+                    <div class="tall-frame">
+                        <img src="{{ item['image_' ~ i] }}" alt="{{ item['title_' ~ i] }}">
+                    </div>
+                    <div class="room-info-new">
+                        <div class="tit">{{ item['title_' ~ i] }}</div>
+                        <div class="des">{{ item['intro_' ~ i] }}</div>
+                        <a href="{{ item['link_' ~ i] }}" class="btn-detail">Explorar Detalles</a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+
+            {% for item in rooms %}
+               <div class="col-sm-4 col-xs-12 full-room-container" data-aos="fade-up">
+
+                <div class="room-frame">
+                    <div class="tall-frame">
+                        <img src="{{ item['image'] }}" alt="{{ item['title'] }}">
+                    </div>
+                    <div class="room-info-new">
+                        <div class="tit">{{ item['title'] }}</div>
+                        <div class="des">{{ item['intro'] }}</div>
+                        <a href="{{ item['link'] }}" class="btn-detail">Explorar Detalles</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="testimonials" style="text-align: center; padding-top: 100px; padding-bottom: 60px;">
+    <div class="txt">
+        <div class="llave-container" style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+
+            <span data-aos="fade-right" data-aos-duration="2000"
+                  style="color: #b39359; font-family: 'Times New Roman', serif; font-size: 18px; letter-spacing: 5px; font-weight: 300;">
+                THE ALEST
+            </span>
+
+            <div class="llave" data-aos="fade-down" data-aos-duration="2000" style="margin-top: 0;">
+                <img src="resources/img/llave.png" alt="" style="max-width: 50px; height: auto;">
+            </div>
+
+            <span data-aos="fade-left" data-aos-duration="2000"
+                  style="color: #b39359; font-family: 'Times New Roman', serif; font-size: 18px; letter-spacing: 5px; font-weight: 300;">
+                THE ALEST
+            </span>
+
+        </div>
+    </div>
+</div>
+
+
+{% include 'inc_footer.html' %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+<script>window.MAINMENU_URL='/es/mainmenu.html';</script>
+<script src="resources/js/main.js?a=010"></script>
+<script src="resources/js/newsletter.js"></script>
+<script src="resources/js/book-widget.js?ap=tst2"></script>
+<script src="resources/js/swiper-bundle.min.js"></script>
+<script src='resources/js/lineSlider.js'></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+    $(function(){
+        $(".check-av").click(function(e){
+            if(e)e.preventDefault();
+            $("#calendarForm").submit();
+        });
+    });
+    AOS.init({duration: 1000, once: true});
+    window.addEventListener('load', function() { AOS.refresh(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <base href="{{ base_href }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest - Gym</title>
+    <meta name="description" content=" ">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <link rel="stylesheet" href="resources/css/fullGallery.css">
+    {% include 'inc_analytics.html' %}
+
+    <style>
+        body{ background:#fff; color:#000; }
+
+        /* ===== Encabezado ===== */
+        .hero-noimage{
+            background:#fff;
+            padding:20px 0 10px;
+            text-align:center;
+        }
+        .hero-noimage .title,.hero-noimage .sub{ color:#000; }
+
+        /* ===== Sección galería cuadrada ===== */
+        #gym-gallery{
+            margin:20px auto 0;
+        }
+
+        #gym-gallery .service-card{
+            text-align:center;
+            margin-bottom:40px;
+        }
+
+        /* ===== Títulos ===== */
+        #gym-gallery .service-card h3{
+            font-family: "Playfair Display", Georgia, serif;
+            font-weight:400;
+            font-size:22px;
+            letter-spacing:0.5px;
+            color:#222;
+            margin:12px 0 8px;
+        }
+
+        #gym-gallery .divider{
+            width:60px;
+            height:2px;
+            background:#c6a06d;
+            margin:10px auto 14px;
+        }
+
+        /* ===== Descripciones ===== */
+        #gym-gallery p{
+            max-width:320px;
+            margin:0 auto;
+            color:#555;
+            font-size:14.5px;
+            line-height:1.7;
+            font-family:"Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight:300;
+            letter-spacing:0.3px;
+            text-align:center;
+        }
+
+        /* Imágenes cuadradas con bordes ligeramente redondeados y slideshow */
+        .circle-wrap{
+            width:280px;
+            height:280px;
+            margin:0 auto 10px;
+            position:relative;
+            overflow:hidden;
+            border-radius:8px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .circle-wrap img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            border-radius:8px;
+            position:absolute;
+            top:0; left:0;
+            transition:opacity 1s ease-in-out;
+            opacity:0;
+        }
+
+        .circle-wrap img.active{ opacity:1; }
+
+        /* Centrado de filas */
+        #gym-gallery .row-centered {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        #gym-gallery .row-centered .service-card {
+            float: none;
+            display: inline-block;
+        }
+
+        /* Responsive */
+        @media(max-width:767px){
+            .circle-wrap{ width:240px; height:240px; }
+            #gym-gallery p{ padding:0 10px; }
+        }
+
+        /* Fuente elegante */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Lato:wght@300;400&display=swap');
+    </style>
+</head>
+<body>
+{% include 'inc_header.html' %}
+
+<div class="hero-noimage">
+    <h1 class="title" style="color:#c6a06d;">Equipos inteligentes de última generación.</h1>
+    <div class="sub">Dinamo Fit cuenta con diversas áreas para cubrir todas las necesidades de un entrenamiento completo.</div>
+</div>
+
+<div id="mainmenu"></div>
+
+<!-- ===== GALERÍA CUADRADA ===== -->
+<section id="gym-gallery" class="container" data-aos="fade-up" data-aos-duration="1000">
+
+    <!-- === FILA 1: 2 cuadrados centrados === -->
+    <div class="row row-centered">
+        <!-- 1. Peso libre -->
+        <div class="col-sm-4 service-card" data-aos="fade-up" data-aos-duration="900">
+            <figure class="circle-wrap">
+                <img src="resources/img/gimnasiopesolibre1.jpg" class="active" alt="Peso libre 1">
+                <img src="resources/img/gimnasiopesolibre2.jpg" alt="Peso libre 2">
+                <img src="resources/img/gimnasiopesolibre3.jpg" alt="Peso libre 3">
+            </figure>
+            <h3>Peso libre y peso integrado</h3>
+            <div class="divider"></div>
+            <p>Para ejercicios de fuerza y desarrollo muscular.</p>
+        </div>
+
+        <!-- 2. Cardio -->
+        <div class="col-sm-4 service-card" data-aos="fade-up" data-aos-duration="900" data-aos-delay="100">
+            <figure class="circle-wrap">
+                <img src="resources/img/gimnasiocardio1.jpg" class="active" alt="Cardio 1">
+                <img src="resources/img/gimnasiocardio2.jpg" alt="Cardio 2">
+            </figure>
+            <h3>Cardio</h3>
+            <div class="divider"></div>
+            <p>Equipos de última tecnología para mejorar la resistencia cardiovascular.</p>
+        </div>
+    </div>
+
+    <!-- === FILA 2: 3 cuadrados centrados === -->
+    <div class="row row-centered">
+        <!-- 3. Alto rendimiento -->
+        <div class="col-sm-4 service-card" data-aos="fade-up" data-aos-duration="900" data-aos-delay="200">
+            <figure class="circle-wrap">
+                <img src="resources/img/gimnasiointensos1.jpg" class="active" alt="Alto rendimiento 1">
+                <img src="resources/img/gimnasiointensos2.jpg" alt="Alto rendimiento 2">
+            </figure>
+            <h3>Alto rendimiento</h3>
+            <div class="divider"></div>
+            <p>Un área especializada para entrenamientos intensos.</p>
+        </div>
+
+        <!-- 4. Entrenamiento funcional -->
+        <div class="col-sm-4 service-card" data-aos="fade-up" data-aos-duration="900" data-aos-delay="300">
+            <figure class="circle-wrap">
+                <img src="resources/img/gimnasiofuncional1.jpg" class="active" alt="Entrenamiento funcional 1">
+                <img src="resources/img/gimnasiofuncional2.jpg" alt="Entrenamiento funcional 2">
+            </figure>
+            <h3>Entrenamiento funcional</h3>
+            <div class="divider"></div>
+            <p>Clases y circuitos que trabajan coordinación, fuerza, resistencia y agilidad.</p>
+        </div>
+
+        <!-- 5. Contorno Pilates -->
+        <div class="col-sm-4 service-card" data-aos="fade-up" data-aos-duration="900" data-aos-delay="400">
+            <figure class="circle-wrap">
+                <img src="resources/img/gimnasiocontorno1.jpg" class="active" alt="Contorno Pilates 1">
+                <img src="resources/img/gimnasiocontorno2.jpg" alt="Contorno Pilates 2">
+            </figure>
+            <h3>Contorno Pilates</h3>
+            <div class="divider"></div>
+            <p>Ofrece clases grupales de Pilates dentro de sus instalaciones.</p>
+        </div>
+    </div>
+</section>
+<!-- /GALERÍA -->
+
+<div class='fullGallery'>
+    <nav>
+        <div class='galleryTitles'>
+            <span></span><span class='tit'></span>
+        </div>
+        <div class='dots'></div>
+        <div class='galleryClose'>&times;</div>
+    </nav>
+    <div class='img'></div>
+</div>
+
+{% include 'inc_footer.html' %}
+
+<!-- JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+<script src="resources/js/main.js?a=0"></script>
+<script src="resources/js/newsletter.js"></script>
+<script src="resources/js/fullGallery.js"></script>
+<script>
+    window.MAINMENU_URL='/es/mainmenu.html';
+</script>
+
+
+<script>
+    // Slideshow automático dentro de los cuadrados
+    document.addEventListener("DOMContentLoaded", function() {
+        const galleries = document.querySelectorAll(".circle-wrap");
+        galleries.forEach(gallery => {
+            const images = gallery.querySelectorAll("img");
+            let current = 0;
+            setInterval(() => {
+                images[current].classList.remove("active");
+                current = (current + 1) % images.length;
+                images[current].classList.add("active");
+            }, 3500);
+        });
+    });
+
+    // Limpia AOS del footer
+    $(function(){
+        if (document.getElementsByTagName("footer")[0]) {
+            document.getElementsByTagName("footer")[0].removeAttribute('data-aos');
+            document.getElementsByTagName("footer")[0].removeAttribute('data-aos-duration');
+        }
+    });
+</script>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+    window.addEventListener('load', function(){ AOS.refresh(); });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <base href="{{ base_href }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest - Gym</title>
+    <meta name="description" content=" ">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <link rel="stylesheet" href="resources/css/fullGallery.css">
+    {% include 'inc_analytics.html' %}
+
+    <style>
+        body { background: #fff; color: #000; }
+
+        /* ===== Encabezado ===== */
+        .hero-noimage {
+            background: #fff;
+            padding: 20px 0 10px;
+            text-align: center;
+        }
+        .hero-noimage .title, .hero-noimage .sub { color: #000; }
+
+        /* ===== Sección galería cuadrada ===== */
+        #wellness-gallery {
+            margin: 40px auto;
+        }
+
+        #wellness-gallery .service-card {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        /* ===== Títulos ===== */
+        #wellness-gallery .service-card h3 {
+            font-family: "Playfair Display", Georgia, serif;
+            font-weight: 400;
+            font-size: 22px;
+            letter-spacing: 0.5px;
+            color: #222;
+            margin: 12px 0 8px;
+        }
+
+        #wellness-gallery .divider {
+            width: 60px;
+            height: 2px;
+            background: #c6a06d;
+            margin: 10px auto 14px;
+        }
+
+        /* ===== Descripciones ===== */
+        #wellness-gallery p {
+            max-width: 320px;
+            margin: 0 auto;
+            color: #555;
+            font-size: 14.5px;
+            line-height: 1.7;
+            font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+            text-align: center;
+        }
+
+        /* Imágenes cuadradas con bordes ligeramente redondeados y slideshow */
+        .circle-wrap {
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 10px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px; /* Bordes suaves */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .circle-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px; /* Bordes suaves */
+            position: absolute;
+            top: 0; left: 0;
+            transition: opacity 1s ease-in-out;
+            opacity: 0;
+        }
+
+        .circle-wrap img.active { opacity: 1; }
+
+        /* Centrado de filas */
+        #wellness-gallery .row-centered {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        #wellness-gallery .row-centered .service-card {
+            float: none;
+            display: inline-block;
+        }
+
+        /* Responsive */
+        @media(max-width:767px) {
+            .circle-wrap { width: 240px; height: 240px; }
+            #wellness-gallery p { padding: 0 10px; }
+        }
+
+        /* Fuente elegante */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Lato:wght@300;400&display=swap');
+    </style>
+</head>
+<body>
+{% include 'inc_header.html' %}
+
+<div class="hero-noimage">
+    <h1 class="title" style="color:#c6a06d;">Elevando tu Bienestar</h1>
+    <div class="sub">
+        En Dinamo, potenciamos tu bienestar más allá del entrenamiento, con servicios diseñados para la recuperación, la relajación y el cuidado integral de tu cuerpo.
+    </div>
+</div>
+
+<div id="mainmenu"></div>
+
+
+<section id="wellness-gallery" class="container" data-aos="fade-up" data-aos-duration="1000">
+
+    <div class="row row-centered">
+
+        <div class="col-sm-4 service-card" data-aos="fade-up" data-aos-duration="900">
+            <figure class="circle-wrap">
+                <img src="resources/img/gimnasiosauna1.jpg" class="active" alt="Sauna 1">
+                <img src="resources/img/gimnasiosauna2.jpg" alt="Sauna 2">
+            </figure>
+            <h3>Sauna</h3>
+            <div class="divider"></div>
+            <p>Ideal para la relajación muscular, alivio del estrés y la desintoxicación del cuerpo.</p>
+        </div>
+
+        <div class="col-sm-4 service-card" data-aos="fade-up" data-aos-duration="900" data-aos-delay="100">
+            <figure class="circle-wrap">
+                <img src="resources/img/gimnasiocamara1.jpg" class="active" alt="Cámara hiperbárica 1">
+                <img src="resources/img/gimnasiocamara2.jpg" alt="Cámara hiperbárica 2">
+                <img src="resources/img/gimnasiocamara3.jpg" alt="Cámara hiperbárica 3">
+            </figure>
+            <h3>Cámara Hiperbárica</h3>
+            <div class="divider"></div>
+            <p>Un servicio de recuperación avanzado que ayuda a mejorar la oxigenación y acelerar la curación.</p>
+        </div>
+
+        <div class="col-sm-4 service-card" data-aos="fade-up" data-aos-duration="900" data-aos-delay="200">
+            <figure class="circle-wrap">
+                <img src="resources/img/gimnasiospa1.webp" class="active" alt="Masaje de Recuperación 1">
+                <img src="resources/img/gimnasiospa2.webp" alt="Masaje de Recuperación 2">
+            </figure>
+            <h3>Spa y Masajes</h3>
+            <div class="divider"></div>
+            <p>Terapias manuales enfocadas en la relajación profunda y la liberación de la tensión muscular.</p>
+        </div>
+
+    </div>
+</section>
+
+<section id="wellness-gallery" class="container" style="margin-top: 0;" data-aos="fade-up" data-aos-duration="1000">
+
+    <div class="row row-centered">
+
+        <div class="col-sm-4 service-card" data-aos="fade-up" data-aos-duration="900">
+            <figure class="circle-wrap">
+                <img src="resources/img/gimnasionutricion1.webp" class="active" alt="Bar de Jugos 1">
+                <img src="resources/img/gimnasionutricion2.webp" alt="Bar de Jugos 2">
+            </figure>
+            <h3>Bar de Nutrición</h3>
+            <div class="divider"></div>
+            <p>Combustibles saludables: jugos frescos, smoothies y snacks nutritivos pre y post-entrenamiento.</p>
+        </div>
+
+        <div class="col-sm-4 service-card" data-aos="fade-up" data-aos-duration="900" data-aos-delay="100">
+            <figure class="circle-wrap">
+                <img src="resources/img/gimnasiofisioterapia1.webp" class="active" alt="Fisioterapia 1">
+                <img src="resources/img/gimnasiofisioterapia2.webp" alt="Fisioterapia 2">
+            </figure>
+            <h3>Fisioterapia</h3>
+            <div class="divider"></div>
+            <p>Consultas y tratamientos profesionales para la prevención y recuperación de lesiones deportivas.</p>
+        </div>
+
+        <div class="col-sm-4 service-card" data-aos="fade-up" data-aos-duration="900" data-aos-delay="100">
+            <figure class="circle-wrap">
+                <img src="resources/img/gimnasioadicion1.webp" class="active" alt="Fisioterapia 1">
+                <img src="resources/img/gimnasioadicion2.webp" alt="Fisioterapia 2">
+            </figure>
+            <h3>Servicios Adicionales</h3>
+            <div class="divider"></div>
+            <p>Pregunta en recepción por nuestra rotación de talleres y programas de bienestar mental.</p>
+        </div>
+
+
+    </div>
+</section>
+<div class='fullGallery'>
+    <nav>
+        <div class='galleryTitles'>
+            <span></span><span class='tit'></span>
+        </div>
+        <div class='dots'></div>
+        <div class='galleryClose'>&times;</div>
+    </nav>
+    <div class='img'></div>
+</div>
+
+{% include 'inc_footer.html' %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+<script src="resources/js/main.js?a=0"></script>
+<script src="resources/js/newsletter.js"></script>
+<script src="resources/js/fullGallery.js"></script>
+<script>
+    window.MAINMENU_URL='/es/mainmenu.html';
+</script>
+
+<script>
+    // Slideshow automático dentro de los cuadrados
+    document.addEventListener("DOMContentLoaded", function() {
+        const galleries = document.querySelectorAll(".circle-wrap");
+        galleries.forEach(gallery => {
+            const images = gallery.querySelectorAll("img");
+            let current = 0;
+            // Asegura que haya imágenes para evitar errores
+            if (images.length > 0) {
+                // Inicializa la primera imagen como activa
+                images[0].classList.add("active");
+
+                // Configura el intervalo
+                setInterval(() => {
+                    images[current].classList.remove("active");
+                    current = (current + 1) % images.length;
+                    images[current].classList.add("active");
+                }, 3500);
+            }
+        });
+    });
+
+    // Limpia AOS del footer
+    $(function(){
+        if (document.getElementsByTagName("footer")[0]) {
+            document.getElementsByTagName("footer")[0].removeAttribute('data-aos');
+            document.getElementsByTagName("footer")[0].removeAttribute('data-aos-duration');
+        }
+    });
+</script>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+    window.addEventListener('load', function(){ AOS.refresh(); });
+</script>
+
+</body>
+</html>

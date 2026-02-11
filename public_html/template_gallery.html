@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="{{ base_href }}">
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest, The Hotel</title>
+    <meta name="description" content=" ">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <link rel='stylesheet' href="resources/css/fullGallery.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% include 'inc_analytics.html' %}
+
+    <style>
+
+      .hero-home .slide img{
+              opacity:0.4;
+            }
+          </style>
+  </head>
+  <body>
+    
+    {% include 'inc_header.html' %}
+    <div class="hero-noimage">
+      <h1 class="title">Gallery</h1>
+      <div class="sub">Enter the exquisite universe of The Alest Hotel.</div>
+    </div>
+    <!-- MAIN MENU mainmenu.html -->
+    <div id='mainmenu'>
+    </div>
+    <!-- / MAIN MENU mainmenu.html -->
+    <!-- imágenes de las galerías -->
+    <script>
+    let GALLERY = {
+
+        {% for item in gallery_categories_2 %}
+          "gallery_{{ item['id'] }}": {
+            title: "{{ item['title'] }}",
+            imgs: [  
+              {% for item2 in item['images'] %}
+                { title: "{{ item2['title'] }}", src: "{{ item2['image'] }}" } {% if not loop.last %},{% endif %}
+              {% endfor %}
+            ]          
+          }{% if not loop.last %},{% endif %}
+        {% endfor %}
+/*
+    "rooms": {
+    title: "Suites &amp; Rooms",
+    imgs: [
+    { title: "image title", src: "resources/img/gal1.jpg" },
+    { title: "image title", src: "resources/img/gal2.jpg" }
+    ]
+    },
+    "bar": {
+    title: "The Bar",
+    imgs: [
+    { title: "image title", src: "resources/img/gal2.jpg" },
+    { title: "image title", src: "resources/img/gal1.jpg" }
+    ]
+    },
+    "lobby": {
+    title: "The Lobby",
+    imgs: [
+    { title: "image title", src: "resources/img/gal2.jpg" },
+    { title: "image title", src: "resources/img/gal1.jpg" },
+    { title: "image title", src: "resources/img/gal2.jpg" },
+    { title: "image title", src: "resources/img/gal1.jpg" }
+    ]
+    },
+    "gastronomic": {
+    title: "Gastronomic Experience",
+    imgs: [
+    { title: "image title", src: "resources/img/gal2.jpg" }
+    ]
+    },
+    "neighborhood": {
+    title: "Neighborhood",
+    imgs: [
+    { title: "image title", src: "resources/img/gal1.jpg" }
+    ]
+    },
+    "amenities": {
+    title: "Amenities",
+    imgs: [
+    { title: "image title", src: "resources/img/gal1.jpg" }
+    ]
+    }
+    */
+    };
+    </script>
+    <div class="galeria">
+      <div class="container">
+
+        {% for item in gallery_categories %}
+          <div class="row">
+
+            {% if item['order'] %}
+                 <div class="col-sm-6">
+                  <a href="#" data-gallery='gallery_{{ item['id_1'] }}'>
+                    <figure class="tall">
+                      <figcaption data-aos="fade-up" data-aos-duration="1200">
+                      <div class="tit">{{ item['title_1'] }}</div>
+                      <div class="des">View gallery</div>
+                      </figcaption>
+                      <img src="{{ item['image_1'] }}" alt="" data-aos="fade-right" data-aos-duration="1000">
+                    </figure>
+                  </a>
+                </div>
+                <div class="col-sm-6">
+                  {% if item['title_2'] %}
+                    <a href="#" data-gallery='gallery_{{ item['id_2'] }}'>
+                      <figure class="fat">
+                        <figcaption data-aos-duration="1700" data-aos="fade-up">
+                        <div class="tit">{{ item['title_2'] }}</div>
+                        <div class="des">View gallery</div>
+                        </figcaption>
+                        <img src="{{ item['image_2'] }}" alt="" data-aos="fade-right" data-aos-duration="1500">
+                      </figure>
+                    </a>
+                  {% endif %}
+
+                  {% if item['title_3'] %}
+                    <a href="#" data-gallery='gallery_{{ item['id_3'] }}'>
+                      <figure class="fat">
+                        <figcaption data-aos="fade-up" data-aos-duration="2200">
+                        <div class="tit">{{ item['title_3'] }}</div>
+                        <div class="des">View gallery</div>
+                        </figcaption>
+                        <img src="{{ item['image_3'] }}" alt="" data-aos="fade-right" data-aos-duration="2000">
+                      </figure>
+                    </a>
+                  {% endif %}
+                </div>
+
+            {% else %}
+
+              <div class="col-sm-6">
+                <a href="#" data-gallery='gallery_{{ item['id_1'] }}'>
+                  <figure class="fat">
+                    <figcaption data-aos="fade-up" data-aos-duration="1200">
+                    <div class="tit">{{ item['title_1'] }}</div>
+                    <div class="des">View gallery</div>
+                    </figcaption>
+                    <img src="{{ item['image_1'] }}" alt="" data-aos="fade-right" data-aos-duration="1000">
+                  </figure>
+                </a>
+
+                {% if item['title_2'] %}
+                  <a href="#" data-gallery='gallery_{{ item['id_2'] }}'>
+                    <figure class="fat">
+                      <figcaption data-aos-duration="1700" data-aos="fade-up">
+                      <div class="tit">{{ item['title_2'] }}</div>
+                      <div class="des">View gallery</div>
+                      </figcaption>
+                      <img src="{{ item['image_2'] }}" alt="" data-aos="fade-right" data-aos-duration="1500">
+                    </figure>
+                  </a>
+                {% endif %}
+
+              </div>
+              <div class="col-sm-6">
+
+                {% if item['title_3'] %}
+                  <a href="#" data-gallery='gallery_{{ item['id_3'] }}'>
+                    <figure class="tall">
+                      <figcaption data-aos="fade-up" data-aos-duration="2200">
+                      <div class="tit">{{ item['title_3'] }}</div>
+                      <div class="des">View gallery</div>
+                      </figcaption>
+                      <img src="{{ item['image_3'] }}" alt="" data-aos="fade-right" data-aos-duration="2000">
+                    </figure>
+                  </a>
+                {% endif %}
+
+              </div>
+
+            {% endif %}
+
+          </div>
+        {% endfor %}
+
+
+<!--
+        <div class="row">
+          <div class="col-sm-6">
+            <a href="#" data-gallery='rooms'>
+              <figure class="tall">
+                <figcaption data-aos="fade-up" data-aos-duration="1200">
+                <div class="tit">Suites & Rooms</div>
+                <div class="des">View gallery</div>
+                </figcaption>
+                <img src="resources/img/gal1.jpg" alt="" data-aos="fade-right" data-aos-duration="1000">
+              </figure>
+            </a>
+          </div>
+          <div class="col-sm-6">
+            <a href="#" data-gallery='bar'>
+              <figure class="fat">
+                <figcaption data-aos-duration="1700" data-aos="fade-up">
+                <div class="tit">The Bar</div>
+                <div class="des">View gallery</div>
+                </figcaption>
+                <img src="resources/img/gal2.jpg" alt="" data-aos="fade-right" data-aos-duration="1500">
+              </figure>
+            </a>
+            <a href="#" data-gallery='lobby'>
+              <figure class="fat">
+                <figcaption data-aos="fade-up" data-aos-duration="2200">
+                <div class="tit">The Lobby</div>
+                <div class="des">View gallery</div>
+                </figcaption>
+                <img src="resources/img/gal2.jpg" alt="" data-aos="fade-right" data-aos-duration="2000">
+              </figure>
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <a href="#" data-gallery='gastronomic'>
+              <figure class="fat">
+                <figcaption data-aos="fade-up" data-aos-duration="1200">
+                <div class="tit">Gastronomic Experience</div>
+                <div class="des">View gallery</div>
+                </figcaption>
+                <img src="resources/img/gal2.jpg" alt="" data-aos="fade-right" data-aos-duration="1000">
+              </figure>
+            </a>
+            <a href="#" data-gallery='neighborhood'>
+              <figure class="fat">
+                <figcaption data-aos-duration="1700" data-aos="fade-up">
+                <div class="tit">The Neightborhood</div>
+                <div class="des">View gallery</div>
+                </figcaption>
+                <img src="resources/img/gal1.jpg" alt="" data-aos="fade-right" data-aos-duration="1500">
+              </figure>
+            </a>
+          </div>
+          <div class="col-sm-6">
+            <a href="#" data-gallery='amenities'>
+              <figure class="tall">
+                <figcaption data-aos="fade-up" data-aos-duration="2200">
+                <div class="tit">Amenities</div>
+                <div class="des">View gallery</div>
+                </figcaption>
+                <img src="resources/img/gal1.jpg" alt="" data-aos="fade-right" data-aos-duration="2000">
+              </figure>
+            </a>
+          </div>
+        </div>
+      -->
+
+      </div>
+    </div>
+    <div class='fullGallery'>
+      <nav><div class='galleryTitles'><span></span><span class='tit'></span></div>
+      <div class='dots'></div><div  class='galleryClose'>&times;</div>
+    </nav>
+    <div class='img'>
+    </div>
+  </div>
+  {% include 'inc_footer.html' %}
+  <!-- JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="resources/js/jQuery.succinct.min.js"></script>
+  <script src="resources/js/scrollreveal.min.js"></script>
+  <script src="resources/js/main.js?a=0"></script>
+  <script src="resources/js/newsletter.js"></script>
+  <script src='resources/js/fullGallery.js'></script>
+  <script>
+    $(function(){ 
+
+document.getElementsByTagName("footer")[0].removeAttribute('data-aos');
+document.getElementsByTagName("footer")[0].removeAttribute('data-aos-duration');
+
+ 
+
+
+    })
+  </script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  
+  <script>
+  AOS.init();
+  
+  window.addEventListener('load', function() {
+      AOS.refresh();
+  });
+  
+  
+      </script>
+</body>
+</html>

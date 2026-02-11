@@ -1,0 +1,147 @@
+[06-Jan-2022 17:36:28 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238
+[06-Jan-2022 17:36:33 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238
+[06-Jan-2022 17:36:37 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238
+[17-Jan-2023 15:28:52 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238
+[17-Jan-2023 15:28:57 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238
+[17-Jan-2023 15:34:15 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238
+[17-Jan-2023 15:34:31 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238
+[17-Jan-2023 15:44:14 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238
+[17-Jan-2023 15:44:18 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238
+[18-Jan-2023 15:46:54 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238
+[18-Jan-2023 15:56:21 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238
+[18-Jan-2023 16:03:31 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238
+[18-Jan-2023 16:17:05 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238
+[18-Jan-2023 16:34:59 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc, id desc = '1' where id = '19'' at line 1 in /home/rpw68yo7p2tx/public_html/cms/index.php:48
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(48): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 48
+[18-Jan-2023 16:38:17 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238
+[18-Jan-2023 16:44:20 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238
+[18-Jan-2023 16:47:11 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238
+[18-Jan-2023 16:49:31 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238
+[05-Jun-2023 18:09:58 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Class 'PHPMailer' not found in /home/rpw68yo7p2tx/public_html/cms/inc/functions.php:92
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/inc/functions.php(86): sendEmailPHPMailer(Array, Array)
+#1 /home/rpw68yo7p2tx/public_html/cms/recover.php(135): sendEmail(Array, Array, true)
+#2 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/inc/functions.php on line 92
+[05-Jun-2023 18:14:12 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Class 'PHPMailer' not found in /home/rpw68yo7p2tx/public_html/cms/inc/functions.php:92
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/inc/functions.php(86): sendEmailPHPMailer(Array, Array)
+#1 /home/rpw68yo7p2tx/public_html/cms/recover.php(135): sendEmail(Array, Array, true)
+#2 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/inc/functions.php on line 92
+[05-Jun-2023 18:15:39 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Class 'PHPMailer' not found in /home/rpw68yo7p2tx/public_html/cms/inc/functions.php:92
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/inc/functions.php(86): sendEmailPHPMailer(Array, Array)
+#1 /home/rpw68yo7p2tx/public_html/cms/recover.php(135): sendEmail(Array, Array, true)
+#2 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/inc/functions.php on line 92
+[05-Jun-2023 18:18:12 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Class 'PHPMailer' not found in /home/rpw68yo7p2tx/public_html/cms/inc/functions.php:92
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/inc/functions.php(86): sendEmailPHPMailer(Array, Array)
+#1 /home/rpw68yo7p2tx/public_html/cms/recover.php(135): sendEmail(Array, Array, true)
+#2 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/inc/functions.php on line 92
+[05-Jun-2023 18:22:01 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Class 'PHPMailer' not found in /home/rpw68yo7p2tx/public_html/cms/inc/functions.php:92
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/inc/functions.php(86): sendEmailPHPMailer(Array, Array)
+#1 /home/rpw68yo7p2tx/public_html/cms/recover.php(135): sendEmail(Array, Array, true)
+#2 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/inc/functions.php on line 92
+[04-Jul-2023 22:09:53 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Class 'PHPMailer' not found in /home/rpw68yo7p2tx/public_html/cms/inc/functions.php:92
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/inc/functions.php(86): sendEmailPHPMailer(Array, Array)
+#1 /home/rpw68yo7p2tx/public_html/cms/recover.php(135): sendEmail(Array, Array, true)
+#2 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/inc/functions.php on line 92
+[07-Jul-2023 16:29:45 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Class 'PHPMailer' not found in /home/rpw68yo7p2tx/public_html/cms/inc/functions.php:92
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/inc/functions.php(86): sendEmailPHPMailer(Array, Array)
+#1 /home/rpw68yo7p2tx/public_html/cms/recover.php(135): sendEmail(Array, Array, true)
+#2 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/inc/functions.php on line 92
+[31-Jul-2023 21:54:07 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238
+[31-Jul-2023 21:56:44 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238
+[31-Jul-2023 21:59:28 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'position' in 'field list' in /home/rpw68yo7p2tx/public_html/cms/index.php:238
+Stack trace:
+#0 /home/rpw68yo7p2tx/public_html/cms/index.php(238): PDOStatement->execute()
+#1 {main}
+  thrown in /home/rpw68yo7p2tx/public_html/cms/index.php on line 238

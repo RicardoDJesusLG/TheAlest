@@ -1,0 +1,160 @@
+{% extends "template_container.html" %}
+{% set uriEditarAgregar = 'admin-new.php' %}
+{% set uriEditarAgregarGeneral = 'admin-general-new.php' %}
+
+{% block content %}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <ol class="breadcrumb">
+          <li><i class="fa fa-edit"></i> {{ translationAdminSection }}</li>
+        </ol>
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+
+            {% if msgUpdated %}
+                <br />
+                <div class="callout callout-success">
+                    <p><i class="fa fa-check-circle"></i> {{ msgUpdated }}</p>
+                </div>
+            {% endif %}
+
+            {% if items|length > 0 %}
+                <div class="box box-info">
+                    <div class="box-body">
+
+                        <table id="mainTable" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-5">{{translationAdminProfileFieldsName}}</th>
+                                    <th class="col-md-5">{{translationAdminProfileFieldsEmail}}</th>
+                                    <th class="col-md-2">{{translationEdit}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for item in items %}
+                                <tr>
+                                    <td>{{ item['nombre'] }}</td>
+                                    <td>{{ item['email'] }}</td>
+                                    <td>
+
+                                        <a href="{% if item['type'] == 1 %}admin-general-new.php{% else %}admin-new.php{% endif %}?id={{ item['id'] }}">
+                                            <button type="button" class="btn btn-info btn-xs"><span class="visible-xs-inline"><i class="fa fa-pencil"></i></span> <span class="hidden-xs">{{translationEdit}}</span></button>
+                                        </a>
+
+                                        <a data-toggle="modal" data-id="{{ item['id'] }}" data-toggle="modal" title="{{translationDelete}}" class="open-puDelete btn bg-navy btn-xs" href="#puDelete"><span class="visible-xs-inline"><i class="fa fa-remove"></i></span> <span class="hidden-xs">{{translationDelete}}</span></a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+
+            {% else %}
+
+                <div class="box box-info">
+                    <div class="box-body">
+
+                        <br />
+                        <br />
+
+                        <div class="callout callout-danger">
+                            <p><i class="fa fa-warning"></i> {{ translationNoItemsAvailable }}</p>
+                        </div>
+
+                        <br />
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+
+            {% endif %}
+
+            {% if showAddSectionAdministrator %}
+                <a href="{{ uriEditarAgregar }}">
+                    <button type="button" class="btn btn-primary"><i class="fa fa-user"></i> {{ translationAdminSectionAddSectionAdministrator }}</button>
+                </a>
+            {% endif %}
+
+            {% if showAddFullAccessAdministrator %}
+                <a href="{{ uriEditarAgregarGeneral }}">
+                    <button type="button" class="btn btn-primary"><i class="fa fa-user-plus"></i> {{ translationAdminSectionAddFullAccessAdministrator }}</button>
+                </a>
+            {% endif %}
+
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+
+<!-- delete -->
+<div id="puDelete" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">{{ translationConfirm }}</h4>
+            </div>
+
+            <form id="frmDelete" name="frmDelete" method="POST">
+                <input type="hidden" id="submitDelete" name="submitDelete" value="1" />
+                <input type="hidden" id="idDelete" name="idDelete" />
+
+                <div class="modal-body">
+                    <p>{{ translationConfirmDeleteLabel }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ translationStrNo }}</button>
+                    <button type="submit" class="btn btn-primary">{{ translationStrYes }}</button>
+                </div>
+
+            </form>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+{% endblock %}
+
+{% block js %}
+<!-- DataTables -->
+<script src="./resources/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="./resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script>
+    $(function() {
+        $('#mainTable').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": true
+
+            {% if siteLang == 'es' %}
+            , "language": {
+                "url": "./resources/plugins/datatables/Spanish.json"
+            }
+            {% endif %}
+
+        });
+    });
+</script>
+{% endblock %}

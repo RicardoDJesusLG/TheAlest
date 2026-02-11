@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="{{ base_href }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest, Events at The Alest</title>
+    <meta name="description" content=" ">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <link rel="stylesheet" href="resources/css/book-widget.css">
+    {% include 'inc_analytics.html' %}
+
+    <style>
+        .hero-home .slide img{
+            opacity:0.4;
+        }
+        .text-center-custom p {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* Border radius */
+        .spots figure img,
+        .spots figure .bg,
+        .spots figure,
+        #carousel-final .item img {
+            border-radius: 15px !important;
+            overflow: hidden !important;
+        }
+
+        /* BOTTOM SLIDER STYLES (3 BOXES) */
+        #final-slider-container {
+            margin-top: 50px;
+            margin-bottom: 80px;
+        }
+        .slider-title {
+            margin-bottom: 30px;
+            font-family: serif;
+        }
+
+        #carousel-final .item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-control {
+            width: 4%;
+            background-image: none !important;
+            color: #000 !important;
+            text-shadow: none;
+        }
+        .carousel-control.left { left: -50px; }
+        .carousel-control.right { right: -50px; }
+
+        @media (max-width: 768px) {
+            #carousel-final .item img {
+                height: 250px;
+                margin-bottom: 10px;
+            }
+            .carousel-control.left { left: 0; }
+            .carousel-control.right { right: 0; }
+            .carousel-control { color: #fff !important; }
+        }
+    </style>
+</head>
+<body>
+{% include 'inc_header.html' %}
+
+<div class="hero-home" >
+    <div class="txt">
+        <div class="title">Mini Events</div>
+        <div class="sub">Small or group experiences</div>
+    </div>
+    <div class="pager-slider">
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#" class="active"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+    </div>
+    <div class="slide">
+        <img src="resources/img/hero-aabb.jpg" alt="">
+    </div>
+</div>
+
+<div id='mainmenu'></div>
+
+<div class='calendarBox'>
+    <div class='form-hit'></div>
+    <div id='calendar' class='dnaCalendar'></div>
+    <form id='calendarForm' method='POST' action="book.php" style='display:none;'>
+        <input type="hidden" name='datein' value=''/>
+        <input type="hidden" name='dateout' value=''/>
+        <input type="hidden"  name='adults' value=''/>
+        <input type="hidden"  name='children' value=''/>
+    </form>
+</div>
+
+<div class="aabb" style='width: 100%; overflow: hidden;'>
+    <div class="container">
+        <div class="introaabb">
+            <div class="row">
+                <div class="col-sm-12 text-center text-center-custom">
+                    <div class="content-centered">
+                        <h6 data-aos="fade-up" data-aos-duration="1000">Mini Events</h6>
+                        <h1 data-aos="fade-up" data-aos-duration="1500" style="margin-bottom: 30px;">With the distinctive seal of <span>The Alest Experiences</span></h1>
+                        <div data-aos="fade-up" data-aos-duration="1000">
+                            <p><strong>Tailor-made experiences, with The Alest seal</strong></p>
+                            <p>Under the distinctive The Alest Experiences seal, every limited-capacity event can be elevated through a curated selection of tailor-made activities, harmoniously integrated into our exclusive experiences program. Each proposal is conceived as a personalized experience, designed to reflect the essence of the brand or celebration, taking care of every detail to create memorable and authentic moments.</p>
+                            <p>Our spaces are exceptionally suited for luxury brand launches and showrooms, offering an elegant, intimate, and highly curated environment. Furthermore, The Alest is the ideal setting to host ephemeral boutiques, concept stores, or temporary pop-up stores, where design, architecture, and atmosphere become strategic allies to highlight products, tell stories, and connect with select audiences.</p>
+                            <p>Every event at The Alest is transformed into a unique sensory experience, where exclusivity, aesthetics, and personalization converge to leave a lasting impression.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="spots-events" >
+            <div class="spots">
+                <figure>
+                    <a href="{{link_events_corporate}}">
+                        <figcaption>
+                            <h3>Business Conventions</h3>
+                            <p>Maximum 16 people</p>
+                        </figcaption>
+                        <img src="resources/img/spot-events-corp.jpg" data-aos="zoom-out" data-aos-duration="1000" alt="">
+                        <div class="bg" data-aos="fade-right" data-aos-duration="500"></div>
+                    </a>
+                </figure>
+                <figure>
+                    <a href="{{link_events_social}}">
+                        <figcaption>
+                            <h3>Private Celebrations</h3>
+                            <p>Tailor-made</p>
+                        </figcaption>
+                        <img src="resources/img/spot-events-social.jpg" data-aos="zoom-out" data-aos-duration="1000" alt="">
+                        <div class="bg" data-aos="fade-left" data-aos-duration="900"></div>
+                    </a>
+                </figure>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="final-slider-container">
+        <div class="text-center">
+            <h2 class="slider-title" data-aos="fade-up">Experience Venues</h2>
+        </div>
+        <div id="carousel-final" class="carousel slide" data-ride="carousel" data-interval="3000">
+            <div class="carousel-inner" role="listbox">
+
+                <div class="item active">
+                    <div class="row">
+                        <div class="col-xs-4"><img src="resources/img/salon1.jpeg" alt="Venue 1"></div>
+                        <div class="col-xs-4"><img src="resources/img/evento1.png" alt="Event 1"></div>
+                        <div class="col-xs-4"><img src="resources/img/salon4.jpeg" alt="Venue 4"></div>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="row">
+                        <div class="col-xs-4"><img src="resources/img/salon5.jpeg" alt="Venue 5"></div>
+                        <div class="col-xs-4"><img src="resources/img/salon6.jpeg" alt="Venue 6"></div>
+                        <div class="col-xs-4"><img src="resources/img/salon9.png" alt="Venue 9"></div>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="row">
+                        <div class="col-xs-4"><img src="resources/img/evento3.png" alt="Event 3"></div>
+                        <div class="col-xs-4"><img src="resources/img/salon10.png" alt="Venue 10"></div>
+                        <div class="col-xs-4"><img src="resources/img/salon15.jpeg" alt="Venue 15"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <a class="left carousel-control" href="#carousel-final" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-final" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% include 'inc_footer.html' %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+<script src="resources/js/main.js"></script>
+<script src="resources/js/newsletter.js"></script>
+<script src="resources/js/book-widget.js?ap=tst2"></script>
+
+<script>
+    $(document).ready(function(){
+        $('#carousel-final').carousel({
+            interval: 3000,
+            pause: "hover"
+        });
+
+        $(".check-av").click(function(e){
+            if(e)e.preventDefault();
+            $("#calendarForm").submit();
+        });
+    });
+</script>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+    window.addEventListener('load', function() {
+        AOS.refresh();
+    });
+</script>
+</body>
+</html>

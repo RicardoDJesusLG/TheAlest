@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <base href="{{ base_href }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest - Gym</title>
+    <meta name="description" content=" ">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <link rel="stylesheet" href="resources/css/book-widget.css">
+
+    {% include 'inc_analytics.html' %}
+    <style>
+        /* Definición del color dorado basado en el logo */
+        :root {
+            --alest-gold: #C7A77B; /* Color dorado para acentos */
+            --dark-card-bg: #1A1A1A; /* Color de fondo oscuro para la tarjeta */
+            --dark-card-text: #F0F0F0; /* Color de texto claro para la tarjeta */
+        }
+
+        /* Mejoras en el estilo de la letra general y encabezados */
+        body {
+            background-color: #fff;
+            color: #333;
+            font-family: 'Georgia', serif; /* Tipo de letra más elegante */
+        }
+        .hero-noimage .title, .hero-noimage .sub { color: #333; }
+        .aabb { background-color: #fff; color: #333; }
+        .aabb h1, .aabb h6 { color: #000; }
+        .aabb p { color: #555; }
+        .aabb h1 { font-weight: 300; font-size: 40px; } /* Estilo más ligero para h1 */
+        .aabb h1 span { color: var(--alest-gold); font-weight: 600; } /* Dorado para el span en el h1 */
+        .aabb h6 { color: var(--alest-gold); font-weight: 700; letter-spacing: 1px; } /* Dorado para h6 */
+
+        .aabb .gridaabb {
+            margin-bottom: 70px;
+        }
+        .hero-home .slide img{
+            opacity:0.4;
+        }
+
+        .introaabb .row {
+            display: flex;
+            align-items: center;
+        }
+        .introaabb .left {
+            text-align: right;
+            padding-right: 20px;
+        }
+        .introaabb .right {
+            padding-left: 20px;
+        }
+        .introaabb .right h4 strong {
+            color: var(--alest-gold); /* Dorado para el título del Pase de Gimnasio */
+        }
+        .introaabb ul li i {
+            color: var(--alest-gold) !important; /* Dorado para los íconos de check */
+        }
+
+        @media (max-width: 767px) {
+            .introaabb .row {
+                display: block;
+            }
+            .introaabb .left {
+                text-align: center;
+                padding: 0 15px;
+            }
+            .introaabb .right {
+                padding: 0 15px;
+            }
+        }
+
+        .dfix-block { position: relative; padding: 32px 0 8px; }
+        .dfix-title { text-align:center; margin:0 0 18px; font-weight:600; letter-spacing:.4px; }
+
+        .dfix-rail {
+            position:relative;
+            min-height: 400px;
+        }
+
+        /* Estilo de la tarjeta de información: Fondo oscuro y texto claro con acentos dorados */
+        .dfix-card {
+            max-width:520px;
+            text-align:center;
+            background: var(--dark-card-bg); /* Fondo Oscuro */
+            backdrop-filter:blur(4px);
+            border-radius:12px;
+            padding:22px 22px;
+            box-shadow:0 12px 28px rgba(0,0,0,.35); /* Sombra más pronunciada para destacar */
+            color: var(--dark-card-text); /* Texto Claro */
+        }
+        .dfix-card h4{
+            margin:0 0 12px;
+            color: var(--alest-gold); /* Dorado para el título de la tarjeta */
+            font-size: 1.6em;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+        }
+        .dfix-card ul{
+            list-style:none;padding-left:0;margin:0 0 14px;font-size:16px;line-height:1.7;
+            text-align: left;
+        }
+        .dfix-card ul li{
+            margin:4px 0;
+            padding-left: 1.5em; /* Espacio para el ícono */
+            position: relative;
+        }
+        .dfix-card ul li:before {
+            content: "\f00c";
+            font-family: FontAwesome;
+            color: var(--alest-gold); /* Dorado para los checks de la lista */
+            position: absolute;
+            left: 0;
+            font-size: 0.9em;
+            top: 5px;
+        }
+
+        .dfix-card table{
+            margin:15px auto 0;
+            font-size:16px;
+            width:100%;
+            max-width:420px;
+            border-collapse: collapse;
+            color: var(--dark-card-text);
+        }
+        .dfix-card thead th {
+            padding: 10px 8px;
+            text-align: left;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--alest-gold); /* Dorado para el separador del encabezado de la tabla */
+            background-color: #282828; /* Fondo oscuro sutil */
+        }
+        .dfix-card tbody td {
+            padding: 10px 8px;
+            text-align: left;
+            border-bottom: 1px solid #333; /* Separador de fila más oscuro */
+        }
+        .dfix-card tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .dfix-card tbody td:last-child {
+            font-weight: 700;
+            text-align: right;
+            color: var(--alest-gold); /* Precio en dorado */
+        }
+
+        .dfix-gallery figure{position:relative;margin:24px 0;overflow:hidden;border-radius:8px;}
+        .dfix-gallery img{width:100%;height:auto;display:block;}
+        .dfix-gallery figcaption{
+            position:absolute;left:0;right:0;bottom:0;padding:14px 16px;
+            color:#fff;
+            background:linear-gradient(to top,rgba(0,0,0,.75),rgba(0,0,0,0));
+        }
+        .dfix-gallery .tit{font-size:18px;font-weight:600;}
+        .dfix-gallery .des{font-size:13px;opacity:.9;}
+
+        @media (max-width:767px){
+            .dfix-rail {
+                min-height: auto;
+                height: auto !important;
+            }
+            .dfix-card{
+                max-width:100%;
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                transform: none !important;
+                margin: 0 15px 20px 15px;
+                width: auto !important;
+            }
+            .dfix-gallery { padding: 0 15px; }
+        }
+    </style>
+</head>
+<body>
+{% include 'inc_header.html' %}
+
+<div class="hero-home" >
+    <div class="txt">
+        <div class="title">
+            Dinamo Fit
+        </div>
+        <div class="sub"> Experiencia Tecnológica y Elegante </div>
+    </div>
+
+    <div class="slide">
+        <img src="resources/img/GYM1.jpg" alt="">
+    </div>
+</div>
+
+<div id='mainmenu'>
+</div>
+
+<div class='calendarBox'>
+    <div class='form-hit'></div>
+    <div id='calendar' class='dnaCalendar'></div>
+    <form id='calendarForm' method='POST' action="book.php" style='display:none;'>
+        <input type="hidden" name='datein' value=''/>
+        <input type="hidden" name='dateout' value=''/>
+        <input type="hidden"  name='adults' value=''/>
+        <input type="hidden"  name='children' value=''/>
+    </form>
+</div>
+
+<div class="aabb" style='width: 100%;overflow: hidden;'>
+    <div class="container">
+        <div class="introaabb">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="left">
+                        <h6 data-aos="fade-left" data-aos-duration="1000" style="margin-bottom: 5px;">Gimnasio de Lujo</h6>
+                        <h1 data-aos="fade-left" data-aos-duration="1500" style="margin-top: 0;">Más allá del fitness <span>hacia la excelencia</span></h1>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="right" data-aos="fade-right" data-aos-duration="1000">
+                        <div style="margin-bottom: 20px; line-height: 1.6; color: #555;">
+                            <h4 style="margin-top: 0; color: #000;"><strong>PASE DE GIMNASIO</strong></h4>
+
+                            <p style="margin-top: 10px; margin-bottom: 10px;">
+                                Equipos de última generación de Technogym, la reconocida marca italiana, con inteligencia artificial integrada.
+                            </p>
+
+                            <ul style="list-style-type: none; padding-left: 0; margin-top: 10px;">
+                                <li style="margin-bottom: 10px;">
+                                    <i class="fa fa-angle-right" style="color: #000; margin-right: 8px;"></i>
+                                    Technogym BioStrength: Un sistema exclusivo en México con entrenamientos inteligentes guiados por IA, que se adaptan a cada usuario.
+                                </li>
+                                <li style="margin-bottom: 10px;">
+                                    <i class="fa fa-angle-right" style="color: #000; margin-right: 8px;"></i>
+                                    Technogym Checkup: Una evaluación integral para medir tu estado físico y mental y diseñar un plan de entrenamiento a tu medida.
+                                </li>
+                                <li style="margin-bottom: 10px;">
+                                    <i class="fa fa-angle-right" style="color: #000; margin-right: 8px;"></i>
+                                    Entrenamiento guiado por IA: Para optimizar los resultados y la experiencia del ejercicio.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="dfix-block">
+        <div class="container" id="dfixWrap">
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div id="dfixRail" class="dfix-rail">
+                        <div id="dfixCard" class="dfix-card">
+                            <h4>Características Esenciales</h4>
+                            <ul>
+                                <li>Tecnología Superior: Equipos Technogym y Dinamo App (bajo demanda)</li>
+                                <li>Entrenamiento Personalizado: Entrenadores certificados de alto rendimiento</li>
+                                <li>Bienestar y Lujo: Nutrición y ambiente optimizado para cuerpo y mente</li>
+                                <li>Flexibilidad: Entrenamiento en gimnasio o de forma remota (plataforma digital)</li>
+                            </ul>
+                            <table>
+                                <thead><tr><th>Acceso Exclusivo</th><th style="text-align: right;">Precio (MXN)</th></tr></thead>
+                                <tbody>
+                                <tr><td>1 Sesión</td><td>$500</td></tr>
+                                <tr><td>3 Sesiones</td><td>$1,350</td></tr>
+                                <tr><td>5 Sesiones</td><td>$2,250</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div id="dfixGallery" class="dfix-gallery">
+                        <a href="es/services/gym/areasentrenamiento">
+                            <figure data-aos="fade-up" data-aos-duration="800">
+                                <figcaption><div class="tit">Áreas de Entrenamiento</div><div class="des">Ver más</div></figcaption>
+                                <img src="resources/img/gimnasioareas.jpg" alt="">
+                            </figure>
+                        </a>
+                        <a href="es/services/gym/bienestar">
+                            <figure data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                                <figcaption><div class="tit">Servicios de Bienestar</div><div class="des">Ver más</div></figcaption>
+                                <img src="resources/img/GYM3.jpg" alt="">
+                            </figure>
+                        </a>
+                        <a href="es/services/gym/ecosistemadigitalycomunidad">
+                            <figure data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                                <figcaption><div class="tit">Entrenamiento Guiado por IA</div><div class="des">Ver más</div></figcaption>
+                                <img src="resources/img/gimnasioIA1.jpg" alt="">
+                            </figure>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            (function(){
+                var wrap=document.getElementById('dfixWrap');
+                var rail=document.getElementById('dfixRail');
+                var card=document.getElementById('dfixCard');
+                var gallery=document.getElementById('dfixGallery');
+                if(!wrap||!rail||!card||!gallery)return;
+
+                function syncRailHeight(){
+                    if(window.innerWidth > 767) {
+                        rail.style.height=gallery.scrollHeight+'px';
+                    } else {
+                        rail.style.height='auto';
+                    }
+                }
+
+                function updatePin(){
+                    if(window.innerWidth<=767){
+                        card.style.position='relative';
+                        card.style.top='0';
+                        card.style.left='auto';
+                        card.style.transform='none';
+                        card.style.width='auto';
+                        rail.style.height = 'auto';
+                        return;
+                    }
+
+                    syncRailHeight();
+                    var docY=window.scrollY||window.pageYOffset;
+                    var wrapRect=wrap.getBoundingClientRect();
+                    var wrapTop=docY+wrapRect.top;
+                    var wrapBottom=docY+wrapRect.bottom;
+                    var vh=window.innerHeight;
+                    var cH=card.offsetHeight;
+                    var centerTop=(vh-cH)/2;
+                    var start=wrapTop-centerTop;
+                    var end=wrapBottom-cH-centerTop;
+
+                    var railRect=rail.getBoundingClientRect();
+                    var railLeft=railRect.left;
+                    var railW=railRect.width;
+                    var targetW=Math.min(520,railW-2);
+
+                    if(docY<start){
+                        card.style.position='absolute';
+                        card.style.top='0';
+                        card.style.left='50%';
+                        card.style.transform='translateX(-50%)';
+                        card.style.width=targetW+'px';
+                    }else if(docY>end){
+                        card.style.position='absolute';
+                        var bottomTop=rail.offsetHeight-cH;
+                        card.style.top=bottomTop+'px';
+                        card.style.left='50%';
+                        card.style.transform='translateX(-50%)';
+                        card.style.width=targetW+'px';
+                    }else{
+                        card.style.position='fixed';
+                        card.style.top=Math.round(centerTop)+'px';
+                        var fixedLeft=Math.round(railLeft+(railW-targetW)/2);
+                        card.style.left=fixedLeft+'px';
+                        card.style.width=targetW+'px';
+                        card.style.transform='none';
+                    }
+                }
+
+                if('ResizeObserver'in window){new ResizeObserver(updatePin).observe(gallery);}
+                window.addEventListener('scroll',updatePin,{passive:true});
+                window.addEventListener('resize',updatePin);
+                window.addEventListener('load',function(){
+                    syncRailHeight();
+                    updatePin();
+                    if (typeof AOS !== 'undefined') {
+                        AOS.refresh();
+                    }
+                });
+                updatePin();
+            })();
+        </script>
+    </section>
+</div>
+
+{% include 'inc_footer.html' %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+<script src="resources/js/main.js?a=10"></script>
+<script src="resources/js/newsletter.js"></script>
+<script src="resources/js/book-widget.js?ap=tst2"></script>
+
+<script>
+    window.MAINMENU_URL='/es/mainmenu.html';
+</script>
+<script>
+    $(function(){
+        $(".check-av").click(function(e){
+            if(e)e.preventDefault();
+            $("#calendarForm").submit();
+        });
+    });
+</script>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+    window.addEventListener('load', function() {
+        AOS.refresh();
+    });
+</script>
+</body>
+</html>
