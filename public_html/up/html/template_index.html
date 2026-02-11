@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="{{ base_href }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest</title>
+    <meta name="description" content=" ">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/book-widget.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+        <link rel="stylesheet" href="resources/css/swiper-bundle.min.css">
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <style>
+a:focus{
+outline:none !important;
+    outline-offset: 0px;
+}
+    </style>
+    {% include 'inc_analytics.html' %}
+  </head>
+  <body>
+    {% include 'inc_header.html' %}
+    <div class="hero-home" >
+      <script>
+      const heroImages=[
+      {% for item in slider %}
+        "{{ item['image'] }}" {% if not loop.last %},{% endif %}
+      {% endfor %}
+      ]
+      </script>
+      
+      <div class="txt">
+        <div class="title">
+          Enjoy a unique & luxury stay
+        </div>
+        <div class="sub">Come as you are, we will take care of the rest</div>
+
+       <div class="hidden-xs">
+        <div class="book-widget" data-datein='' data-dateout=''  data-children='0' data-adults='2'></div>
+        <a href="#" class="check-av btn-line-big">Check Availability</a>
+        </div> 
+        <div class="visible-xs">
+          <a href="https://be.synxis.com/?hotel=31241" target="_blank" class="btn-line-big">Check Availability</a>
+        </div>
+      </div>
+      <div class="pager-slider">
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        
+      </div>
+      <div class="slide">
+        <img src="resources/img/hero1.jpg" alt="">
+      </div>
+      
+    </div>
+    <div id='mainmenu'>
+    </div>
+    <!-- cal -->
+    <div class='calendarBox'>
+      <div class='form-hit'></div>
+      <div id='calendar' class='dnaCalendar'></div>
+      <form id='calendarForm' method='POST' action="book.php" style='display:none;'>
+        <input type="hidden" name='datein' value=''/>
+        <input type="hidden" name='dateout' value=''/>
+        <input type="hidden"  name='adults' value=''/>
+        <input type="hidden"  name='children' value=''/>
+      </form>
+    </div>
+    <!-- /calendar
+    -->
+    
+    
+    <div class="intro" >
+      <div class="container">
+        <div class="cont">
+          <div class="txt">
+            <h6 data-aos="fade-up" data-aos-duration="900">The Hotel</h6>
+            <h1 data-aos="fade-up" data-aos-duration="900" data-aos-offset="200">Experience the <span>finest location</span> in Mexico City</h1>
+            <p data-aos="fade-up" data-aos-duration="900" data-aos-offset="100">
+            At The Alest Petit Hotel we take pride in our attention to detail, for us any travel experience is unique and deserves to be shaped by state of the art facilities, comfort, as well as a discovering journey through the senses of history, sophistication and innovation.</p>
+            <p data-aos="fade-up" data-aos-duration="900" data-aos-offset="100">Beauty can be found everywere at The Alest. Come, enjoy and discover the vibrant history of Mexico City.</p>
+            <a href="#"  class="btn-line" data-aos="fade-up" data-aos-duration="900" data-aos-offset="100">Discover More</a>
+          </div>
+          <figure>
+            <img src="resources/img/intro-alest.jpg" alt="" data-aos="fade-up" data-aos-duration="900">
+            <figcaption data-aos="fade-right" data-aos-duration="900">
+            Upon arrival our guests are met with the
+            elegant atmosphere of the hotel’s luxury
+            and contemporary design which provides
+            a cossy feeling of being at home.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+    <div class="twospots" >
+      <div class="spots">
+        <figure>
+          <a href="{{link_rooms}}">
+            <figcaption>
+            <h3>The rooms</h3>
+            <p>Explore The Alest’s stunning rooms</p>
+            </figcaption>
+            <img src="resources/img/spot-rooms.jpg" data-aos="zoom-out"    data-aos-duration="1000"  alt="">
+            <div class="bg" data-aos="fade-right" data-aos-duration="500"></div>
+          </a>
+        </figure>
+        <figure>
+          <a href="{{link_gallery}}">
+            <figcaption>
+            <h3>Gallery</h3>
+            <p>Lorem ipsum dolor amet couple of words</p>
+            </figcaption>
+            <img src="resources/img/spot-galler.jpg" data-aos="zoom-out"  data-aos-duration="1000"   alt="">
+            <div class="bg" data-aos="fade-left" data-aos-duration="900"></div>
+          </a>
+        </figure>
+      </div>
+    </div>
+    <div class="testimonials"  >
+
+      {% for item in testimonials %}
+
+        <div class="txt">
+          <div class="llave" data-aos="fade-down" data-aos-duration="2000">
+            <img src="resources/img/llave.png" alt="">
+          </div>
+          <h4 >“{{ item['text'] }}”</h4>
+          <div class="author" ><strong>{{ item['author'] }}</strong> / {{ item['location'] }}</div>
+        </div>
+
+      {% endfor %}
+
+      <div class="bg" data-aos="zoom-in" data-aos-duration="2000">
+        <img src="resources/img/alest-bg.jpg" alt="">
+      </div>
+    </div>
+    <div class="specials" >
+      <div class="header" data-aos="fade-up" data-aos-duration="3000">
+        <div class="row">
+          <div class="col-sm-6">
+            <h6>Our specials</h6>
+            <h2>Offers & Packages</h2>
+          </div>
+          <div class="col-sm-6">
+            <nav>
+              <a href="#" class="inactive"><img src="resources/img/prev.png" alt="previous"></a> <a href="#" ><img src="resources/img/next.png" alt="next"></a>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="grid" data-aos="fade-up" data-aos-duration="3000">
+
+        {% for item in specials %}
+
+          <figure>
+            <a href="{{ item['link'] }}">
+              <figcaption>
+              <h4>{{ item['title'] }}</h4>
+              <p>{{ item['intro'] }}</p>
+              </figcaption>
+              <div class="shad"></div>
+              <img src="{{ item['image'] }}" alt="">
+              <div class="bg"></div>
+            </a>
+          </figure>
+
+        {% endfor %}
+
+      </div>
+      
+    </div>
+    <div class="news">
+      <div class="container">
+        <div class="head" data-aos="fade-up"
+          data-aos-duration="1000">
+          <h6>What´s On</h6>
+          <h2>News & Upcoming Events</h2>
+        </div>
+
+
+        <div class="grilla">
+          <div class="row">
+
+            {% for item in articles %}
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="500">
+                  <a href="{{ item['link_1'] }}">
+                    <article class="nota">
+                      <figure>
+                        <img src="{{ item['image_1'] }}" alt="">
+                      </figure>
+                      <div class="txt">
+                        <div class="date">{{ item['date_1'] }}</div>
+                        <div class="title">{{ item['title_1'] }}</div>
+                        <p class="art1">{{ item['intro_1']|nl2br }}</p>
+                        <div class="more">More</div>
+                      </div>
+                    </article>
+                  </a>
+                  {% if item['id_2'] %}
+                    <a href="{{ item['link_2'] }}">
+                      <article class="solotexto">
+                        <div class="date">{{ item['date_2'] }}</div>
+                        <div class="title">{{ item['title_2'] }}</div>
+                      </article>
+                    </a>
+                  {% endif %}
+                </div>
+                <!-- col2 -->
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="1000">
+                  {% if item['id_3'] %}
+                    <a href="{{ item['link_3'] }}">
+                      <article class="solotexto">
+                        <div class="date">{{ item['date_3'] }}</div>
+                        <div class="title">{{ item['title_3'] }}</div>
+                      </article>
+                    </a>
+                  {% endif %}
+
+                  {% if item['id_4'] %}
+                    <a href="{{ item['link_4'] }}">
+                      <article class="nota">
+                        <figure>
+                          <img src="{{ item['image_4'] }}" alt="">
+                        </figure>
+                        <div class="txt">
+                          <div class="date">{{ item['date_4'] }}</div>
+                          <div class="title">{{ item['title_4'] }}</div>
+                          <p class="art1">{{ item['intro_4']|nl2br }}</p>
+                          <div class="more">More</div>
+                        </div>
+                      </article>
+                    </a>
+                  {% endif %}
+
+                </div>
+                <!-- col3 -->
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="1500">
+
+                  {% if item['id_5'] %}
+                    <a href="{{ item['link_5'] }}">
+                      <article class="conimagen">
+                        <div class="txt">
+                          <div class="date">{{ item['date_5'] }}</div>
+                          <div class="title">{{ item['title_5'] }}</div>
+                        </div>
+                        <figure>
+                          <img src="{{ item['image_5'] }}" alt="">
+                        </figure>
+                      </article>
+                    </a>
+
+
+                  {% endif %}
+
+                  {% if item['image_instagram_5'] %}
+                    <a href="https://www.instagram.com/the.alest/" target="_blank">
+                      <!-- <a href="{{ item['link_6'] }}"> -->
+                      <article class="imagen">
+                        <div class="icono"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                        <figure>
+                          <img src="{{ item['image_instagram_5'] }}" alt="">
+                        </figure>
+                      </article>
+                    </a>
+                  {% endif %}
+
+                </div>
+                <!-- /row -->
+            {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+            <!-- /row -->
+          </div>
+
+          <div class="viewmore" data-aos="fade-down" data-aos-duration="3000">
+            <div class="linea"></div>
+            <a href="{{link_news}}"><div class="btn-line">View All</div></a>
+          </div>
+
+        </div>
+
+
+
+<!--
+        <div class="grilla">
+          <div class="row">
+            <div class="col-md-4 col-sm-6" data-aos="fade-up"
+              >
+              <a href="#">
+                <article class="nota">
+                  <figure>
+                    <img src="resources/img/news1.jpg" alt="">
+                  </figure>
+                  <div class="txt">
+                    <div class="date">Aug 16, 2021</div>
+                    <div class="title">Early bird in our restaurant</div>
+                    <p class="art1">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo officia facilis odio architecto dolorem pariatur officiis, nesciunt modi numquam, deleniti corrupti, similique. Mollitia officiis earum repudiandae hic doloremque, natus, harum.</p>
+                    <div class="more">More</div>
+                  </div>
+                </article>
+              </a>
+              <a href="#">
+                <article class="solotexto">
+                  <div class="date">Jun 25, 2021</div>
+                  <div class="title">New gourmet scenne at Polanco</div>
+                </article>
+              </a>
+            </div>
+            <div class="col-md-4 col-sm-6 hidden-xs" data-aos="fade-up"
+              data-aos-duration="2000">
+              <a href="#">
+                <article class="solotexto">
+                  <div class="date">Jun 25, 2021</div>
+                  <div class="title">New gourmet scenne at Polanco</div>
+                </article>
+              </a>
+              <a href="#">
+                <article class="nota">
+                  <figure>
+                    <img src="resources/img/news1.jpg" alt="">
+                  </figure>
+                  <div class="txt">
+                    <div class="date">Aug 16, 2021</div>
+                    <div class="title">Early bird in our restaurant</div>
+                    <p class="art1">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo officia facilis odio architecto dolorem pariatur officiis, nesciunt modi numquam, deleniti corrupti, similique. Mollitia officiis earum repudiandae hic doloremque, natus, harum.</p>
+                    <div class="more">More</div>
+                  </div>
+                </article>
+              </a>
+            </div>
+            <div class="col-md-4 hidden-sm hidden-xs" data-aos="fade-up"
+              data-aos-duration="3000">
+              <a href="#">
+                <article class="conimagen">
+                  <div class="txt">
+                    <div class="date">Aug 16, 2021</div>
+                    <div class="title">Early bird in our restaurant</div>
+                  </div>
+                  <figure>
+                    <img src="resources/img/news2.jpg" alt="">
+                  </figure>
+                </article>
+              </a>
+              <a href="https://www.instagram.com/the.alest/" target="_blank">
+              
+                <article class="imagen">
+                  <div class="icono"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                  <figure>
+                  <img src="resources/img/news-img.jpg" alt="">
+                  </figure>
+                </article>
+              </a>
+            </div>
+          </div>
+          <div class="viewmore" data-aos="fade-down" data-aos-duration="3000">
+            <div class="linea"></div>
+            <div class="btn-line">View All</div>
+          </div>
+        </div>
+
+      -->
+      </div>
+    </div>
+    {% include 'inc_footer.html' %}
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="resources/js/jQuery.succinct.min.js"></script>
+    <script src="resources/js/scrollreveal.min.js"></script>
+    <script src="resources/js/main.js"></script>
+    <script src="resources/js/newsletter.js"></script>
+        <script src="resources/js/book-widget.js"></script>
+
+        <script src="resources/js/swiper-bundle.min.js"></script>
+        <script src='resources/js/lineSlider.js'></script>
+
+
+    <script>
+    $(function(){
+    $(".check-av").click(function(e){
+    if(e)e.preventDefault();
+    $("#calendarForm").submit();
+    });
+    });
+    AOS.init();
+    </script>
+  </body>
+</html>

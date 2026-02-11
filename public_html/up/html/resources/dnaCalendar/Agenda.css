@@ -1,0 +1,325 @@
+.calendarBox {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: block;
+    border: 0px solid #cccccc;
+    padding: 40px;
+
+}
+
+.dnaCalendar {
+    position: relative;
+    width: 100%;
+    min-width: 220px;
+    margin-bottom: 20px;
+}
+
+.dnaCalendar .dcHead {
+    position: relative;
+    width: 100%;
+}
+
+.dnaCalendar .dcHead img {
+    position: absolute;
+    width: 14px;
+    top: 0;
+    cursor: pointer;
+    opacity: 0.7;
+    vertical-align: middle;
+    margin-top: 4px;
+}
+
+.dnaCalendar .dcHead img:hover {
+    opacity: 1;
+}
+
+.dnaCalendar .dcHead img:nth-child(1) {
+    left: 20px;
+}
+
+.dnaCalendar .dcHead img:nth-child(2) {
+    right: 20px;
+}
+
+.dnaCalendar .dcHead p {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333333;
+    cursor: pointer;
+}
+
+
+.dnaCalendar .dcHead .dcWeekDays {
+    position: relative;
+    font-size: 0;
+    margin-bottom: 10px;
+}
+
+.dnaCalendar .dcHead .dcWeekDays span {
+    font-size: 10px;
+    display: inline-block;
+    text-align: center;
+    font-weight: 700;
+    color: #666666;
+    text-transform: uppercase;
+}
+
+.dnaCalendar .dcDays {
+    position: relative;
+    font-size: 0;
+    border-left: 1px solid #666666;
+    border-top: 1px solid #666666;
+
+}
+
+
+.dnaCalendar .dcDays > div.cbox {
+    display: inline-block;
+    font-size: 0;
+    border-bottom: 1px solid #666666;
+    border-right: 1px solid #666666;
+
+    position: relative;
+}
+
+.dnaCalendar .dcDays>div.cbox:hover {
+
+    background-color: #efefef;
+
+}
+
+.dnaCalendar .dcDays>div.cbox .event-labels  {
+    position:absolute;
+    bottom: 0;left:0;right:0;
+    padding: 8px 8px 6px;
+    
+     
+}
+
+
+.dnaCalendar .dcDays>div.cbox .event-labels i {
+    display: block;
+    font-size: 10px;
+    max-width: 80%;
+    color: #333333;
+     
+}
+
+
+
+.dnaCalendar .dcDays span {
+    font-size: 14px;
+    position: absolute;
+    display: inline-block;
+    text-align: center;
+    top: 2px;
+    right: 2px;
+    width: 30px;
+    height: 30px;
+    /*cursor: pointer;*/
+    padding: 5px 0 5px 0;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+
+    color: #969696;
+    vertical-align: middle;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+
+}
+
+
+
+
+.dnaCalendar .dcDays span.dcEmpty {
+    opacity: 0;
+    cursor: auto;
+}
+
+.dnaCalendar .dcDays span:hover {
+    background-color: #ffffff;
+    color: #f12b33;
+}
+
+.dnaCalendar .dcDays span.active {
+    background-color: #f12b33;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.dnaCalendar .dcDays span.active:hover {
+    background-color: #dddddd;
+
+}
+
+.dnaCalendar .dcDays .dcEvents {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: 100%;
+    background-color: white;
+    font-size: 16px;
+    color: #969696;
+}
+
+.dnaCalendar .dcDays .dcEvents p {
+    font-size: 16px;
+    color: #f12b33;
+
+    font-weight: 700;
+}
+
+.dnaCalendar .dcDays .dcEvents .dcELine {
+    padding: 13px;
+
+    color: #f12b33;
+    font-size: 11px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 5px;
+
+}
+
+.dnaCalendar .dcDays .dcEvents .dcELine a {
+    text-decoration: none;
+    color: #f12b33;
+    font-size: 15px;
+}
+
+.dnaCalendar .dcDays .dcEvents .dcELine a:hover {
+    text-decoration: none;
+
+    color: #f12b33;
+
+}
+
+
+
+
+
+/*
+
+EVENTOS POPUP
+*/
+
+
+.event-list {
+    display: none;
+    position: absolute;
+    width: 100%;
+    padding: 0px;
+    background-color: rgba(100%, 100%, 100%, 0.5);
+
+    top: 40px;
+    left: 0%;
+    min-height: 100%;
+    z-index: 9999990;
+}
+
+.event-list .event-hit {
+     position: absolute;
+top:0;left:0;right:0;bottom:0;
+   
+}
+
+
+.event-list .lista {
+    width: 100%;
+    max-width: 400px;
+    margin: 10px auto;
+    position: relative;
+    padding: 30px;
+    background-color: white;
+    border: 1px solid #f12b33;
+    z-index: 9999995;
+}
+
+.event-list .event-item {
+    border-bottom: 1px solid #aaaaaa;
+    padding: 20px;
+}
+
+.event-list .event-item>div {
+    margin: 10px 0;
+}
+
+
+.event-list .event-item i {}
+
+.event-list .event-item b {
+    border: 1px solid #cccccc;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.event-list .event-item p {
+    border: 1px solid #cccccc;
+    padding: 5px;
+    margin: 5px 0;
+
+}
+
+.event-list .event-item button {}
+
+
+
+.event-list .lista .closeBut {}
+
+.event-list .lista .close {
+    font-size: 22px;
+    position: absolute;
+    display: inline-block;
+    text-align: center;
+    top: -15px;
+    right: -15px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    padding: 5px 0 5px 0;
+    color: #ffffff;
+    vertical-align: middle;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background-color: #f12b33;
+    opacity: 1;
+}
+
+
+.event-list .event-item .eig {
+    background-color: white;
+
+}
+
+.event-list .event-item .eig.active {
+    display: inline-block;
+    border-color: #f12b33;
+    color: #f12b33;
+
+}
+
+.event-time {
+    -webkit-user-select: none;
+    /* Chrome all / Safari all */
+    -moz-user-select: none;
+    /* Firefox all */
+    -ms-user-select: none;
+    /* IE 10+ */
+    user-select: none;
+}
+
+.event-time-more,
+.event-time-less {
+
+    display: inline-block;
+    font-weight: 600;
+    color: #f12b33;
+    cursor: pointer;
+}

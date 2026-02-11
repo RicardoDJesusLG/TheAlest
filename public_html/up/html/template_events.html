@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="{{ base_href }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest, The Hotel</title>
+    <meta name="description" content=" ">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <link rel="stylesheet" href="resources/css/book-widget.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% include 'inc_analytics.html' %}
+  </head>
+  <body>
+    {% include 'inc_header.html' %}
+    <div class="hero-home" >
+      <div class="txt">
+        <div class="title">
+          Micro events
+        </div>
+        <div class="sub">Banquets & Conventions</div>
+        <div class="hidden-xs">
+          <div class="book-widget"> </div>
+          <a href="#" class="btn-line-big check-av">Check Availability</a>
+        </div>
+
+        <div class="visible-xs">
+          <a href="https://be.synxis.com/?hotel=31241" target="_blank" class="btn-line-big">Check Availability</a>
+        </div>
+      </div>
+      <div class="pager-slider">
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#" class="active"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+      </div>
+      <div class="slide">
+        <img src="resources/img/hero-events.jpg" alt="">
+      </div>
+    </div>
+    <!-- MAIN MENU mainmenu.html -->
+    <div id='mainmenu'>
+    </div>
+    <!-- / MAIN MENU mainmenu.html -->
+    <!-- cal -->
+    <div class='calendarBox'>
+      <div class='form-hit'></div>
+      <div id='calendar' class='dnaCalendar'></div>
+      <form id='calendarForm' method='POST' action="book.php" style='display:none;'>
+        <input type="hidden" name='datein' value=''/>
+        <input type="hidden" name='dateout' value=''/>
+        <input type="hidden"  name='adults' value=''/>
+        <input type="hidden"  name='children' value=''/>
+      </form>
+    </div>
+    <!-- /calendar
+    -->
+    <div class="aabb"  style='width: 100%;overflow: hidden;'>
+      <div class="container">
+        <div class="introaabb">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="left">
+                <h6 data-aos="fade-left" data-aos-duration="1000">Events at The Alest</h6>
+                <h1 data-aos="fade-left" data-aos-duration="1500">Unforgettable
+                <span>moments</span></h1>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="right" data-aos="fade-right" data-aos-duration="1000">
+                <p>The Alest can host memorable, unrepeatable moments. It
+                  offers spaces for tailor-made events, along with the excellent
+                  service and the extraordinary gastronomic experience that
+                it is known for.</p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="container">
+        <div class="spots-events" >
+          <div class="spots">
+            <figure>
+              <a href="{{link_events_corporate}}">
+                <figcaption>
+                <h3>Corporate events</h3>
+                <p>Lorem ipsum dolor amet couple of words</p>
+                </figcaption>
+                <img src="resources/img/spot-events-corp.jpg" data-aos="zoom-out"    data-aos-duration="1000"  alt="">
+                <div class="bg" data-aos="fade-right" data-aos-duration="500"></div>
+              </a>
+            </figure>
+            <figure>
+              <a href="{{link_events_social}}">
+                <figcaption>
+                <h3>Social celebrations</h3>
+                <p>Lorem ipsum dolor amet couple of words</p>
+                </figcaption>
+                <img src="resources/img/spot-events-social.jpg" data-aos="zoom-out"  data-aos-duration="1000"   alt="">
+                <div class="bg" data-aos="fade-left" data-aos-duration="900"></div>
+              </a>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    {% include 'inc_footer.html' %}
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="resources/js/jQuery.succinct.min.js"></script>
+    <script src="resources/js/scrollreveal.min.js"></script>
+    <script src="resources/js/main.js"></script>
+    <script src="resources/js/newsletter.js"></script>
+    <script src="resources/js/book-widget.js"></script>
+    <script>
+    $(function(){
+    $(".check-av").click(function(e){
+    if(e)e.preventDefault();
+    $("#calendarForm").submit();
+    });
+    });
+    AOS.init();
+    </script>
+  </body>
+</html>

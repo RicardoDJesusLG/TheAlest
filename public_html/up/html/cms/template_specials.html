@@ -1,0 +1,388 @@
+{% extends "template_container.html" %}
+
+{% block content %}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <ol class="breadcrumb">
+          <li><i class="fa fa-edit"></i> {{sectionTitle}}</li>
+          <li class="active">Items</li>
+        </ol>
+    </h1>
+</section>
+ 
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+
+            {% if mode == 'order' %}
+
+                {% if items|length > 0 %}
+
+                    <form method="POST" action="{{currentPage}}?{{qs}}" id="form" name="form" class="form-horizontal">
+                        <input type="hidden" id="submitUpdateOrder" name="submitUpdateOrder" value="{{mode}}" />
+
+                        <input type="hidden" id="orderHidden" name="orderHidden">
+
+                        <div class="box box-info">
+                            <div class="box-body">
+                                <p>{{ translationDragAndDrop }}</p>
+
+                                <ul class='containerOrder list-group'>
+
+                                {% for item in items %}
+                                    <li data-id="{{ item['id'] }}" class="list-group-item pointer">{{ item['title'] }}</li>
+                                {% endfor %}
+
+                                </ul>
+
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+
+                        <div class="box">
+                            <div class="box-footer">
+                                <a href="{{currentPage}}?">
+                                    <button type="button" class="btn btn-default"><i class="fa fa-undo"></i> {{ translationCancel }}</button>
+                                </a>
+
+                                <button type="submit" class="btn btn-info pull-right"><i class="fa fa-save"></i> {{ translationSave }}</button>
+                            </div>
+                            <!-- /.box-footer -->
+                        </div>
+                        <!-- /.box -->
+
+                    </form>
+
+                {% else %}
+
+                    <br />
+                    <div class="callout callout-danger">
+                        <p><i class="fa fa-warning"></i> {{ translationNoItemsAvailable }}</p>
+                    </div>
+
+                {% endif %}
+
+            {% elseif mode == 'list' %}
+
+                {% if msgUpdated %}
+                    <br />
+                    <div class="callout callout-success">
+                        <p><i class="fa fa-check-circle"></i> {{ msgUpdated }}</p>
+                    </div>
+                {% endif %}
+
+                {% if items|length > 0 %}
+                    <div class="box box-info">
+                        <div class="box-body">
+
+                            <table id="mainTable" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-10">Title</th>
+                                        <th class="col-md-2">{{translationEdit}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {% for item in items %}
+                                        <tr>
+                                            <td><span style="display: none">{{ item['position'] }}</span> {{ item['title'] }}</td>
+                                            <td>
+                                                <a href="{{currentPage}}?mode=edit&id={{ item['id'] }}">
+                                                    <button type="button" class="btn btn-info btn-xs"><span class="visible-xs-inline"><i class="fa fa-pencil"></i></span> <span class="hidden-xs">{{translationEdit}}</span></button>
+                                                </a>
+
+                                                <a data-toggle="modal" data-id="{{ item['id'] }}" data-toggle="modal" title="{{translationDelete}}" class="open-puDelete btn bg-navy btn-xs" href="#puDelete"><span class="visible-xs-inline"><i class="fa fa-remove"></i></span> <span class="hidden-xs">{{translationDelete}}</span></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+
+                {% else %}
+
+                    <br />
+                    <div class="callout callout-danger">
+                        <p><i class="fa fa-warning"></i> {{ translationNoItemsAvailable }}</p>
+                    </div>
+
+                {% endif %}
+
+                <br />
+                <a href="{{ linkAdd }}">
+                    <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i> {{ translationAddItem }}</button>
+                </a>
+
+                {% if items|length > 1 %}
+                    <a href="{{currentPage}}?mode=order">
+                        <button type="button" class="btn btn-warning"><i class="fa fa-list"></i> {{ translationSetOrder }}</button>
+                    </a>
+                {% endif %}
+
+                <a href="specials-slider.php">
+                    <button type="button" class="btn btn-warning"><i class="fa fa-list"></i> Slider</button>
+                </a>
+
+            {% elseif mode == 'edit' %}
+
+                {% if errorMsg %}
+                    <br />
+                    <div class="callout callout-danger">
+                        <p><i class="fa fa-warning"></i> {{ errorMsg }}</p>
+                    </div>
+                {% endif %}
+
+                    <!-- Horizontal Form -->
+                    <form method="POST" action="{{currentPage}}?{{qs}}" id="form" name="form" class="form-horizontal" enctype="multipart/form-data">
+                        <input type="hidden" id="submitUpdate" name="submitUpdate" value="1" />
+                        <!-- Custom Tabs -->
+                        <div class="nav-tabs-custom">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#tab_es" data-toggle="tab"><i class="famfamfam-flag-es"></i></a></li>
+                                <li><a href="#tab_en" data-toggle="tab"><i class="famfamfam-flag-gb"></i></a></li>
+                                <li><a href="#tab_general" data-toggle="tab">General</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab_es">
+                                    <div class="form-group">
+                                        <label for="titleEs" class="col-sm-2 control-label">Title  </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="titleEs" name="titleEs" value="{{titleEs}}">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            {% if statusEs %}<p class="text-red">{{ translationRequired }}</p>{% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="introEs" class="col-sm-2 control-label">Intro </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="introEs" name="introEs" value="{{introEs}}">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            {% if statusEs %}<p class="text-red">{{ translationRequired }}</p>{% endif %}
+                                        </div>
+                                    </div>  
+                                    <div class="form-group">
+                                        <label for="textEs" class="col-sm-2 control-label">Text </label>
+                                        <div class="col-sm-8">
+                                        <textarea id="textEs" name="textEs" class="form-control summernote" rows="4">{{textEs}}</textarea>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            {% if statusEs %}<p class="text-red">{{ translationRequired }}</p>{% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="statusEs" class="col-sm-2 control-label">{{ translationStatus }}</label>
+                                        <div class="col-sm-10">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="statusEs" name="statusEs" value="1" {% if statusEs %}checked{% endif %} /> {{ translationStatusDesc }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- /.tab-pane -->
+                                <div class="tab-pane" id="tab_en">
+                                    <div class="form-group">
+                                        <label for="titleEn" class="col-sm-2 control-label">Title </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="titleEn" name="titleEn" value="{{titleEn}}">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            {% if statusEn %}<p class="text-red">{{ translationRequired }}</p>{% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="introEn" class="col-sm-2 control-label">Intro </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="introEn" name="introEn" value="{{introEn}}">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            {% if statusEn %}<p class="text-red">{{ translationRequired }}</p>{% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="textEn" class="col-sm-2 control-label">Text </label>
+                                        <div class="col-sm-8">
+                                        <textarea id="textEn" name="textEn" class="form-control summernote" rows="4">{{textEn}}</textarea>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            {% if statusEn %}<p class="text-red">{{ translationRequired }}</p>{% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="statusEn" class="col-sm-2 control-label">{{ translationStatus }}</label>
+                                        <div class="col-sm-10">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="statusEn" name="statusEn" value="1" {% if statusEn %}checked{% endif %} /> {{ translationStatusDesc }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- /.tab-pane -->
+                                <div class="tab-pane" id="tab_general">
+                                    <input type='hidden' name='image' value='{{image}}' />
+                                    <div class="form-group">
+                                        <label for="image" class="col-sm-2 control-label">Image </label>
+                                        <div class="col-sm-8">
+                                            <input type="file" id="image" name="image">
+                                            <p class="help-block">{{translationSize}} 595 x 715px</p>
+                                        {% autoescape false %}{{ imagePreview }}{% endautoescape %}
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p class="text-red">{{ translationRequired }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.tab-pane -->
+                            </div>
+                            <!-- /.tab-content -->
+                        </div>
+                        <!-- nav-tabs-custom -->
+                        <div class="box">
+                            <div class="box-footer">
+                                <a href="{{linkCancel}}">
+                                    <button type="button" class="btn btn-default"><i class="fa fa-undo"></i> {{ translationCancel }}</button>
+                                </a>
+                                <button type="submit" class="btn btn-info pull-right"><i class="fa fa-save"></i> {{ translationSave }}</button>
+                            </div>
+                            <!-- /.box-footer -->
+                        </div>
+                        <!-- /.box -->
+                    </form>
+
+            {% endif %}
+
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+
+<!-- delete -->
+<div id="puDelete" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">{{ translationConfirm }}</h4>
+            </div>
+
+            <form id="frmDelete" name="frmDelete" method="POST" action="{{currentPage}}?">
+                <input type="hidden" id="submitDelete" name="submitDelete" value="1" />
+                <input type="hidden" id="idDelete" name="idDelete" />
+
+                <div class="modal-body">
+                    <p>{{ translationConfirmDeleteLabel }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ translationStrNo }}</button>
+                    <button type="submit" class="btn btn-primary">{{ translationStrYes }}</button>
+                </div>
+
+            </form>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+{% endblock %}
+
+{% block js %}
+
+    {% if mode == 'order' %}
+
+        <script src="./resources/plugins/jquery-sortable.js"></script>
+        <script>
+        $(function  () {
+          $("ul.containerOrder").sortable({
+              onDrop: function ($item, container, _super) {
+                var data = $("ul.containerOrder").sortable("serialize").get();
+
+                var jsonString = JSON.stringify(data, null, ' ');
+
+                $('#orderHidden').val(jsonString);
+                _super($item, container);
+              }
+            });
+        });
+        </script>
+
+    {% elseif mode == 'list' %}
+
+        <!-- DataTables -->
+        <script src="./resources/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="./resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <script>
+            $(function() {
+                $('#mainTable').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true
+
+                    {% if siteLang == 'es' %}
+                    , "language": {
+                        "url": "./resources/plugins/datatables/Spanish.json"
+                    }
+                    {% endif %}
+
+                });
+            });
+        </script>
+
+    {% elseif mode == 'edit' %}
+
+        <!-- datepicker -->
+        <script src="./resources/plugins/datepicker/bootstrap-datepicker.js"></script>
+
+        {% if siteLang == 'es' %}
+        <script src="./resources/plugins/datepicker/locales/bootstrap-datepicker.es.js"></script>
+        {% endif %}
+
+        <script>
+            $(function() {
+                $('.datepicker').datepicker({
+                    autoclose: true,
+
+                    {% if siteLang == 'es' %}
+                        language: 'es',
+                        format: 'dd/mm/yyyy'
+                    {% else %}
+                        format: 'mm/dd/yyyy'
+                    {% endif %}
+                });
+            });
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+          $('.summernote').summernote();
+        });            
+        </script>
+
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends "template_container.html" %}
+
+{% block content %}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <ol class="breadcrumb">
+          <li><i class="fa fa-edit"></i> {{sectionTitle}}</li>
+          <li class="active">Items</li>
+        </ol>
+    </h1>
+</section>
+ 
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+
+            {% if mode == 'edit' %}
+
+                {% if errorMsg %}
+                    <br />
+                    <div class="callout callout-danger">
+                        <p><i class="fa fa-warning"></i> {{ errorMsg }}</p>
+                    </div>
+                {% elseif msgUpdated %}
+                    <br />
+                    <div class="callout callout-success">
+                        <p><i class="fa fa-check-circle"></i> {{ msgUpdated }}</p>
+                    </div>
+                {% endif %}
+
+                    <!-- Horizontal Form -->
+                    <form method="POST" action="{{currentPage}}?{{qs}}" id="form" name="form" class="form-horizontal" enctype="multipart/form-data">
+                        <input type="hidden" id="submitUpdate" name="submitUpdate" value="1" />
+                        <!-- Custom Tabs -->
+                        <div class="nav-tabs-custom">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#tab_es" data-toggle="tab"><i class="famfamfam-flag-es"></i></a></li>
+                                <li><a href="#tab_en" data-toggle="tab"><i class="famfamfam-flag-gb"></i></a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab_es">
+                                    <div class="form-group">
+                                        <label for="privacyTitleEs" class="col-sm-2 control-label">Title  </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="privacyTitleEs" name="privacyTitleEs" value="{{privacyTitleEs}}">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p class="text-red">{{ translationRequired }}</p>
+                                        </div>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label for="privacyTextEs" class="col-sm-2 control-label">Text </label>
+                                        <div class="col-sm-8">
+                                        <textarea id="privacyTextEs" name="privacyTextEs" class="form-control summernote" rows="4">{{privacyTextEs}}</textarea>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p class="text-red">{{ translationRequired }}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- /.tab-pane -->
+                                <div class="tab-pane" id="tab_en">
+                                    <div class="form-group">
+                                        <label for="privacyTitleEn" class="col-sm-2 control-label">Title  </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="privacyTitleEn" name="privacyTitleEn" value="{{privacyTitleEn}}">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p class="text-red">{{ translationRequired }}</p>
+                                        </div>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label for="privacyTextEn" class="col-sm-2 control-label">Text </label>
+                                        <div class="col-sm-8">
+                                        <textarea id="privacyTextEn" name="privacyTextEn" class="form-control summernote" rows="4">{{privacyTextEn}}</textarea>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p class="text-red">{{ translationRequired }}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- /.tab-pane -->
+                            </div>
+                            <!-- /.tab-content -->
+                        </div>
+                        <!-- nav-tabs-custom -->
+                        <div class="box">
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-info pull-right"><i class="fa fa-save"></i> {{ translationSave }}</button>
+                            </div>
+                            <!-- /.box-footer -->
+                        </div>
+                        <!-- /.box -->
+                    </form>
+
+            {% endif %}
+
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+{% endblock %}
+
+{% block js %}
+
+    {% if mode == 'edit' %}
+
+        <!-- datepicker -->
+        <script src="./resources/plugins/datepicker/bootstrap-datepicker.js"></script>
+
+        {% if siteLang == 'es' %}
+        <script src="./resources/plugins/datepicker/locales/bootstrap-datepicker.es.js"></script>
+        {% endif %}
+
+        <script>
+            $(function() {
+                $('.datepicker').datepicker({
+                    autoclose: true,
+
+                    {% if siteLang == 'es' %}
+                        language: 'es',
+                        format: 'dd/mm/yyyy'
+                    {% else %}
+                        format: 'mm/dd/yyyy'
+                    {% endif %}
+                });
+            });
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+          $('.summernote').summernote();
+        });            
+        </script>
+
+    {% endif %}
+
+{% endblock %}

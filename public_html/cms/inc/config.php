@@ -17,8 +17,8 @@ $config['lang'] = 'en';
 // db login
 $config['db_hostname'] = "localhost";
 $config['db_database'] = "web8755";
-$config['db_username'] = "usr7166";
-$config['db_password'] = '+W#z!~JhX8!s';
+$config['db_username'] = "root";
+$config['db_password'] = "woofandbarf";
 
 // emails
 $config['email_address'] = "hello@thealest.com"; // info@thealest.com

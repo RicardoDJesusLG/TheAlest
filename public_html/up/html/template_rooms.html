@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="{{ base_href }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest</title>
+    <meta name="description" content=" ">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <link rel="stylesheet" href="resources/css/book-widget.css">
+    <link rel="stylesheet" href="resources/css/swiper-bundle.min.css">
+
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% include 'inc_analytics.html' %}
+    
+    <style>
+      a:focus{
+      outline:none !important;
+          outline-offset: 0px;
+      }
+          </style>
+  </head>
+  <body>
+    
+    {% include 'inc_header.html' %}
+    <div class="hero-home" >
+      <div class="txt">
+        <div class="title">
+          Enjoy a unique & luxury stay
+        </div>
+        <div class="sub">Come as you are, we will take care of the rest</div>
+
+        <div class="hidden-xs">
+        <div class="book-widget">
+        </div>
+        <a href="#" class="btn-line-big check-av">Check Availability</a>
+        </div>
+
+        <div class="visible-xs">
+          <a href="https://be.synxis.com/?hotel=31241" target="_blank" class="btn-line-big">Check Availability</a>
+        </div>
+
+      </div>
+      <div class="pager-slider">
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#" class="active"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+      </div>
+      <div class="slide">
+        <img src="resources/img/hero1.jpg" alt="">
+      </div>
+    </div>
+    
+    
+    <!-- MAIN MENU mainmenu.html -->
+    <div id='mainmenu'>
+    </div>
+    <!-- / MAIN MENU mainmenu.html -->
+    <!-- cal -->
+    <div class='calendarBox'>
+      <div class='form-hit'></div>
+      <div id='calendar' class='dnaCalendar'></div>
+      <form id='calendarForm' method='POST' action="book.php" style='display:none;'>
+        <input type="hidden" name='datein' value=''/>
+        <input type="hidden" name='dateout' value=''/>
+        <input type="hidden"  name='adults' value=''/>
+        <input type="hidden"  name='children' value=''/>
+      </form>
+    </div>
+    <!-- /calendar
+    -->
+    <div class="intro" style='width: 100%;overflow: hidden;'>
+      <div class="container">
+        <div class="cont">
+          <div class="txt">
+            <h6 data-aos="fade-up" data-aos-duration="900">rooms & suits</h6>
+            <h1 data-aos="fade-up" data-aos-duration="900" data-aos-offset="200"><span>A universe</span> onto itself, a haven for disconnecting</h1>
+            <p data-aos="fade-up" data-aos-duration="900" data-aos-offset="100">
+            The Alest it offers an intimate, cozy space featuring 19 lavishly decorated suites. Three are Junior Suites, with large terraces that are perfect for enjoying the outdoors. </p>
+            
+            <p data-aos="fade-up" data-aos-duration="900" data-aos-offset="100">Enjoy sophisticated residential comfort in one of the
+              19 rooms. Each room offers comfort and refinement,
+              reflected in its timeless design and neutral colors that
+              induce relaxation. 10 rooms face an indoor patio
+            and 9 offer outdoor views.</p>
+            <p data-aos="fade-up" data-aos-duration="900" data-aos-offset="100">Their surface area ranges from 22 m2 (72 sq ft)
+              to 75.59 m2 (247 sq ft) to accommodate from 2
+            to 4 people, according to chosen category.</p>
+            
+          </div>
+          <figure>
+            <img src="resources/img/intro-rooms.jpg" alt="" data-aos="fade-up" data-aos-duration="900">
+            <figcaption data-aos="fade-right" data-aos-duration="900">
+            Its eclectic style surprises and delights guests.
+            Different international interior design trends are
+            carefully curated, then splendidly combined.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+    <div class="container" style='width: 100%;overflow: hidden;'>
+      <div class="rooms-parrafo">
+        <figure data-aos="fade-right" data-aos-duration="1000" >
+          <img src="resources/img/intro-rooms2.jpg" alt="">
+        </figure>
+        <div class="txt" data-aos="fade-left" data-aos-duration="1000">
+          
+          <p>The three exclusive Junior Suites located on the
+            third floor have their own large terrace on the
+            upper parts of the building, overlooking the
+            pleasant and quiet Eugenio Sue Street, in the
+            heart of Polanco. Their surface area ranges from
+          51.89m2 (170 sq ft) to 75.59 m2 (247 sq ft).</p>
+          <p>
+            Rooms boast unique pieces of art and locally
+            designed objects. The one-of-a-kind dressers
+            in each room. Carrara marble bathrooms,
+            Italian-style hardwood floors, and amenities
+            that will make a stay at The Alest a memorable
+          experience.</p>
+        </div>
+      </div>
+    </div>
+    <div class="galeria pararoom" style='width: 100%;overflow: hidden;'>
+      <div class="container">
+        <h2>Our Suites</h2>
+
+        {% for item in suites %}
+          <div class="row">
+
+            {% if item['order'] %}
+                 <div class="col-sm-6">
+                  <a href="{{ item['link_1'] }}">
+                    <figure class="tall">
+                      <figcaption data-aos="fade-up" data-aos-duration="1200">
+                      <div class="tit">{{ item['title_1'] }}</div>
+                      <div class="des">{{ item['intro_1'] }}</div>
+                      </figcaption>
+                      <img src="{{ item['image_1'] }}" alt="" data-aos="fade-right" data-aos-duration="1000">
+                    </figure>
+                  </a>
+                </div>
+                <div class="col-sm-6">
+                  {% if item['title_2'] %}
+                    <a href="{{ item['link_2'] }}">
+                      <figure class="fat">
+                        <figcaption data-aos-duration="1700" data-aos="fade-up">
+                        <div class="tit">{{ item['title_2'] }}</div>
+                        <div class="des">{{ item['intro_2'] }}</div>
+                        </figcaption>
+                        <img src="{{ item['image_2'] }}" alt="" data-aos="fade-right" data-aos-duration="1500">
+                      </figure>
+                    </a>
+                  {% endif %}
+
+                  {% if item['title_3'] %}
+                    <a href="{{ item['link_3'] }}">
+                      <figure class="fat">
+                        <figcaption data-aos="fade-up" data-aos-duration="2200">
+                        <div class="tit">{{ item['title_3'] }}</div>
+                        <div class="des">{{ item['intro_3'] }}</div>
+                        </figcaption>
+                        <img src="{{ item['image_3'] }}" alt="" data-aos="fade-right" data-aos-duration="2000">
+                      </figure>
+                    </a>
+                  {% endif %}
+                </div>
+
+            {% else %}
+
+              <div class="col-sm-6">
+                <a href="{{ item['link_1'] }}">
+                  <figure class="fat">
+                    <figcaption data-aos="fade-up" data-aos-duration="1200">
+                    <div class="tit">{{ item['title_1'] }}</div>
+                    <div class="des">{{ item['intro_1'] }}</div>
+                    </figcaption>
+                    <img src="{{ item['image_1'] }}" alt="" data-aos="fade-right" data-aos-duration="1000">
+                  </figure>
+                </a>
+
+                {% if item['title_2'] %}
+                  <a href="{{ item['link_2'] }}">
+                    <figure class="fat">
+                      <figcaption data-aos-duration="1700" data-aos="fade-up">
+                      <div class="tit">{{ item['title_2'] }}</div>
+                      <div class="des">{{ item['intro_2'] }}</div>
+                      </figcaption>
+                      <img src="{{ item['image_2'] }}" alt="" data-aos="fade-right" data-aos-duration="1500">
+                    </figure>
+                  </a>
+                {% endif %}
+
+              </div>
+              <div class="col-sm-6">
+
+                {% if item['title_3'] %}
+                  <a href="{{ item['link_3'] }}">
+                    <figure class="tall">
+                      <figcaption data-aos="fade-up" data-aos-duration="2200">
+                      <div class="tit">{{ item['title_3'] }}</div>
+                      <div class="des">{{ item['intro_3'] }}</div>
+                      </figcaption>
+                      <img src="{{ item['image_3'] }}" alt="" data-aos="fade-right" data-aos-duration="2000">
+                    </figure>
+                  </a>
+                {% endif %}
+
+              </div>
+
+            {% endif %}
+
+          </div>
+        {% endfor %}
+
+
+<!--
+        <div class="row">
+          <div class="col-sm-6">
+            <a href="#">
+              <figure class="tall">
+                <figcaption  data-aos="fade-up" data-aos-duration="1200">
+                <div class="tit">Alexander Suite</div>
+                <div class="des">Grand Deluxe Suite  /  44.43 m2 (145.77 sq ft)</div>
+                </figcaption>
+                
+                <img src="resources/img/gal1.jpg" alt="" data-aos="fade-right" data-aos-duration="1000">
+                
+              </figure>
+            </a>
+          </div>
+          <div class="col-sm-6">
+            <a href="#">
+              <figure class="fat">
+                
+                <figcaption  data-aos-duration="1700" data-aos="fade-up">
+                <div class="tit">Alest Suite</div>
+                <div class="des">Deluxe Junior Suite  /  38.39 m2 (125.95 sq ft)</div>
+                </figcaption>
+                <img src="resources/img/gal2.jpg" alt="" data-aos="fade-right" data-aos-duration="1500">
+              </figure>
+            </a>
+            <a href="#">
+              <figure class="fat">
+                <figcaption  data-aos="fade-up" data-aos-duration="2200">
+                <div class="tit">Stephanie Suite</div>
+                <div class="des">Deluxe Junior Suite  /  38.39 m2 (125.95 sq ft)</div>
+                </figcaption>
+                <img src="resources/img/gal2.jpg" alt="" data-aos="fade-right" data-aos-duration="2000">
+              </figure>
+            </a>
+          </div>
+        </div>
+      -->
+      </div>
+    </div>
+    
+    <div class="specials" style='width: 100%;overflow: hidden;'>
+      <div class="header" data-aos="fade-up" data-aos-duration="3000">
+        <div class="row">
+          <div class="col-sm-6">
+            
+            <h2>Our Rooms</h2>
+          </div>
+          <div class="col-sm-6">
+            <nav>
+              <a href="#" class="inactive"><img src="resources/img/prev.png" alt="previous"></a> <a href="#" ><img src="resources/img/next.png" alt="next"></a>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="grid" data-aos="fade-up" data-aos-duration="3000">
+
+
+      {% for item in rooms %}
+        <figure>
+          <a href="{{ item['link'] }}">
+            <figcaption>
+            <h4>{{ item['title'] }}</h4>
+            <p>{{ item['intro'] }}</p>
+            </figcaption>
+            <div class="shad"></div>
+            <img src="{{ item['image'] }}" alt="">
+            <div class="bg"></div>
+          </a>
+        </figure>
+      {% endfor %}
+
+
+      </div>
+      
+    </div>
+    <div class="testimonials"  >
+      {% for item in testimonials %}
+
+        <div class="txt">
+          <div class="llave" data-aos="fade-down" data-aos-duration="2000">
+            <img src="resources/img/llave.png" alt="">
+          </div>
+          <h4 data-aos="fade-up" data-aos-duration="2000">“{{ item['text'] }}”</h4>
+          <div class="author" data-aos="fade-up" data-aos-duration="2000"><strong>{{ item['author'] }}</strong> / {{ item['location'] }}</div>
+        </div>
+
+      {% endfor %}
+      <div class="bg" data-aos="zoom-in" data-aos-duration="2000">
+        <img src="resources/img/alest-bg.jpg" alt="">
+      </div>
+    </div>
+    {% include 'inc_footer.html' %}
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="resources/js/jQuery.succinct.min.js"></script>
+    <script src="resources/js/scrollreveal.min.js"></script>
+    <script src="resources/js/main.js"></script>
+    <script src="resources/js/newsletter.js"></script>
+    <script src="resources/js/book-widget.js"></script>
+
+    <script src="resources/js/swiper-bundle.min.js"></script>
+    <script src='resources/js/lineSlider.js'></script>
+
+
+    <script>
+    $(function(){
+    $(".check-av").click(function(e){
+    if(e)e.preventDefault();
+    $("#calendarForm").submit();
+    
+    });
+    
+    });
+    
+    AOS.init();
+    </script>
+  </body>
+</html>

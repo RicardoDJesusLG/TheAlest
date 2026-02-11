@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="{{ base_href }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest, The Hotel</title>
+    <meta name="description" content=" ">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% include 'inc_analytics.html' %}
+    
+  </head>
+  <body>
+    {% include 'inc_header.html' %}
+    <div class="hero-noimage">
+      <h1 class="title">What's On</h1>
+      <div class="sub">news & upcoming events at the alest</div>
+    </div>
+    
+    <!-- MAIN MENU mainmenu.html -->
+    <div id='mainmenu'>
+    </div>
+    <!-- / MAIN MENU mainmenu.html -->
+    <div class="news">
+      <div class="container">
+        <div class="grilla">
+          <div class="row">
+
+            {% for item in articles %}
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="500">
+                  <a href="{{ item['link_1'] }}">
+                    <article class="nota">
+                      <figure>
+                        <img src="{{ item['image_1'] }}" alt="">
+                      </figure>
+                      <div class="txt">
+                        <div class="date">{{ item['date_1'] }}</div>
+                        <div class="title">{{ item['title_1'] }}</div>
+                        <p class="art1">{{ item['intro_1']|nl2br }}</p>
+                        <div class="more">More</div>
+                      </div>
+                    </article>
+                  </a>
+                  {% if item['id_2'] %}
+                    <a href="{{ item['link_2'] }}">
+                      <article class="solotexto">
+                        <div class="date">{{ item['date_2'] }}</div>
+                        <div class="title">{{ item['title_2'] }}</div>
+                      </article>
+                    </a>
+                  {% endif %}
+                </div>
+                <!-- col2 -->
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="1000">
+                  {% if item['id_3'] %}
+                    <a href="{{ item['link_3'] }}">
+                      <article class="solotexto">
+                        <div class="date">{{ item['date_3'] }}</div>
+                        <div class="title">{{ item['title_3'] }}</div>
+                      </article>
+                    </a>
+                  {% endif %}
+
+                  {% if item['id_4'] %}
+                    <a href="{{ item['link_4'] }}">
+                      <article class="nota">
+                        <figure>
+                          <img src="{{ item['image_4'] }}" alt="">
+                        </figure>
+                        <div class="txt">
+                          <div class="date">{{ item['date_4'] }}</div>
+                          <div class="title">{{ item['title_4'] }}</div>
+                          <p class="art1">{{ item['intro_4']|nl2br }}</p>
+                          <div class="more">More</div>
+                        </div>
+                      </article>
+                    </a>
+                  {% endif %}
+
+                </div>
+                <!-- col3 -->
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="1500">
+
+                  {% if item['id_5'] %}
+                    <a href="{{ item['link_5'] }}">
+                      <article class="conimagen">
+                        <div class="txt">
+                          <div class="date">{{ item['date_5'] }}</div>
+                          <div class="title">{{ item['title_5'] }}</div>
+                        </div>
+                        <figure>
+                          <img src="{{ item['image_5'] }}" alt="">
+                        </figure>
+                      </article>
+                    </a>
+
+
+                  {% endif %}
+
+                  {% if item['image_instagram_5'] %}
+                    <a href="https://www.instagram.com/the.alest/" target="_blank">
+                      <!-- <a href="{{ item['link_6'] }}"> -->
+                      <article class="imagen">
+                        <div class="icono"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                        <figure>
+                          <img src="{{ item['image_instagram_5'] }}" alt="">
+                        </figure>
+                      </article>
+                    </a>
+                  {% endif %}
+
+                </div>
+                <!-- /row -->
+            {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+            <!-- /row -->
+          </div>
+          <!-- set 2 -->
+          <!-- set 3 -->
+        </div>
+      </div>
+    </div>
+    {% include 'inc_footer.html' %}
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="resources/js/jQuery.succinct.min.js"></script>
+    <script src="resources/js/scrollreveal.min.js"></script>
+    <script src="resources/js/main.js"></script>
+    <script src="resources/js/newsletter.js"></script>
+    <script>
+    AOS.init();
+    </script>
+  </body>
+</html>

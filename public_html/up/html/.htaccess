@@ -1,0 +1,51 @@
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php73” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php73 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
+
+Options -MultiViews
+
+# DirectoryIndex index.php index.html index.htm
+
+RewriteEngine on
+RewriteBase /
+
+	RewriteRule ^stay/?$ rooms.php [L]
+	RewriteRule ^stay/([^/.]+)/?$ room.php?slug=$1 [L]
+	RewriteRule ^eat-and-drink/?$ aabb.php [L]
+	RewriteRule ^eat-and-drink/([^/.]+)/?$ aabb-detalle.php?slug=$1 [L]
+	RewriteRule ^events/?$ events.php [L]
+	RewriteRule ^events/([^/.]+)/?$ events-detalle.php?slug=$1 [L]
+	RewriteRule ^gallery/?$ gallery.php [L]
+	RewriteRule ^location/?$ location.php [L]
+	RewriteRule ^specials/?$ specials.php [L]
+	RewriteRule ^specials/([^/.]+)/?$ special.php?slug=$1 [L]
+	RewriteRule ^the-hotel/?$ the-hotel.php [L]
+	RewriteRule ^news/?$ noticias.php [L]
+	RewriteRule ^news/([^/.]+)/?$ noticia.php?slug=$1 [L]
+	RewriteRule ^contact/?$ contact.php [L]
+	RewriteRule ^contact/thanks/?$ contact.php?msg=1 [L]
+	RewriteRule ^safety-protocols/?$ safety.php [L]
+	RewriteRule ^privacy-policy/?$ privacy.php [L]
+	RewriteRule ^legal-notice/?$ legal.php [L]
+
+	RewriteRule ^es/stay/?$ rooms.php [L]
+	RewriteRule ^es/stay/([^/.]+)/?$ room.php?slug=$1 [L]
+	RewriteRule ^es/eat-and-drink/?$ aabb.php [L]
+	RewriteRule ^es/eat-and-drink/([^/.]+)/?$ aabb-detalle.php?slug=$1 [L]
+	RewriteRule ^es/events/?$ events.php [L]
+	RewriteRule ^es/events/([^/.]+)/?$ events-detalle.php?slug=$1 [L]
+	RewriteRule ^es/gallery/?$ gallery.php [L]
+	RewriteRule ^es/location/?$ location.php [L]
+	RewriteRule ^es/specials/?$ specials.php [L]
+	RewriteRule ^es/specials/([^/.]+)/?$ special.php?slug=$1 [L]
+	RewriteRule ^es/the-hotel/?$ the-hotel.php [L]
+	RewriteRule ^es/news/?$ noticias.php [L]
+	RewriteRule ^es/news/([^/.]+)/?$ noticia.php?slug=$1 [L]
+	RewriteRule ^es/contact/?$ contact.php [L]
+	RewriteRule ^es/contact/thanks/?$ contact.php?msg=1 [L]
+	RewriteRule ^safety-protocols/?$ safety.php [L]
+	RewriteRule ^es/privacy-policy/?$ privacy.php [L]
+	RewriteRule ^es/legal-notice/?$ legal.php [L]

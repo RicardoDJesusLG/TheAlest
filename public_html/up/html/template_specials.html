@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="{{ base_href }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest, The Hotel</title>
+    <meta name="description" content=" ">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="resources/css/alest.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <link rel="stylesheet" href="resources/css/book-widget.css">
+    <link rel="stylesheet" href="resources/css/swiper-bundle.min.css">
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% include 'inc_analytics.html' %}
+    
+    <style>
+      a:focus{
+      outline:none !important;
+          outline-offset: 0px;
+      }
+          </style>
+  </head>
+  <body>
+    {% include 'inc_header.html' %}
+    <div class="hero-home" >
+      <div class="txt">
+        <div class="title">
+          Our specials
+        </div>
+        <div class="sub">Offers & Packages</div>
+
+        <div class="hidden-xs">
+          <div class="book-widget"> </div>
+          <a href="#" class="btn-line-big check-av">Check Availability</a>
+        </div>
+
+        <div class="visible-xs">
+          <a href="https://be.synxis.com/?hotel=31241" target="_blank" class="btn-line-big">Check Availability</a>
+        </div>
+
+      </div>
+      <div class="pager-slider">
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#" class="active"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+      </div>
+      <div class="slide">
+        <img src="resources/img/hero-special.jpg" alt="">
+      </div>
+    </div>
+    <!-- MAIN MENU mainmenu.html -->
+    <div id='mainmenu'>
+    </div>
+    <!-- / MAIN MENU mainmenu.html -->
+    <!-- cal -->
+    <div class='calendarBox'>
+      <div class='form-hit'></div>
+      <div id='calendar' class='dnaCalendar'></div>
+      <form id='calendarForm' method='POST' action="book.php" style='display:none;'>
+        <input type="hidden" name='datein' value=''/>
+        <input type="hidden" name='dateout' value=''/>
+        <input type="hidden"  name='adults' value=''/>
+        <input type="hidden"  name='children' value=''/>
+      </form>
+    </div>
+    <!-- /calendar
+    -->
+    <div class="specials-page"  style='width: 100%;overflow: hidden;'>
+      <div class="container">
+        <div class="introspecial">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="left">
+                <h6 data-aos="fade-left" data-aos-duration="1000">Specials</h6>
+                <h1 data-aos="fade-left" data-aos-duration="1500">Enjoy a range of <span>beneefits</span></h1>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="right" data-aos="fade-right" data-aos-duration="1000">
+                <p>At The Alest Petit Hotel we take pride words about specials detail, for us any travel experience is unique and deserves to be shaped by state of the art facilities.</p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="container">
+        <div class="featured-specials" >
+          <div class="spots">
+
+            {% for item in specials %}
+              {% if item['index'] <= 2 %}
+
+              <figure>
+                <a href="{{ item['link'] }}">
+                  <figcaption>
+                  <h3>{{ item['title'] }}</h3>
+                  <p>{{ item['intro'] }}</p>
+                  </figcaption>
+                  <img src="{{ item['image'] }}" data-aos="zoom-out"    data-aos-duration="1000"  alt="">
+                  <div class="bg" data-aos="fade-right" data-aos-duration="500"></div>
+                </a>
+              </figure>
+
+              {% endif %}
+            {% endfor %}
+
+          </div>
+        </div>
+      </div>
+      <div class="specials" >
+        <div  data-aos="fade-up" data-aos-duration="3000">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-6">
+                <h6>More</h6>
+                <h2>Offers & Packages</h2>
+              </div>
+              <div class="col-sm-6">
+                <nav>
+                  <a href="#" class="inactive"><img src="resources/img/prev.png" alt="previous"></a> <a href="#" ><img src="resources/img/next.png" alt="next"></a>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid" data-aos="fade-up" data-aos-duration="3000">
+
+          {% for item in specials %}
+            {% if item['index'] > 2 %}
+
+            <figure>
+              <a href="{{ item['link'] }}">
+                <figcaption>
+                <h4>{{ item['title'] }}</h4>
+                <p>{{ item['intro'] }}</p>
+                </figcaption>
+                <div class="shad"></div>
+                <img src="{{ item['image'] }}" alt="">
+                <div class="bg"></div>
+              </a>
+            </figure>
+
+            {% endif %}
+          {% endfor %}
+
+        </div>
+        
+      </div>
+    </div>
+    
+    
+    {% include 'inc_footer.html' %}
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="resources/js/jQuery.succinct.min.js"></script>
+    <script src="resources/js/scrollreveal.min.js"></script>
+    <script src="resources/js/main.js"></script>
+    <script src="resources/js/newsletter.js"></script>
+    <script src="resources/js/book-widget.js"></script>
+    <script src="resources/js/swiper-bundle.min.js"></script>
+    <script src='resources/js/lineSlider.js'></script>
+
+
+    <script>
+    $(function(){
+    $(".check-av").click(function(e){
+    if(e)e.preventDefault();
+    $("#calendarForm").submit();
+    
+    });
+    
+    });
+    
+    AOS.init();
+    </script>
+  </body>
+</html>

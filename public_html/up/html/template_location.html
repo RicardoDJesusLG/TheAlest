@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="{{ base_href }}">
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Alest, The Hotel</title>
+  <meta name="description" content=" ">
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link href="resources/css/alest.css" rel="stylesheet">
+  <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+  <link rel="stylesheet" href="resources/css/mainmenu.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+      .hero-home .slide img {
+  opacity: 0;
+  position: absolute;
+}
+    </style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+
+      {% include 'inc_analytics.html' %}
+
+  </head>
+  <body>
+ 
+    {% include 'inc_header.html' %}
+
+
+    <div class="hero-home" >
+      <div class="txt">
+        <div class="title">
+          Polanco
+        </div>
+        <div class="sub">Polanco, the hotel’s exclusive neighborhood</div>
+
+        
+
+      </div>
+
+      
+
+      <div class="slide">
+        <img src="resources/img/hero-location.jpg" alt="">
+      </div>
+    </div>
+
+
+<!-- MAIN MENU mainmenu.html -->
+
+<div id='mainmenu'>
+</div>
+
+<!-- / MAIN MENU mainmenu.html -->
+
+
+
+    <div class="the-hotel"  style='width: 100%;overflow: hidden;'>
+      <div class="container">
+
+        <div class="first less-margin">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="left">
+                <h6 data-aos="fade-right" data-aos-duration="1000">Location</h6>
+                <h1 data-aos="fade-right" data-aos-duration="1500">Prime spot in <span>Mexico City</span></h1>
+
+                <figure data-aos="fade-up" data-aos-duration="1000">
+                  <img src="resources/img/location1.jpg" alt="">
+                </figure>
+              </div>
+            </div>
+            <div class="col-sm-6">
+             <div class="right" >
+              <div data-aos="fade-left" data-aos-duration="1000">
+                <p>
+                  Located in one of the most exclusive neighborhoods 
+in Mexico City, home to a wide array of high-end 
+boutiques, the most sought-after urban residences, 
+the most important museums in the capital city 
+and a vibrant, cosmopolitan atmosphere. </p>
+<p>
+
+Its convenient location is ideal when planning visits 
+to all the landmarks and attractions the city has 
+to offer.
+                </p>
+                
+
+              </div>
+
+
+              <div class="epigrafe" data-aos="fade-left" data-aos-duration="1000">
+                A few meters from The Alest is Parque Lincoln, 
+a park that can be considered the heart of the 
+neighborhood. Here, locals engage in recreational 
+activities such as model boat sailing and racing,
+visiting a weekly outdoor market and even enjoying 
+cultural events at the open-air Angela Peralta Theater.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="second less-margin">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="left">
+              <h6 data-aos="fade-left" data-aos-duration="1000">restaurants</h6>
+              <h2 data-aos="fade-left" data-aos-duration="1500"><span>A broad 
+range</span> of dining 
+options</h2>
+              <div data-aos="fade-up" data-aos-duration="1000">
+                <p>As distinctive feature of the area surrounding The Alest,
+guests can enjoy the benefits stemming from our 
+alliances with restaurants such as L'Osteria del Becco,
+Belfiore, Butcher & Sons, Cipriani, Cuerno Masaryk, 
+Emilio, Fogo de Chao, Harry's, Garum, Ivoire, Le Pain 
+Quotidien, Limantour, Porfirios, Pubbelly, Puerto 
+Madero, Pujol, Quintonil, Rosa Negra, Ryoshi and 
+Tori Tori, among others.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="right">
+              <figure data-aos="fade-right" data-aos-duration="1000">
+                <img src="resources/img/location2.jpg" alt="polanco">
+              </figure>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="third less-margin">
+        <figure data-aos="fade-right" data-aos-duration="1000" class="hidden-xs">
+          <img src="resources/img/location3.jpg" alt="">
+          <figcaption>Art in all its forms, as well as history, can be enjoyed in exclusive art galleries in Polanco or in the most important museums that the area houses.</figcaption>
+        </figure>
+        <div class="txt" data-aos="fade-left" data-aos-duration="1000">
+          <h3>Living Polanco</h3>
+          <p>Polanco is the main place to enjoy different 
+types of experiences, and it pleases all kinds 
+of travelers. The most wonderful things take 
+place in the neighborhood or very close to it.</p>
+<p>The most prestigious events, such as the Haute 
+Horlogerie Salon (SIAR), art week Zona MACO, 
+the Mercedes Benz Fashion Week, the Longines 
+Global Champions Tour equestrian meet, 
+Design Week and Formula 1 races are only a 
+few examples of what The Alest guests will be 
+able to attend.</p>
+
+        </div>
+      </div>
+
+
+
+
+      <div class="mapa" id="mapid">
+        <div class="info" data-aos="fade-up" data-aos-duration="1000">
+          <h3>The Alest</h3>
+          <p>Eugenio Sue #45, Polanco, 11540 Mexico City</p>
+        </div>
+
+      </div>
+
+
+<div class="acceso">
+        
+            <div class="titul">
+              
+              <h2 data-aos="fade-left" data-aos-duration="1500">Accesibility</h2>
+              
+            </div>
+           
+          <div class="txt">
+            
+              <p>
+                Mexico City International Airport  .  16 Km. / (9.mi) 20 min<br>
+                Toluca Private Airport  .  53 Km. (32 mi) / 45 min<br>
+                Heliports   .  0.6 to 1 Km. / 6 to 10 / min walk</p>
+              </p>
+            </div>
+          </div>
+        
+
+
+
+      <!-- <div class="accesibility">
+        <div class="row">
+          
+          <div class="col-sm-5">
+            <h2 data-aos="fade-left" data-aos-duration="1000">Accesibility</h2>
+          </div>
+          <div class="col-sm-7">
+            <p data-aos="fade-right" data-aos-duration="1500">
+            Mexico City International Airport  .  16 Km. / (9.mi) 20 min<br>
+            Toluca Private Airport  .  53 Km. (32 mi) / 45 min<br>
+            Heliports   .  0.6 to 1 Km. / 6 to 10 / min walk</p>
+          </div>
+        </div>
+      </div> -->
+
+
+      
+
+
+
+
+
+
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% include 'inc_footer.html' %}
+
+
+
+
+
+
+
+
+<!-- JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+<script src="resources/js/main.js"></script>
+<script src="resources/js/newsletter.js"></script>
+        <script>
+
+
+          var mymap = L.map('mapid').setView([19.43029798401748, -99.194232087246], 15);
+          L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+          attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          tileSize: 512,
+          maxZoom: 18,
+          zoomOffset: -1,
+          id: 'mapbox/light-v9',
+          accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
+          }).addTo(mymap);
+          mymap.scrollWheelZoom.disable();
+          var greenIcon = L.icon({
+            iconUrl: 'resources/img/pin.png',
+          iconSize:     [30, 60], // size of the icon
+        });
+          L.marker([19.43029798401748, -99.194232087246], {icon: greenIcon}).addTo(mymap);
+        </script>
+
+<script>
+  AOS.init();
+</script>
+</body>
+</html>

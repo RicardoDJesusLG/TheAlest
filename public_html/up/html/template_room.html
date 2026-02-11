@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="{{ base_href }}">
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Alest, {{title}}</title>
+  <meta name="description" content=" ">
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link href="resources/css/alest.css" rel="stylesheet">
+  <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="resources/css/mainmenu.css">
+  <link rel="stylesheet" href="resources/css/swiper-bundle.min.css">
+
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+      a:focus{
+      outline:none !important;
+          outline-offset: 0px;
+      }
+
+@media (max-width: 768px) {
+.intro-room .room-book{
+  width:100%;
+}
+}
+          </style>
+      {% include 'inc_analytics.html' %}
+      
+  </head>
+  <body>
+ 
+    {% include 'inc_header.html' %}
+
+
+    <div class="hero-home" >
+
+      <script>
+        const heroImages=[
+          {% for item in slider %}
+            "{{ item['image'] }}" {% if not loop.last %},{% endif %}
+          {% endfor %}
+        ]
+        </script>
+        
+
+
+
+      <div class="txt">
+        <div class="title">
+          {{title}}
+        </div>
+        <div class="sub">{{intro}}</div>
+
+         <div class="visible-xs">
+          <a href="https://be.synxis.com/?hotel=31241" target="_blank" class="btn-line-big">Check Availability</a>
+        </div>
+
+        
+
+      </div>
+
+      <div class="pager-slider">
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#" class="active"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
+      </div>
+
+      <div class="slide">
+          {% for item in slider %}
+            {% if loop.first %}<img src="{{ item['image'] }}" alt="">{% endif %}
+          {% endfor %}        
+      </div>
+    </div>
+    
+
+<!-- MAIN MENU mainmenu.html -->
+
+<div id='mainmenu'>
+</div>
+
+<!-- / MAIN MENU mainmenu.html -->
+
+ 
+
+<!-- cal -->
+<div class='calendarBox'>
+  <div class='form-hit'></div>
+<div id='calendar' class='dnaCalendar'></div>
+
+<form id='calendarForm' method='POST' action="book.php" style='display:none;'>
+<input type="hidden" name='datein' value=''/>
+<input type="hidden" name='dateout' value=''/>
+<input type="hidden"  name='adults' value=''/>
+<input type="hidden"  name='children' value=''/>
+ </form>
+</div>
+<!-- /calendar
+-->
+
+
+
+    <div class="intro-room" style='width: 100%;overflow: hidden;'>
+
+     <div class="container">
+      <div class="cont">
+        <div class="txt">
+          <h6 data-aos="fade-up" data-aos-duration="900">{{pretitle}}</h6>
+          <h1 data-aos="fade-up" data-aos-duration="900" data-aos-offset="200">{{intro2}}</h1>
+          <div data-aos="fade-up" data-aos-duration="900" data-aos-offset="100">
+          <p >
+          {{text|raw}}</p>
+         
+        </div>
+
+         
+        </div>
+        <div class="room-book hidden-xs">
+        <div class="book-widget2">
+          <div class="col linea bottomline">
+            <span>Arrival</span>
+            <div class="date">
+              <a href="#">
+                <div class="numero">26</div>
+                <div class="mes">Sep <img src="resources/img/arrow.png" alt="date picker">
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col bottomline">
+            <span>Departure</span>
+            <div class="date">
+              <a href="#">
+                <div class="numero">28</div>
+                <div class="mes">Sep
+                  <img src="resources/img/arrow.png" alt="date picker">
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col linea">
+            <span>Adults</span>
+            <div class="pax">
+              <a href="#"><img src="resources/img/menos.png" alt="less"></a>
+              <div class="numero">2</div>
+              <a href="#"><img src="resources/img/mas.png" alt="more"></a>
+            </div>
+          </div>
+          <div class="col">
+            <span>Children</span>
+            <div class="pax">
+              <a href="#"><img src="resources/img/menos.png" alt="less"></a>
+              <div class="numero">0</div>
+              <a href="#"><img src="resources/img/mas.png" alt="more"></a>
+            </div>
+          </div>
+         
+        </div>
+ 
+         <a href="#" class="btn-line-big check-av">Check Availability</a>
+       </div>
+        
+      </div>
+
+    </div>
+  </div>
+
+
+<div class="container" style='width: 100%;overflow: hidden;'>
+  <div class="rooms-parrafo">
+        <figure data-aos="fade-right" data-aos-duration="1000" >
+          <img src="{{servicesImage}}" alt="">
+        </figure>
+        <div class="txt" data-aos="fade-left" data-aos-duration="1000">
+           <h2>Services</h2>
+          
+            <ul>
+              {% if services %}
+                  {% for item in services %}
+                    <li>{{ item }}</li>
+                  {% endfor %}
+              {% endif %}
+
+
+            </ul>
+
+        </div>
+      </div>
+</div>      
+
+
+ <div class="co-join" data-aos="fade-up" data-aos-duration="1000" style='width: 100%;overflow: hidden;'>
+   <div class="container">
+     <h2>{{specialInfoTitle}}</h2>
+     <p>{{specialInfoText|nl2br}}</p>
+   </div>
+ </div>
+  
+
+
+
+
+
+<div class="specials" >
+  <div class="header" data-aos="fade-up" data-aos-duration="3000">
+    <div class="row">
+      <div class="col-sm-6">
+        
+        <h2>Other categories</h2>
+      </div>
+      <div class="col-sm-6">
+        <nav>
+          <a href="#" class="inactive"><img src="resources/img/prev.png" alt="previous"></a> <a href="#" ><img src="resources/img/next.png" alt="next"></a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="grid lessmar" data-aos="fade-up" data-aos-duration="3000" style='width: 100%;overflow: hidden;'>
+
+      {% for item in rooms %}
+        <figure>
+          <a href="{{ item['link'] }}">
+            <figcaption>
+            <h4>{{ item['title'] }}</h4>
+            <p>{{ item['intro'] }}</p>
+            </figcaption>
+            <div class="shad"></div>
+            <img src="{{ item['image'] }}" alt="">
+            <div class="bg"></div>
+          </a>
+        </figure>
+      {% endfor %}
+
+
+  </div>
+  
+</div>     
+
+
+
+ 
+
+
+
+
+
+
+
+
+{% include 'inc_footer.html' %}
+
+
+
+
+
+
+
+
+<!-- JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+<script src="resources/js/main.js"></script>
+<script src="resources/js/book-widget.js"></script>
+
+<script src="resources/js/swiper-bundle.min.js"></script>
+<script src='resources/js/lineSlider.js'></script>
+
+
+
+
+<script>
+
+  $(function(){
+    $(".check-av").click(function(e){
+      if(e)e.preventDefault();
+  $("#calendarForm").submit();
+  
+    });
+  
+  });
+  
+  AOS.init();
+</script>
+</body>
+</html>
