@@ -2,7 +2,8 @@
 
 ARCHIVOS QUE SOLO SE DEBE MODIFICAR LA PRIMERA VEZ QUE SE VA A CONFIGURAR UN NUEVO ENTORNO LOCAL:
 
-- .htaccess
+- .htaccess (incluirlos en .gitignore de la raiz para que no entren en el add )
+- config.php
 
 LA BASE DE DATOS NO SE DEBE SUBIR AL REPOSITORIO, SE COMPRIME Y SE DESCARGA DEL HOST O SE PIDE POR PRIVADO
 
@@ -101,7 +102,7 @@ Configurar credenciales locales de base de datos
 
 ⚠️ Nunca subir config.php al repositorio
 
-Agregar al .gitignore:
+Agregar al .gitignore despues de haber configurado su entorno local:
 
 public_html/cms/inc/config.php
 
@@ -120,7 +121,7 @@ mysql -u root -p web8755 < dump.sql <---dump es el nombre de tu archivo.sql que 
 
 Verificar tablas importantes (ej: alest_slider)
 
-6️⃣ Carpeta files
+6️⃣ Carpeta files (en caso de no contar con ella)
 
 Copiar desde producción:
 
