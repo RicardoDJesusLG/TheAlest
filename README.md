@@ -2,8 +2,8 @@
 
 ARCHIVOS QUE SOLO SE DEBE MODIFICAR LA PRIMERA VEZ QUE SE VA A CONFIGURAR UN NUEVO ENTORNO LOCAL:
 
-- .htaccess (incluirlos en .gitignore de la raiz para que no entren en el add )
-- config.php
+- .htaccess (incluirlo en .gitignore de la raiz para que no entren en el add )
+- config.php (incluirlo en .gitignore de la raiz para que no entren en el add )
 
 LA BASE DE DATOS NO SE DEBE SUBIR AL REPOSITORIO, SE COMPRIME Y SE DESCARGA DEL HOST O SE PIDE POR PRIVADO
 
@@ -11,22 +11,17 @@ Guía oficial para levantar el proyecto en entorno local replicando producción.
 
 1️⃣ Requisitos Previos
 
-Windows 10 o superior
-
 XAMPP instalado (Apache + MySQL)
 
 PHP 7.4.x
 
 Export de base de datos desde producción (.sql)
 
-Carpeta public_html/files descargada desde producción
-
 2️⃣ Estructura del Proyecto
 
 Ruta esperada en local:
 
 C:/xampp/htdocs/TheAlest/public_html
-
 
 Puntos importantes:
 
@@ -69,12 +64,11 @@ Editar:
 C:/xampp/apache/conf/extra/httpd-vhosts.conf
 
 
-Agregar:
+Agregar al final:
 
 <VirtualHost *:80>
     ServerName thealest.local
     DocumentRoot "C:/xampp/htdocs/TheAlest/public_html"
-
     <Directory "C:/xampp/htdocs/TheAlest/public_html">
         AllowOverride All
         Require all granted
@@ -110,20 +104,21 @@ public_html/cms/inc/config.php
 
 Crear base de datos local (ejemplo: web8755)
 
-Importar el dump SQL:
+Importar el dump SQL: (Se exporta rápido en phpmyadmin y luego se importa en local)
 
 Vía phpMyAdmin
 
 O vía CLI:
 
 mysql -u root -p web8755 < dump.sql <---dump es el nombre de tu archivo.sql que contiene la base de datos.
-
-
+**NOTA**
+En caso de que no funcionen los comandos usando solo el comando mysql al inicio, se sustituye ese mysql por la ruta de donde esta instalado mysql o en su defecto se añade mysql al PATH y se reinicia la terminal
+**
 Verificar tablas importantes (ej: alest_slider)
 
 6️⃣ Carpeta files (en caso de no contar con ella)
 
-Copiar desde producción:
+Comprimir y descargar desde producción:
 
 public_html/files
 
@@ -161,10 +156,8 @@ public_html/cms/inc/config.php
 
 Buenas prácticas:
 
-Compartir dump SQL de forma privada
+Compartir dump SQL de forma privada para que la informacion de usuarios no quede expuesta
 
 Usar VirtualHost para mantener entorno igual a producción
-
-Trabajar en ramas (feature/*, fix/*)
 
 Nunca modificar .htaccess para ajustes locales 
