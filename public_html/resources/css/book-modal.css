@@ -1,0 +1,179 @@
+.floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #c7a86f;
+    color: white;
+    padding: 14px 24px;
+    border-radius: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: .4s ease;
+    z-index: 9999;
+}
+
+.floating-btn.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    display: flex;              /* <- SIEMPRE flex (ya no none) */
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity .35s ease, visibility .35s ease;
+    z-index: 99999;
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+    height: 85vh;
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+
+    opacity: 0;
+    transform: translateY(18px) scale(.98);
+    transition: opacity .35s ease, transform .35s ease;
+}
+
+/* Estado abierto */
+.modal-overlay.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.modal-overlay.open .modal-content {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.7);
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    border-radius: 50px; /* <-- puedes ajustar la curvatura */
+    cursor: pointer;
+    z-index: 99999;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    transition: 0.25s ease;
+    white-space: nowrap; /* <-- evita que la palabra se corte en varias líneas */
+}
+
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: scale(1.05);
+}
+
+
+.reserve-btn {
+    display: inline-block;
+    margin-top: 20px;
+    background: #d4af37;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: .3s ease;
+}
+
+.reserve-btn:hover {
+    background: #b8942f;
+}
+
+.iframe-modal {
+    padding: 0;
+    width: 90%;
+    max-width: 900px;
+    height: 80vh;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+}
+
+.iframe-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.iframe-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+    }
+
+    .iframe-wrapper {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+
+    .iframe-wrapper iframe {
+        width: 100%;
+        height: 100%;
+    }
+
+    .close-btn {
+        top: 14px;
+        right: 14px;
+        width: 42px;
+        height: 42px;
+        font-size: 24px;
+    }
+}
