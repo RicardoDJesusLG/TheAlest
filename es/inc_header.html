@@ -1,25 +1,50 @@
-    <header class="start" >
-      <div class="logo">
+<header class="start">
+    <div class="logo">
         <a href="{{link_root}}">
-          <img src="resources/img/logo.png" alt="The Alest Hotel Mexico City">
+            <img src="resources/img/logo.png" alt="The Alest Hotel Mexico City">
         </a>
-      </div>
-      <div class="navegacion">
-        <nav><span class='hidden-xs'>
-          <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F" target="_blank"><img src="resources/img/book-icon.png" alt="Reservations"> <span>Reservas</span></a>
-             <a href="https://wa.me/525514557995?text=Hola,%20me%20gustaría%20recibir%20información" target="_blank">
-            <img src="resources/img/phone-icon.png" alt="WhatsApp">
-          <a href="{{link_contact}}" target="_blank"><img src="resources/img/contact-icon.png" alt="Contact Us"></a>
-        </span>
-          <div class="burger">
-            <div id="nav-icon3">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
+    </div>
+
+    <div class="navegacion">
+        <nav>
+
+            <!-- ICONOS -->
+            <span class="menu-icons">
+
+                <!-- Reservas -->
+                <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F" target="_blank" class="desktop-only">
+                    <img src="resources/img/book-icon.png" alt="Reservas">
+                    <span>Reservas</span>
+                </a>
+
+                <!-- WhatsApp -->
+                <a href="https://wa.me/525514557995?text=Hola,%20me%20gustaría%20hacer%20una%20reservación"
+                   target="_blank"
+                   class="whatsapp-btn">
+                    <img src="resources/img/phone-icon.png" alt="WhatsApp">
+                </a>
+
+                <!-- Contacto -->
+                <a href="{{link_contact}}" target="_blank" class="desktop-only">
+                    <img src="resources/img/contact-icon.png" alt="Contacto">
+                </a>
+
+            </span>
+
+            <!-- BURGER -->
+            <div class="burger">
+                <div id="nav-icon3">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
-          </div>
 
         </nav>
-      </div>
-    </header>
+    </div>
+
+</header>
+
+<div id="modal-loader"></div>
+<script src="./resources/js/booking.js"></script>
