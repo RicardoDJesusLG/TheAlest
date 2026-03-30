@@ -1,153 +1,1423 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+<head>
     <base href="{{ base_href }}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>The Alest, Bar & Restaurant 45</title>
-    <meta name="description" content="Alta cocina mexicana contemporánea">
+    <title>Dining at The Alest | Restaurante & Bar 45</title>
+    <meta name="description" content="Descubra una propuesta gastronómica refinada en el corazón de Polanco.">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="resources/css/alest.css" rel="stylesheet">
     <link rel="stylesheet" href="resources/css/font-awesome.min.css">
     <link rel="stylesheet" href="resources/css/mainmenu.css">
     <link rel="stylesheet" href="resources/css/book-widget.css">
-    
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
     {% include 'inc_analytics.html' %}
 
     <style>
-      .hero-home .slide img{
-        opacity:0.4;
-      }
 
+
+
+            /* AJUSTES DE RESPONSIVIDAD (Sin cambiar el diseño) */
+        @media (max-width: 768px) {
+
+            /* 1. Evita que los nombres de platillos y precios se encimen */
+            .menu-item h6 {
+                display: flex;
+                flex-direction: column; /* El precio baja si no cabe */
+                align-items: flex-start;
+            }
+            .menu-item .price {
+                margin-top: 5px;
+                font-weight: 700;
+            }
+
+            /* 2. Ajuste de la Cava (Wines) para que no se rompa la línea de puntos */
+            .wine-row {
+                flex-wrap: wrap;
+                align-items: flex-start;
+            }
+            .wine-info {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .wine-prices {
+                width: 100%;
+                justify-content: flex-start;
+                border-top: 1px solid #f0f0f0;
+                padding-top: 5px;
+            }
+
+            /* 3. Menú de Categorías (Tabs): Permite scroll lateral si son muchos */
+            .menu-categories-nav .nav-tabs {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                justify-content: flex-start !important;
+                border-bottom: none;
+            }
+            .menu-categories-nav .nav-tabs > li {
+                flex: 0 0 auto;
+                display: inline-block;
+            }
+
+            /* 4. Galería: Ajuste de altura para que no sea infinita en móvil */
+            .gallery-item img {
+                height: 300px !important;
+            }
+
+            /* 5. Botón de Reserva: Asegura que no tape contenido importante */
+            .opentable-float {
+                width: calc(100% - 40px);
+                left: 20px;
+                right: 20px;
+                bottom: 20px;
+                text-align: center;
+                padding: 12px;
+                font-size: 12px;
+            }
+
+            /* 6. Espaciados de secciones */
+            .dining-intro { padding: 60px 0; }
+            .tab-content-menu { padding: 30px 0; }
+        }
+
+
+        .btn-reserva-left {
+            /* Posicionamiento fijo a la IZQUIERDA */
+            position: fixed;
+            left: 20px; /* Separación del borde izquierdo */
+            bottom: 30px; /* Altura desde el fondo */
+            z-index: 1000;
+
+            /* Diseño Minimalista y Pequeño */
+            background-color: #c5a059; /* Dorado The Alest */
+            color: #ffffff !important;
+            padding: 10px 18px;
+            font-family: 'Playfair Display', serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            text-decoration: none !important;
+
+            /* Estética */
+            border-radius: 2px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-reserva-left:hover {
+            background-color: #1a1a1a; /* Cambia a negro al pasar el mouse */
+            transform: translateX(5px); /* Se mueve ligeramente a la DERECHA al pasar el mouse */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Ajuste para celulares */
+        @media (max-width: 768px) {
+            .btn-reserva-left {
+                left: 15px;
+                bottom: 20px;
+                padding: 8px 14px;
+                font-size: 10px;
+            }
+        }
+        /* Estilo de Cava de Lujo */
+        .wine-cat-header {
+            color: #c5a059;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .wine-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 15px;
+            border-bottom: 1px dotted #ddd; /* Línea de puntos guía */
+            padding-bottom: 5px;
+        }
+
+        .wine-info {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .wine-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .wine-grape {
+            font-size: 11px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .wine-prices {
+            display: flex;
+            min-width: 140px; /* Espacio fijo para los precios */
+            justify-content: flex-end;
+        }
+
+        .p-cup, .p-bot {
+            width: 70px; /* Ancho igual para Copa y Botella */
+            text-align: right;
+            font-size: 14px;
+            font-weight: 600;
+            color: #c5a059;
+        }
+
+        .p-cup::before { content: ''; color: #ccc; font-size: 10px; font-weight: 400; display: block; }
+        .p-bot::before { content: ''; color: #ccc; font-size: 10px; font-weight: 400; display: block; }
+
+        /* Responsive: Ajuste para móviles */
+        @media (max-width: 768px) {
+            .wine-prices { min-width: 110px; }
+            .p-cup, .p-bot { width: 55px; font-size: 12px; }
+            .wine-name { font-size: 14px; }
+        }
+
+
+
+
+        /* Estilos para los items del menú */
+        .menu-category-title {
+            color: #c5a059;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            font-size: 14px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        .menu-item {
+            margin-bottom: 25px;
+        }
+
+        .menu-item h6 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #1a1a1a;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .menu-item .price {
+            font-family: 'Montserrat', sans-serif;
+            color: #c5a059;
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+        .menu-item p {
+            font-size: 13px;
+            color: #777;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .drink-list li {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f9f9f9;
+            color: #444;
+        }
+
+        .drink-list li span {
+            color: #c5a059;
+            font-weight: 600;
+        }
+
+
+
+
+
+        /* Estilos para el Menú de Categorías */
+        .menu-categories-nav {
+            background-color: #1a1a1a;
+            padding: 0;
+            margin-top: -50px; /* Ajuste para que quede pegado a la galería si deseas */
+            position: relative;
+            z-index: 10;
+        }
+
+        .menu-categories-nav .nav-tabs {
+            border: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .menu-categories-nav .nav-tabs > li {
+            float: none;
+            margin-bottom: 0;
+        }
+
+        .menu-categories-nav .nav-tabs > li > a {
+            color: #fff;
+            border: none;
+            border-radius: 0;
+            padding: 20px 30px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: 13px;
+            transition: 0.3s;
+            margin-right: 0;
+            background: transparent;
+        }
+
+        /* Pestaña Activa (como en tu imagen) */
+        .menu-categories-nav .nav-tabs > li.active > a,
+        .menu-categories-nav .nav-tabs > li.active > a:hover,
+        .menu-categories-nav .nav-tabs > li.active > a:focus {
+            background-color: #e5e5e5 !important;
+            color: #1a1a1a !important;
+            border: none;
+        }
+
+        .menu-categories-nav .nav-tabs > li > a:hover {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .tab-content-menu {
+            padding: 60px 0;
+            background: #fff;
+            min-height: 400px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-categories-nav .nav-tabs > li { width: 50%; text-align: center; }
+            .menu-categories-nav .nav-tabs > li > a { padding: 15px 10px; font-size: 11px; }
+        }
+
+
+        .menu-categories-nav {
+            background-color: #1a1a1a;
+            padding: 0;
+            margin-top: 80px; /* Aquí controlas el espacio. Antes era -50px */
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.05); /* Sombra sutil para dar profundidad */
+        }
+
+
+
+        .hero-home .slide img { opacity: 0.5; }
+        .gold-title { color: #c5a059; text-transform: uppercase; letter-spacing: 3px; font-size: 12px; font-weight: 700; margin-bottom: 15px; }
+        .hours-box { border-top: 1px solid #eee; margin-top: 30px; padding-top: 20px; font-size: 13px; color: #666; }
+
+        .dining-intro { padding: 140px 0 80px 0; background: #fff; }
+
+        .dining-gallery { margin: 50px 0; }
+        .gallery-item { padding: 0 10px; outline: none; }
+        .gallery-item img { width: 100%; height: 450px; object-fit: cover; border-radius: 2px; }
+
+        /* Botón Flotante - Ahora tipo Button para el
+         */
+        .opentable-float {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 999;
+            background: #c5a059;
+            color: #fff !important;
+            padding: 15px 30px;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .opentable-float:hover { background: #1a1a1a; transform: translateY(-5px); }
+
+        /* Estilos del Modal */
+        .modal-content { border-radius: 0; border: none; }
+        .modal-header { background: #f9f9f9; border-bottom: 1px solid #eee; }
+        .close { font-size: 30px; opacity: 0.8; }
+        #reservaIframe { width: 100%; height: 600px; border: none; }
+
+        .ig-feed { padding: 60px 0; background: #f9f9f9; text-align: center; }
+        .ig-grid { display: flex; gap: 10px; margin-top: 30px; flex-wrap: wrap; justify-content: center; }
+        .ig-post { width: calc(20% - 100px / 5); aspect-ratio: 1/1; background: #ddd; }
+
+        @media (max-width: 768px) {
+            .dining-intro { padding: 80px 0 40px 0; }
+            .opentable-float { width: 100%; bottom: 0; left: 0; right: 0; text-align: center; }
+            #reservaIframe { height: 500px; }
+        }
     </style>
-  </head>
-  <body>
-    {% include 'inc_header.html' %}
-    <div class="hero-home" >
-      <div class="txt">
-        <div class="title">
-          Bar & Restaurant 45
+</head>
+<body>
+{% include 'inc_header.html' %}
+
+<div class="hero-home">
+    <div class="txt">
+        <div class="title">Dining at The Alest</div>
+        <div class="sub">Sabores de autor en Polanco</div>
+    </div>
+    <div class="slide">
+        <img src="resources/img/hero-aabb.jpg" alt="Dining Experience">
+    </div>
+</div>
+
+<div id='mainmenu'></div>
+
+<section class="dining-intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6" data-aos="fade-up">
+                <div class="gold-title">Experiencia Culinaria</div>
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 36px; margin-bottom: 25px;">Momentos Memorables</h2>
+                <p style="font-size: 16px; line-height: 1.8; color: #444;">
+                    Descubra una propuesta gastronómica refinada en un ambiente íntimo y elegante. Nuestro restaurante y bar ofrecen una experiencia culinaria cuidadosamente curada, donde ingredientes de alta calidad, técnica contemporánea y hospitalidad excepcional se unen para crear momentos memorables.
+
+                </p>
+                <p style="font-size: 16px; line-height: 1.8; color: #444;">
+                    Desde desayunos relajados hasta cócteles por la noche, cada detalle está pensado para disfrutar la esencia de Polanco en un entorno sofisticado.
+                </p>
+            </div>
+            <div class="col-md-5 col-md-offset-1" data-aos="fade-up" data-aos-delay="200">
+                <div class="hours-box">
+                    <h6 style="margin-bottom: 15px; font-weight: 700;">HORARIOS</h6>
+                    <p><strong>Lunes a Sábado:</strong> 7:00 am – 11:00 pm</p>
+                    <p><strong>Domingo:</strong> 7:00 am – 10:00 pm</p>
+                    <hr>
+                    <p style="font-style: italic; font-size: 12px;">Eugenio Sue 45, Col. Polanco III Sección</p>
+                </div>
+            </div>
         </div>
-        <div class="sub">Alta cocina mexicana contemporánea</div>
-      </div>
-      
-      <div class="slide">
-        <img src="resources/img/hero-aabb.jpg" alt="">
-      </div>
     </div>
-    <!-- MAIN MENU mainmenu.html -->
-    <div id='mainmenu'>
+</section>
+
+    <div class="container-fluid dining-gallery mb-5" data-aos="fade-up" style="margin-bottom: 80px;">
+    <div class="gallery-slider">
+        <div class="gallery-item"><img src="resources/img/alimento1.png" alt="Platillo"></div>
+        <div class="gallery-item"><img src="resources/img/alimento2.png" alt="Atmósfera"></div>
+        <div class="gallery-item"><img src="resources/img/alimento3.png" alt="Coctelería"></div>
+        <div class="gallery-item"><img src="resources/img/alimento4.png" alt="Restaurante 45"></div>
+        <div class="gallery-item"><img src="resources/img/alimento5.png" alt="Alimento5"></div>
+        <div class="gallery-item"><img src="resources/img/alimento6.png" alt="Alimento6"></div>
+        <div class="gallery-item"><img src="resources/img/alimento7.png" alt="Alimento7"></div>
+        <div class="gallery-item"><img src="resources/img/alimento8.png" alt="Alimento8"></div>
+        <div class="gallery-item"><img src="resources/img/alimento9.png" alt="Alimento9"></div>
     </div>
-    <!-- / MAIN MENU mainmenu.html -->
-    <!-- cal -->
-    <div class='calendarBox'>
-      <div class='form-hit'></div>
-      <div id='calendar' class='dnaCalendar'></div>
-      <form id='calendarForm' method='POST' action="book.php" style='display:none;'>
-        <input type="hidden" name='datein' value=''/>
-        <input type="hidden" name='dateout' value=''/>
-        <input type="hidden"  name='adults' value=''/>
-        <input type="hidden"  name='children' value=''/>
-      </form>
+</div>
+
+
+
+<section class="menu-categories-nav">
+    <div class="container-fluid">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation"><a href="#breakfast" aria-controls="breakfast" role="tab" data-toggle="tab">Breakfast</a></li>
+            <li role="presentation" class="active"><a href="#lunch" aria-controls="lunch" role="tab" data-toggle="tab">Lunch & Dinner</a></li>
+            <li role="presentation"><a href="#desserts" aria-controls="desserts" role="tab" data-toggle="tab">Desserts</a></li>
+            <li role="presentation"><a href="#snack" aria-controls="snack" role="tab" data-toggle="tab">Snack Bar</a></li>
+            <li role="presentation"><a href="#wines" aria-controls="wines" role="tab" data-toggle="tab">Wines</a></li>
+            <li role="presentation"><a href="#cocktail" aria-controls="cocktail" role="tab" data-toggle="tab">Cocktail</a></li>
+            <li role="presentation"><a href="#drinks" aria-controls="drinks" role="tab" data-toggle="tab">Drinks</a></li>
+            <li role="presentation"><a href="#mocteleria" aria-controls="mocteleria" role="tab" data-toggle="tab">Moctelería</a></li>
+        </ul>
     </div>
-    <!-- /calendar
-    -->
-    <div class="aabb"  style='width: 100%;overflow: hidden;'>
-      <div class="container">
-        <div class="introaabb">
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="left">
-                <h6 data-aos="fade-left" data-aos-duration="1000">Una fusión de tradición y modernidad para paladares conocedores</h6>
-                <h1 data-aos="fade-left" data-aos-duration="1500"><span>Experiencias</span> gourmet locales y mixología exclusiva</h1>
-              </div>
+</section>
+
+
+
+
+<section class="tab-content-menu">
+    <div class="container">
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade" id="breakfast">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 text-center" style="margin-bottom: 50px;">
+                            <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; color: #1a1a1a;">Desayunos</h2>
+                            <div style="width: 50px; height: 2px; background: #c5a059; margin: 15px auto;"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="menu-category-title">Ligeros</h5>
+                            <div class="menu-item">
+                                <h6>Fruta de la Estación <span class="price">$155</span></h6>
+                                <p>Acompañada de yogur griego, granola artesanal y miel.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Copa Parfait <span class="price">$120</span></h6>
+                                <p>Compota de frutos rojos, yogur griego, granola artesanal y frutos rojos frescos.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Avena Caliente <span class="price">$130</span></h6>
+                                <p>Cremosa avena preparada con leche, leche de almendras o agua, con fruta de temporada.</p>
+                            </div>
+
+                            <h5 class="menu-category-title" style="margin-top:40px;">Dulces</h5>
+                            <div class="menu-item">
+                                <h6>Hot Cakes (2 piezas) <span class="price">$210</span></h6>
+                                <p>Estilo Tsubaki, con bayas, compota de ciruela y miel de maple. (Prep. 20 min).</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Pan Francés <span class="price">$210</span></h6>
+                                <p>Acompañado de fruta de la estación y miel de maple.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Waffles (6 piezas) <span class="price">$190</span></h6>
+                                <p>Acompañados de miel de maple y frutos rojos.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Rol de Canela <span class="price">$190</span></h6>
+                                <p>Acompañado de compota de frutos rojos y crema irlandesa.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Pan de la Casa <span class="price">$60</span></h6>
+                                <p>Variedad de pan dulce tradicional mexicano.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h5 class="menu-category-title">Salados</h5>
+                            <div class="menu-item">
+                                <h6>Sándwich Piedmont <span class="price">$290</span></h6>
+                                <p>Pan de arándano y nuez, jamón serrano, queso provolone, compota de higo y ensalada.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Toast de Aguacate <span class="price">$150</span></h6>
+                                <p>Pan de masa madre, aguacate cremoso, jocoque, verdolagas y hummus de betabel. <br><small>+ Huevo extra (2 pzas) por $80</small></p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Chilaquiles (Verdes o Rojos) <span class="price">$200</span></h6>
+                                <p>Queso fresco, crema, cebolla y aguacate. <br><small>+ Pollo $60 | Brisket $90 | Huevo $40</small></p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Tlacoyos (2 piezas) <span class="price">$95</span></h6>
+                                <p>Uno de frijol y otro de queso, acompañados de guacamole y rajas de chile xcatic. <br><small>+ Barbacoa de cordero $85</small></p>
+                            </div>
+
+                            <h5 class="menu-category-title" style="margin-top:40px;">Huevos y Omelettes</h5>
+                            <div class="menu-item">
+                                <h6>Huevos Benedictinos <span class="price">$200</span></h6>
+                                <p>A elegir entre salmón ahumado o lomo canadiense, con salsa holandesa.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Omelette de la Casa <span class="price">$220</span></h6>
+                                <p>Espinaca baby, queso de cabra, tomates confitados y aceite de albahaca.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Omelette Saludable <span class="price">$210</span></h6>
+                                <p>Claras de huevo, espinacas, champiñones, ensalada caprese y pan de semillas.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr style="margin: 60px 0;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="menu-category-title">Jugos Naturales</h5>
+                            <ul class="list-unstyled drink-list">
+                                <li>Jugo Verde <span>$70</span></li>
+                                <li>Naranja / Toronja <span>$60</span></li>
+                                <li>Jugo de Frutos Rojos <span>$80</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h5 class="menu-category-title">Café y Té</h5>
+                            <ul class="list-unstyled drink-list">
+                                <li>Americano / Espresso <span>$65</span></li>
+                                <li>Latte / Capuchino <span>$80</span></li>
+                                <li>Matcha / Chai Latte <span>$80</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h5 class="menu-category-title">Especialidades</h5>
+                            <ul class="list-unstyled drink-list">
+                                <li>Batido Saludable <span>$100</span></li>
+                                <li>Smoothies Naturales <span>$100</span></li>
+                                <li>Infusiones Dammann <span>$95</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-6">
-              <div class="right" data-aos="fade-right" data-aos-duration="1000">
-                <p>La gastronomía es cosa seria en The Alest Hotel. Reunimos propuestas culinarias de cada rincón del país en diversos momentos del día y la noche, para el deleite de nuestros invitados. Disfrute desayunos tradicionales mexicanos, pan recién horneado, jugos frescos elaborados con frutas locales de temporada, menús exquisitos con ingredientes de primera calidad y experiencias inmersivas con destilados nacionales.</p>
-              </div>
+
+            <div role="tabpanel" class="tab-pane fade in active" id="lunch">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 text-center" style="margin-bottom: 50px;">
+                            <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; color: #1a1a1a;">Comida y Cena</h2>
+                            <div style="width: 50px; height: 2px; background: #c5a059; margin: 15px auto;"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="menu-category-title">Entradas y Ensaladas</h5>
+                            <div class="menu-item">
+                                <h6>Toast de Gravlax de Salmón <span class="price">$265</span></h6>
+                                <p>Rábano, crema de aguacate y sandía, con brotes de cilantro. (3 piezas).</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Ceviche Amarillo <span class="price">$310</span></h6>
+                                <p>Callo de hacha (100g), emulsión de piña, chile manzano, jengibre y espuma de coco.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Tartar de Salmón <span class="price">$295</span></h6>
+                                <p>Reducción de tamarindo con aceite de sésamo, chile serrano y aguacate.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Crab Puffs <span class="price">$285</span></h6>
+                                <p>Empanaditas de cangrejo con pico de gallo encurtido y aguacate cremoso. (4 piezas).</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Flautas de Pato <span class="price">$280</span></h6>
+                                <p>Pato confitado, crema de rancho, emulsión verde, verdolagas y rábano. (4 piezas).</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Burrata <span class="price">$230</span></h6>
+                                <p>Durazno rostizado, tomate cherry, pesto de macadamia y reducción balsámica.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Ensalada Xictli <span class="price">$235</span></h6>
+                                <p>Mix de mizuna, queso de cabra, nuez de la india y tomates heirloom rostizados.</p>
+                            </div>
+
+                            <h5 class="menu-category-title" style="margin-top:40px;">Sopas y Cremas</h5>
+                            <div class="menu-item">
+                                <h6>Crema Poblana <span class="price">$150</span></h6>
+                                <p>Crema de chile poblano, elote tierno, queso de cabra y crutón largo.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Sopa Azteca <span class="price">$210</span></h6>
+                                <p>Chochoyotes de chile pasilla rellenos de queso, aguacate brujeado y crema de rancho.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Consomé de Pollo <span class="price">$185</span></h6>
+                                <p>Acompañado de vegetales de temporada y pollo deshebrado.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h5 class="menu-category-title">Pastas y Risottos</h5>
+                            <div class="menu-item">
+                                <h6>Fusilli Funghi <span class="price">$380</span></h6>
+                                <p>Salsa de champiñones cremini, portobello y un toque de aceite de trufa negra.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Saffron Risotto con Camarones <span class="price">$320</span></h6>
+                                <p>Risotto al azafrán con espárragos y camarones de profundidad al vino blanco.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Lasaña Mestiza <span class="price">$230</span></h6>
+                                <p>Pasta fresca rellena de pollo, rajas poblanas, elote y queso Chihuahua.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Rigatoni Arrabiata <span class="price">$200</span></h6>
+                                <p>Salsa pomodoro al peperoncino, calabacita, brócoli y ajo rostizado.</p>
+                            </div>
+
+                            <h5 class="menu-category-title" style="margin-top:40px;">Platos Fuertes</h5>
+                            <div class="menu-item">
+                                <h6>Pesca a la Mantequilla de Limón <span class="price">$400</span></h6>
+                                <p>Pescado a la parrilla (200g), puré de papa y brotes de cilantro.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Pulpo a la Parrilla <span class="price">$500</span></h6>
+                                <p>Servido con salsa pampeana, chips de ajo y papas al azafrán.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Filete 45 <span class="price">$380</span></h6>
+                                <p>Filete de res (145g) con papa parmentier, chalota caramelizada y demi-glace.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Rib Eye (300g) <span class="price">$710</span></h6>
+                                <p>Corte premium a la parrilla acompañado de vegetales de estación rostizados.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>New York Burger <span class="price">$345</span></h6>
+                                <p>Res premium (140g), queso menonita, cebolla caramelizada, pancita y mermelada de tocino.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Short Rib Braseado <span class="price">$335</span></h6>
+                                <p>Salsa de ajo dulce, kale tatemada, chips de camote y chilacayote rostizado.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr style="margin: 60px 0;">
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            <h5 class="menu-category-title" style="border:none; margin-bottom:10px;">Para los más pequeños</h5>
+                            <div style="width: 30px; height: 1px; background: #c5a059; margin: 0 auto 30px;"></div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="menu-item">
+                                <h6>Chicken Fingers <span class="price" style="float:none; display:block;">$290</span></h6>
+                                <p>Crujientes tiras de pollo acompañadas de papas fritas premium.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="menu-item">
+                                <h6>Spaghetti en Salsa <span class="price" style="float:none; display:block;">$200</span></h6>
+                                <p>Salsa cremosa de queso con pollo a la parrilla.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="menu-item">
+                                <h6>Papas a la Francesa <span class="price" style="float:none; display:block;">$190</span></h6>
+                                <p>Clásicas papas doradas y crujientes de calidad premium.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          
+            <div role="tabpanel" class="tab-pane fade" id="desserts">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 text-center" style="margin-bottom: 50px;">
+                            <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; color: #1a1a1a;">Postres y Helados</h2>
+                            <div style="width: 50px; height: 2px; background: #c5a059; margin: 15px auto;"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="menu-item text-center" style="padding: 20px; border: 1px solid #f9f9f9; transition: 0.3s;">
+                                <h6 style="display: block;">Strawberry The Alest <span class="price" style="display: block; margin-top: 10px;">$230</span></h6>
+                                <p>Mousse de fresa, coulis de frutas y merengue francés.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="menu-item text-center" style="padding: 20px; border: 1px solid #f9f9f9; transition: 0.3s;">
+                                <h6 style="display: block;">Tarta de Santiago <span class="price" style="display: block; margin-top: 10px;">$200</span></h6>
+                                <p>Nuestra versión del clásico español. Tarta de almendra, almendras caramelizadas y helado de vainilla.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="menu-item text-center" style="padding: 20px; border: 1px solid #f9f9f9; transition: 0.3s;">
+                                <h6 style="display: block;">Strudel de Manzana <span class="price" style="display: block; margin-top: 10px;">$200</span></h6>
+                                <p>Hojaldre, compota de manzana y anís acompañado de salsa irlandesa. <br><small>(Prep. 20 min)</small></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col-md-4">
+                            <div class="menu-item text-center" style="padding: 20px; border: 1px solid #f9f9f9;">
+                                <h6 style="display: block;">Brownie de Chocolate <span class="price" style="display: block; margin-top: 10px;">$185</span></h6>
+                                <p>Acompañado de frutos rojos y helado de vainilla francesa.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="menu-item text-center" style="padding: 20px; border: 1px solid #f9f9f9;">
+                                <h6 style="display: block;">Cheesecake <span class="price" style="display: block; margin-top: 10px;">$185</span></h6>
+                                <p>Con compota de frutos rojos artesanal.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="menu-item text-center" style="padding: 20px; border: 1px solid #f9f9f9;">
+                                <h6 style="display: block;">Helado de la Casa <span class="price" style="display: block; margin-top: 10px;">$180</span></h6>
+                                <p>Elaborado con fruta de temporada (3 bolas), acompañado de una teja de galleta.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 text-center" style="margin-top: 40px;">
+                            <p style="font-style: italic; color: #c5a059; font-size: 14px;">El final perfecto para una experiencia gastronómica inolvidable.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="snack">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 text-center" style="margin-bottom: 50px;">
+                            <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; color: #1a1a1a;">Snack Bar</h2>
+                            <div style="width: 50px; height: 2px; background: #c5a059; margin: 15px auto;"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="menu-category-title">Tablas y Especialidades</h5>
+                            <div class="menu-item">
+                                <h6>Tabla de Quesos <span class="price">$420</span></h6>
+                                <p>Selección de queso Brie, Manchego de oveja curado, Trufa de Montaña y Panela fresca (60g c/u). Acompañados de pan de masa madre, frutos rojos y miel.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Tabla de Charcutería <span class="price">$700</span></h6>
+                                <p>Chorizo español, lomo de bellota, salchichón, lomo canadiense y jamón serrano (50g c/u). Con aceitunas Kalamata y pantumaca.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Roll de Pollo al Cajun <span class="price">$180</span></h6>
+                                <p>Pollo al cajún (120g), emulsión de mango y chipotle envoltura crocante y reducción balsámica.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Elotitos a la Brasa (4 piezas) <span class="price">$300</span></h6>
+                                <p>Elote baby, queso fresco, limón eureka asado y alioli de Togarashi.</p>
+                            </div>
+
+                            <h5 class="menu-category-title" style="margin-top:40px;">Nuestros Tacos</h5>
+                            <div class="menu-item">
+                                <h6>Tacos The Alest (3 piezas) <span class="price">$290</span></h6>
+                                <p>Camarones salteados (120g) con pimientos, cebolla morada y chile poblano, con queso Chihuahua fundido.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Tacos de Rib Eye (4 piezas) <span class="price">$400</span></h6>
+                                <p>Rib Eye Prime Choice (300g), acompañados de guacamole, chiles toreados y limón.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Tacos al Pastor (3 piezas) <span class="price">$180</span></h6>
+                                <p>Pierna de cerdo marinada, piña, cilantro, cebolla morada y aguacate cremoso.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h5 class="menu-category-title">Pizzas y Clásicos</h5>
+                            <div class="menu-item">
+                                <h6>Pizza Sue <span class="price">$250</span></h6> <p>Base de salsa de tomate y queso mozzarella. Variedades a elegir: <br>
+                                <strong>• Pepperoni</strong> <br>
+                                <strong>• Tropical / Hawaiana</strong> <br>
+                                <strong>• Prosciutto con Arúgula</strong></p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Sándwich de Pollo <span class="price">$280</span></h6>
+                                <p>Pollo a la parrilla (160g) con tocino, jamón, queso, jitomate y lechuga. Acompañado de papas fritas crujientes.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Quesadillas de Portobello (3 piezas) <span class="price">$190</span></h6>
+                                <p>Portobello confitado, queso oaxaca fresco, epazote y salsa martajada.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Papas Trufadas <span class="price">$190</span></h6>
+                                <p>Papas (260g) servidas con queso parmesano, cebollín fresco y un toque de aceite de trufa.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wines">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 text-center" style="margin-bottom: 50px;">
+                            <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; color: #1a1a1a;">Cava de Vinos</h2>
+                            <div style="width: 50px; height: 2px; background: #c5a059; margin: 15px auto;"></div>
+                            <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 11px; color: #888;">Copa / Botella</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="wine-cat-header">Vinos Blancos</h5>
+
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Henri Lurton</span>
+                                    <span class="wine-grape">Sauvignon Blanc</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$200</span>
+                                    <span class="p-bot">$950</span>
+                                </div>
+                            </div>
+
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Casa Madero</span>
+                                    <span class="wine-grape">Sauvignon Blanc</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$250</span>
+                                    <span class="p-bot">$1,100</span>
+                                </div>
+                            </div>
+
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Alba de Vetus</span>
+                                    <span class="wine-grape">Albariño</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$250</span>
+                                    <span class="p-bot">$1,200</span>
+                                </div>
+                            </div>
+
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Tricó 21</span>
+                                    <span class="wine-grape">Albariño</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$380</span>
+                                    <span class="p-bot">$1,700</span>
+                                </div>
+                            </div>
+
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Gran Meín</span>
+                                    <span class="wine-grape">Treixadura, Godello...</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">-</span>
+                                    <span class="p-bot">$1,900</span>
+                                </div>
+                            </div>
+
+                            <h5 class="wine-cat-header" style="margin-top:40px;">Vinos Rosados</h5>
+
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Whispering Angel</span>
+                                    <span class="wine-grape">Garnacha, Cinsault</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$300</span>
+                                    <span class="p-bot">$1,400</span>
+                                </div>
+                            </div>
+
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">V Casa Madero</span>
+                                    <span class="wine-grape">Shiraz</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$300</span>
+                                    <span class="p-bot">$1,400</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h5 class="wine-cat-header">Vinos Tintos</h5>
+
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Las Nubes Nebbiolo</span>
+                                    <span class="wine-grape">85% Nebbiolo</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$370</span>
+                                    <span class="p-bot">$1,800</span>
+                                </div>
+                            </div>
+
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Mariatinto</span>
+                                    <span class="wine-grape">Ensamble de Tintos</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$340</span>
+                                    <span class="p-bot">$1,600</span>
+                                </div>
+                            </div>
+
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Casa Madero 3v</span>
+                                    <span class="wine-grape">Cabernet, Merlot, Temp.</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$250</span>
+                                    <span class="p-bot">$1,150</span>
+                                </div>
+                            </div>
+
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Matarromera Crianza</span>
+                                    <span class="wine-grape">Tempranillo</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$390</span>
+                                    <span class="p-bot">$1,900</span>
+                                </div>
+                            </div>
+
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Marqués de Murrieta</span>
+                                    <span class="wine-grape">Rioja Reserva</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$550</span>
+                                    <span class="p-bot">$2,100</span>
+                                </div>
+                            </div>
+
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Vega Sicilia Valbuena 5°</span>
+                                    <span class="wine-grape">Ribera del Duero</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">-</span>
+                                    <span class="p-bot">$7,500</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="cocktail">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 text-center" style="margin-bottom: 50px;">
+                            <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; color: #1a1a1a;">Coctelería</h2>
+                            <div style="width: 50px; height: 2px; background: #c5a059; margin: 15px auto;"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="menu-category-title">Cócteles de la Casa</h5>
+
+                            <div class="menu-item">
+                                <h6>Alphonse de Lamartine <span class="price">$200</span></h6>
+                                <p>JW Black Label, Jerez Barbadillo Oloroso, cordial de pera, hinojo y miel.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Amatista <span class="price">$310</span></h6>
+                                <p>Mezcal 400 Conejos, licor de naranja Cointreau, jamaica, limón, miel de agave y sal de gusano.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Basilikon Python <span class="price">$250</span></h6>
+                                <p>Ginebra Bombay Sapphire, cordial de guanábana, albahaca, manzana verde y limón.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Eugenio Sue <span class="price">$270</span></h6>
+                                <p>Ginebra Tanqueray infundida con té negro, Champagne Möet, limón amarillo y cardamomo.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Isaac Newton <span class="price">$200</span></h6>
+                                <p>Mezcal 400 Conejos, cordial de pepino, semilla de cilantro, pimiento verde y té de limón.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Julio Verne <span class="price">$220</span></h6>
+                                <p>Tequila Maestro Dobel Diamante, jarabe de toronja y sake artesanal Nomi con cempasúchil.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Martini The Alest <span class="price">$300</span></h6>
+                                <p>JW Black Label, cordial de manzana, manzanilla, pimienta rosa y ginger ale.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Tomas Masaryk <span class="price">$250</span></h6>
+                                <p>Vino blanco Casa Madero 2V, cordial de manzana amarilla, manzanilla y aceitunas.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h5 class="menu-category-title">Clásicos Imperdibles</h5>
+
+                            <div class="menu-item">
+                                <h6>Aperol Spritz <span class="price">$230</span></h6>
+                                <p>Cinzano Pro Spritz, licor Aperol y agua mineral.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Carajillo <span class="price">$240</span></h6>
+                                <p>Licor 43 y una carga de café espresso premium.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Espresso Martini <span class="price">$200</span></h6>
+                                <p>Stolichnaya Vodka, Kahlúa y shot de espresso.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Negroni <span class="price">$200</span></h6>
+                                <p>Ginebra Beefeater, Vermouth Rosso y licor Campari.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Old Fashioned <span class="price">$215</span></h6>
+                                <p>Bulleit Bourbon, azúcar mascabado y amargo de Angostura.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Moscow Mule <span class="price">$215</span></h6>
+                                <p>Vodka Stolichnaya, jugo de limón, jengibre y cerveza oscura.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Spicy Margarita <span class="price">$300</span></h6>
+                                <p>Tequila Herradura Blanco, Cointreau, licor Ancho Reyes y chile serrano.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>St. Germain Spritz <span class="price">$270</span></h6>
+                                <p>Cinzano Spritz, Licor de flor de saúco St. Germain y agua mineral.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 text-center" style="margin-top: 30px;">
+                            <p style="font-size: 12px; color: #999; font-style: italic;">Contamos con una amplia selección de licores premium. Si no ve su clásico favorito, consulte con nuestro mixólogo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="drinks">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 text-center" style="margin-bottom: 50px;">
+                            <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; color: #1a1a1a;">Destilados y Cervezas</h2>
+                            <div style="width: 50px; height: 2px; background: #c5a059; margin: 15px auto;"></div>
+                            <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 11px; color: #888;">Copa / Botella</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="wine-cat-header">Cervezas</h5>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Allende</span>
+                                    <span class="wine-grape">Agave, Trigo, IPA, Brown, Golden, Porter</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-bot">$100</span>
+                                </div>
+                            </div>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Charro / Estrella Galicia</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-bot">$100</span>
+                                </div>
+                            </div>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Modelo Especial / Negra</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-bot">$75</span>
+                                </div>
+                            </div>
+
+                            <h5 class="wine-cat-header" style="margin-top:40px;">Tequila</h5>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Maestro Dobel Diamante</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$260</span>
+                                    <span class="p-bot">$2,600</span>
+                                </div>
+                            </div>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Don Julio 70</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$310</span>
+                                    <span class="p-bot">$3,100</span>
+                                </div>
+                            </div>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Casa Dragones Blanco</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$400</span>
+                                    <span class="p-bot">$4,400</span>
+                                </div>
+                            </div>
+
+                            <h5 class="wine-cat-header" style="margin-top:40px;">Mezcal</h5>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">400 Conejos</span>
+                                    <span class="wine-grape">Espadín</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$200</span>
+                                    <span class="p-bot">$2,200</span>
+                                </div>
+                            </div>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">La Medida</span>
+                                    <span class="wine-grape">Bicuishe / Tobalá / Espadín</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$380</span>
+                                    <span class="p-bot">$4,180</span>
+                                </div>
+                            </div>
+
+                            <h5 class="wine-cat-header" style="margin-top:40px;">Ginebra</h5>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Hendrick’s</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$360</span>
+                                    <span class="p-bot">$3,600</span>
+                                </div>
+                            </div>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Bombay Sapphire</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$310</span>
+                                    <span class="p-bot">$3,410</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h5 class="wine-cat-header">Whisky & Bourbon</h5>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">JW Black Label</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$260</span>
+                                    <span class="p-bot">$2,860</span>
+                                </div>
+                            </div>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">The Macallan 12</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$330</span>
+                                    <span class="p-bot">$3,300</span>
+                                </div>
+                            </div>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Bulleit Bourbon</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$215</span>
+                                    <span class="p-bot">$2,365</span>
+                                </div>
+                            </div>
+
+                            <h5 class="wine-cat-header" style="margin-top:40px;">Ron</h5>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Zacapa 23</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$350</span>
+                                    <span class="p-bot">$3,850</span>
+                                </div>
+                            </div>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Havana Club 7</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$200</span>
+                                    <span class="p-bot">$2,000</span>
+                                </div>
+                            </div>
+
+                            <h5 class="wine-cat-header" style="margin-top:40px;">Cognac & Brandy</h5>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Hennessy XO</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$1,100</span>
+                                    <span class="p-bot">$11,000</span>
+                                </div>
+                            </div>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Torres 20</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$425</span>
+                                    <span class="p-bot">$4,250</span>
+                                </div>
+                            </div>
+
+                            <h5 class="wine-cat-header" style="margin-top:40px;">Licores Populares</h5>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Licor 43 / Baileys</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$180</span>
+                                    <span class="p-bot">$1,800</span>
+                                </div>
+                            </div>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">Disaronno Amaretto</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$200</span>
+                                    <span class="p-bot">$2,000</span>
+                                </div>
+                            </div>
+                            <div class="wine-row">
+                                <div class="wine-info">
+                                    <span class="wine-name">St. Germain</span>
+                                </div>
+                                <div class="wine-prices">
+                                    <span class="p-cup">$200</span>
+                                    <span class="p-bot">$2,200</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="mocteleria">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 text-center" style="margin-bottom: 50px;">
+                            <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; color: #1a1a1a;">Moctelería</h2>
+                            <div style="width: 50px; height: 2px; background: #c5a059; margin: 15px auto;"></div>
+                            <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 11px; color: #888;">Coctelería sin Alcohol</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="menu-item">
+                                <h6>Berry Fizz <span class="price">$100</span></h6>
+                                <p>Puré de frutos rojos, jugo de limón y agua mineral con un toque de miel natural.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Passion Tropical <span class="price">$100</span></h6>
+                                <p>Fruta de la pasión, jugo de limón, agua quina, top de jamaica y romero flameado.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Pepino Mule <span class="price">$100</span></h6>
+                                <p>Jarabe de jengibre hecho en casa, jugo de limón, agua mineral o ginger ale, láminas de pepino fresco y menta.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="menu-item">
+                                <h6>Strawberry Kiwi Cooler <span class="price">$100</span></h6>
+                                <p>Jarabe de kiwi y fresa, jugo de limón, miel de agave y agua mineral.</p>
+                            </div>
+                            <div class="menu-item">
+                                <h6>Mango Tropical <span class="price">$100</span></h6>
+                                <p>Jarabe de mango Manila, jugo de naranja natural, crema de coco y leche evaporada con hielo triturado.</p>
+                            </div>
+
+                            <div style="margin-top: 30px; padding: 20px; border: 1px solid #eee; text-align: center; background-color: #fafafa;">
+                                <p style="font-style: italic; color: #c5a059; margin: 0;">Consulte por nuestras infusiones naturales y sodas artesanales del día.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="gridaabb">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-6">
-              <a href="{{link_aabb_the_restaurant}}">
-                <figure class="tall">
-                  <figcaption  data-aos="fade-up" data-aos-duration="1200">
-                  <div class="tit">45 Restaurant</div>
-                  <div class="des">Ver más</div>
-                  </figcaption>
-                  
-                  <img src="resources/img/aabb1.jpg" alt="" data-aos="fade-right" data-aos-duration="1000">
-                  
-                </figure>
-              </a>
-            </div>
-            <div class="col-sm-6">
-              <a href="{{link_aabb_the_bar}}">
-                <figure class="fat">
-                  
-                  <figcaption  data-aos-duration="1700" data-aos="fade-up">
-                  <div class="tit">The Alest Bar, 45</div>
-                  <div class="des">Ver más</div>
-                  </figcaption>
-                  <img src="resources/img/aabb2.jpg" alt="" data-aos="fade-right" data-aos-duration="1500">
-                </figure>
-              </a>
-              <a href="{{link_aabb_the_terrace}}">
-                <figure class="fat">
-                  <figcaption  data-aos="fade-up" data-aos-duration="2200">
-                  <div class="tit">La terraza</div>
-                  <div class="des">Ver más</div>
-                  </figcaption>
-                  <img src="resources/img/aabb3.jpg" alt="" data-aos="fade-right" data-aos-duration="2000">
-                </figure>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-    
-    {% include 'inc_footer.html' %}
-    <!-- JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="resources/js/jQuery.succinct.min.js"></script>
-    <script src="resources/js/scrollreveal.min.js"></script>
+</section>
+
+<section class="ig-feed">
+    <div class="container">
+        <div class="gold-title">SÍGANOS EN INSTAGRAM</div>
+        <a href="https://www.instagram.com/45baryrestaurante/" target="_blank" style="text-decoration: none; color: inherit;">
+            <h3 style="cursor: pointer; transition: 0.3s;">@45baryrestaurante</h3>
+        </a>
+
+        <div class="ig-grid">
+            <a href="https://www.instagram.com/45baryrestaurante/" target="_blank" class="ig-post" style="display: block; overflow: hidden;">
+                <img src="resources/img/aabb1.jpg" style="width:100%; height:100%; object-fit:cover; transition: transform 0.5s;">
+            </a>
+            <a href="https://www.instagram.com/45baryrestaurante/" target="_blank" class="ig-post" style="display: block; overflow: hidden;">
+                <img src="resources/img/aabb2.jpg" style="width:100%; height:100%; object-fit:cover; transition: transform 0.5s;">
+            </a>
+            <a href="https://www.instagram.com/45baryrestaurante/" target="_blank" class="ig-post" style="display: block; overflow: hidden;">
+                <img src="resources/img/aabb3.jpg" style="width:100%; height:100%; object-fit:cover; transition: transform 0.5s;">
+            </a>
+            <a href="https://www.instagram.com/45baryrestaurante/" target="_blank" class="ig-post" style="display: block; overflow: hidden;">
+                <img src="resources/img/vista1.png" style="width:100%; height:100%; object-fit:cover; transition: transform 0.5s;">
+            </a>
+            <a href="https://www.instagram.com/45baryrestaurante/" target="_blank" class="ig-post" style="display: block; overflow: hidden;">
+                <img src="resources/img/vista2.png" style="width:100%; height:100%; object-fit:cover; transition: transform 0.5s;">
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<div class="booking-button-wrapper" style="margin: 40px 0; text-align: center;">
+
+    <a href="https://www.opentable.com.mx/restref/client/?rid=1485979&restRef=1485979&lang=es-MX&corrid=1"
+       target="_blank"
+       class="btn-reserva-left"
+       style="display: inline-block; padding: 15px 40px; background: #c5a059; color: #fff; text-transform: uppercase; font-family: 'Playfair Display', serif; font-size: 13px; letter-spacing: 2px; text-decoration: none; transition: 0.3s; border: 1px solid #c5a059;">
+        Reservar Mesa &rarr;
+    </a>
+
+</div>
+
+
+{% include 'inc_footer.html' %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+
 <script>
-window.MAINMENU_URL='/es/mainmenu.html';
+    window.MAINMENU_URL='/es/mainmenu.html';
 </script>
-    <script src="resources/js/main.js"></script>
-    <script src="resources/js/newsletter.js"></script>
-    <script src="resources/js/book-widget.js?ap=tst2"></script>
-    <script>
-    $(function(){
-    $(".check-av").click(function(e){
-    if(e)e.preventDefault();
-    $("#calendarForm").submit();
+
+<script src="resources/js/main.js"></script>
+<script src="resources/js/newsletter.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+    $(document).ready(function(){
+        AOS.init({ duration: 1000, once: true });
+
+        // Cargar el iframe solo cuando se abra el modal (optimización)
+        $('#modalReserva').on('show.bs.modal', function () {
+            $('#reservaIframe').attr('src', 'https://the-alest.mesa.express/en/reservas/?');
+        });
+
+        $('.gallery-slider').slick({
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            responsive: [
+                { breakpoint: 992, settings: { slidesToShow: 2 } },
+                { breakpoint: 768, settings: { slidesToShow: 1 } }
+            ]
+        });
     });
-    }); 
-    </script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  
-    <script>
-    AOS.init();
-    
-    window.addEventListener('load', function() {
-        AOS.refresh();
-    });
-    
-    
-        </script>
-  </body>
+</script>
+</body>
 </html>

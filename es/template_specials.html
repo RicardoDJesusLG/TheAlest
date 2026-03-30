@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <base href="{{ base_href }}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,193 +14,678 @@
     <link rel="stylesheet" href="resources/css/book-widget.css">
     <link rel="stylesheet" href="resources/css/swiper-bundle.min.css">
 
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
     {% include 'inc_analytics.html' %}
-    
+
     <style>
-      a:focus{
-      outline:none !important;
-          outline-offset: 0px;
-      }
- 
-.hero-home .slide img{
-        opacity:0.4;
-      }
-           </style>
-  </head>
-  <body>
-    {% include 'inc_header.html' %}
-    <div class="hero-home" >
-      <div class="txt">
-        <div class="title">
-          Promociones especiales
-        </div>
-        <div class="sub">Disfrute de beneficios pensados especialmente para usted</div>
+        a:focus{ outline:none !important; outline-offset: 0px; }
+        .hero-home .slide img{ opacity:0.4; }
 
-        <div class="hidden-xs">
-          <div class="book-widget"> </div>
-          <a href="#" class="btn-line-big check-av">Ver Disponibilidad</a>
-        </div>
+        /* Estilos para las nuevas categorías de servicios */
+        .nav-services-custom { border: none; margin-bottom: 40px; display: flex; justify-content: center; gap: 20px; }
+        .nav-services-custom li a {
+            color: #999; text-transform: uppercase; letter-spacing: 2px; font-size: 12px;
+            border: none !important; background: transparent !important;
+        }
+        .nav-services-custom li.active a { color: #c5a059 !important; border-bottom: 2px solid #c5a059 !important; font-weight: bold; }
+        .service-box { padding: 20px; border-radius: 4px; transition: 0.3s; }
+        .logo-partner { height: 22px; margin-left: 10px; opacity: 0.8; vertical-align: middle; }
 
-        <div class="visible-xs">
-          <a href="https://be.synxis.com/?hotel=31241" target="_blank" class="btn-line-big">Ver Disponibilidad</a>
-        </div>
+        .hero-home .slide video {
+            opacity: 0.4;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
 
-      </div>
-      <div class="pager-slider">
+        /* MODAL OVERLAY STYLES */
+        .modal-overlay-custom {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px);
+            z-index: 99999; align-items: center; justify-content: center; padding: 20px;
+        }
+        .modal-container-full {
+            background: #fff; width: 100%; max-width: 950px; max-height: 90vh;
+            border-radius: 4px; position: relative; overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+        .modal-content-scroller { overflow-y: auto; max-height: 90vh; }
+
+        /* Reutilización de tus estilos de la modal para que se vea igual que tu diseño */
+        .modal-hero-header { position: relative; height: 350px; width: 100%; overflow: hidden; }
+        .modal-hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; background: #000; }
+        .modal-hero-text {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 40px; background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: #fff;
+        }
+        .modal-headline { font-family: 'Playfair Display', serif; font-size: 40px; margin: 0; color: #fff; }
+        .modal-tag { color: #c5a059; text-transform: uppercase; letter-spacing: 3px; font-size: 12px; margin-bottom: 5px; }
+        .modal-padding-body { padding: 50px; }
+        .modal-description-main { font-size: 18px; color: #555; line-height: 1.7; margin-bottom: 30px; }
+        .highlight-bar-modal {
+            border: 1px solid #d8c38a; background: #fffdf6; padding: 15px; border-radius: 6px;
+            display: flex; justify-content: space-around; flex-wrap: wrap; margin-bottom: 50px;
+        }
+        .h-item { color: #444; font-size: 14px; margin: 5px 10px; }
+        .h-item i { color: #c5a059; margin-right: 5px; }
+        .modal-services-grid h4 { font-family: 'Playfair Display', serif; color: #c5a059; margin: 15px 0 10px; font-size: 20px; }
+        .img-circle-modal { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; margin-bottom: 10px; }
+        .rates-card-modal { margin-top: 50px; padding: 30px; border: 1px solid #eee; background: #fdfdfd; border-radius: 8px; }
+        .email-cta-modal {
+            display: inline-block; padding: 12px 25px; border: 1px solid #c5a059; color: #c5a059;
+            text-decoration: none; border-radius: 4px; font-weight: bold; transition: 0.3s;
+        }
+        .email-cta-modal:hover { background: #c5a059; color: #fff; text-decoration: none; }
+        .modal-close-btn {
+            position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.9);
+            border: none; font-size: 24px; width: 45px; height: 45px; border-radius: 50%;
+            cursor: pointer; z-index: 100; display: flex; align-items: center; justify-content: center;
+        }
+        .guest-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(197,160,89,0.15) !important; }
+
+    </style>
+</head>
+<body>
+{% include 'inc_header.html' %}
+
+<div class="hero-home" >
+    <div class="txt">
+        <div class="title">Servicios & Experiencias</div>
+        <div class="sub">Detalles diseñados para elevar su estancia</div>
+    </div>
+    <div class="pager-slider">
         <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
         <a href="#" class="active"><i class="fa fa-circle" aria-hidden="true"></i></a>
         <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
         <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
-      </div>
-      <div class="slide">
-        <img src="resources/img/hero-special.jpg" alt="">
-      </div>
     </div>
-    <!-- MAIN MENU mainmenu.html -->
-    <div id='mainmenu'>
+    <div class="slide">
+        <img src="resources/img/fachada.png" alt="">
     </div>
-    <!-- / MAIN MENU mainmenu.html -->
-    <!-- cal -->
-    <div class='calendarBox'>
-      <div class='form-hit'></div>
-      <div id='calendar' class='dnaCalendar'></div>
-      <form id='calendarForm' method='POST' action="book.php" style='display:none;'>
-        <input type="hidden" name='datein' value=''/>
-        <input type="hidden" name='dateout' value=''/>
-        <input type="hidden"  name='adults' value=''/>
-        <input type="hidden"  name='children' value=''/>
-      </form>
-    </div>
-    <!-- /calendar
-    -->
-    <div class="specials-page"  style='width: 100%;overflow: hidden;'>
-      <div class="container">
+</div>
+
+<div id='mainmenu'></div>
+
+<div class="specials-page" style='width: 100%; overflow: hidden;'>
+    <div class="container">
         <div class="introspecial">
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="left">
-                <h6 data-aos="fade-left" data-aos-duration="1000">La experiencia The Alest</h6>
-                <h1 data-aos="fade-left" data-aos-duration="1500"><span>Programas inmersivos</span> a la medida</h1>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="right" data-aos="fade-right" data-aos-duration="1000">
-                <p>En The Alest Hotel nos enorgullecemos de nuestra propuesta de experiencias al interior y fuera de la propiedad. Sibaritas, amantes del
-arte, cultura, almas creativas, solo travellers y viajeros apasionados encontrarán actividades únicas para deleitarse con todo lo que la Ciudad de México ofrece.</p>
-              </div>
-            </div>
-          </div>
-          
-        </div>
-      </div>
-      <div class="container">
-        <div class="featured-specials" >
-          <div class="spots">
-
-            {% for item in specials %}
-              {% if item['index'] <= 2 %}
-
-              <figure>
-                <a href="{{ item['link'] }}">
-                  <figcaption>
-                  <h3>{{ item['title'] }}</h3>
-                  <p>{{ item['intro'] }}</p>
-                  </figcaption>
-                  <img src="{{ item['image'] }}" data-aos="zoom-out"    data-aos-duration="1000"  alt="">
-                  <div class="bg" data-aos="fade-right" data-aos-duration="500"></div>
-                </a>
-              </figure>
-
-              {% endif %}
-            {% endfor %}
-
-          </div>
-        </div>
-      </div>
-      <div class="specials" >
-        <div  data-aos="fade-up" data-aos-duration="3000">
-          <div class="container">
             <div class="row">
-              <div class="col-sm-6">
-                <h6>Más</h6>
-                <h2>Ofertas y paquetes</h2>
-              </div>
-              <div class="col-sm-6">
-                <nav>
-                  <a href="#" class="inactive"><img src="resources/img/prev.png" alt="previous"></a> <a href="#" ><img src="resources/img/next.png" alt="next"></a>
-                </nav>
-              </div>
+                <div class="col-sm-6">
+                    <div class="left">
+                        <h6 data-aos="fade-left" data-aos-duration="1000">La experiencia The Alest</h6>
+                        <h1 data-aos="fade-left" data-aos-duration="1500"><span>Servicios Exclusivos</span> a la medida</h1>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="right" data-aos="fade-right" data-aos-duration="1000">
+                        <p>En The Alest Hotel nos enorgullecemos de nuestra propuesta de experiencias al interior y fuera de la propiedad. Cada detalle ha sido curado para ofrecer un santuario de lujo y bienestar en Polanco.</p>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="grid" data-aos="fade-up" data-aos-duration="3000">
-
-          {% for item in specials %}
-            {% if item['index'] > 2 %}
-
-            <figure>
-              <a href="{{ item['link'] }}">
-                <figcaption>
-                <h4>{{ item['title'] }}</h4>
-                <p>{{ item['intro'] }}</p>
-                </figcaption>
-                <div class="shad"></div>
-                <img src="{{ item['image'] }}" alt="">
-                <div class="bg"></div>
-              </a>
-            </figure>
-
-            {% endif %}
-          {% endfor %}
-
-        </div>
-        
-      </div>
     </div>
-    
-    
-    {% include 'inc_footer.html' %}
-    <!-- JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="resources/js/jQuery.succinct.min.js"></script>
-    <script src="resources/js/scrollreveal.min.js"></script>
+
+    <div class="container" style="margin-bottom: 80px;">
+        <ul class="nav nav-tabs nav-services-custom" role="tablist">
+            <li role="presentation" class="active"><a href="#comfort" data-toggle="tab">In-Suite Comfort</a></li>
+            <li role="presentation"><a href="#wellness" data-toggle="tab">Wellness & Fitness</a></li>
+            <li role="presentation"><a href="#guest" data-toggle="tab">Guest Services</a></li>
+            <li role="presentation"><a href="#tours_tab" data-toggle="tab">Tours</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="comfort">
+                <div class="row">
+                    <div class="col-md-5">
+                        <h2 style="color:#c5a059; font-family:'Playfair Display';">Confort en Suite</h2>
+                        <ul style="list-style:none; padding:0; line-height:2.5; color:#666;">
+                            <li><i class="fa fa-check" style="color:#c5a059"></i> Amenidades de baño <strong>Le Labo</strong></li>
+                            <li><i class="fa fa-check" style="color:#c5a059"></i> Secador de cabello <strong>Dyson</strong></li>
+                            <li><i class="fa fa-check" style="color:#c5a059"></i> Batas de algodón y pantuflas de cortesía</li>
+                            <li><i class="fa fa-check" style="color:#c5a059"></i> Nespresso y minibar complementario</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="swiper-container comfort-slider" style="border-radius:5px; overflow:hidden;">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide"><img src="resources/img/amenidadlelavo.png" class="img-responsive"></div>
+                                <div class="swiper-slide"><img src="resources/img/amenidaddyson.png" class="img-responsive"></div>
+                                <div class="swiper-slide"><img src="resources/img/amenidadbatas.png" class="img-responsive"></div>
+                                <div class="swiper-slide"><img src="resources/img/amenidaddyson2.png" class="img-responsive"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wellness">
+                <div class="row">
+
+                    <div class="col-sm-6" style="margin-bottom: 30px;">
+                        <div style="width: 100%; height: 350px; overflow: hidden; margin-bottom: 20px; border-radius: 4px;">
+                            <img src="resources/img/scape4.png" class="img-responsive" style="width: 100%; height: 100%; object-fit: cover;" alt="Spa treatment at The Alest">
+                        </div>
+
+                        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <img src="resources/img/scapelogo.jpeg" alt="Scape Logo" style="height: 45px; width: auto; margin-right: 15px;">
+                            <h4 style="margin: 0; color: #c5a059; font-family: 'Playfair Display', serif; font-size: 20px;">Spa by Scape</h4>
+                        </div>
+
+                        <p style="color: #666; line-height: 1.6; margin-bottom: 20px;">
+                            <strong>El confort del spa en la privacidad de su suite.</strong><br>
+                            En colaboración con Scape, los expertos en bienestar líderes en México, transformamos su habitación en un santuario personal.
+                        </p>
+
+                        <a href="services/spa" class="btn-line-small"
+                           style="display: inline-block; padding: 6px 18px; border: 1px solid #c5a059; color: #c5a059; text-decoration: none; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-family: 'Montserrat', sans-serif; font-weight: 600; border-radius: 2px; transition: all 0.3s ease;">
+                            Ver menú de tratamientos →
+                        </a>
+                    </div>
+
+                    <div class="col-sm-6" style="margin-bottom: 30px;">
+                        <div style="width: 100%; height: 350px; overflow: hidden; margin-bottom: 20px; border-radius: 4px;">
+                            <img src="resources/img/dinamo.jpg" class="img-responsive" style="width: 100%; height: 100%; object-fit: cover;" alt="Dinamo Gym Polanco">
+                        </div>
+
+                        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <img src="resources/img/dinamologo1.png" alt="Dinamo Logo" style="height: 45px; width: auto; margin-right: 15px;">
+                            <h4 style="margin: 0; color: #c5a059; font-family: 'Playfair Display', serif; font-size: 20px;">Dinamo Gym</h4>
+                        </div>
+
+                        <p style="color: #666; line-height: 1.6; margin-bottom: 20px;">
+                            <strong>Entrenamiento de élite en el corazón de Polanco.</strong><br>
+                            Nuestros huéspedes disfrutan de acceso exclusivo a Dinamo Gym, uno de los centros de fitness más prestigiosos de la zona.
+                        </p>
+
+                        <a href="services/gym" class="btn-line-small"
+                           style="display: inline-block; padding: 6px 18px; border: 1px solid #c5a059; color: #c5a059; text-decoration: none; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-family: 'Montserrat', sans-serif; font-weight: 600; border-radius: 2px; transition: all 0.3s ease;">
+                            Ver menú de Dinamo Fit →
+                        </a>
+                    </div>
+
+                </div> </div>
+
+            <div role="tabpanel" class="tab-pane fade" id="guest">
+                <div class="row">
+                    <div class="col-sm-4" style="margin-bottom: 30px;">
+                        <div class="guest-card openCustomModal"
+                             style="background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease; cursor: pointer;"
+                             data-title="Movilidad"
+                             data-text="House Car y bicicletas de cortesía disponibles."
+                             data-img="resources/img/mobilidad.png">
+
+                            <div style="width: 100%; height: 220px; overflow: hidden; margin-bottom: 20px; border-radius: 4px;">
+                                <img src="resources/img/mobilidad.png" class="img-responsive" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+
+                            <div class="text-center">
+                                <h5 style="color: #c5a059; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; margin-bottom: 12px; font-size: 14px;">Movilidad</h5>
+                                <hr style="width: 30px; border-top: 2px solid #c5a059; margin: 10px auto;">
+                                <p style="color: #777; font-size: 13px; line-height: 1.7; padding: 0 10px; min-height: 60px;">
+                                    House Car y bicicletas de cortesía disponibles.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4" style="margin-bottom: 30px;">
+                        <div class="guest-card openCustomModal"
+                             style="background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease; cursor: pointer;"
+                             data-title="Cuidado & Asistencia"
+                             data-text="Servicio impecable de lavandería, tintorería y planchado para que sus prendas luzcan perfectas en todo momento. Nuestro Concierge está disponible 24/7 para asistirle con cualquier requerimiento adicional."
+                             data-img="resources/img/Cuidadoderopa.png">
+
+                            <div style="width: 100%; height: 220px; overflow: hidden; margin-bottom: 20px; border-radius: 4px;">
+                                <img src="resources/img/Cuidadoderopa.png" class="img-responsive" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+
+                            <div class="text-center">
+                                <h5 style="color: #c5a059; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; margin-bottom: 12px; font-size: 14px;">Cuidado & Asistencia</h5>
+                                <hr style="width: 30px; border-top: 2px solid #c5a059; margin: 10px auto;">
+                                <p style="color: #777; font-size: 13px; line-height: 1.7; padding: 0 10px; min-height: 60px;">
+                                    Lavandería, Tintorería y Concierge 24/7.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4" style="margin-bottom: 30px;">
+                        <div class="guest-card openCustomModal"
+                             data-title="Dining"
+                             data-text="In-Suite Dining: Disfrute de la excelencia gastronómica de nuestro 45 Bar & Restaurant en la intimidad de su habitación. Disponible para desayunos, comidas y cenas con una selección curada de platillos."
+                             data-img="resources/img/dining.jpg"
+                             style="background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease; cursor: pointer;">
+
+                            <div style="width: 100%; height: 220px; overflow: hidden; margin-bottom: 20px; border-radius: 4px;">
+                                <img src="resources/img/dining.jpg" class="img-responsive" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+
+                            <div class="text-center">
+                                <h5 style="color: #c5a059; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; margin-bottom: 12px; font-size: 14px;">Dining</h5>
+                                <hr style="width: 30px; border-top: 2px solid #c5a059; margin: 10px auto;">
+                                <p style="color: #777; font-size: 13px; line-height: 1.7; padding: 0 10px; min-height: 60px;">
+                                    In-Suite Dining: Servicio a la habitación de 45 Bar & Restaurant.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="tours_tab">
+                <div class="container-fluid" style="padding: 60px 0;">
+
+                    <div class="text-center" style="margin-bottom: 50px;">
+                        <h6 style="color: #c5a059; text-transform: uppercase; letter-spacing: 3px; font-weight: bold; font-size: 11px;">Experiencias Curadas</h6>
+                        <h2 style="font-family: 'Playfair Display', serif; font-size: 36px; color: #1a1a1a; margin-top: 10px;">Inmersión en la Ciudad de México</h2>
+                        <div style="width: 40px; height: 2px; background: #c5a059; margin: 25px auto;"></div>
+                        <p style="color: #666; max-width: 650px; margin: 0 auto; line-height: 1.8;">Descubra la riqueza cultural, histórica y gastronómica de la capital a través de itinerarios diseñados exclusivamente para nuestros huéspedes.</p>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-sm-4" style="margin-bottom: 30px;">
+                            <a href="/es/tours/antropologia" style="text-decoration: none; display: block; position: relative; overflow: hidden; border-radius: 4px; height: 450px; background: #000;">
+
+                                <img src="resources/img/Antropologiamuseum.jpg" alt="Museo de Antropología" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: transform 0.6s ease; filter: brightness(0.8);">
+
+                                <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 35%, rgba(0,0,0,0.3) 60%, transparent 100%); padding: 35px; display: flex; flex-direction: column; justify-content: flex-end; color: #fff;">
+                                    <h4 style="font-family: 'Playfair Display', serif; font-size: 24px; margin: 0 0 10px; color: #c5a059;">Raíces Ancestrales</h4>
+                                    <p style="font-size: 14px; line-height: 1.5; margin: 0; font-weight: 300; letter-spacing: 0.5px;">Un viaje privado por la historia prehispánica en el Museo de Antropología.</p>
+                                    <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; margin-top: 20px; border-bottom: 1px solid rgba(197, 160, 89, 0.5); align-self: flex-start; padding-bottom: 5px;">Descubrir más</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-sm-4" style="margin-bottom: 30px;">
+                            <a href="/es/tours/gastronomia" style="text-decoration: none; display: block; position: relative; overflow: hidden; border-radius: 4px; height: 450px; background: #000;">
+                                <img src="resources/img/gastronomia.jpeg" alt="Gastronomía CDMX" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: transform 0.6s ease; filter: brightness(0.8);">
+                                <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 35%, rgba(0,0,0,0.3) 60%, transparent 100%); padding: 35px; display: flex; flex-direction: column; justify-content: flex-end; color: #fff;">
+                                    <h4 style="font-family: 'Playfair Display', serif; font-size: 24px; margin: 0 0 10px; color: #c5a059;">Rutas del Sabor</h4>
+                                    <p style="font-size: 14px; line-height: 1.5; margin: 0; font-weight: 300; letter-spacing: 0.5px;">Degustaciones exclusivas en los mercados y mesas más emblemáticas.</p>
+                                    <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; margin-top: 20px; border-bottom: 1px solid rgba(197, 160, 89, 0.5); align-self: flex-start; padding-bottom: 5px;">Descubrir más</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-sm-4" style="margin-bottom: 30px;">
+                            <a href="/es/tours/teotihuacan" style="text-decoration: none; display: block; position: relative; overflow: hidden; border-radius: 4px; height: 450px; background: #000;">
+                                <img src="resources/img/piramidedelsol.png" alt="Teotihuacán" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: transform 0.6s ease; filter: brightness(0.8);">
+                                <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 35%, rgba(0,0,0,0.3) 60%, transparent 100%); padding: 35px; display: flex; flex-direction: column; justify-content: flex-end; color: #fff;">
+                                    <h4 style="font-family: 'Playfair Display', serif; font-size: 24px; margin: 0 0 10px; color: #c5a059;">Ciudad de los Dioses</h4>
+                                    <p style="font-size: 14px; line-height: 1.5; margin: 0; font-weight: 300; letter-spacing: 0.5px;">Acceso privilegiado a las pirámides de Teotihuacán al amanecer.</p>
+                                    <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; margin-top: 20px; border-bottom: 1px solid rgba(197, 160, 89, 0.5); align-self: flex-start; padding-bottom: 5px;">Descubrir más</span>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <div class="text-center" style="margin-top: 50px;">
+                        <a href="/es/services/tours" class="btn-line-big" style="display: inline-block; padding: 18px 45px; border: 1px solid #c5a059; color: #c5a059; text-transform: uppercase; letter-spacing: 3px; text-decoration: none; font-size: 12px; font-weight: bold; transition: 0.3s; background: transparent;">
+                            Explorar Catálogo Completo
+                        </a>
+                        <p style="margin-top: 25px; font-size: 13px; color: #888; font-style: italic;">O consulte con nuestro Concierge para una experiencia personalizada.</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+<div id="customModal" class="modal-overlay-custom">
+    <div class="modal-container-full">
+        <button class="modal-close-btn" id="closeModal">×</button>
+        <div id="modalDynamicContent" class="modal-content-scroller">
+        </div>
+    </div>
+</div>
+
+{% include 'inc_footer.html' %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+<script>window.MAINMENU_URL='/es/mainmenu.html';</script>
+<script src="resources/js/main.js?v=2"></script>
+<script src="resources/js/newsletter.js"></script>
+<script src="resources/js/book-widget.js?ap=tst2"></script>
+<script src="resources/js/swiper-bundle.min.js"></script>
+<script src='resources/js/lineSlider.js'></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
 <script>
-window.MAINMENU_URL='/es/mainmenu.html';
-</script>
-    <script src="resources/js/main.js?v=2"></script>
-    <script src="resources/js/newsletter.js"></script>
-    <script src="resources/js/book-widget.js?ap=tst2"></script>
-    <script src="resources/js/swiper-bundle.min.js"></script>
-    <script src='resources/js/lineSlider.js'></script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const modal = document.getElementById("customModal");
+        const closeBtn = document.getElementById("closeModal");
+        const openBtns = document.querySelectorAll(".openCustomModal");
+        const dynamicContainer = document.getElementById("modalDynamicContent");
 
 
-    <script>
+        if (!modal || !dynamicContainer) return;
+
+
+        const houseCarTemplate = `
+<div class="modal-hero-header">
+    <img src="resources/img/the-car-house.jpg" class="modal-hero-img">
+    <div class="modal-hero-text">
+        <h6 class="modal-tag">Servicio Exclusivo</h6>
+        <h2 class="modal-headline">The House Car</h2>
+    </div>
+</div>
+
+<div class="modal-padding-body">
+    <div class="modal-intro-section text-center">
+         <h6 data-aos="fade-up" data-aos-duration="900">Confort y Distinción</h6>
+        <h1 data-aos="fade-up" data-aos-duration="900" data-aos-offset="200">Servicio<br><span>Privado del Hotel</span></h1>
+
+        <p data-aos="fade-up" data-aos-duration="900" data-aos-offset="120">
+            The Alest Hotel extiende su alto nivel de servicio con su exclusivo
+            <em>“The House Car Service”</em>: el auto privado del hotel para traslados
+            cómodos, puntuales y con la discreción que nos caracteriza.
+        </p>
+
+        <div class="highlight-bar-modal">
+            <span class="h-item"><i class="fa fa-car"></i> Lincoln Navigator Reserve 2022</span>
+            <span class="h-item"><i class="fa fa-user"></i> Hasta 5 pasajeros</span>
+            <span class="h-item"><i class="fa fa-shield"></i> Confort y sofisticación</span>
+        </div>
+    </div>
+
+    <div class="row modal-services-grid">
+        <div class="col-sm-4 text-center">
+            <img src="resources/img/the-car-house-4.png" class="img-circle-modal">
+            <h4>Traslados al Aeropuerto</h4>
+            <p>Pick Up / Drop Off al AICM y Aeropuerto de Toluca con asistencia de equipaje.</p>
+        </div>
+        <div class="col-sm-4 text-center">
+            <img src="resources/img/the-car-house-3.png" class="img-circle-modal">
+            <h4>Helipuertos Polanco</h4>
+            <p>Conexión terrestre precisa para embarques y desembarques sin esperas.</p>
+        </div>
+        <div class="col-sm-4 text-center">
+            <img src="resources/img/alest-car.jpg" class="img-circle-modal">
+            <h4>Renta por Tiempo</h4>
+            <p>Contratación por hora o día dentro de la CDMX para agendas flexibles.</p>
+        </div>
+    </div>
+
+    <div class="rates-card-modal" style="margin-top: 50px;">
+        <h4><i class="fa fa-credit-card"></i> Tarifas & Reservaciones</h4>
+        <b>Las tarifas varían según el servicio solicitado (traslados fijos o renta por tiempo).</b>
+        <ul class="list-unstyled">
+            <li><i class="fa fa-check"></i> Traslados al Aeropuerto (AICM / Toluca)</li>
+            <li><i class="fa fa-check"></i> Pick Up / Drop Off a helipuertos en Polanco</li>
+            <li><i class="fa fa-check"></i> Renta por hora o por día dentro de la CDMX</li>
+        </ul>
+        <p style="margin:14px 0;">
+            Para cotizaciones y disponibilidad, contáctanos:
+            <a class="email-cta" href="mailto:hello@thealest.com?subject=The%20House%20Car%20Service%20-%20Cotizaci%C3%B3n">
+                <i class="fa fa-envelope-o"></i> hello@thealest.com
+            </a>
+        </p>
+        <div class="note">
+            *Se recomienda reservar con anticipación para garantizar disponibilidad.
+        </div>
+    </div>
+
+      <div class="bike-service-section" style="margin-top: 50px; padding-top: 40px; border-top: 1px solid #eee;">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div style="background: #fdfaf3; border: 1px solid #e9dfc4; border-radius: 8px; overflow: hidden; display: flex; flex-wrap: wrap; align-items: center;">
+
+                <div class="col-sm-5" style="padding: 0;">
+                    <img src="resources/img/bicicletas2.png" alt="Bicicletas de Cortesía" style="width: 100%; height: 250px; object-fit: cover; display: block;">
+                </div>
+
+                <div class="col-sm-7" style="padding: 30px;">
+                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <i class="fa fa-bicycle" style="font-size: 24px; color: #c5a059; margin-right: 15px;"></i>
+                        <h4 style="font-family: 'Playfair Display', serif; color: #c5a059; margin: 0; font-size: 22px;">Bicicletas de Cortesía</h4>
+                    </div>
+
+                    <p style="color: #666; line-height: 1.6; margin-bottom: 15px; font-size: 15px;">
+                        Explore el encanto de Polanco y sus alrededores a su propio ritmo. Ponemos a disposición de nuestros huéspedes nuestras exclusivas bicicletas, ideales para disfrutar de un paseo con estilo por la ciudad.
+                    </p>
+
+                    <div style="font-size: 12px; color: #444; letter-spacing: 0.5px; border-top: 1px solid #e9dfc4; padding-top: 15px;">
+                        <div style="margin-bottom: 5px;">
+                            <strong><i class="fa fa-clock-o"></i> Horario:</strong> 9:00 AM – 6:00 PM
+                        </div>
+                        <div>
+                            <strong><i class="fa fa-info-circle"></i> Solicitud:</strong> Disponible directamente en Recepción
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>`;
+        const laundryTemplate = `
+<div class="modal-hero-header">
+    <img src="resources/img/laundry.jpg" class="modal-hero-img">
+    <div class="modal-hero-text">
+        <h6 class="modal-tag">Servicio Exclusivo</h6>
+        <h2 class="modal-headline">Tintorería & Cuidado</h2>
+    </div>
+</div>
+
+<div class="modal-padding-body" style="background:#fff;">
+    <section class="container-fluid" style="padding:0;">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="media" style="text-align:right; margin-bottom:40px;">
+                    <h3 style="font-weight:700; margin-top:0; color:#333;">Atención Profesional</h3>
+                    <div style="width:100px; height:2px; background:#c5a059; margin:12px 0 14px auto;"></div>
+                    <p style="color:#777; font-size:14px;">Servicio de lavandería y tintorería premium, disponible exclusivamente para huéspedes registrados.</p>
+                </div>
+                <div class="media" style="text-align:right;">
+                    <h3 style="font-weight:700; margin-top:0; color:#333;">Acabado Impecable</h3>
+                    <div style="width:100px; height:2px; background:#c5a059; margin:12px 0 14px auto;"></div>
+                    <p style="color:#777; font-size:14px;">Tratamiento a medida para telas delicadas. Prensado perfecto y entrega lista para usar.</p>
+                </div>
+            </div>
+
+            <div class="col-sm-4 text-center">
+                <img src="resources/img/laundry.jpg"
+                     style="width:280px; height:280px; border-radius:50%; object-fit:cover; border: 8px solid #f9f9f9; margin:0 auto 20px;"
+                     class="img-responsive">
+            </div>
+
+            <div class="col-sm-4">
+                <div class="media" style="margin-bottom:40px;">
+                    <h3 style="font-weight:700; margin-top:0; color:#333;">Entrega Rápida</h3>
+                    <div style="width:100px; height:2px; background:#c5a059; margin:12px auto 14px 0;"></div>
+                    <p style="color:#777; font-size:14px;">Opciones de mismo día y día siguiente para su conveniencia. Solicite el servicio con nuestro equipo.</p>
+                </div>
+                <div class="media">
+                    <h3 style="font-weight:700; margin-top:0; color:#333;">Servicio Personalizado</h3>
+                    <div style="width:100px; height:2px; background:#c5a059; margin:12px auto 14px 0;"></div>
+                    <p style="color:#777; font-size:14px;">Gestionado por el personal de The Alest de principio a fin con comunicación clara y manejo cuidadoso.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container-fluid" style="margin-top:60px; padding:0;">
+        <div class="row">
+            <div class="col-sm-6">
+                <div style="border:1px solid #eee; padding:25px; border-radius:10px; background:#fdfdfd; min-height:380px;">
+                    <h3 class="text-center" style="font-weight:700; margin-bottom:20px; font-family:'Playfair Display';">Tiempos de Entrega</h3>
+                    <div class="table-responsive">
+                        <table class="table" style="font-size:13px;">
+                            <thead>
+                                <tr style="border-bottom:2px solid #c5a059;">
+                                    <th>Tipo de servicio</th>
+                                    <th>Recepción</th>
+                                    <th>Entrega</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Mismo día</td><td>Antes 10:00</td><td>19:00 hrs</td></tr>
+                                <tr><td>Día siguiente</td><td>Después 10:00</td><td>09:00 hrs</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-muted text-center" style="font-size:11px; margin-top:15px;">* Servicio no disponible domingos ni días festivos.</p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div style="border:1px solid #eee; padding:25px; border-radius:10px; background:#fdfdfd; min-height:380px;">
+                    <h3 class="text-center" style="font-weight:700; margin-bottom:20px; font-family:'Playfair Display';">Tarifas y Garantías</h3>
+                    <ul class="list-unstyled text-center" style="color:#666; font-size:13px; margin-bottom:20px; line-height:1.8;">
+                        <li>Tarifas sujetas a <strong>16% IVA</strong> y <strong>10% servicio</strong>.</li>
+                        <li>Opción exprés: recargo de <strong>+15%</strong>.</li>
+                        <li>Entrega <em>doblada</em> o <em>en gancho</em>.</li>
+                    </ul>
+                    <div class="table-responsive">
+                        <table class="table" style="font-size:13px;">
+                            <thead>
+                                <tr style="border-bottom:2px solid #c5a059;">
+                                    <th>Categoría</th>
+                                    <th>Detalles</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Estándar</td><td>Lavado y planchado base.</td></tr>
+                                <tr><td>Premium</td><td>Cuidado para telas delicadas.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container-fluid" style="margin-top:60px; padding:0;">
+        <div class="row">
+            <div class="col-sm-4 text-center">
+                <img src="resources/img/Dry-clean2.jpg" class="img-circle" style="width:180px; height:180px; object-fit:cover; margin-bottom:15px;">
+                <h4 style="font-weight:600; font-size:16px;">Atención Profesional</h4>
+                <p style="font-size:13px; color:#777;">Manejo discreto y meticuloso de sus prendas.</p>
+            </div>
+            <div class="col-sm-4 text-center">
+                <img src="resources/img/Dry-clean3.png" class="img-circle" style="width:180px; height:180px; object-fit:cover; margin-bottom:15px;">
+                <h4 style="font-weight:600; font-size:16px;">Entrega Rápida</h4>
+                <p style="font-size:13px; color:#777;">Opciones flexibles según su itinerario.</p>
+            </div>
+            <div class="col-sm-4 text-center">
+                <img src="resources/img/Dry-clean.jpg" class="img-circle" style="width:180px; height:180px; object-fit:cover; margin-bottom:15px;">
+                <h4 style="font-weight:600; font-size:16px;">Acabado Impecable</h4>
+                <p style="font-size:13px; color:#777;">Limpieza premium con atención al detalle.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="text-center" style="margin-top:50px; padding:20px; border-top:1px solid #eee;">
+        <p style="color:#c5a059; font-weight:bold;">Solicite este servicio marcando a Recepción desde su suite.</p>
+    </div>
+</div>
+`;
+
+        const diningTemplate = `
+<div class="modal-hero-header">
+    <img src="resources/img/dining.jpg" class="modal-hero-img">
+    <div class="modal-hero-text">
+        <h6 class="modal-tag">Experiencia Gastronómica</h6>
+        <h2 class="modal-headline">In-Suite Dining</h2>
+    </div>
+</div>
+
+<div class="modal-padding-body" style="background:#fff; padding-bottom: 60px;">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 text-center">
+            <h6 style="color:#c5a059; text-transform:uppercase; letter-spacing:3px; margin-bottom:15px;">El placer de la privacidad</h6>
+            <h1 style="font-family:'Playfair Display', serif; font-size:42px; color:#333; margin-bottom:25px;">Sabor en Casa</h1>
+
+            <div style="width:60px; height:2px; background:#c5a059; margin:0 auto 30px;"></div>
+
+            <p style="font-size:18px; color:#666; line-height:1.8; max-width:750px; margin:0 auto 40px;">
+                Disfrute de la propuesta gastronómica de <strong>45 Bar & Restaurant</strong> en la comodidad de su suite.
+                Cada platillo es preparado al momento y servido con la misma elegancia y atención que en nuestro salón principal.
+            </p>
+
+            <div style="background:#f9f9f9; padding:30px; border-radius:8px; border:1px solid #eee; display:inline-block; width:100%; max-width:600px;">
+                <div class="row">
+                    <div class="col-sm-6" style="border-right: 1px solid #ddd;">
+                        <i class="fa fa-clock-o" style="color:#c5a059; font-size:24px; margin-bottom:10px;"></i>
+                        <h4 style="font-size:14px; text-transform:uppercase; font-weight:700;">Disponibilidad</h4>
+                        <p style="font-size:13px; color:#777; margin:0;">Durante el horario de operación del restaurante.</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <i class="fa fa-phone" style="color:#c5a059; font-size:24px; margin-bottom:10px;"></i>
+                        <h4 style="font-size:14px; text-transform:uppercase; font-weight:700;">Cómo ordenar</h4>
+                        <p style="font-size:13px; color:#777; margin:0;">Marque la extensión de <strong>Room Service</strong> desde su suite.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top:40px;">
+                <p style="font-size:12px; color:#999; font-style:italic;">
+                    *Consulte el menú digital disponible en su habitación para conocer nuestra selección de temporada.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+`;
+
+
+
+
+        openBtns.forEach(btn => {
+            btn.addEventListener("click", function(e) {
+                e.preventDefault();
+                const title = btn.getAttribute("data-title");
+
+                // 1. Caso para Movilidad (House Car y Bicicletas)
+                if (title === "Movilidad") {
+                    dynamicContainer.innerHTML = houseCarTemplate;
+                }
+
+                // 2. Caso para Tintorería y Cuidado
+                else if (title === "Cuidado & Asistencia") {
+                    dynamicContainer.innerHTML = laundryTemplate;
+                }
+
+                // 3. Caso para Dining (Sabor en Casa)
+                else if (title === "Dining") {
+                    dynamicContainer.innerHTML = diningTemplate;
+                }
+
+                // 4. Caso genérico para cualquier otra card
+                else {
+                    const text = btn.getAttribute("data-text");
+                    const img = btn.getAttribute("data-img");
+                    dynamicContainer.innerHTML = `
+            <div class="modal-hero-header">
+                <img src="${img}" class="modal-hero-img">
+                <div class="modal-hero-text">
+                    <h6 class="modal-tag">Experiencia The Alest</h6>
+                    <h2 class="modal-headline">${title}</h2>
+                </div>
+            </div>
+            <div class="modal-padding-body text-center">
+                <p class="modal-description-main">${text}</p>
+            </div>`;
+                }
+
+                // Mostrar la modal y bloquear scroll del fondo
+                modal.style.display = "flex";
+                document.body.style.overflow = "hidden";
+            });
+        });
+        const closeAll = () => { modal.style.display = "none"; document.body.style.overflow = "auto"; };
+        closeBtn.addEventListener("click", closeAll);
+        modal.addEventListener("click", (e) => { if (e.target === modal) closeAll(); });
+        document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeAll(); });
+    });
+
     $(function(){
-    $(".check-av").click(function(e){
-    if(e)e.preventDefault();
-    $("#calendarForm").submit();
-    
+        AOS.init();
+        new Swiper('.comfort-slider', { loop: true, autoplay: { delay: 3500 }, effect: 'fade' });
     });
-    
-    });
-    
- 
-    </script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  
-    <script>
-    AOS.init();
-    
-    window.addEventListener('load', function() {
-        AOS.refresh();
-    });
-    
-    
-        </script>
-  </body>
+</script>
+</body>
 </html>
