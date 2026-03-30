@@ -62,6 +62,44 @@
             .the-hotel .row, .the-hotel .first, .the-hotel .second, .the-hotel .third { display: block; }
             .the-hotel figure img { height: 300px; }
         }
+
+
+
+
+             /* AJUSTES PARA RESPONSIVIDAD */
+        @media (max-width: 767px) {
+            /* 1. Hacemos que las filas se apilen verticalmente */
+            .the-hotel .row,
+            .the-hotel .first,
+            .the-hotel .second,
+            .the-hotel .third {
+                display: block !important;
+            }
+
+            /* 2. Ajustamos la altura de las imágenes para que no se vean estiradas */
+            .the-hotel figure img {
+                height: 300px !important;
+                margin-bottom: 15px;
+            }
+
+            /* 3. Quitamos el "push" y "pull" en móvil para que el orden sea natural */
+            .col-sm-6.col-sm-push-6,
+            .col-sm-6.col-sm-pull-6 {
+                left: 0 !important;
+                right: 0 !important;
+                width: 100% !important;
+            }
+
+            /* 4. Ajuste de textos para que no queden muy grandes en celular */
+            .the-hotel h1 { font-size: 28px !important; }
+            .txt-box h3 { font-size: 22px !important; }
+
+            .txt-box {
+                padding: 20px !important;
+                margin-bottom: 30px !important;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -102,145 +140,78 @@
         <input type="hidden"  name='children' value=''/>
     </form>
 </div>
-
 <div class="the-hotel" style='width: 100%; overflow: hidden;'>
     <div class="container">
 
         <div class="row">
-            <div class="col-xs-12 text-center" style="margin-bottom: 50px;">
-                <h6 data-aos="fade-up" data-aos-duration="1000">The Alest</h6>
-                <h1 data-aos="fade-up" data-aos-duration="1500" style="text-align: center;">
-                    Donde el lujo se manifiesta en los detalles,
-                    <span style="display: block;">la calidez del servicio y la intimidad de cada experiencia.</span>
+            <div class="col-xs-12 text-center" style="margin-bottom: 60px;">
+                <h6 data-aos="fade-up" data-aos-duration="1000" style="color: #c5a059; letter-spacing: 3px; text-transform: uppercase; font-size: 11px; font-weight: 700;">The Alest</h6>
+                <h1 data-aos="fade-up" data-aos-duration="1500" style="font-family: 'Playfair Display', serif; font-size: 36px; line-height: 1.2;">
+                    Nuestra Esencia
                 </h1>
             </div>
         </div>
 
         <div class="first">
-            <div class="row">
+            <div class="row" style="display: flex; align-items: center; flex-wrap: wrap;">
                 <div class="col-sm-6">
                     <figure data-aos="fade-up" data-aos-duration="1000">
-                        <img src="resources/img/Recpcion.png" alt="Recepción">
+                        <img src="resources/img/lobby2.png" alt="The Alest DNA - Interiorismo">
                     </figure>
                 </div>
                 <div class="col-sm-6">
                     <div class="txt-box" data-aos="fade-left" data-aos-duration="1000">
-                        <p>Hospitalidad de clase mundial en un entorno refinado y hedónico.</p>
-                        <p>Detalles exquisitos y experiencias exclusivas son nuestro sello distintivo.<br>
-                            The Alest Hotel posee una identidad única. Diseñado con elementos eclécticos y sofisticados, su fachada de inspiración británica combina maravillosamente con los variados estilos clásicos europeos que redefinen la arquitectura del barrio de Polanco, marcado por construcciones modernas que conviven con casas de estilo neocolonial y californiano.</p>
-                        <p>Con sus materiales suntuosos y una personalidad inigualable, nuestra propiedad le da la bienvenida a descubrir la Ciudad de México con una nueva forma de mirar.</p>
-                        <div class="epigrafe" data-aos="fade-left" data-aos-duration="1000" style="font-style: italic; border-top: 1px solid #eee; padding-top: 10px; margin-top: 10px;">
-                            Cada detalle y experiencia en The Alest Hotel ha sido meticulosamente creado para brindar una buena vida y hacer que nuestros huéspedes se sientan como en casa.
-                        </div>
+                        <h6 style="color: #c5a059; letter-spacing: 2px; text-transform: uppercase; font-size: 10px; font-weight: 700; margin-bottom: 10px;">Concepto</h6>
+                        <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 20px; font-size: 28px;">The Alest DNA</h3>
+                        <p style="font-size: 15px; line-height: 1.8; color: #555;">
+                            Inspirado en la sofisticación de las grandes residencias europeas, pero con el alma cálida de México.
+                            <strong>The Alest</strong> es un hotel boutique de autor donde el diseño clásico y la modernidad conviven en perfecta armonía.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="second">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="txt-box" data-aos="fade-right" data-aos-duration="1000">
-                        <h6>Un Barrio Rico en Historia</h6>
-                        <h3>Polanco, Ciudad de México</h3>
-                        <p>En la época colonial, en el siglo XVI, la Hacienda de San Juan de los Morales fue la primera edificación de la zona que el Rey de España donó a Hernán Cortés, y recibió su nombre por los morales que allí se plantaron.</p>
-                        <p>Alrededor de 1930, las tierras se dividieron en respuesta a la demanda de zonas urbanas en la ciudad, que aumentó tras la Revolución Mexicana, ya que las familias deseaban alejarse de la zona central. Las calles del barrio recibieron entonces nombres de diferentes humanistas, filósofos y escritores, entre ellos el autor francés Eugenio Sue.</p>
-
-                        <div class="epigrafe" data-aos="fade-right" data-aos-duration="1500" style="padding: 10px;">
-                            La diversidad cultural ha sido un sello distintivo del barrio de Polanco. Al día de hoy, sigue siendo la zona preferida por los nuevos residentes internacionales, encantados por el ambiente cosmopolita y sus calles llenas de vida.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <figure data-aos="fade-left" data-aos-duration="1000">
-                        <img src="resources/img/Fachada.png" alt="fachada polanco">
+        <div class="second" style="margin-top: 40px;">
+            <div class="row" style="display: flex; align-items: center; flex-wrap: wrap;">
+                <div class="col-sm-6 col-sm-push-6">
+                    <figure data-aos="fade-up" data-aos-duration="1000">
+                        <img src="resources/img/Fachada.png" alt="Eugenio Sue 45 - Polanco">
                     </figure>
                 </div>
+                <div class="col-sm-6 col-sm-pull-6">
+                    <div class="txt-box" data-aos="fade-right" data-aos-duration="1000">
+                        <h6 style="color: #c5a059; letter-spacing: 2px; text-transform: uppercase; font-size: 10px; font-weight: 700; margin-bottom: 10px;">Ubicación</h6>
+                        <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 20px; font-size: 28px;">Eugenio Sue 45</h3>
+                        <p style="font-size: 15px; line-height: 1.8; color: #555;">
+                            Situado en una de las calles más serenas y exclusivas de Polanco, The Alest ofrece el equilibrio perfecto entre la vibrante energía de la Ciudad de México y la privacidad de una residencia de autor.
+                            Rodeado de galerías de arte, alta moda y los mejores restaurantes, nuestro hotel es el punto de partida para descubrir el México más sofisticado.
+                        </p>
+                        <a href="es/events" style="display: inline-block; margin-top: 15px; color: #1a1a1a; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 2px; text-decoration: none; border-bottom: 1px solid #c5a059; padding-bottom: 5px; transition: all 0.3s ease;">
+                            Explorar el vecindario &rarr;
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="third">
-            <div class="row">
+        <div class="third" style="margin-top: 40px;">
+            <div class="row" style="display: flex; align-items: center; flex-wrap: wrap;">
                 <div class="col-sm-6">
-                    <figure data-aos="fade-right" data-aos-duration="1000">
-                        <img src="resources/img/thehotel3.jpg" alt="Servicio">
+                    <figure data-aos="fade-up" data-aos-duration="1000">
+                        <img src="resources/img/amenidadesgua.png" alt="Hospitalidad The Alest">
                     </figure>
                 </div>
                 <div class="col-sm-6">
                     <div class="txt-box" data-aos="fade-left" data-aos-duration="1000">
-                        <h3>Servicio Inigualable</h3>
-                        <p>The Alest Hotel brinda un nivel superior de servicio con el equilibrio justo entre profesionalismo, privacidad y calidez, en alianza con la firma Hospitality & Butler. Aquí, las necesidades y gustos de cada visitante siempre serán anticipados, y serán tratados como huéspedes especiales para que se sientan en casa, consentidos con amenidades de alta gama dentro de la propiedad, y con las experiencias más exclusivas que la Ciudad de México tiene para ofrecer a su disposición.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="third">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="txt-box" data-aos="fade-right" data-aos-duration="1000">
-                        <h3>Bienestar</h3>
-                        <p>Gracias a nuestras alianzas exclusivas, los huéspedes de The Alest podrán disfrutar de masajes y tratamientos estéticos en la comodidad de su propia habitación, de la mano de proveedores externos de los mejores spas de la zona. Además, podrán mantenerse en forma practicando yoga, fitness o su disciplina favorita en los estudios y gimnasios cercanos recomendados por nuestro concierge.</p>
-                        <p>Dentro de las habitaciones, los huéspedes pueden disfrutar de diferentes sesiones de spa y terapias con un menú especial para consentirse, con opciones para relajar o aliviar la tensión, así como masajes especializados, ya sean prenatales, reductores o de drenaje linfático.</p>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <figure data-aos="fade-left" data-aos-duration="1000">
-                        <img src="resources/img/thehotel4.jpg" alt="Bienestar">
-                    </figure>
-                </div>
-            </div>
-        </div>
-
-        <div class="third">
-            <div class="row">
-                <div class="col-sm-6">
-                    <figure data-aos="fade-right" data-aos-duration="1000" style="display: flex; justify-content: center;">
-                        <img src="resources/img/lobby2.png" alt="Lobby" style="width: 100%; max-width: 550px; height: 450px; object-fit: cover; border-radius: 0;">
-                    </figure>
-                </div>
-                <div class="col-sm-6">
-                    <div class="txt-box" data-aos="fade-left" data-aos-duration="1000">
-                        <h3>El Lobby</h3>
-                        <p>El corazón de The Alest Hotel es un espacio elegante que mezcla lo mejor de diversos estilos de diseño de interiores. El estilo clásico de la recepción le da la bienvenida a un ambiente sofisticado, salpicado de áreas agradables que invitan al descanso.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="third">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="txt-box" data-aos="fade-right" data-aos-duration="1000">
-                        <h3>The Alest Bar - 45</h3>
-                        <p>45 es un punto de encuentro agradable y exclusivo, cuya mixología destaca por sus bebidas altamente originales.</p>
-                        <p>Los cócteles, diseñados por expertos exclusivamente para 45, el bar de The Alest Hotel, se inspiran en las figuras notables que dan nombre a las calles de Polanco, creados para despertar la mente, el corazón y el alma de quienes los prueban, tal como lo hicieron estos pensadores, autores y científicos a través de sus obras.</p>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <figure data-aos="fade-left" data-aos-duration="1000">
-                        <img src="resources/img/thehotel6.jpg" alt="Bar">
-                    </figure>
-                </div>
-            </div>
-        </div>
-
-        <div id="housecar"></div>
-        <div class="third">
-            <div class="row">
-                <div class="col-sm-6">
-                    <figure data-aos="fade-left" data-aos-duration="1000">
-                        <img src="resources/img/alest-car.jpg" alt="Auto de la casa">
-                    </figure>
-                </div>
-                <div class="col-sm-6">
-                    <div class="txt-box" data-aos="fade-right" data-aos-duration="1000">
-                        <h3>El Auto de la Casa</h3>
-                        <p>The Alest Hotel brinda un servicio superior a sus huéspedes en lo que a transporte se refiere.<br>
-                            El "House Car" es el vehículo privado de The Alest Hotel. Una lujosa camioneta Lincoln Navigator Reserve 2022 de color negro, con un diseño imponente y tecnología intuitiva que ofrece el máximo confort. Capacidad máxima para 5 personas.<br>
-                            El vehículo cuenta con portaequipajes de techo así como un amplio maletero.</p>
-                        <a href="mailto:hello@thealest.com?subject=Reserva%20de%20Servicio%20de%20Auto" class="btn-line-big" style="display: inline-block; margin-top: 15px; color: #222; border: 1px solid #c5a059; padding: 10px 25px; text-decoration: none;">
-                            Reservar servicio de transporte
+                        <h6 style="color: #c5a059; letter-spacing: 2px; text-transform: uppercase; font-size: 10px; font-weight: 700; margin-bottom: 10px;">Hospitalidad</h6>
+                        <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 20px; font-size: 28px;">Servicio de Guante Blanco</h3>
+                        <p style="font-size: 15px; line-height: 1.8; color: #555;">
+                            En The Alest, la hospitalidad de clase mundial no es un estándar, es un detalle exquisito. Entendemos que el verdadero lujo hoy es el tiempo y la atención.
+                            Por ello, nuestra propiedad de solo 19 habitaciones funciona como una residencia privada donde el servicio se anticipa a la necesidad.
+                        </p>
+                        <a href="es/specials" style="display: inline-block; margin-top: 15px; color: #1a1a1a; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 2px; text-decoration: none; border-bottom: 1px solid #c5a059; padding-bottom: 5px; transition: all 0.3s ease;">
+                            Explorar nuestros servicios &rarr;
                         </a>
                     </div>
                 </div>
@@ -249,7 +220,6 @@
 
     </div>
 </div>
-
 {% include 'inc_footer.html' %}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

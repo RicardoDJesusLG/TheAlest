@@ -1,302 +1,343 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="es">
+<head>
     <base href="{{ base_href }}">
-    
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>The Alest, The Hotel</title>
-    <meta name="description" content=" ">
+    <title>Banquetes y Eventos - The Alest Hotel</title>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="resources/css/alest.css" rel="stylesheet">
     <link rel="stylesheet" href="resources/css/font-awesome.min.css">
     <link rel="stylesheet" href="resources/css/mainmenu.css">
+    <link rel="stylesheet" href="resources/css/book-widget.css">
     <link rel='stylesheet' href="resources/css/fullGallery.css">
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    {% include 'inc_analytics.html' %}
 
     <style>
 
-      .hero-home .slide img{
-              opacity:0.4;
+
+            /* AJUSTES DE RESPONSIVIDAD (SIN CAMBIAR EL DISEÑO) */
+        @media (max-width: 991px) {
+            /* 1. Ajuste del Hero para que el texto no se pierda */
+            .hero-banquetes {
+                height: 60vh;
+                background-attachment: scroll; /* Mejora el rendimiento en móviles */
             }
-          </style>
-  </head>
-  <body>
-    
-    {% include 'inc_header.html' %}
-    <div class="hero-noimage">
-      <h1 class="title">Galería</h1>
-      <div class="sub">Adéntrese en el exquisito universo de The Alest Hotel</div>
+            .hero-banquetes h1 {
+                font-size: 32px !important;
+            }
+            .hero-banquetes p {
+                font-size: 14px;
+                letter-spacing: 2px;
+            }
+
+            /* 2. Forzar que las tarjetas de paquetes se apilen correctamente */
+            .paquetes-wrapper .row,
+            .mosaico-banquetes .row,
+            .flex-align-center {
+                display: block !important;
+            }
+
+            .paquetes-wrapper .col-md-4 {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            /* 3. Ajuste de las tarjetas de paquetes */
+            .paquete-card {
+                padding: 30px 20px !important;
+            }
+
+            /* 4. Mosaico de imágenes */
+            .mosaico-banquetes .col-md-4 {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            .img-mosaico {
+                height: 250px; /* Un poco más bajas para no alargar tanto el scroll */
+            }
+
+            /* 5. Sección final (Excelencia en cada detalle) */
+            .espaciado-final {
+                padding: 60px 0 !important;
+            }
+            .espaciado-final h2 {
+                font-size: 30px !important;
+                text-align: center;
+            }
+            .espaciado-final p {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            /* 6. Banner de Reserva */
+            .reserva-banner strong {
+                font-size: 20px;
+            }
+        }
+
+        /* Ajuste extra para celulares muy pequeños */
+        @media (max-width: 480px) {
+            .hero-banquetes h1 {
+                font-size: 28px !important;
+            }
+            .btn-cotizar-wa {
+                width: 100%;
+                padding: 14px 10px;
+                font-size: 10px;
+            }
+        }
+        /* Hero Principal con Imagen de Fondo */
+        .hero-banquetes {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+            url('resources/img/desayuno.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 85vh; /* Un poco más alto para mayor impacto */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding-top: 80px; /* Espacio para el header sin empujar la imagen */
+        }
+
+        .hero-banquetes h1 {
+            font-size: 65px;
+            font-weight: 400;
+            margin-bottom: 15px;
+            color: #fff;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.5);
+        }
+
+        .hero-banquetes p {
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: 300;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Mosaico de Imágenes */
+        .mosaico-banquetes { padding: 60px 0; background-color: #fff; }
+        .mosaico-banquetes .row { display: flex; flex-wrap: wrap; margin: 0 -10px; }
+        .mosaico-banquetes .col-md-4 { padding: 10px; }
+        .img-mosaico {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border: 1px solid #eee;
+            transition: transform 0.4s ease;
+        }
+        .img-mosaico:hover { transform: scale(1.03); }
+
+        /* Sección Final y Espaciados */
+        .espaciado-final { padding: 120px 0 180px; overflow: hidden; background-color: #fff; }
+        .flex-align-center { display: flex; align-items: center; flex-wrap: wrap; }
+        .img-container-alest { border: 1px solid #c5a059; padding: 10px; display: block; width: 100%; transition: transform 0.6s ease; }
+        .img-container-alest:hover { transform: scale(1.02); }
+        .img-evento-grande { width: 100%; height: auto; }
+
+        /* Tipografía General */
+        body { font-family: 'Playfair Display', serif; color: #1a1a1a; overflow-x: hidden; background-color: #fff; }
+
+        /* Paquetes */
+        .paquetes-wrapper { padding: 100px 0; background: #fdfdfd; }
+        .paquetes-wrapper .row { display: flex; flex-wrap: wrap; }
+        .paquetes-wrapper .col-md-4 { display: flex; flex-direction: column; padding: 15px; }
+        .paquete-card {
+            display: flex; flex-direction: column; flex: 1; border: 1px solid #eee;
+            padding: 50px 35px; text-align: center; background: #fff; transition: all 0.4s ease;
+        }
+        .paquete-card:hover { transform: translateY(-10px); border-color: #c5a059; box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+        .card-featured { background-color: #faf9f6; border: 1px solid #c5a059 !important; }
+
+        .btn-cotizar-wa {
+            background-color: #1a1a1a; color: white !important; padding: 16px 30px;
+            text-transform: uppercase; font-size: 11px; letter-spacing: 3px; transition: 0.4s;
+            text-decoration: none !important; display: inline-block;
+        }
+        .btn-cotizar-wa:hover { background-color: #c5a059; }
+
+        .reserva-banner { padding: 60px 0; background: #1a1a1a; color: #fff; text-align: center; }
+        .reserva-banner strong { font-size: 26px; font-weight: 400; display: block; color: #c5a059; }
+
+        /* Responsivo */
+        @media (max-width: 991px) {
+            .espaciado-final { padding-bottom: 80px; }
+            .col-md-7 { margin-top: 40px; }
+            .hero-banquetes h1 { font-size: 40px; }
+        }
+    </style>
+</head>
+<body class="inner-page">
+
+{% include 'inc_header.html' %}
+
+<div class="hero-banquetes">
+    <div class="container">
+        <h1 data-aos="fade-up">Desayunos a Domicilio</h1>
+        <p data-aos="fade-up" data-aos-delay="200">La elegancia de The Alest en su hogar</p>
+
+        <a href="https://wa.me/525514557995?text=Hola,%20me%20interesa%20cotizar%20un%20desayuno%20a%20domicilio."
+           class="btn-cotizar-wa"
+           style="background:#c5a059; margin-top:30px; border: none;">
+            Cotizar por WhatsApp
+        </a>
     </div>
-    <!-- MAIN MENU mainmenu.html -->
-    <div id='mainmenu'>
-    </div>
-    <!-- / MAIN MENU mainmenu.html -->
-    <!-- imágenes de las galerías -->
-    <script>
-    let GALLERY = {
+</div>
 
-        {% for item in gallery_categories_2 %}
-          "gallery_{{ item['id'] }}": {
-            title: "{{ item['title'] }}",
-            imgs: [  
-              {% for item2 in item['images'] %}
-                { title: "{{ item2['title'] }}", src: "{{ item2['image'] }}" } {% if not loop.last %},{% endif %}
-              {% endfor %}
-            ]          
-          }{% if not loop.last %},{% endif %}
-        {% endfor %}
-/*
-    "rooms": {
-    title: "Suites &amp; Rooms",
-    imgs: [
-    { title: "image title", src: "resources/img/gal1.jpg" },
-    { title: "image title", src: "resources/img/gal2.jpg" }
-    ]
-    },
-    "bar": {
-    title: "The Bar",
-    imgs: [
-    { title: "image title", src: "resources/img/gal2.jpg" },
-    { title: "image title", src: "resources/img/gal1.jpg" }
-    ]
-    },
-    "lobby": {
-    title: "The Lobby",
-    imgs: [
-    { title: "image title", src: "resources/img/gal2.jpg" },
-    { title: "image title", src: "resources/img/gal1.jpg" },
-    { title: "image title", src: "resources/img/gal2.jpg" },
-    { title: "image title", src: "resources/img/gal1.jpg" }
-    ]
-    },
-    "gastronomic": {
-    title: "Gastronomic Experience",
-    imgs: [
-    { title: "image title", src: "resources/img/gal2.jpg" }
-    ]
-    },
-    "neighborhood": {
-    title: "Neighborhood",
-    imgs: [
-    { title: "image title", src: "resources/img/gal1.jpg" }
-    ]
-    },
-    "amenities": {
-    title: "Amenities",
-    imgs: [
-    { title: "image title", src: "resources/img/gal1.jpg" }
-    ]
-    }
-    */
-    };
-    </script>
-    <div class="galeria">
-      <div class="container">
+<div id='mainmenu'></div>
 
-        {% for item in gallery_categories %}
-          <div class="row">
+<div class='calendarBox' style="display:none;">
+    <div class='form-hit'></div>
+    <div id='calendar' class='dnaCalendar'></div>
+    <form id='calendarForm' method='POST' action="book.php">
+        <input type="hidden" name='datein' value=''/>
+        <input type="hidden" name='dateout' value=''/>
+        <input type="hidden" name='adults' value=''/>
+        <input type="hidden" name='children' value=''/>
+    </form>
+</div>
 
-            {% if item['order'] %}
-                 <div class="col-sm-6">
-                  <a href="#" data-gallery='gallery_{{ item['id_1'] }}'>
-                    <figure class="tall">
-                      <figcaption data-aos="fade-up" data-aos-duration="1200">
-                      <div class="tit">{{ item['title_1'] }}</div>
-                      <div class="des">Ver galería</div>
-                      </figcaption>
-                      <img src="{{ item['image_1'] }}" alt="" data-aos="fade-right" data-aos-duration="1000">
-                    </figure>
-                  </a>
-                </div>
-                <div class="col-sm-6">
-                  {% if item['title_2'] %}
-                    <a href="#" data-gallery='gallery_{{ item['id_2'] }}'>
-                      <figure class="fat">
-                        <figcaption data-aos-duration="1700" data-aos="fade-up">
-                        <div class="tit">{{ item['title_2'] }}</div>
-                        <div class="des">Ver galería</div>
-                        </figcaption>
-                        <img src="{{ item['image_2'] }}" alt="" data-aos="fade-right" data-aos-duration="1500">
-                      </figure>
-                    </a>
-                  {% endif %}
+<div class="container text-center" style="padding: 100px 0 60px;">
+    <p style="max-width: 850px; margin: 0 auto; font-size: 20px; line-height: 1.8; color: #555; font-style: italic;">
+        Nuestro servicio de desayuno está diseñado para adaptarse a tus necesidades, ya sea en tu hogar o en cualquier otro lugar que elijas para celebrar.
+    </p>
+</div>
 
-                  {% if item['title_3'] %}
-                    <a href="#" data-gallery='gallery_{{ item['id_3'] }}'>
-                      <figure class="fat">
-                        <figcaption data-aos="fade-up" data-aos-duration="2200">
-                        <div class="tit">{{ item['title_3'] }}</div>
-                        <div class="des">Ver galería</div>
-                        </figcaption>
-                        <img src="{{ item['image_3'] }}" alt="" data-aos="fade-right" data-aos-duration="2000">
-                      </figure>
-                    </a>
-                  {% endif %}
-                </div>
-
-            {% else %}
-
-              <div class="col-sm-6">
-                <a href="#" data-gallery='gallery_{{ item['id_1'] }}'>
-                  <figure class="fat">
-                    <figcaption data-aos="fade-up" data-aos-duration="1200">
-                    <div class="tit">{{ item['title_1'] }}</div>
-                    <div class="des">Ver galería</div>
-                    </figcaption>
-                    <img src="{{ item['image_1'] }}" alt="" data-aos="fade-right" data-aos-duration="1000">
-                  </figure>
-                </a>
-
-                {% if item['title_2'] %}
-                  <a href="#" data-gallery='gallery_{{ item['id_2'] }}'>
-                    <figure class="fat">
-                      <figcaption data-aos-duration="1700" data-aos="fade-up">
-                      <div class="tit">{{ item['title_2'] }}</div>
-                      <div class="des">Ver galería</div>
-                      </figcaption>
-                      <img src="{{ item['image_2'] }}" alt="" data-aos="fade-right" data-aos-duration="1500">
-                    </figure>
-                  </a>
-                {% endif %}
-
-              </div>
-              <div class="col-sm-6">
-
-                {% if item['title_3'] %}
-                  <a href="#" data-gallery='gallery_{{ item['id_3'] }}'>
-                    <figure class="tall">
-                      <figcaption data-aos="fade-up" data-aos-duration="2200">
-                      <div class="tit">{{ item['title_3'] }}</div>
-                      <div class="des">Ver galería</div>
-                      </figcaption>
-                      <img src="{{ item['image_3'] }}" alt="" data-aos="fade-right" data-aos-duration="2000">
-                    </figure>
-                  </a>
-                {% endif %}
-
-              </div>
-
-            {% endif %}
-
-          </div>
-        {% endfor %}
-
-
-<!--
+<section class="paquetes-wrapper">
+    <div class="container">
         <div class="row">
-          <div class="col-sm-6">
-            <a href="#" data-gallery='rooms'>
-              <figure class="tall">
-                <figcaption data-aos="fade-up" data-aos-duration="1200">
-                <div class="tit">Suites & Rooms</div>
-                <div class="des">View gallery</div>
-                </figcaption>
-                <img src="resources/img/gal1.jpg" alt="" data-aos="fade-right" data-aos-duration="1000">
-              </figure>
-            </a>
-          </div>
-          <div class="col-sm-6">
-            <a href="#" data-gallery='bar'>
-              <figure class="fat">
-                <figcaption data-aos-duration="1700" data-aos="fade-up">
-                <div class="tit">The Bar</div>
-                <div class="des">View gallery</div>
-                </figcaption>
-                <img src="resources/img/gal2.jpg" alt="" data-aos="fade-right" data-aos-duration="1500">
-              </figure>
-            </a>
-            <a href="#" data-gallery='lobby'>
-              <figure class="fat">
-                <figcaption data-aos="fade-up" data-aos-duration="2200">
-                <div class="tit">The Lobby</div>
-                <div class="des">View gallery</div>
-                </figcaption>
-                <img src="resources/img/gal2.jpg" alt="" data-aos="fade-right" data-aos-duration="2000">
-              </figure>
-            </a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <a href="#" data-gallery='gastronomic'>
-              <figure class="fat">
-                <figcaption data-aos="fade-up" data-aos-duration="1200">
-                <div class="tit">Gastronomic Experience</div>
-                <div class="des">View gallery</div>
-                </figcaption>
-                <img src="resources/img/gal2.jpg" alt="" data-aos="fade-right" data-aos-duration="1000">
-              </figure>
-            </a>
-            <a href="#" data-gallery='neighborhood'>
-              <figure class="fat">
-                <figcaption data-aos-duration="1700" data-aos="fade-up">
-                <div class="tit">The Neightborhood</div>
-                <div class="des">View gallery</div>
-                </figcaption>
-                <img src="resources/img/gal1.jpg" alt="" data-aos="fade-right" data-aos-duration="1500">
-              </figure>
-            </a>
-          </div>
-          <div class="col-sm-6">
-            <a href="#" data-gallery='amenities'>
-              <figure class="tall">
-                <figcaption data-aos="fade-up" data-aos-duration="2200">
-                <div class="tit">Amenities</div>
-                <div class="des">View gallery</div>
-                </figcaption>
-                <img src="resources/img/gal1.jpg" alt="" data-aos="fade-right" data-aos-duration="2000">
-              </figure>
-            </a>
-          </div>
-        </div>
-      -->
+            <div class="col-md-4">
+                <div class="paquete-card" data-aos="fade-up">
+                    <span class="tag-alimentos">Servicio Emplatado</span>
+                    <h3>Esencial</h3>
+                    <div class="price">$320 <small>MXN p/p</small></div>
+                    <ul>
+                        <li>Fruta de temporada & Jugo de naranja</li>
+                        <li>Plato fuerte a elección + guarnición</li>
+                        <li>Vajilla, cristalería y servilleta de tela</li>
+                        <li>Pan dulce miniatura, café y té</li>
+                    </ul>
+                    <a href="https://wa.me/525514557995?text=Deseo%20información%20del%20Paquete%20Esencial" class="btn-cotizar-wa">Solicitar</a>
+                </div>
+            </div>
 
-      </div>
+            <div class="col-md-4">
+                <div class="paquete-card card-featured" data-aos="fade-up" data-aos-delay="200">
+                    <span class="tag-alimentos">⭐ El Preferido</span>
+                    <h3>Clásico Tiffany</h3>
+                    <div class="price">$490 <small>MXN p/p</small></div>
+                    <ul>
+                        <li>Incluye todo lo del paquete Esencial</li>
+                        <li>Mesas redondas/cuadradas con mantelería</li>
+                        <li>Silla Tiffany (Blanca, Negra o Dorada)</li>
+                        <li>Refresco, hielo y 5 horas de servicio</li>
+                    </ul>
+                    <a href="https://wa.me/525514557995?text=Deseo%20información%20del%20Paquete%20Tiffany" class="btn-cotizar-wa">Solicitar</a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="paquete-card" data-aos="fade-up" data-aos-delay="400">
+                    <span class="tag-alimentos">Servicio Buffet</span>
+                    <h3>Grand Buffet</h3>
+                    <div class="price">$400 <small>MXN p/p</small></div>
+                    <ul>
+                        <li>Estaciones de jugos, frutas y yogurt</li>
+                        <li>Barra con 2 a 4 opciones de platos fuertes</li>
+                        <li>Montaje completo de estaciones de alimentos</li>
+                        <li>Personal especializado para la barra</li>
+                    </ul>
+                    <a href="https://wa.me/525514557995?text=Deseo%20información%20del%20Paquete%20Buffet" class="btn-cotizar-wa">Solicitar</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class='fullGallery'>
-      <nav><div class='galleryTitles'><span></span><span class='tit'></span></div>
-      <div class='dots'></div><div  class='galleryClose'>&times;</div>
+</section>
+
+<section class="mosaico-banquetes">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" data-aos="fade-up">
+                <img src="resources/img/banquete1.png" class="img-mosaico" alt="Panadería Fina The Alest">
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <img src="resources/img/banquete2.png" class="img-mosaico" alt="Desayuno Emplatado">
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                <img src="resources/img/banquete3.png" class="img-mosaico" alt="Servicio de Café Gourmet">
+            </div>
+        </div>
+    </div>
+
+
+<div class="reserva-banner">
+    <div class="container">
+        <strong>Reserva con el 30% de anticipo</strong>
+        <span style="letter-spacing:2px; font-size:12px; opacity:0.7;">DISPONIBILIDAD LIMITADA EN TEMPORADA ALTA</span>
+    </div>
+</div>
+<section class="espaciado-final">
+    <div class="container">
+        <div class="row flex-align-center">
+
+            <div class="col-md-5" data-aos="fade-right">
+                <h2 style="font-size: 42px; margin-bottom: 30px; font-weight: 400;">Excelencia en cada detalle</h2>
+                <p style="font-size: 17px; line-height: 2; color: #666; font-family: 'Montserrat', sans-serif; font-weight: 300;">
+                    Nuestro servicio trasciende el menú; nos encargamos de la curaduría estética de su evento.
+                    <br><br>
+                    Llevamos el estándar de hospitalidad de <strong>The Alest Hotel</strong> directamente a su ubicación para bautizos, baby showers o reuniones ejecutivas.
+                </p>
+            </div>
+
+            <div class="col-md-7" data-aos="fade-left">
+                <div class="img-container-alest">
+                    <img src="resources/img/montaje-desayuno-2.jpg" class="img-responsive img-evento-grande" alt="Banquete The Alest">
+                </div>
+            </div>
+
+        </div> </div> </section> <div class='fullGallery'>
+    <nav><div class='galleryTitles'><span>Inspiration</span><span class='tit'></span></div>
+        <div class='dots'></div><div class='galleryClose'>&times;</div>
     </nav>
-    <div class='img'>
-    </div>
-  </div>
-  {% include 'inc_footer.html' %}
-  <!-- JS -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script src="resources/js/jQuery.succinct.min.js"></script>
-  <script src="resources/js/scrollreveal.min.js"></script>
+    <div class='img'></div>
+</div>
+
+
+
+<div class='fullGallery'>
+    <nav><div class='galleryTitles'><span>Inspiration</span><span class='tit'></span></div>
+        <div class='dots'></div><div class='galleryClose'>&times;</div>
+    </nav>
+    <div class='img'></div>
+</div>
+
+{% include 'inc_footer.html' %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+<script src="resources/js/main.js"></script>
+<script src="resources/js/newsletter.js"></script>
+<script src="resources/js/book-widget.js"></script>
+<script src='resources/js/fullGallery.js'></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
 <script>
-window.MAINMENU_URL='/es/mainmenu.html';
+    $(function(){
+        AOS.init({ duration: 1000, once: true });
+
+        // Funcionalidad de reserva recuperada
+        $(".check-av").click(function(e){
+            e.preventDefault();
+            $("#calendarForm").submit();
+        });
+    });
 </script>
-  <script src="resources/js/main.js"></script>
-  <script src="resources/js/newsletter.js"></script>
-  <script src='resources/js/fullGallery.js'></script>
-  <script>
-    $(function(){ 
-
-document.getElementsByTagName("footer")[0].removeAttribute('data-aos');
-document.getElementsByTagName("footer")[0].removeAttribute('data-aos-duration');
- 
-
-    })
-  </script>
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  
-  <script>
-  AOS.init();
-  
-  window.addEventListener('load', function() {
-      AOS.refresh();
-  });
-  
-  
-      </script>
 </body>
 </html>
