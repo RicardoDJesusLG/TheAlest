@@ -59,31 +59,39 @@
 <body>
 {% include 'inc_header.html' %}
 
-<div class="hero-home">
-    <script>
-        const heroImages=[
-            {% for item in slider %}
-        "{{ item['image'] }}" {% if not loop.last %},{% endif %}
-        {% endfor %}
-        ]
-    </script>
+<div class="hero-home hero-video-home">
+    <video autoplay muted loop playsinline class="hero-video">
+        <source src="resources/img/video-home2.MOV" type="video/mp4">
+        Tu navegador no soporta videos.
+    </video>
+
+    <div class="overlay"></div>
+
     <div class="txt">
         <div class="title">The Alest Hotel</div>
-        <div class="sub">Hosting the world <br><br><strong>Welcome</strong></div>
+        <div class="sub">
+            Hosting the world <br><br><strong>Welcome</strong>
+        </div>
+
         <div class="hidden-xs">
-            <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F" target="_blank" class="btn-line-big">Check Availability</a>
+            <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F"
+               target="_blank"
+               class="btn-line-big">
+                Check Availability
+            </a>
         </div>
+
         <div class="visible-xs">
-            <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F" target="_blank" class="btn-line-big">Check Availability</a>
+            <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F"
+               target="_blank"
+               class="btn-line-big">
+                Check Availability
+            </a>
         </div>
-    </div>
-    <div class="pager-slider">
-        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
-    </div>
-    <div class="slide">
-        <img src="files/slider/slide1a.jpg" alt="">
     </div>
 </div>
+
+<script src="js/carrusel-videos.js"></script>
 
 <div id='mainmenu'></div>
 
