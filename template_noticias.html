@@ -1,103 +1,866 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <base href="{{ base_href }}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>The Alest, News</title>
-    <meta name="description" content=" ">
+    <title>The Alest - Experiences 2026</title>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="resources/css/alest.css" rel="stylesheet">
     <link rel="stylesheet" href="resources/css/font-awesome.min.css">
     <link rel="stylesheet" href="resources/css/mainmenu.css">
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    {% include 'inc_analytics.html' %}
-    
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
     <style>
 
-      .hero-home .slide img{
-              opacity:0.4;
+
+        @media (max-width: 991px) {
+            /* 1. Resetear el Flexbox para que las tarjetas se apilen verticalmente */
+            .row-flex,
+            .event-group .row {
+                display: block !important;
             }
-          </style>
-  </head>
-  <body>
-    {% include 'inc_header.html' %}
-    <div class="hero-noimage">
-      <h1 class="title">What's On</h1>
-      <div class="sub">at the alest</div>
-    </div>
-    
-    <!-- MAIN MENU mainmenu.html -->
-    <div id='mainmenu'>
-    </div>
-    <!-- / MAIN MENU mainmenu.html -->
-    <div class="news">
-      <div class="container">
-        <div class="grilla">
 
-            
-          <div class="row">
-            {% for item in articles %}
+            .col-flex,
+            .col-md-4,
+            .col-md-6 {
+                width: 100% !important;
+                margin-bottom: 20px;
+            }
 
-                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="500">
-                  <a href="{{ item['link'] }}">
-                    <article class="nota">
-                      <figure>
-                        <img src="{{ item['image'] }}" alt="">
-                      </figure>
-                      <div class="txt">
-                        <div class="date" style="display: none">{{ item['date'] }}</div>
-                        <div class="title">{{ item['title'] }}</div>
-                        <p class="art1">{{ item['intro']|nl2br }}</p>
-                        <div class="more">More</div>
-                      </div>
-                    </article>
-                  </a>
-                </div>
-                 {% endfor %}
+            /* 2. Ajuste de las tarjetas minimalistas */
+            .minimal-card {
+                padding: 30px 25px;
+                height: auto;
+            }
 
+            /* 3. Ajuste de la tipografía del Hero y Títulos */
+            .category-intro {
+                padding: 40px 5%;
+            }
+            .category-intro h2 {
+                font-size: 32px !important;
+            }
+            .intro-text {
+                font-size: 16px;
+            }
+
+            /* 4. Swiper / Concert Cards */
+            .concert-card-slider {
+                min-height: 400px; /* Reducimos un poco la altura en móvil */
+            }
+            .concert-content-overlay {
+                padding: 30px 15px;
+            }
+            .concert-list-text {
+                font-size: 13px; /* Texto un poco más compacto */
+                line-height: 1.8;
+            }
+
+            /* 5. Navegación de Pestañas (Tabs) */
+            /* Hacemos que las pestañas se puedan deslizar horizontalmente si no caben */
+            .nav-tabs-alest {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                justify-content: flex-start !important;
+                padding-bottom: 10px;
+            }
+            .nav-tabs-alest li {
+                flex: 0 0 auto;
+            }
+            .nav-tabs-alest li a {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            /* 6. Ajuste de las "Small Events" y "Concierge Box" */
+            .small-event, .concierge-box {
+                padding: 30px 20px !important;
+                height: auto;
+                margin-bottom: 15px;
+            }
+        }
+
+        /* Ajustes para teléfonos muy pequeños (iPhone SE, etc) */
+        @media (max-width: 480px) {
+            .category-intro h2 {
+                font-size: 28px !important;
+            }
+            .concert-month {
+                font-size: 14px;
+                letter-spacing: 2px;
+            }
+            .concert-list-text {
+                font-size: 12px;
+            }
+        }
+
+        .event-group { margin-bottom: 70px; }
+
+        .event-group h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 45px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #1a1a1a;
+        }
+
+        /* Tarjeta minimalista */
+        .minimal-card {
+            background: #fff;
+            padding: 45px 35px;
+            height: 100%;
+            border: 1px solid #eaeaea; /* Borde muy fino */
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: relative;
+        }
+
+        /* Línea dorada superior que aparece al pasar el mouse */
+        .minimal-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 0px;
+            background: #c5a059;
+            transition: height 0.3s ease;
+        }
+
+        .minimal-card:hover {
+            border-color: #c5a059;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+            transform: translateY(-5px);
+        }
+
+        .minimal-card:hover::before {
+            height: 4px;
+        }
+
+        /* Estilos de contenido */
+        .min-date {
+            color: #c5a059;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .min-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: #1a1a1a;
+            margin: 0 0 20px;
+            line-height: 1.3;
+        }
+
+        .min-desc {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 0;
+            font-weight: 300;
+        }
+
+        /* Ajuste de altura igual para todas las tarjetas de una fila */
+        .row-flex {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .col-flex {
+            display: flex;
+            margin-bottom: 30px;
+        }
+
+        /* Estilo para el Mes (Enero, Febrero...) */
+        .concert-month {
+            color: #fff !important; /* Cambiado a blanco */
+            letter-spacing: 4px;
+            font-weight: 600;
+            font-size: 16px; /* Un poco más grande para destacar */
+            margin-bottom: 25px;
+            display: block;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8); /* Sombra para legibilidad total */
+        }
+
+        /* Estilo para la lista de artistas */
+        .concert-list-text {
+            color: #fff !important; /* Todo el texto en blanco */
+            font-size: 14px; /* Aumentado de 12px a 14px */
+            line-height: 1.8;
+            font-weight: 400; /* Un poco más de grosor */
+            text-shadow: 0 1px 8px rgba(0,0,0,0.9);
+        }
+
+        /* Estilo para los números de las fechas */
+        .concert-list-text strong {
+            color: #fff !important; /* Los números también en blanco */
+            font-weight: 700;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Subrayado sutil opcional */
+        }
+
+        /* Ajuste extra: Capa oscura más intensa para que el blanco brille */
+        .concert-card-slider::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.75)); /* Oscurecemos un poco más */
+            z-index: 2;
+        }
+
+        .concert-card-slider {
+            min-height: 480px; /* Aumenté la altura para que quepa todo el texto */
+        }
+
+        .concert-list-text {
+            color: #fff;
+            font-size: 12px; /* Un punto más pequeño para legibilidad */
+            line-height: 1.6; /* Interlineado más compacto */
+            font-weight: 300;
+            text-align: center;
+        }
+
+        .concert-list-text strong {
+            color: #c5a059;
+            font-weight: 600;
+        }
+
+
+
+        .event-group .row { display: flex; flex-wrap: wrap; }
+
+        /* Contenedor Principal de la Tarjeta */
+        .concert-card-slider {
+            position: relative;
+            min-height: 400px;
+            height: 100%;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .concert-card-slider .swiper {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+
+        .concert-card-slider .swiper-slide img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        .concert-card-slider::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8));
+            z-index: 2;
+        }
+
+        .concert-content-overlay {
+            position: relative;
+            z-index: 3;
+            padding: 40px 25px;
+            pointer-events: none; /* Permite que el swiper se pueda arrastrar si es necesario */
+        }
+
+        /* Estilos de texto heredados y ajustados */
+        .concert-month { color: #c5a059; letter-spacing: 3px; font-weight: 600; margin-bottom: 20px; display: block; }
+        .concert-list-text { color: #fff; font-size: 13px; line-height: 1.8; }
+        .concert-list-text strong { color: #c5a059; }
+
+        /* Tarjetas inferiores (se mantienen igual para que sean parejas) */
+        .small-event, .concierge-box {
+            background: #fff; border: 1px solid #eee; padding: 40px 25px !important;
+            height: 100%; display: flex; flex-direction: column; justify-content: center; text-align: center;
+        }
+
+
+        .concert-card {
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            padding: 40px 30px; /* Más padding para mayor impacto visual */
+            border-radius: 0;
+            text-align: center;
+            height: 100%;
+            min-height: 280px; /* Un poco más alta para lucir la imagen */
+            overflow: hidden;
+            transition: transform 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.1); /* Borde sutil transparente */
+        }
+
+        .concert-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)); /* Gradiente oscuro */
+            z-index: 1;
+            transition: opacity 0.4s ease;
+        }
+
+        .concert-card:hover { transform: translateY(-5px); }
+        .concert-card:hover::before { opacity: 0.7; }
+
+        .concert-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .concert-month {
+            color: #c5a059;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 4px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            display: block;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* Sombra para resaltar */
+        }
+
+        .concert-list-text {
+            color: #fff; /* Todo el texto en blanco */
+            font-size: 15px;
+            line-height: 2.2;
+            font-weight: 300;
+            text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+        }
+
+        .concert-list-text strong {
+            color: #fff;
+            font-weight: 600;
+            margin-right: 5px;
+        }
+
+
+        .category-intro {
+            padding: 60px 15% 80px;
+        }
+
+        .subtitle-alest {
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 12px;
+            color: #c5a059;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .category-intro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+
+        .divider-gold {
+            width: 60px;
+            height: 2px;
+            background: #c5a059;
+            margin: 0 auto 30px;
+        }
+
+        .intro-text {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .cta-alest-gold {
+            display: inline-block;
+            padding: 15px 35px;
+            border: 1px solid #c5a059;
+            color: #c5a059;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 13px;
+            transition: all 0.4s ease;
+            text-decoration: none !important;
+        }
+
+        .cta-alest-gold:hover {
+            background: #c5a059;
+            color: #fff;
+        }
+
+        /* --- Event Cards --- */
+        .event-card-wrapper {
+            margin-bottom: 30px;
+        }
+
+        .event-card {
+            display: block;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none !important;
+        }
+
+        .event-image-container {
+            position: relative;
+            height: 450px; /* Altura editorial */
+            overflow: hidden;
+            background: #000;
+        }
+
+        .event-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            opacity: 0.85;
+        }
+
+        .event-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+            z-index: 2;
+        }
+
+        .event-category {
+            color: #c5a059;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .event-title {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            margin: 0 0 15px;
+            transition: transform 0.4s ease;
+        }
+
+        .event-link {
+            color: #fff;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+        }
+
+        /* Hover Effects */
+        .event-card:hover img {
+            transform: scale(1.1);
+            opacity: 0.6;
+        }
+
+        .event-card:hover .event-link {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .event-card:hover .event-title {
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .category-intro { padding: 40px 5%; }
+            .category-intro h2 { font-size: 32px; }
+            .event-image-container { height: 350px; }
+        }
+
+
+
+
+        .nav-tabs-alest { border: none; margin-bottom: 50px; display: flex; justify-content: center; }
+        .nav-tabs-alest li { float: none; }
+        .nav-tabs-alest li a {
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            color: #999;
+            border: none !important;
+            font-size: 16px;
+            letter-spacing: 2px;
+            padding: 15px 30px;
+        }
+        .nav-tabs-alest li.active a { color: #000 !important; border-bottom: 2px solid #000 !important; background: transparent !important; }
+
+        /* --- FORMATO DE IMÁGENES Y TARJETAS --- */
+        .row-flex {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .nota {
+            background: #fff;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Igualar altura de tarjetas */
+            text-decoration: none !important;
+        }
+        .nota figure {
+            margin: 0;
+            overflow: hidden;
+            height: 250px; /* Altura fija para todas las fotos */
+            width: 100%;
+        }
+        .nota figure img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Recorta la imagen para llenar el espacio sin deformarse */
+            transition: transform 0.5s ease;
+        }
+        .nota:hover figure img {
+            transform: scale(1.05);
+        }
+        .nota .txt {
+            padding: 20px 0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .nota .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: #000;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            min-height: 44px; /* Evita que títulos cortos desalineen el texto */
+        }
+        .nota p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .nota .more {
+            margin-top: auto;
+            color: #8a7350;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        /* -------------------------------------- */
+
+        .category-intro { text-align: center; margin-bottom: 40px; }
+        .category-intro h2 { font-family: 'Playfair Display', serif; text-transform: uppercase; margin-bottom: 15px; }
+        .category-intro p { font-size: 1.2em; color: #555; max-width: 800px; margin: 0 auto; }
+        .event-group { margin-bottom: 60px; }
+        .event-group h3 { border-bottom: 1px solid #000; padding-bottom: 10px; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
+        .event-item { margin-bottom: 30px; }
+        .event-item h4 { font-weight: bold; margin-bottom: 5px; color: #000; }
+        .event-date { color: #8a7350; font-weight: bold; text-transform: uppercase; font-size: 0.9em; margin-bottom: 8px; }
+        .cta-alest { display: inline-block; padding: 15px 35px; background: #000; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px; transition: 0.3s; }
+        .cta-alest:hover { background: #333; color: #fff; text-decoration: none; }
+        .concert-list { font-size: 0.95em; line-height: 1.8; color: #444; }
+        .concert-month { font-weight: bold; margin-top: 20px; color: #000; border-left: 3px solid #8a7350; padding-left: 10px; }
+        .hero-noimage { margin-bottom: 0; }
+
+
+        /* Estilo para las pestañas de navegación */
+        .nav-tabs-alest { border: none; margin-bottom: 50px; display: flex; justify-content: center; }
+        .nav-tabs-alest li { float: none; }
+        .nav-tabs-alest li a {
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            color: #999;
+            border: none !important;
+            font-size: 16px;
+            letter-spacing: 2px;
+            padding: 15px 30px;
+        }
+        .nav-tabs-alest li.active a { color: #000 !important; border-bottom: 2px solid #000 !important; background: transparent !important; }
+
+        /* Estilo de contenido */
+        .category-intro { text-align: center; margin-bottom: 40px; }
+        .category-intro h2 { font-family: 'Playfair Display', serif; text-transform: uppercase; margin-bottom: 15px; }
+        .category-intro p { font-size: 1.2em; color: #555; max-width: 800px; margin: 0 auto; }
+
+        .event-group { margin-bottom: 60px; }
+        .event-group h3 { border-bottom: 1px solid #000; padding-bottom: 10px; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
+
+        .event-item { margin-bottom: 30px; }
+        .event-item h4 { font-weight: bold; margin-bottom: 5px; color: #000; }
+        .event-date { color: #8a7350; font-weight: bold; text-transform: uppercase; font-size: 0.9em; margin-bottom: 8px; }
+
+        .cta-alest {
+            display: inline-block; padding: 15px 35px; background: #000; color: #fff;
+            text-transform: uppercase; letter-spacing: 1px; margin-top: 20px; transition: 0.3s;
+        }
+        .cta-alest:hover { background: #333; color: #fff; text-decoration: none; }
+
+        .concert-list { font-size: 0.95em; line-height: 1.8; color: #444; }
+        .concert-month { font-weight: bold; margin-top: 20px; color: #000; border-left: 3px solid #8a7350; padding-left: 10px; }
+
+        .hero-noimage { margin-bottom: 0; }
+    </style>
+</head>
+<body>
+{% include 'inc_header.html' %}
+
+<div class="hero-noimage">
+    <h1 class="title">Experiences</h1>
+    <div class="sub"></div>
+</div>
+
+<div id='mainmenu'></div>
+<div class="container" style="margin-top: 50px;">
+
+    <ul class="nav nav-tabs nav-tabs-alest" role="tablist">
+        <li role="presentation" class="active"><a href="#inhouse" aria-controls="inhouse" role="tab" data-toggle="tab">In-House Events</a></li>
+        <li role="presentation"><a href="#city" aria-controls="city" role="tab" data-toggle="tab">City Agenda</a></li>
+        <li role="presentation"><a href="#tours" aria-controls="tours" role="tab" data-toggle="tab">Bespoke Tours</a></li>
+    </ul>
+
+    <div class="tab-content">
+
+        <!-- In-House Tab: Banquets -->
+        <div role="tabpanel" class="tab-pane active" id="inhouse">
+            <div class="category-intro text-center" data-aos="fade-up">
+                <span class="subtitle-alest">Exclusive Moments</span>
+                <h2>Banquets & Celebrations</h2>
+                <div class="divider-gold"></div>
+                <p class="intro-text">
+                    The perfect setting for unforgettable moments. From private dinners to corporate events,
+                    each detail is designed with the distinctive sophistication of <strong>The Alest</strong>.
+                </p>
+                <a href="/gallery" target="_blank" class="cta-alest-gold">
+                    View Banquet Brochure <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- City Agenda Tab -->
+        <div role="tabpanel" class="tab-pane" id="city">
+            <div class="category-intro">
+                <h2>City Agenda 2026</h2>
+                <p>Discover the most exclusive and vibrant experiences in Mexico City. Art, sports, music, and lifestyle come together to offer unforgettable moments.</p>
             </div>
 
+            <div class="event-group">
+                <h3>Major Sporting Experiences</h3>
+                <div class="row row-flex">
+                    <div class="col-md-6 col-flex" data-aos="fade-up">
+                        <div class="minimal-card">
+                            <span class="min-date">June – July 2026</span>
+                            <h4 class="min-title">FIFA World Cup™ 2026 – Mexico City</h4>
+                            <p class="min-desc">Azteca Stadium and premium locations. Experience the world’s greatest tournament from VIP suites, exclusive lounges, and fan zones curated for our guests.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-flex" data-aos="fade-up" data-aos-delay="100">
+                        <div class="minimal-card">
+                            <span class="min-date">Oct 29 – Nov 2, 2026</span>
+                            <h4 class="min-title">Formula 1® Mexico City Grand Prix</h4>
+                            <p class="min-desc">Feel the roar of the engines with preferential pit lane access, F1® Experiences™ packages, and premium hospitality areas managed by our Concierge.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div class="event-group">
+                <h3>Culture & Lifestyle</h3>
+                <div class="row row-flex">
+                    <div class="col-md-4 col-flex" data-aos="fade-up">
+                        <div class="minimal-card">
+                            <span class="min-date">April 30 – May 3, 2026</span>
+                            <h4 class="min-title">Flower and Garden Festival (FYJA)</h4>
+                            <p class="min-desc">Masaryk’s urban transformation featuring world-class floral installations just steps away from The Alest.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-flex" data-aos="fade-up" data-aos-delay="100">
+                        <div class="minimal-card">
+                            <span class="min-date">April 18 & 19, 2026</span>
+                            <h4 class="min-title">Polanco Jazz Festival – XXII Edition</h4>
+                            <p class="min-desc">Live music at the Angela Peralta Theater. The most sophisticated atmosphere in Mexico City under the stars.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-flex" data-aos="fade-up" data-aos-delay="200">
+                        <div class="minimal-card">
+                            <span class="min-date">Through April 10, 2026</span>
+                            <h4 class="min-title">Lee Broom Exhibition in Polanco</h4>
+                            <p class="min-desc">An exclusive exhibition of avant-garde design and lighting by the acclaimed British designer in the heart of Polanco.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div class="event-group">
+                <h3 style="margin-bottom: 40px;">Auditorio Nacional Experience</h3>
+                <div class="row">
+                    <div class="col-md-4" style="margin-bottom: 30px;">
+                        <div class="concert-card-slider" data-aos="fade-up">
+                            <div class="swiper mySwiper">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide"><img src="resources/img/enero-1.png"></div>
+                                    <div class="swiper-slide"><img src="resources/img/enero-2.png"></div>
+                                    <div class="swiper-slide"><img src="resources/img/enero-3.png"></div>
+                                </div>
+                            </div>
+                            <div class="concert-content-overlay">
+                                <span class="concert-month">January 2026</span>
+                                <div class="concert-list-text">
+                                    <strong>7:</strong> Oscar D’León<br>
+                                    <strong>8:</strong> Cardenales | Poder del Norte | Invasores<br>
+                                    <strong>16:</strong> Leiva | <strong>18:</strong> Los Askis<br>
+                                    <strong>22:</strong> Gloria Trevi<br>
+                                    <strong>30:</strong> La Gusana Ciega<br>
+                                    <strong>31:</strong> Yandel Sinfónico
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 30px;">
+                        <div class="concert-card-slider" data-aos="fade-up" data-aos-delay="100">
+                            <div class="swiper mySwiper">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide"><img src="resources/img/febrero-1.png"></div>
+                                    <div class="swiper-slide"><img src="resources/img/febrero-2.png"></div>
+                                </div>
+                            </div>
+                            <div class="concert-content-overlay">
+                                <span class="concert-month">February 2026</span>
+                                <div class="concert-list-text">
+                                    <strong>3:</strong> M. Carrasco | <strong>4:</strong> Arcano | <strong>5:</strong> Porter<br>
+                                    <strong>9:</strong> Napoleón & Mocedades | <strong>12:</strong> Kalimba<br>
+                                    <strong>14:</strong> Jesse & Joy (Double) | <strong>15:</strong> Edith Márquez<br>
+                                    <strong>19:</strong> Jesse & Joy | <strong>20:</strong> Emmanuel & Mijares<br>
+                                    <strong>21:</strong> Gloria Trevi | <strong>24:</strong> Demon Slayer<br>
+                                    <strong>26:</strong> Elefante | <strong>28:</strong> Un Corazón
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 30px;">
+                        <div class="concert-card-slider" data-aos="fade-up" data-aos-delay="200">
+                            <div class="swiper mySwiper">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide"><img src="resources/img/marzo-1.png"></div>
+                                    <div class="swiper-slide"><img src="resources/img/marzo-2.png"></div>
+                                </div>
+                            </div>
+                            <div class="concert-content-overlay">
+                                <span class="concert-month">March 2026</span>
+                                <div class="concert-list-text">
+                                    <strong>1:</strong> Monumental Organ | <strong>6:</strong> Matisse<br>
+                                    <strong>7:</strong> Caravana del Amor | <strong>8:</strong> Amanda Miguel<br>
+                                    <strong>12:</strong> Aleks Syntek | <strong>18:</strong> Horóscopos Durango<br>
+                                    <strong>19:</strong> Miguel Mateos | <strong>20:</strong> Gloria Trevi<br>
+                                    <strong>21:</strong> MET Opera | <strong>22:</strong> Los Yaguarú<br>
+                                    <strong>23:</strong> Mitski
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-
-
-
-
-
-
-
-
-
-
-          <!-- set 2 -->
-          <!-- set 3 -->
+                <div class="row">
+                    <div class="col-md-4" style="margin-bottom: 30px;">
+                        <div class="small-event" data-aos="fade-up">
+                            <span class="event-date">April & May</span>
+                            <p>
+                                <strong>Apr 5:</strong> ABBA Tribute | <strong>Apr 8:</strong> Fonseca<br>
+                                <strong>Apr 17/18:</strong> Raphael<br>
+                                <strong>May 15/16:</strong> Miguel Bosé<br>
+                                <strong>May 22:</strong> La La Love You
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 30px;">
+                        <div class="small-event" data-aos="fade-up" data-aos-delay="100">
+                            <span class="event-date">Summer & Autumn</span>
+                            <p>
+                                <strong>Jun 17:</strong> Julieta Venegas<br>
+                                <strong>Jul 31 / Aug 1:</strong> Gilberto Santa Rosa<br>
+                                <strong>Aug 14/15:</strong> Cristian Castro<br>
+                                <strong>Oct 9:</strong> Pablo Alborán
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 30px;">
+                        <div class="concierge-box" data-aos="fade-up" data-aos-delay="200">
+                            <span class="event-date" style="color:#1a1a1a">Bespoke Concierge</span>
+                            <p style="font-size: 13px;">
+                                Many events offer VIP packages. Booking in advance guarantees the best experience.
+                            </p>
+                            <div class="text-center">
+                                <a href="https://wa.me/525514557995" class="cta-alest-gold">ARRANGE VIP TICKETS</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <!-- Tours Tab -->
+        <div role="tabpanel" class="tab-pane" id="tours">
+            <div class="category-intro" data-aos="fade-up">
+                <h2>Bespoke Tours</h2>
+                <p>"Explore the city with exclusive access and a curation designed by our Concierge."</p>
+                <a href="/services/tours" class="cta-alest-gold">Explore Curated Experiences</a>
+            </div>
+        </div>
+
     </div>
-    {% include 'inc_footer.html' %}
-    <!-- JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="resources/js/jQuery.succinct.min.js"></script>
-    <script src="resources/js/scrollreveal.min.js"></script>
-    <script src="resources/js/main.js?a=0"></script>
-    <script src="resources/js/newsletter.js"></script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  
+{% include 'inc_footer.html' %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="resources/js/jQuery.succinct.min.js"></script>
+<script src="resources/js/scrollreveal.min.js"></script>
+<script>window.MAINMENU_URL='mainmenu.html';</script>
+<script src="resources/js/main.js"></script>
+<script src="resources/js/newsletter.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
-AOS.init();
-
-window.addEventListener('load', function() {
-    AOS.refresh();
-});
-
-
-    </script>
-  </body>
+    var swiper = new Swiper(".mySwiper", {
+        effect: "fade", // Efecto elegante de desvanecimiento
+        loop: true,
+        autoplay: {
+            delay: 4000, // Cambia de imagen cada 4 segundos
+            disableOnInteraction: false,
+        },
+        speed: 1500, // Velocidad de la transición
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var swiper = new Swiper(".mySwiper", {
+            effect: "fade", // Efecto elegante de desvanecimiento
+            loop: true,
+            autoplay: {
+                delay: 3500, // Cambia cada 3.5 segundos
+                disableOnInteraction: false,
+            },
+            speed: 1500,
+            allowTouchMove: true, // Permite arrastrar con el mouse/dedo
+        });
+    });
+</script>
+<script>
+    AOS.init();
+    window.addEventListener('load', function() {
+        AOS.refresh();
+    });
+</script>
+</body>
 </html>

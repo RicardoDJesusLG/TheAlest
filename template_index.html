@@ -5,8 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>The Alest Hotel in Polanco, Mexico</title>
-    <meta name="description" content="Located in the refined and cosmopolitan neighborhood of Polanco. A property that, under the boutique hospitality concept, opens its doors to a world of dreams and unparalleled hedonism.">
+    <title>The Alest Hotel in Polanco, Mexico City</title>
+    <meta name="description" content="Ubicado en el refinado y cosmopolita vecindario de Polanco. Una propiedad que, bajo el concepto de hotelería boutique, abre sus puertas a un mundo de ensueño y hedonismo sin igual.">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="resources/css/alest.css" rel="stylesheet">
     <link rel="stylesheet" href="resources/css/font-awesome.min.css">
@@ -15,51 +16,55 @@
     <link rel="stylesheet" href="resources/css/swiper-bundle.min.css">
 
     <style>
-        a:focus{ outline:none !important; outline-offset: 0px; }
+        a:focus{ outline:none !important; }
         .hero-home .slide img{ opacity:0.4; }
-        .specials{ overflow:hidden; }
+        body { font-family: 'Poppins', sans-serif; }
 
-        /* --- NEWS SECTION --- */
-        .news { padding: 60px 0; background-color: #fcfcfc; }
-        .news .grilla article {
-            background: #fff; margin-bottom: 30px; border: 1px solid #eaeaea;
-            transition: all 0.3s ease; overflow: hidden; height: 100%;
+        /* --- DISEÑO DE BLOQUES --- */
+        .main-blocks { padding: 100px 0; background-color: #fff; }
+        .block-item {
+            text-decoration: none !important; color: inherit; display: block; position: relative;
+            overflow: hidden; height: 550px; margin-bottom: 30px; background: #000;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
-        .news .grilla a { text-decoration: none !important; color: inherit; }
-        .news .grilla a:hover article { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
-        .news .grilla .nota figure img { width: 100%; height: 250px; object-fit: cover; }
-        .news .grilla .txt { padding: 25px; }
-        .news .grilla .title {
-            font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600;
-            line-height: 1.4; margin-bottom: 15px; color: #1a1a1a;
-            text-transform: uppercase; letter-spacing: 1px;
+        .block-item .overlay {
+            position: absolute; top:0; left:0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0,0.8) 100%);
+            z-index: 2;
         }
-        .news .grilla p.art1 { font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 20px; }
-        .news .grilla .more {
-            font-size: 12px; text-transform: uppercase; font-weight: bold;
-            letter-spacing: 2px; color: #bfa17d; border-bottom: 1px solid #bfa17d;
-            display: inline-block; padding-bottom: 2px;
+        .block-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 3s ease; z-index: 1; }
+        .block-item:hover img { transform: scale(1.1); }
+        /* Color dorado para los subtítulos sobre los títulos principales */
+        .block-content h6 {
+            color: #c5a059 !important; /* El dorado oficial de The Alest */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 11px;
         }
+        .block-content { position: absolute; bottom: 50px; left: 0; right: 0; z-index: 3; text-align: center; padding: 0 30px; transition: transform 0.5s ease; }
+        .block-content h3 { color: #fff; font-family: 'Playfair Display', serif; font-size: 28px; text-transform: uppercase; }
+        .block-line { width: 0px; height: 1px; background: #c5a059; margin: 20px auto 0; transition: width 0.6s ease; }
+        .block-item:hover .block-line { width: 60px; }
 
-        /* MODAL & GALLERY */
-        .modal-backdrop { background-color: #000; }
-        .modal-backdrop.in { opacity: 0.8; }
-        .modal-content { border-radius: 0; border: none; box-shadow: 0 15px 50px rgba(0,0,0,0.5); }
-        .modal-gallery-img {
-            width: 100%; height: 250px; object-fit: cover;
-            border: 1px solid #eee; transition: opacity 0.3s;
-        }
-        .modal-gallery-img:hover { opacity: 0.9; }
+        .modal-side-content { padding: 50px; background: #fff; max-height: 85vh; overflow-y: auto; position: relative; }
+        .modal-side-content h2 { font-family: 'Playfair Display', serif; font-size: 32px; color: #1a1a1a; margin-bottom: 20px; }
+        .section-title { font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 3px; font-size: 10px; color: #c5a059; font-weight: 700; margin-top: 30px; display: block; }
+        .curadoria-item { margin-bottom: 20px; display: flex; align-items: flex-start; text-align: left; }
+        .curadoria-item i { color: #c5a059; margin-right: 15px; margin-top: 5px; }
 
-        /* FIX PARA EL DIV DE ERROR 404 SI EL SCRIPT FALLA */
-        #mainmenu:empty { display: none; }
+        .btn-alest-line:hover span { width: 100% !important; }
+        @media (max-width: 991px) { .block-item { height: 450px; } }
     </style>
     {% include 'inc_analytics.html' %}
 </head>
 <body>
+
 {% include 'inc_header.html' %}
 
-<div class="hero-home">
+<div class="hero-home" >
     <script>
         const heroImages=[
             {% for item in slider %}
@@ -69,20 +74,16 @@
     </script>
     <div class="txt">
         <div class="title">The Alest Hotel</div>
-        <div class="sub">Hosting the world <br><br><strong>Welcome</strong></div>
+        <div class="sub">Hosting the world <br><br><strong>Bienvenido</strong></div>
         <div class="hidden-xs">
-            <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F" target="_blank" class="btn-line-big">Check Availability</a>
+            <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F" target="_blank" class="btn-line-big">Descubre la Experiencia The Alest.</a>
         </div>
         <div class="visible-xs">
-            <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F" target="_blank" class="btn-line-big">Check Availability</a>
+            <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F" target="_blank" class="btn-line-big">Ver Disponibilidad</a>
         </div>
     </div>
-    <div class="pager-slider">
-        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
-    </div>
-    <div class="slide">
-        <img src="files/slider/slide1a.jpg" alt="">
-    </div>
+    <div class="pager-slider"><a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a></div>
+    <div class="slide"><img src="files/slider/Sliderfachada.JPG" alt=""></div>
 </div>
 
 <div id='mainmenu'></div>
@@ -93,272 +94,181 @@
     <form id='calendarForm' method='POST' action="book.php" style='display:none;'>
         <input type="hidden" name='datein' value=''/>
         <input type="hidden" name='dateout' value=''/>
-        <input type="hidden" name='adults' value=''/>
-        <input type="hidden" name='children' value=''/>
+        <input type="hidden"  name='adults' value=''/>
+        <input type="hidden"  name='children' value=''/>
     </form>
 </div>
-
-<div class="intro" style="padding: 80px 0; background-color: #f4f4f4;">
+<div class="intro" style="padding: 80px 0 40px 0; background-color: #f4f4f4;">
     <div class="container">
         <div style="background: #ffffff; border: 1px solid #d1d1d1; padding: 60px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
             <div class="row" style="display: flex; align-items: center; flex-wrap: wrap;">
                 <div class="col-md-7">
-                    <div class="txt" style="text-align: left; padding-right: 30px;">
-                        <h6 data-aos="fade-up" data-aos-duration="900">Experience</h6>
-                        <h1 data-aos="fade-up" data-aos-duration="900" data-aos-offset="200" style="margin-top: 20px; margin-bottom: 30px;">
-                            The Alest, a sophisticated hotel in a vibrant city
+                    <div class="txt" style="text-align: left; padding-right: 40px;">
+                        <h6 data-aos="fade-up" data-aos-duration="900" style="text-transform: uppercase; letter-spacing: 3px; color: #c5a059; font-weight: 700; font-size: 12px; margin-bottom: 15px; font-family: 'Montserrat', sans-serif;">Experience</h6>
+                        <h1 data-aos="fade-up" data-aos-duration="900" data-aos-offset="200" style="margin-top: 0; margin-bottom: 35px; line-height: 1.3; font-weight: 300; color: #1a1a1a; font-size: 2.2rem; font-family: 'Playfair Display', serif;">
+                            Inspired by the sophistication of <br>
+                            <span style="font-style: italic; font-weight: 400;">great European residences,</span>
+                            <strong style="display: block; margin-top: 10px; color: #c5a059; font-weight: 600;">yet with the warm soul of Mexico.</strong>
                         </h1>
-                        <p data-aos="fade-up" data-aos-duration="900" data-aos-offset="100" style="margin-bottom: 30px;">
-                            The Alest is characterized by the classic elegance that shines through all its spaces, from its 19 beautifully decorated rooms to the elegant public areas that stand out for their unique beauty both inside and out.
-                            <br><br>
-                            Allow yourself to be captivated by personalized and anticipatory service that meets the most demanding needs, welcoming you to new, unique, and unrepeatable experiences.
+                        <p data-aos="fade-up" data-aos-duration="900" data-aos-offset="100" style="margin-bottom: 40px; font-size: 17px; line-height: 1.7; color: #555; font-weight: 400; font-family: 'Montserrat', sans-serif;">
+                            The Alest is a signature boutique hotel where classic design and modernity coexist in perfect harmony.
                         </p>
-                        <a href="javascript:void(0)" class="btn-line" data-toggle="modal" data-target="#modalExperiencia" data-aos="fade-up" data-aos-duration="900" data-aos-offset="100">Discover more</a>
+
+                        <a
+                                href="#"
+                                id="openCustomModal"
+                                class="btn-alest-line"
+                                style="display: inline-block; text-transform: uppercase; letter-spacing: 4px; font-size: 10px; font-weight: 700; text-decoration: none; color: #1a1a1a; font-family: 'Montserrat', sans-serif; position: relative; padding-bottom: 8px; transition: all 0.3s ease;">
+                            Discover more
+                            <span style="position: absolute; bottom: 0; left: 0; width: 30px; height: 1px; background: #c5a059; transition: width 0.4s ease;"></span>
+                        </a>
+
                     </div>
                 </div>
-
                 <div class="col-md-5">
-                    <figure style="background: #fff; padding: 15px; border: 1px solid #eaeaea; margin: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                        <img src="resources/img/thealest0.png" alt="" data-aos="fade-up" data-aos-duration="900" style="width: 100%; height: auto; display: block;">
-                        <figcaption data-aos="fade-right" data-aos-duration="900" style="text-align: left; padding: 15px; border-left: 4px solid #c5a059; margin-top: 15px; background: #fff;">
-                            <strong>Extraordinary location</strong>
+                    <figure style="background: #fff; padding: 15px; border: 1px solid #eaeaea; margin: 0;">
+                        <img src="resources/img/Thealest01.png" alt="" data-aos="fade-up" data-aos-duration="900" style="width: 100%; height: auto; display: block;">
+                        <figcaption data-aos="fade-right" data-aos-duration="900" style="text-align: left; padding: 15px; border-left: 4px solid #c5a059; margin-top: 15px; font-family: 'Montserrat', sans-serif;">
+                            <strong style="font-weight: 700;">Extraordinary location</strong>
                         </figcaption>
                     </figure>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div><div class="main-blocks">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="800">
+                <a href="{{link_rooms}}" class="block-item">
+                    <div class="overlay"></div>
+                    <img src="resources/img/rooms.JPG" alt="Suites">
+                    <div class="block-content">
+                        <h6>The Living Experience</h6> <h3>Suites</h3>
+                        <div class="block-line"></div>
+                    </div>
+                </a>
+            </div>
 
-<div class="twospots">
-    <div class="spots">
-        <figure>
-            <a href="{{link_rooms}}">
-                <figcaption>
-                    <h3>Rooms and Deluxe Junior Suites</h3>
-                    <p>Enter a universe of disconnection and eclectic style through a curated selection of interior design</p>
-                </figcaption>
-                <img src="resources/img/spot-rooms.jpg" data-aos="zoom-out" data-aos-duration="1000" alt="">
-                <div class="bg" data-aos="fade-right" data-aos-duration="500"></div>
-            </a>
-        </figure>
-        <figure>
-            <a href="{{link_gallery}}">
-                <figcaption>
-                    <h3>Gallery</h3>
-                    <p>Enchant your senses at The Alest Hotel</p>
-                </figcaption>
-                <img src="resources/img/spot-galler.jpg" data-aos="zoom-out" data-aos-duration="1000" alt="">
-                <div class="bg" data-aos="fade-left" data-aos-duration="900"></div>
-            </a>
-        </figure>
+            <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="1200">
+                <a href="en/eat-and-drink" class="block-item">
+                    <div class="overlay"></div>
+                    <img src="resources/img/Restaurantebar.png" alt="Restaurant">
+                    <div class="block-content">
+                        <h6>Dining</h6> <h3>45 Bar & Restaurant</h3>
+                        <div class="block-line"></div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 col-sm-12" data-aos="fade-up" data-aos-duration="1600">
+                <a href="{{link_gallery}}" class="block-item">
+                    <div class="overlay"></div>
+                    <img src="resources/img/Galler.png" alt="Gallery">
+                    <div class="block-content">
+                        <h6>Alest Moments</h6> <h3>Gallery</h3>
+                        <div class="block-line"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="testimonials">
     {% for item in testimonials %}
     <div class="txt">
-        <div class="llave" data-aos="fade-down" data-aos-duration="2000">
-            <img src="resources/img/llave.png" alt="">
-        </div>
+        <div class="llave" data-aos="fade-down" data-aos-duration="2000"><img src="resources/img/llave.png" alt=""></div>
         <h4>“{{ item['text'] }}”</h4>
         <div class="author"><strong>{{ item['author'] }}</strong> / {{ item['location'] }}</div>
     </div>
     {% endfor %}
-    <div class="bg" data-aos="zoom-in" data-aos-duration="2000">
-        <img src="resources/img/alest-bg.jpg" alt="">
-    </div>
-</div>
-
-<div class="specials" data-aos="fade-up" data-aos-duration="3000">
-    <div class="header">
-        <div class="row">
-            <div class="col-sm-8">
-                <h6>Promotions</h6>
-                <h2>Seasonal rates and exclusive packages</h2>
-            </div>
-            <div class="col-sm-4">
-                <nav>
-                    <a href="#" class="inactive"><img src="resources/img/prev.png" alt="prev"></a>
-                    <a href="#"><img src="resources/img/next.png" alt="next"></a>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <div class="grid">
-        {% for item in specials %}
-        <figure>
-            <a href="{{ item['link'] }}">
-                <figcaption>
-                    <h4>{{ item['title'] }}</h4>
-                    <p>{{ item['intro'] }}</p>
-                </figcaption>
-                <div class="shad"></div>
-                <img src="{{ item['image'] }}" alt="">
-                <div class="bg"></div>
-            </a>
-        </figure>
-        {% endfor %}
-    </div>
-</div>
-
-<div class="news">
-    <div class="container">
-        <div class="head" data-aos="fade-up" data-aos-duration="1000">
-            <h6>What's happening at</h6>
-            <h2>The Alest</h2>
-        </div>
-        <div class="grilla">
-            <div class="row">
-                {% for item in articles %}
-                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="500">
-                    <a href="{{ item['link_1'] }}">
-                        <article class="nota">
-                            <figure><img src="{{ item['image_1'] }}" alt=""></figure>
-                            <div class="txt">
-                                <div class="title">{{ item['title_1'] }}</div>
-                                <p class="art1">{{ item['intro_1']|nl2br }}</p>
-                                <div class="more">See More</div>
-                            </div>
-                        </article>
-                    </a>
-                    {% if item['id_2'] %}
-                    <a href="{{ item['link_2'] }}">
-                        <article class="nota">
-                            <figure><img src="{{ item['image_2'] }}" alt=""></figure>
-                            <div class="txt">
-                                <div class="title">{{ item['title_2'] }}</div>
-                                <p class="art1">{{ item['intro_2']|nl2br }}</p>
-                                <div class="more">See More</div>
-                            </div>
-                        </article>
-                    </a>
-                    {% endif %}
-                </div>
-                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="1000">
-                    {% if item['id_3'] %}
-                    <a href="{{ item['link_3'] }}">
-                        <article class="nota">
-                            <figure><img src="{{ item['image_3'] }}" alt=""></figure>
-                            <div class="txt">
-                                <div class="title">{{ item['title_3'] }}</div>
-                                <p class="art1">{{ item['intro_3']|nl2br }}</p>
-                                <div class="more">See More</div>
-                            </div>
-                        </article>
-                    </a>
-                    {% endif %}
-                    {% if item['id_4'] %}
-                    <a href="{{ item['link_4'] }}">
-                        <article class="nota">
-                            <figure><img src="{{ item['image_4'] }}" alt=""></figure>
-                            <div class="txt">
-                                <div class="title">{{ item['title_4'] }}</div>
-                                <p class="art1">{{ item['intro_4']|nl2br }}</p>
-                                <div class="more">See More</div>
-                            </div>
-                        </article>
-                    </a>
-                    {% endif %}
-                </div>
-                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-duration="1500">
-                    {% if item['id_5'] %}
-                    <a href="{{ item['link_5'] }}">
-                        <article class="nota">
-                            <figure><img src="{{ item['image_5'] }}" alt=""></figure>
-                            <div class="txt">
-                                <div class="title">{{ item['title_5'] }}</div>
-                                <p class="art1">{{ item['intro_5']|nl2br }}</p>
-                                <div class="more">See More</div>
-                            </div>
-                        </article>
-                    </a>
-                    {% endif %}
-                    {% if item['id_6'] %}
-                    <a href="{{ item['link_6'] }}">
-                        <article class="nota">
-                            <figure><img src="{{ item['image_6'] }}" alt=""></figure>
-                            <div class="txt">
-                                <div class="title">{{ item['title_6'] }}</div>
-                                <p class="art1">{{ item['intro_6']|nl2br }}</p>
-                                <div class="more">See More</div>
-                            </div>
-                        </article>
-                    </a>
-                    {% endif %}
-                </div>
-                {% endfor %}
-            </div>
-            <div class="viewmore" data-aos="fade-down" data-aos-duration="3000">
-                <div class="linea"></div>
-                <a href="{{link_news}}"><div class="btn-line">See more</div></a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="modalExperiencia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header" style="border: none; padding: 20px 20px 0 20px;">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 30px;"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel" style="text-transform: uppercase; letter-spacing: 2px;">The Alest Gallery</h4>
-            </div>
-            <div class="modal-body" style="padding: 20px;">
-                <div class="row">
-                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal1.png" class="modal-gallery-img" alt="1"></div>
-                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal9.png" class="modal-gallery-img" alt="2"></div>
-                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal2.png" class="modal-gallery-img" alt="3"></div>
-                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal3.png" class="modal-gallery-img" alt="4"></div>
-                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal8.png" class="modal-gallery-img" alt="5"></div>
-                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal10.png" class="modal-gallery-img" alt="6"></div>
-                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal4.png" class="modal-gallery-img" alt="7"></div>
-                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal6.jpeg" class="modal-gallery-img" alt="8"></div>
-                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal11.jpeg" class="modal-gallery-img" alt="9"></div>
-                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal5.png" class="modal-gallery-img" alt="10"></div>
-                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal7.jpeg" class="modal-gallery-img" alt="11"></div>
-                    <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;"><img src="resources/img/modal13.jpeg" class="modal-gallery-img" alt="12"></div>
-                </div>
-            </div>
-            <div class="modal-footer" style="border: none;">
-                <button type="button" class="btn-line" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
+    <div class="bg" data-aos="zoom-in" data-aos-duration="2000"><img src="resources/img/alest-bg.jpg" alt=""></div>
 </div>
 
 {% include 'inc_footer.html' %}
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="resources/js/jQuery.succinct.min.js"></script>
 <script src="resources/js/scrollreveal.min.js"></script>
-
-<script>
-    window.MAINMENU_URL='mainmenu.html';
-</script>
-
+<script>window.MAINMENU_URL='mainmenu.html';</script>
 <script src="resources/js/main.js?v=30"></script>
 <script src="resources/js/newsletter.js"></script>
 <script src="resources/js/book-widget.js?ap=tst2"></script>
 <script src="resources/js/swiper-bundle.min.js"></script>
 <script src='resources/js/lineSlider.js'></script>
-
-<script>
-    $(function(){
-        $(".check-av").click(function(e){
-            if(e)e.preventDefault();
-            $("#calendarForm").submit();
-        });
-    });
-</script>
-
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+
+<div id="customModal" class="modal-overlay">
+    <div class="modal-content">
+
+        <div class="close-btn" id="closeModal">&times;</div>
+        <div class="modal-identity-container" style="display: flex; flex-wrap: wrap; background: #fff; min-height: 600px; font-family: 'Montserrat', sans-serif; position: relative; overflow: hidden;">
+
+            <div class="col-md-5 hidden-xs" style="padding: 0; background: url('resources/img/Fachada001.png') center center no-repeat; background-size: cover; position: relative;">
+                <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.3);"></div> <div style="position: absolute; bottom: 40px; left: 40px; color: #fff; z-index: 2;">
+                <h6 style="color: #c5a059; letter-spacing: 3px; text-transform: uppercase; font-size: 10px; margin-bottom: 10px; font-weight: 700;">The Alest</h6>
+                <h2 style="color: #c5a059; font-family: 'Playfair Display', serif; font-size: 26px; margin: 0; font-weight: 500;">Residencia de Autor</h2>
+            </div>
+            </div>
+
+            <div class="col-md-7 col-xs-12" style="padding: 60px 50px; background: #fff; text-align: left;">
+
+                <h6 style="color: #c5a059; letter-spacing: 4px; font-weight: 700; text-transform: uppercase; font-size: 10px; margin-bottom: 15px;">Manifiesto de Marca</h6>
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 34px; color: #1a1a1a; margin-top: 0; margin-bottom: 25px; line-height: 1.2;">Nuestra Esencia</h2>
+
+                <p style="font-size: 15px; color: #666; line-height: 1.8; margin-bottom: 40px;">
+                    Inspirados en la elegancia de las grandes residencias europeas, nuestra misión es ofrecer un refugio hedonista donde el diseño y la calidez mexicana conviven en perfecta armonía.
+                </p>
+
+                <div class="row" style="margin-bottom: 45px;">
+                    <div class="col-sm-6" style="border-left: 2px solid #c5a059; padding-left: 20px; margin-bottom: 25px;">
+                        <h5 style="font-weight: 700; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #1a1a1a; margin-bottom: 12px;">Misión</h5>
+                        <p style="font-size: 13px; color: #777; line-height: 1.6; margin: 0;">
+                            Curar experiencias extraordinarias a través de nuestro <strong>Servicio de Guante Blanco</strong>, donde la discreción y la excelencia son nuestra firma.
+                        </p>
+                    </div>
+                    <div class="col-sm-6" style="border-left: 2px solid #c5a059; padding-left: 20px; margin-bottom: 25px;">
+                        <h5 style="font-weight: 700; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #1a1a1a; margin-bottom: 12px;">Visión</h5>
+                        <p style="font-size: 13px; color: #777; line-height: 1.6; margin: 0;">
+                            Consolidarnos como el referente absoluto de la hotelería boutique en México, redefiniendo el lujo a través de la curaduría de autor.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="background: #fdfdfd; padding: 30px; border: 1px solid #f0f0f0;">
+                    <h4 style="font-family: 'Playfair Display', serif; font-size: 20px; margin-top: 0; margin-bottom: 18px; color: #1a1a1a;">Reserva con nosotros</h4>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                <span style="font-size: 14px; color: #1a1a1a; font-weight: 600;">
+                    <i class="fa fa-phone" style="color: #c5a059; margin-right: 12px; width: 15px;"></i> +52 56 1869 6207
+                </span>
+                        <span style="font-size: 14px; color: #1a1a1a; font-weight: 600;">
+                    <i class="fa fa-envelope-o" style="color: #c5a059; margin-right: 12px; width: 15px;"></i> generalmanager@thealest.com
+                </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 <script>
-    AOS.init();
-    window.addEventListener('load', function() {
-        AOS.refresh();
+    $(document).ready(function(){
+        // Usamos delegación de eventos para evitar conflictos con otros scripts
+
+        $(".check-av").click(function(e){ if(e)e.preventDefault(); $("#calendarForm").submit(); });
+
+        try {
+            AOS.init();
+        } catch(e) {
+            console.log("Error en AOS init ignorado.");
+        }
     });
 </script>
+
+<script src="resources/js/funcion-modal.js"></script>
 
 </body>
 </html>

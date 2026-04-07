@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <base href="{{ base_href }}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>The Alest, The Hotel</title>
+    <title>The Alest, El Hotel</title>
     <meta name="description" content=" ">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -62,6 +62,44 @@
             .the-hotel .row, .the-hotel .first, .the-hotel .second, .the-hotel .third { display: block; }
             .the-hotel figure img { height: 300px; }
         }
+
+
+
+
+        /* AJUSTES PARA RESPONSIVIDAD */
+        @media (max-width: 767px) {
+            /* 1. Hacemos que las filas se apilen verticalmente */
+            .the-hotel .row,
+            .the-hotel .first,
+            .the-hotel .second,
+            .the-hotel .third {
+                display: block !important;
+            }
+
+            /* 2. Ajustamos la altura de las imágenes para que no se vean estiradas */
+            .the-hotel figure img {
+                height: 300px !important;
+                margin-bottom: 15px;
+            }
+
+            /* 3. Quitamos el "push" y "pull" en móvil para que el orden sea natural */
+            .col-sm-6.col-sm-push-6,
+            .col-sm-6.col-sm-pull-6 {
+                left: 0 !important;
+                right: 0 !important;
+                width: 100% !important;
+            }
+
+            /* 4. Ajuste de textos para que no queden muy grandes en celular */
+            .the-hotel h1 { font-size: 28px !important; }
+            .txt-box h3 { font-size: 22px !important; }
+
+            .txt-box {
+                padding: 20px !important;
+                margin-bottom: 30px !important;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -71,7 +109,7 @@
 <div class="hero-home">
     <div class="txt">
         <div class="title">The Alest Hotel</div>
-        <div class="sub">Refined Details and Exclusive Experiences</div>
+        <div class="sub">Refined Details & Exclusive Experiences</div>
         <div class="hidden-xs">
             <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F" target="_blank" class="btn-line-big">Check Availability</a>
         </div>
@@ -86,10 +124,9 @@
         <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
     </div>
     <div class="slide">
-        <img src="resources/img/hero-thehotel.jpg" alt="">
+        <img src="resources/img/hero-thehotel.jpg" alt="The Alest Hotel Hero">
     </div>
 </div>
-
 <div id='mainmenu'></div>
 
 <div class='calendarBox'>
@@ -102,147 +139,78 @@
         <input type="hidden"  name='children' value=''/>
     </form>
 </div>
-
 <div class="the-hotel" style='width: 100%; overflow: hidden;'>
     <div class="container">
 
         <div class="row">
-            <div class="col-xs-12 text-center" style="margin-bottom: 50px;">
-                <h6 data-aos="fade-up" data-aos-duration="1000">The Alest</h6>
-                <h1 data-aos="fade-up" data-aos-duration="1500" style="text-align: center;">
-                    Where luxury is manifested in the details,
-                    <span style="display: block;">the warmth of the service, and the intimacy of each experience.</span>
+            <div class="col-xs-12 text-center" style="margin-bottom: 60px;">
+                <h6 data-aos="fade-up" data-aos-duration="1000" style="color: #c5a059; letter-spacing: 3px; text-transform: uppercase; font-size: 11px; font-weight: 700;">The Alest</h6>
+                <h1 data-aos="fade-up" data-aos-duration="1500" style="font-family: 'Playfair Display', serif; font-size: 36px; line-height: 1.2;">
+                    Our Essence
                 </h1>
             </div>
         </div>
 
         <div class="first">
-            <div class="row">
+            <div class="row" style="display: flex; align-items: center; flex-wrap: wrap;">
                 <div class="col-sm-6">
                     <figure data-aos="fade-up" data-aos-duration="1000">
-                        <img src="resources/img/Recpcion.png" alt="">
+                        <img src="resources/img/lobby2.png" alt="The Alest DNA - Interior Design">
                     </figure>
                 </div>
                 <div class="col-sm-6">
                     <div class="txt-box" data-aos="fade-left" data-aos-duration="1000">
-                        <p>World-class hospitality in a refined and hedonic environment.</p>
-                        <p>Exquisite details and exclusive experiences are our hallmark.<br>
-                            The Alest Hotel has a unique identity. Designed with eclectic and sophisticated elements, its British-inspired façade combines wonderfully with the varied classic European styles that redefine the architecture of the Polanco neighborhood, which is marked by modern constructions that coexist with neocolonial and Californian-style homes.</p>
-                        <p>With its sumptuous materials and an unparalleled personality, our property welcomes you to discover Mexico City with a new way of seeing.</p>
-                        <div class="epigrafe" data-aos="fade-left" data-aos-duration="1000" style="font-style: italic; border-top: 1px solid #eee; padding-top: 10px; margin-top: 10px;">
-                            Every detail and experience at The Alest Hotel is meticulously created to provide the good life and to make our guests feel at home.
-                        </div>
+                        <h6 style="color: #c5a059; letter-spacing: 2px; text-transform: uppercase; font-size: 10px; font-weight: 700; margin-bottom: 10px;">Concept</h6>
+                        <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 20px; font-size: 28px;">The Alest DNA</h3>
+                        <p style="font-size: 15px; line-height: 1.8; color: #555;">
+                            Inspired by the sophistication of grand European residences, yet infused with the warm soul of Mexico.
+                            <strong>The Alest</strong> is a signature boutique hotel where classic design and modernity coexist in perfect harmony.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="second">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="txt-box" data-aos="fade-right" data-aos-duration="1000">
-                        <h6></h6>
-                        <h3>Polanco, Mexico City </h3>
-                        <p>Back in colonial times, in the 16th century, the Hacienda de San Juan de los Morales was the first building in the area that the King of Spain donated to Hernan Cortes, and it was named after the mulberry trees that were planted there.</p>
-                        <p>Around 1930, the lands were divided in response to the demand for urban areas in the city, which increased following the Mexican Revolution, as families wished to move away from the central area. The streets in the area were then named after different humanists, philosophers, and writers, including French author Eugenio Sue.</p>
-
-                        <div class="epigrafe" data-aos="fade-right" data-aos-duration="1500" style="padding: 10px;">
-                            Cultural diversity has been a hallmark of the Polanco neighborhood. To this day, it is still the preferred area for new international residents, who are delighted by the cosmopolitan vibe and lively streets.
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-sm-6">
-                    <figure data-aos="fade-left" data-aos-duration="1000">
-                        <img src="resources/img/Fachada.png" alt="polanco">
+        <div class="second" style="margin-top: 40px;">
+            <div class="row" style="display: flex; align-items: center; flex-wrap: wrap;">
+                <div class="col-sm-6 col-sm-push-6">
+                    <figure data-aos="fade-up" data-aos-duration="1000">
+                        <img src="resources/img/Fachada.png" alt="Eugenio Sue 45 - Polanco">
                     </figure>
-
+                </div>
+                <div class="col-sm-6 col-sm-pull-6">
+                    <div class="txt-box" data-aos="fade-right" data-aos-duration="1000">
+                        <h6 style="color: #c5a059; letter-spacing: 2px; text-transform: uppercase; font-size: 10px; font-weight: 700; margin-bottom: 10px;">Location</h6>
+                        <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 20px; font-size: 28px;">Eugenio Sue 45</h3>
+                        <p style="font-size: 15px; line-height: 1.8; color: #555;">
+                            Situated on one of the most serene and exclusive streets in Polanco, The Alest offers the perfect balance between the vibrant energy of Mexico City and the privacy of a signature residence.
+                            Surrounded by art galleries, high fashion, and top-tier restaurants, our hotel is the ideal starting point to discover Mexico at its most sophisticated.
+                        </p>
+                        <a href="/events" style="display: inline-block; margin-top: 15px; color: #1a1a1a; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 2px; text-decoration: none; border-bottom: 1px solid #c5a059; padding-bottom: 5px; transition: all 0.3s ease;">
+                            Explore the neighborhood &rarr;
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="third">
-            <div class="row">
+        <div class="third" style="margin-top: 40px;">
+            <div class="row" style="display: flex; align-items: center; flex-wrap: wrap;">
                 <div class="col-sm-6">
-                    <figure data-aos="fade-right" data-aos-duration="1000">
-                        <img src="resources/img/thehotel3.jpg" alt="">
+                    <figure data-aos="fade-up" data-aos-duration="1000">
+                        <img src="resources/img/amenidadesgua.png" alt="The Alest Hospitality">
                     </figure>
                 </div>
                 <div class="col-sm-6">
                     <div class="txt-box" data-aos="fade-left" data-aos-duration="1000">
-                        <h3>Unparalleled Service</h3>
-                        <p>The Alest Hotel provides a superior level of service with just the right balance between professionalism, privacy and warmth, in alliance with the Hospitality & Butler firm. Here, the needs and tastes of each visitor will always be anticipated, and they will be treated like special guests to make them feel at home, they will be pampered with high-end amenities within the property, and the exclusive experiences Mexico City has to offer will be made available to them.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="third">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="txt-box" data-aos="fade-right" data-aos-duration="1000">
-                        <h3>Wellness</h3>
-                        <p>Thanks to our exclusive alliances, The Alest guests will be able to enjoy massages and aesthetic treatments in the comfort of their own room from external service providers from the best spas in the area, and also keep fit by practicing yoga, fitness activities, or whatever their favorite discipline may be in the nearby studios and gyms recommended by our concierge.</p>
-                        <p>Inside the rooms, guests can indulge in different spa sessions and therapies with a special menu to pamper the guest, featuring options for relaxing or alleviating tightness, as well as specialty massages, be they prenatal, slimming or to promote lymphatic drainage.</p>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <figure data-aos="fade-left" data-aos-duration="1000">
-                        <img src="resources/img/thehotel4.jpg" alt="">
-                    </figure>
-                </div>
-            </div>
-        </div>
-
-        <div class="third">
-            <div class="row">
-                <div class="col-sm-6">
-                    <figure data-aos="fade-right" data-aos-duration="1000" style="display: flex; justify-content: center;">
-                        <img src="resources/img/lobby2.png" alt="" style="width: 100%; max-width: 550px; height: 450px; object-fit: cover; border-radius: 0;">
-                    </figure>
-                </div>
-                <div class="col-sm-6">
-                    <div class="txt-box" data-aos="fade-left" data-aos-duration="1000">
-                        <h3>The Lobby</h3>
-                        <p>The heart of The Alest Hotel is an elegant space that blends the best of various interior design styles. The classic style of the front desk welcomes you into a sophisticated environment dotted with pleasant areas that invite you to unwind.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="third">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="txt-box" data-aos="fade-right" data-aos-duration="1000">
-                        <h3>The Alest Bar- 45</h3>
-                        <p>45 is a pleasant and exclusive meeting point in which the featured mixology its known for its highly original drinks.</p>
-                        <p>The cocktails designed by experts exclusively for 45, the bar at The Alest Hotel, are inspired by notable figures that the streets of Polanco are named after, and have been created to awaken the mind, heart and soul of those who sips them, just like these thinkers, authors and scientists did through their works and events that transformed humanity.</p>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <figure data-aos="fade-left" data-aos-duration="1000">
-                        <img src="resources/img/thehotel6.jpg" alt="">
-                    </figure>
-                </div>
-            </div>
-        </div>
-
-        <div id="housecar"></div>
-        <div class="third">
-            <div class="row">
-                <div class="col-sm-6">
-                    <figure data-aos="fade-left" data-aos-duration="1000">
-                        <img src="resources/img/alest-car.jpg" alt="">
-                    </figure>
-                </div>
-                <div class="col-sm-6">
-                    <div class="txt-box" data-aos="fade-right" data-aos-duration="1000">
-                        <h3>The House Car</h3>
-                        <p>The Alest Hotel provides superior service to its guests when it comes to transportation.<br>
-                            The House Car is The Alest Hotel's private car. A luxurious black 2022 Lincoln Navigator Reserve SUV with an imposing design and intuitive technology that delivers maximum passenger comfort. Maximum capacity 5 people.<br>
-                            The House Car has a roof rack as well as an ample trunk for luggage.</p>
-                        <a href="mailto:hello@thealest.com?subject=Car%20Service%20Reservation" class="btn-line-big" style="display: inline-block; margin-top: 15px; color: #222; border: 1px solid #c5a059; padding: 10px 25px; text-decoration: none;">
-                            Reserve car service
+                        <h6 style="color: #c5a059; letter-spacing: 2px; text-transform: uppercase; font-size: 10px; font-weight: 700; margin-bottom: 10px;">Hospitality</h6>
+                        <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 20px; font-size: 28px;">White Glove Service</h3>
+                        <p style="font-size: 15px; line-height: 1.8; color: #555;">
+                            At The Alest, world-class hospitality is not just a standard—it is an exquisite detail. We understand that true luxury today is time and attention.
+                            That is why our property, with only 19 rooms, functions as a private residence where service anticipates every need.
+                        </p>
+                        <a href="/specials" style="display: inline-block; margin-top: 15px; color: #1a1a1a; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 2px; text-decoration: none; border-bottom: 1px solid #c5a059; padding-bottom: 5px; transition: all 0.3s ease;">
+                            Explore our services &rarr;
                         </a>
                     </div>
                 </div>
@@ -251,6 +219,7 @@
 
     </div>
 </div>
+
 
 {% include 'inc_footer.html' %}
 
