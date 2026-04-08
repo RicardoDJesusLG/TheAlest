@@ -1,174 +1,318 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Alest Petit Hotel</title>
-  <meta name="description" content=" ">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Alest Petit Hotel | Luxury Stay Polanco</title>
 
+    <!-- Google Fonts para toque de lujo -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link href="resources_l/css/alest.css" rel="stylesheet">
-  <link rel="stylesheet" href="resources_l/css/font-awesome.min.css">
-  <link rel="stylesheet" href="resources_l/css/book-widget.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources_l/css/alest.css">
+    <link rel="stylesheet" href="resources_l/css/mainmenu.css">
 
-  <link rel="stylesheet" href="resources_l/css/mainmenu.css">
+    <style>
+        /* --- ESTILOS GENERALES --- */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            background-color: #fff;
+            margin: 0;
+        }
 
+        /* --- HEADER --- */
+        header.start {
+            position: absolute;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header .logo img { height: 50px; }
+        .navegacion a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 2px;
+            margin-left: 20px;
+        }
+        .navegacion img { width: 18px; margin-right: 5px; filter: brightness(0) invert(1); }
 
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
- 
-<style>
+        /* --- HERO / HOME --- */
+        .hero-home {
+            height: 100vh;
+            position: relative;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+        }
+        .hero-home .slide img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+        .hero-home .txt { position: relative; z-index: 10; }
+        .hero-home .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+        .hero-home .sub {
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 12px;
+            margin-bottom: 30px;
+        }
+        .btn-line-big {
+            border: 1px solid #fff;
+            padding: 12px 35px;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+        .btn-line-big:hover { background: #fff; color: #000; text-decoration: none; }
 
-</style>
+        /* --- FOOTER (ESTILO NUEVO BASADO EN IMAGEN) --- */
+        footer {
+            background-color: #ffffff;
+            padding-top: 0;
+            border-top: 1px solid #eee;
+            margin-top: 0;
+        }
 
-  </head>
-  <body>
+        /* Barra superior Polanco / Links */
+        .footer-top-bar {
+            border-bottom: 1px solid #eee;
+            padding: 25px 0;
+            margin-bottom: 50px;
+        }
+        .location-label {
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            font-weight: 400;
+        }
+        .footer-top-links { text-align: right; }
+        .footer-top-links a {
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: #333;
+            margin-left: 25px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .footer-top-links a.highlight { color: #c5a67c; }
 
-    <header class="start" >
-      <div class="logo">
+        /* Cuerpo principal del footer */
+        .foot { padding-bottom: 60px; }
+        .foot h6 {
+            text-transform: uppercase;
+            color: #c5a67c;
+            font-size: 10px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+        .foot .info, .foot .newsletter-text {
+            font-size: 11px;
+            line-height: 1.8;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .foot a { color: #666; text-decoration: none; }
+
+        .footer-logo img { max-width: 160px; height: auto; }
+
+        .map-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 10px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 2px;
+            color: #000 !important;
+        }
+
+        /* Newsletter */
+        .newsletter-form {
+            display: flex;
+            margin-top: 15px;
+        }
+        .newsletter-form input {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 100%;
+            font-size: 10px;
+            outline: none;
+        }
+        .newsletter-form button {
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 0 20px;
+            font-size: 10px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .newsletter-form button:hover { background: #333; }
+
+        .social-icons { margin-top: 25px; }
+        .social-icons a { font-size: 18px; margin-right: 20px; color: #333; transition: 0.3s; }
+        .social-icons a:hover { color: #c5a67c; }
+
+        /* Copy & Studio */
+        .copy {
+            padding: 30px 0;
+            border-top: 1px solid #f9f9f9;
+            font-size: 9px;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .copy a { color: #999; text-decoration: none; }
+
+        @media (max-width: 767px) {
+            .footer-top-links { text-align: left; margin-top: 15px; }
+            .footer-top-links a { margin-left: 0; margin-right: 15px; }
+            .foot .col-sm-3 { margin-bottom: 40px; text-align: center; }
+            .social-icons { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="start">
+    <div class="logo">
         <a href="#">
-          <img src="resources_l/img/logo.png" alt="The Alest Hotel Mexico City">
+            <img src="resources_l/img/logo.png" alt="The Alest Hotel Logo">
         </a>
-      </div>
-      <div class="navegacion">
-        <nav><span class='hidden-xs'>
-          <a href="https://be.synxis.com/?hotel=31241" target="_blank"><img src="resources_l/img/book-icon.png" alt="Reservations"> <span>Reservations</span></a>
-          <a href="tel:00525590277343" target="_blank"><img src="resources_l/img/phone-icon.png" alt="Call Us"></a>
-           
-        </span>
-           
-
+    </div>
+    <div class="navegacion">
+        <nav>
+          <span class='hidden-xs'>
+            <a href="https://be.synxis.com/?hotel=31241" target="_blank">
+                <img src="resources_l/img/book-icon.png" alt=""> <span>Reservations</span>
+            </a>
+            <a href="tel:00525590277343" target="_blank">
+                <i class="fa fa-phone" style="font-size: 16px; vertical-align: middle;"></i>
+            </a>
+          </span>
         </nav>
-      </div>
-    </header>
+    </div>
+</header>
 
-    <div class="hero-home" >
-
-      <script>
-        const heroImages=[
-        "resources_l/img/slide-1.jpg",
-        "resources_l/img/slide-2.jpg",
-        "resources_l/img/slide-3.jpg",
-        "resources_l/img/slide-4.jpg"
-
-        ]
-        </script>
-        
-
-
-      <div class="txt">
-        <div class="title">
-          Enjoy a unique & luxury stay
-        </div>
+<div class="hero-home">
+    <div class="slide">
+        <img src="resources_l/img/slide-1.jpg" alt="The Alest Luxury Interior">
+    </div>
+    <div class="txt">
+        <h1 class="title">Enjoy a unique & luxury stay</h1>
         <div class="sub">website coming soon</div>
-
-
-        <a href="Https://be.synxis.com/?hotel=31241" target="_blank" class="btn-line-big">Check Availability</a>
-
-      </div>
-
-      <div class="pager-slider">
-        <a href="#"><i class="fa fa-circle" aria-hidden="true"></i></a>
- 
-      </div>
-
-      <div class="slide">
-        <img src="resources_l/img/slide-1.jpg" alt="">
-      </div>
-
-
- 
-
+        <a href="https://be.synxis.com/?hotel=31241" target="_blank" class="btn-line-big">Check Availability</a>
     </div>
-
- 
-
-<footer data-aos="fade-up"
-data-aos-duration="1000">
- 
-
-<div class="foot" >
-  <div class="container">
-    <div class="row">
-      
-      <div class="col-sm-4 text-center">
-        <h6>Location</h6>
-        <div class="info">
-          Eugenio Sue #45, Polanco<br>
-          México city<br>
-          11560 México
-        </div>
-      </div>
-      <div class="col-sm-4 text-center">
-        <div class="logo">
-          <img src="resources_l/img/logo-footer.png" alt="Alest Hotel">
-        </div>
-      </div>
-      <div class="col-sm-4 text-center">
-        <h6>Contact</h6>
-        <div class="info">
-          <a href="tel:00525590277343">+52 55 90277 343</a>
-          <a href="tel:00525590277344">+52 55 90277 344</a>
-          <a href="mailto:info@thealest.com">info@thealest.com</a>
-        </div>
-        <div class="social">
-          <a href="https://www.instagram.com/the.alest/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-          <a href="https://www.facebook.com/TheAlestHotel" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-          
-        </div>
-      </div>
-
-       
-    </div>
-  </div>
 </div>
 
-<div class="copy" >
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6">
-        © 2021 . The Alest Petit Hotel . ALL RIGHTS RESERVED
-      </div>
+<footer>
+    <!-- Barra superior del Footer -->
+    <div class="footer-top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <span class="location-label">Polanco, CDMX</span>
+                </div>
+                <div class="col-sm-8 footer-top-links">
+                    <a href="#">Novedades</a>
+                    <a href="#">Legal</a>
+                    <a href="#">Privacidad</a>
+                    <a href="https://be.synxis.com/?hotel=31241" class="highlight">Reservas</a>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
+    <div class="foot">
+        <div class="container">
+            <div class="row">
+
+                <!-- Logo Footer -->
+                <div class="col-sm-3 text-center">
+                    <div class="footer-logo">
+                        <img src="resources_l/img/logo-footer.png" alt="The Alest Mexico City">
+                    </div>
+                </div>
+
+                <!-- Encuéntranos -->
+                <div class="col-sm-3">
+                    <h6>Encuéntranos</h6>
+                    <div class="info">
+                        Eugenio Sue 45, Polanco,<br>
+                        CDMX, 11550 Mexico
+                        <br>
+                        <a href="https://goo.gl/maps/xyz" target="_blank" class="map-link">ABRIR EN GOOGLE MAPS →</a>
+                    </div>
+                </div>
+
+                <!-- Contacto -->
+                <div class="col-sm-3">
+                    <h6>Contacto</h6>
+                    <div class="info">
+                        <a href="tel:00525590277343">+52 55 90277 343</a><br>
+                        <a href="mailto:hello@thealest.com">HELLO@THEALEST.COM</a>
+                    </div>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/the.alest/" target="_blank"><i class="fa fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/TheAlestHotel" target="_blank"><i class="fa fa-facebook"></i></a>
+                    </div>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="col-sm-3">
+                    <h6>Newsletter</h6>
+                    <p class="newsletter-text">RECIBE NOVEDADES Y EXPERIENCIAS EXCLUSIVAS.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="EMAIL" required>
+                        <button type="submit">UNIRSE</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="copy">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    © 2026 . THE ALEST PETIT HOTEL . ALL RIGHTS RESERVED
+                </div>
+                <div class="col-sm-6 text-right hidden-xs">
+                    Design & Dev by <a href="https://wearedna.studio" target="_blank">DNA Studio</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </footer>
 
-
-
-
-
-
-
-<!-- JS -->
+<!-- Scripts -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="resources_l/js/jQuery.succinct.min.js"></script>
-<script src="resources_l/js/scrollreveal.min.js"></script>
 
-<script src="resources_l/js/main.js"></script>
- 
-<script src="resources_l_l/js/book-widget.js"></script>
-
-<script>
-
-
-$(function(){
-  $(".check-av").click(function(e){
-    if(e)e.preventDefault();
-$("#calendarForm").submit();
-
-  });
-
-});
-
-
-  AOS.init();
-</script>
 </body>
 </html>
