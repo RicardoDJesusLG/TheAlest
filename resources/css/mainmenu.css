@@ -360,4 +360,83 @@ header {
     gap: 10px;
 }
 
+/* ===== HERO VIDEO SOLO HOME ===== */
+.hero-video-home {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-video-home .hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+.hero-video-home .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1;
+}
+
+/* 🔥 AQUÍ ESTÁ EL FIX */
+.hero-video-home .txt {
+    position: relative !important;
+    z-index: 2;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+    text-align: center;
+}
+
+.hero-video-home .hidden-xs,
+.hero-video-home .visible-xs {
+    margin-top: 30px;
+}
+
+/* ===== BOTÓN ORIGINAL EN HERO VIDEO ===== */
+.hero-video-home .btn-line-big {
+    display: inline-block;
+    min-width: fit-content;
+    padding: 14px 28px;
+    border: 1px solid #c7a86f;
+    color: #c7a86f !important;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 18px;
+    font-weight: 600;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.hero-video-home .btn-line-big:hover {
+    background: #c7a86f;
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
+
+.hero-video-home .btn-line-big:hover,
+.hero-video-home .btn-line-big:hover:visited,
+.hero-video-home .btn-line-big:hover:focus {
+    background: #c7a86f !important;
+    color: #ffffff !important;
+    border-color: #c7a86f !important;
+    text-decoration: none !important;
+    outline: none !important;
+}
+
 
