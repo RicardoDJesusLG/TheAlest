@@ -6,33 +6,117 @@
     </div>
 
     <div class="navegacion">
-        <nav>
+        <nav style="display: flex; align-items: center; justify-content: flex-end;">
 
-            <!-- ICONOS -->
-            <span class="menu-icons">
+            <style>
+                @keyframes pulse-gold {
+                    0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7); }
+                    70% { box-shadow: 0 0 0 10px rgba(197, 160, 89, 0); }
+                    100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
+                }
 
-                <!-- Reservations -->
-                <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F" target="_blank" class="desktop-only">
-                    <img src="resources/img/book-icon.png" alt="Reservations">
-                    <span>Reservations</span>
-                </a>
+                .btn-book-now-llamativo {
+                    animation: pulse-gold 2s infinite;
+                    transition: all 0.3s ease !important;
+                }
 
-                <!-- WHATSAPP -->
-                <a href="https://wa.me/5215512345678?text=Hola,%20quiero%20hacer%20una%20reservaci%C3%B3n%20en%20The%20Alest%20Hotel"
+                .btn-book-now-llamativo:hover {
+                    animation: none;
+                    transform: scale(1.05);
+                    background-color: #b08d4a !important;
+                }
+
+                /* --- AJUSTES PARA MÓVIL --- */
+                @media (max-width: 768px) {
+                    .desktop-only {
+                        display: inline-flex !important;
+                    }
+
+                    .menu-icons {
+                        gap: 12px !important;
+                    }
+
+                    .btn-book-now-llamativo {
+                        padding: 8px 12px !important;
+                    }
+
+                    .btn-book-now-llamativo span {
+                        font-size: 11px !important;
+                        letter-spacing: 1px !important;
+                    }
+
+                    .btn-book-now-llamativo svg {
+                        margin-right: 5px !important;
+                        width: 14px;
+                        height: 14px;
+                    }
+                }
+            </style>
+
+            <span class="menu-icons" style="display: flex; align-items: center; gap: 25px;">
+
+                <a href="https://hotels.cloudbeds.com/en/reservation/BIpC6F"
                    target="_blank"
-                   class="whatsapp-btn">
-                    <img src="resources/img/phone-icon.png" alt="WhatsApp">
+                   class="desktop-only btn-book-now-llamativo"
+                   style="
+                        text-decoration: none;
+                        display: inline-flex;
+                        align-items: center;
+                        background-color: #c5a059;
+                        border: 1px solid #c5a059;
+                        padding: 10px 22px;
+                        border-radius: 4px;
+                        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                   ">
+
+                    <!-- NUEVO ICONO: TIMBRE DE RECEPCIÓN / CLOCHE -->
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 10px;">
+                        <path d="M2 20h20"></path>
+                        <path d="M20 16A8 8 0 1 0 4 16"></path>
+                        <circle cx="12" cy="5" r="1"></circle>
+                        <path d="M4 16h16"></path>
+                    </svg>
+
+                    <span style="
+                        font-family: 'Playfair Display', serif;
+                        color: #ffffff;
+                        letter-spacing: 2px;
+                        font-size: 13px;
+                        text-transform: uppercase;
+                        font-weight: 600;
+                    ">
+                        Book Now
+                    </span>
                 </a>
 
-                <!-- Contact -->
-                <a href="{{link_contact}}" target="_blank" class="desktop-only">
-                    <img src="resources/img/contact-icon.png" alt="Contact Us">
+                <a href="https://wa.me/525514557995?text=Hola,%20me%20gustaría%20hacer%20una%20reservación"
+                   target="_blank"
+                   class="whatsapp-btn"
+                   style="display: flex; align-items: center; transition: transform 0.3s ease;"
+                   onmouseover="this.style.transform='scale(1.1)';"
+                   onmouseout="this.style.transform='scale(1)';"
+                >
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="#c5a059" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.004 2C6.48 2 2.004 6.477 2.004 12C2.004 14.39 2.81 16.59 4.14 18.281L3.004 22L6.873 21.056C8.384 21.666 10.15 22 12.004 22C17.527 22 22.004 17.523 22.004 12C22.004 6.477 17.527 2 12.004 2ZM17.152 16.485C16.895 17.172 15.688 17.653 15.118 17.705C14.654 17.747 14.072 17.844 12.08 17.062C9.408 16.014 7.7 13.434 7.568 13.268C7.435 13.102 6.471 11.892 6.471 10.64C6.471 9.388 7.163 8.795 7.428 8.528C7.627 8.328 7.95 8.238 8.267 8.238H9.006C9.271 8.238 9.479 8.243 9.686 8.706C9.913 9.213 10.468 10.495 10.536 10.627C10.604 10.76 10.672 10.892 10.573 11.059C10.482 11.234 10.373 11.383 10.231 11.532C10.089 11.681 9.923 11.847 9.807 11.963C9.666 12.128 9.534 12.311 9.699 12.577C9.865 12.843 10.43 13.731 11.267 14.432C12.341 15.344 13.2 15.659 13.53 15.808C13.86 15.957 14.067 15.932 14.266 15.716C14.465 15.5 15.126 14.77 15.39 14.39C15.654 14.01 15.918 14.109 16.282 14.234C16.646 14.359 18.665 15.3 18.995 15.449C19.325 15.598 19.539 15.681 19.613 15.808C19.688 15.932 19.688 16.319 19.423 16.985H17.152Z" />
+                    </svg>
+                </a>
+
+                <a href="{{link_contact}}"
+                   target="_blank"
+                   class="desktop-only"
+                   style="display: flex; align-items: center; transition: transform 0.3s ease;"
+                   onmouseover="this.style.transform='scale(1.1)';"
+                   onmouseout="this.style.transform='scale(1)';"
+                >
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
                 </a>
 
             </span>
 
-            <!-- BURGER -->
-            <div class="burger">
+            <div class="burger" style="margin-left: 25px;">
                 <div id="nav-icon3">
                     <span></span>
                     <span></span>
@@ -43,7 +127,6 @@
 
         </nav>
     </div>
-
 </header>
 
 <div id="modal-loader"></div>
